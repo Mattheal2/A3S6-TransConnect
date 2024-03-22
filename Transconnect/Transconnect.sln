@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransLib", "TransLib\TransLib.csproj", "{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD0165DB-FA95-45FA-A718-C01167507D6B}
+	EndGlobalSection
+EndGlobal
