@@ -10,7 +10,7 @@ namespace TransLib
     {
         protected int seats;
 
-        public Car(string brand, string model, string license_plate, int seats) : base(brand, model, license_plate)
+        public Car(string vehicle_id, string brand, string model, string license_plate, int seats) : base(vehicle_id, brand, model, license_plate)
         {
             this.seats = seats;
         }

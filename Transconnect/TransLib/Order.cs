@@ -17,6 +17,7 @@ namespace TransLib
             Closed
         }
 
+        protected string order_id;
         protected Client client;
         protected Vehicle vehicle;
         protected Driver driver;
@@ -28,7 +29,7 @@ namespace TransLib
         //gets the price from delivery price calculation function -> peut etre redondant ?
         public int Price { get => throw new NotImplementedException(); }
 
-        public Order(Client client, Vehicle vehicle, DateTime departure_date, string departure_city, string arrival_city)
+        public Order(string order_id, Client client, Vehicle vehicle, DateTime departure_date, string departure_city, string arrival_city)
         {
             this.client = client;
             this.vehicle = vehicle;
