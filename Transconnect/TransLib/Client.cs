@@ -14,5 +14,10 @@ namespace TransLib
         {
             this.id_client = id_client;
         }
+
+        public bool new_order(Order new_order)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

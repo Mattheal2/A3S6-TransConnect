@@ -20,5 +20,10 @@ namespace TransLib
             this.salary = salary;
             this.hire_date = hire_date;
         }
+
+        public DateTime[] get_schedule()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
