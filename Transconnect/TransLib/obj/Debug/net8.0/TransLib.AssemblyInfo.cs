@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TransLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cce9cc5b7a38c7bb9d8329bf034570f254aa3755")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7018254cd5dd5333e64b2c24a1b7aa190d527754")]
 [assembly: System.Reflection.AssemblyProductAttribute("TransLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TransLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

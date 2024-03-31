@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransLib", "TransLib\TransLib.csproj", "{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransLib", "TransLib\TransLib.csproj", "{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransDebug", "TransDebug\TransDebug.csproj", "{0DFC9BC1-6080-423D-B814-35B463248FC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB} = {7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DFC9BC1-6080-423D-B814-35B463248FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DFC9BC1-6080-423D-B814-35B463248FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DFC9BC1-6080-423D-B814-35B463248FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DFC9BC1-6080-423D-B814-35B463248FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

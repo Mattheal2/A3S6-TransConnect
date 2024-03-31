@@ -1,8 +1,9 @@
+DROP DATABASE IF EXISTS transcodb;
 CREATE DATABASE transcodb;
 USE transcodb;
 
-CREATE TABLE personne (
-	user_id VARCHAR(30)  PRIMARY KEY,
+CREATE TABLE person (
+	user_id VARCHAR(30) PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     phone VARCHAR(30),
@@ -34,11 +35,17 @@ CREATE TABLE vehicle (
 
 CREATE TABLE orders (
 	order_id VARCHAR(30) PRIMARY KEY,
-    FOREIGN KEY (client_id) REFERENCES personne(user_id),
-    FOREIGN KEY (driver_id) REFERENCES personne(user_id),
-    FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id),
+    client_id VARCHAR(30),
+    driver_id VARCHAR(30),
+    vehicle_id VARCHAR(30),
     departure_date DATETIME,
     departure_city VARCHAR(40),
     arrival_city VARCHAR(40),
-    order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed')    
+    order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed'),
+	FOREIGN KEY (client_id) REFERENCES person(user_id),
+    FOREIGN KEY (driver_id) REFERENCES person(user_id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
 );
+
+INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date) VALUES("E1", 'Jean', 'Pierre', '0612326754', "example@mail.com", "1 rue de Paris", '2002-07-07');
+SELECT * FROM person;
