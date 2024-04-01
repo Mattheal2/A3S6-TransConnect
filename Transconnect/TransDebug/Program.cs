@@ -12,13 +12,11 @@ namespace TransDebug
         {
             Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
 
+            trans_connexion.hire_employee_async(new Driver("John", "Doe", "0651782912", "john.doe@edu.devinci.fr", "98 Avenue de Roissy", "1988-10-01", $"D{trans_connexion.get_available_id("D").Result}", "Driver", "2000", "2021-09-01", "CAR"));
 
-            string query = $"INSERT INTO person(user_id, first_name, last_name, phone, email, address, birth_date) VALUES(\"E{trans_connexion.get_available_id("E").Result}\", \"Jean\", \"Pierre le second\", 0612326754, \"example@mail.com\", \"1 rue de Paris\", \"2002-07-07\");";
-            MySqlCommand cmd = new MySqlCommand(query);//$"INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date) VALUES(\"E{trans_connexion.get_available_id("E")}\", \"Jean\", \"Pierre le second\", 0612326754, \"example@mail.com\", \"1 rue de Paris\", \"2002-07-07\");");
-            display_async_query(cmd, trans_connexion.DB_CONNECTION_STRING);
-            Console.WriteLine("-");
-            cmd = new MySqlCommand($"SELECT * FROM person;");
-            display_async_query(cmd, trans_connexion.DB_CONNECTION_STRING);
+            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("John", "Doe").Result);
+            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("Jean", "Pierre").Result);
+            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("Karl", "Marx").Result);
 
             while (true) ;
         }
@@ -39,11 +37,7 @@ namespace TransDebug
                     DbDataReader rdr = await cmd.ExecuteReaderAsync();
                     while (await rdr.ReadAsync())
                     {
-                        for (int i = 0; i < rdr.FieldCount; i++)
-                        {
-                            // Afficher la valeur de la colonne à l'index i
-                            Console.Write(rdr[i] + "\t");
-                        }
+                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
                         Console.WriteLine();
                     }
                     rdr.Close();

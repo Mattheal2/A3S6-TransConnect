@@ -15,7 +15,7 @@ CREATE TABLE person (
     salary INT,
     hire_date DATE,
     #Driver's specific
-    license_type ENUM('CAR', 'TRUCK')
+    license_type ENUM('CAR', 'TRUCK', 'B', 'C')
 );
 
 CREATE TABLE vehicle (
@@ -49,3 +49,6 @@ CREATE TABLE orders (
 
 INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date) VALUES("E1", 'Jean', 'Pierre', '0612326754', "example@mail.com", "1 rue de Paris", '2002-07-07');
 SELECT * FROM person;
+SELECT user_id FROM person WHERE first_name = "John" AND last_name = "Doe";
+SELECT COUNT(*) FROM person WHERE first_name = "John" AND last_name = "Doe";
+SELECT MAX(user_id) FROM person WHERE user_id LIKE 'D%' ORDER BY CAST(SUBSTRING(user_id, 2) AS UNSIGNED) DESC;
