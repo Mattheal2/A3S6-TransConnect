@@ -1,9 +1,8 @@
-DROP DATABASE IF EXISTS transcodb;
 CREATE DATABASE transcodb;
 USE transcodb;
 
 CREATE TABLE person (
-	user_id VARCHAR(30) PRIMARY KEY,
+	user_id VARCHAR(30)  PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     phone VARCHAR(30),
@@ -15,14 +14,14 @@ CREATE TABLE person (
     salary INT,
     hire_date DATE,
     #Driver's specific
-    license_type ENUM('CAR', 'TRUCK', 'B', 'C')
+    license_type ENUM('CAR', 'TRUCK')
 );
 
 CREATE TABLE vehicle (
 	vehicle_id VARCHAR(30) PRIMARY KEY,
+	licence_plate VARCHAR(30) PRIMARY KEY,
 	brand VARCHAR(30),
     model VARCHAR(30),
-    licence_plate VARCHAR(30),
     #Truck's specific
     volume INT,
     truck_type VARCHAR(30),
@@ -47,8 +46,8 @@ CREATE TABLE orders (
     FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
 );
 
-INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date) VALUES("E1", 'Jean', 'Pierre', '0612326754', "example@mail.com", "1 rue de Paris", '2002-07-07');
 SELECT * FROM person;
-SELECT user_id FROM person WHERE first_name = "John" AND last_name = "Doe";
-SELECT COUNT(*) FROM person WHERE first_name = "John" AND last_name = "Doe";
-SELECT MAX(user_id) FROM person WHERE user_id LIKE 'D%' ORDER BY CAST(SUBSTRING(user_id, 2) AS UNSIGNED) DESC;
+SELECT COUNT(user_id) FROM person WHERE first_name = 'John';
+DELETE FROM person WHERE user_id = 'D0'
+
+INSERT INTO vehicle (vehicle_id, brand, model, licence_plate) VALUES ()

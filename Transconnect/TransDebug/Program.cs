@@ -11,12 +11,8 @@ namespace TransDebug
         static void Main(string[] args)
         {
             Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
+            
 
-            trans_connexion.hire_employee_async(new Driver("John", "Doe", "0651782912", "john.doe@edu.devinci.fr", "98 Avenue de Roissy", "1988-10-01", $"D{trans_connexion.get_available_id("D").Result}", "Driver", "2000", "2021-09-01", "CAR"));
-
-            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("John", "Doe").Result);
-            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("Jean", "Pierre").Result);
-            Console.WriteLine(trans_connexion.get_employee_id_by_name_async("Karl", "Marx").Result);
 
             while (true) ;
         }

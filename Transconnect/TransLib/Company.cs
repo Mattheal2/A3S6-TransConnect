@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace TransLib
 {
@@ -142,27 +144,143 @@ namespace TransLib
 
         /// Fires a new employee and returns true if the operation was successful.
         /// Should return false if the employee doesn't exists.
-        public async Task<bool> fire_employee_async(string id)
+        public async Task<bool> fire_employee_by_id_async(string id)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM person WHERE user_id = '{id}'", c);
 
+                try
+                {
+                    await c.OpenAsync();
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
+                            Console.WriteLine();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// Try to remove an employee using it's name. If 2 employees with same name are found, operation is cancelled
+        public async Task<bool> fire_employee_by_name_async(string first_name, string last_name)
+        {
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand count_query = new MySqlCommand($"SELECT COUNT(user_id) FROM person WHERE first_name = '{first_name}' AND last_name='{last_name}'", c);
+                MySqlCommand delete_query = new MySqlCommand($"DELETE FROM person WHERE first_name = '{first_name}' AND last_name='{last_name}'", c);
+
+                try
+                {
+                    await c.OpenAsync();
+                    string buffer = "";
+                    using (DbDataReader rdr = await count_query.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            for (int i = 0; i < rdr.FieldCount; i++) buffer += rdr[i];
+                        }
+                    }
+
+                    if (int.Parse(buffer) > 1) throw new Exception("Error : can't delete multiple users with same name");
+                    if (int.Parse(buffer) == 0) throw new Exception("Error : user not found");
+                    using (DbDataReader rdr = await delete_query.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
+                            Console.WriteLine();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return true;
         }
         #endregion
 
         #region Vehicle management
-        public bool buy_vehicle(Vehicle new_vehicle)
+        public async Task<bool> buy_vehicle_async(Vehicle new_vehicle)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                try
+                {
+                    await c.OpenAsync();
+                    (string car_string_option, string car_string_arg) = new_vehicle is Car ? (", seats", $", {((Car)new_vehicle).SEATS}") : ("", "");
+                    (string van_string_option, string van_string_arg) = new_vehicle is Van ? (", usage", $", '{((Van)new_vehicle).Usage}'") : ("", "");
+                    (string truck_string_option, string truck_string_arg) = new_vehicle is Truck ? (", volume, truck_type", $", {((Truck)new_vehicle).VOLUME}, '{((Truck)new_vehicle).TRUCK_TYPE}'") : ("", "");
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO vehicle(license_plate, brand, model{car_string_option+van_string_option+truck_string_option}) VALUES('{new_vehicle.LICENSE_PLATE}', '{new_vehicle.BRAND}', '{new_vehicle.MODEL}'{car_string_arg + van_string_arg + truck_string_arg})", c);
+
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
+                            Console.WriteLine();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            //this.money -= new_vehicle.Price //Il faut MAJ les tables et les classes pour tenir compte du prix => plus tard tkt
+            return true;
+
         }
 
-        public bool sell_vehicle(string licence_plate)
+        public async Task<bool> sell_vehicle_async(string license_plate)
         {
-            throw new NotImplementedException();
+            if(await delete_vehicle_async(license_plate))
+            {
+                //this.money += vehicle.price * 0.8 //à récupérer avec une query mais là j'ai trop la flemme (en vrai j'ai juste pas le temps hein)
+                return true;
+            }
+            return false;
         }
 
-        public bool delete_vehicle(string licence_plate)
+        public async Task<bool> delete_vehicle_async(string license_plate)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM vehicle WHERE license_plate = '{license_plate}'", c);
+
+                try
+                {
+                    await c.OpenAsync();
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
+                            Console.WriteLine();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return true;
+
         }
         #endregion
     }

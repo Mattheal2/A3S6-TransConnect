@@ -9,10 +9,15 @@ namespace TransLib
     public class Truck : Vehicle
     {
         protected int volume;
+        protected string truck_type;
 
-        public Truck(string vehicle_id, string brand, string model, string license_plate, int volume) : base(vehicle_id, brand, model, license_plate)
+        public int VOLUME { get => volume; }
+        public string TRUCK_TYPE { get => truck_type; }
+
+        public Truck(string license_plate, string brand, string model, int volume, string truck_type) : base(license_plate, brand, model)
         {
             this.volume = volume;
+            this.truck_type = truck_type;
         }
     }
 }

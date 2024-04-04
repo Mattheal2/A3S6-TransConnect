@@ -10,7 +10,9 @@ namespace TransLib
     {
         protected string usage;
 
-        public Van(string vehicle_id, string brand, string model, string license_plate, string usage) : base(vehicle_id, brand, model, license_plate)
+        public string Usage { get =>  usage; set => usage = value; }
+
+        public Van(string license_plate, string brand, string model, string usage) : base(license_plate, brand, model)
         {
             this.usage = usage;
         }

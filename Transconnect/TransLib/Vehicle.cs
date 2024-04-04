@@ -8,17 +8,21 @@ namespace TransLib
 {
     public abstract class Vehicle
     {
-        protected string vehicle_id;
+        protected string license_plate;
         protected string brand;
         protected string model;
-        protected string license_plate;
+        protected int price;
 
-        public Vehicle(string vehicle_id, string brand, string model, string license_plate)
+        public string LICENSE_PLATE { get => license_plate; }
+        public string MODEL { get => model; }
+        public string BRAND { get => brand; }
+        public int Price { get => price; set => price = value; }
+
+        public Vehicle(string license_plate, string brand, string model)
         {
-            this.vehicle_id = vehicle_id;
+            this.license_plate = license_plate;
             this.brand = brand;
             this.model = model;
-            this.license_plate = license_plate;
         }
     }
 }
