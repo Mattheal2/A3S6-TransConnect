@@ -40,12 +40,15 @@ namespace TransLib
                     MySqlCommand cmd = new MySqlCommand($"INSERT INTO company VALUES ('{this.name}', '{this.address}', {this.money});", c);
                     cmd.ExecuteReader();
                 }
+                catch (MySqlException ex)
+                {
+                    if(!ex.Message.Contains("Duplicate entry")) Console.WriteLine(ex.Message);
+                }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
-
 
         }
 
@@ -108,7 +111,7 @@ namespace TransLib
         }
 
         /// Adds a new employee and returns true if the operation was successful
-        public async Task<bool> hire_employee_async(Employee new_employee)
+        public async Task<bool> hire_employee_async(Employee new_employee) //A reviser : enlever classe Driver et tout faire en fn de position & ID (1re lettre)
         {
             using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
             {
@@ -358,6 +361,97 @@ namespace TransLib
                 return true;
             }
             else return false;
+        }
+        #endregion
+
+        #region Monitoring functions
+
+        public async Task<List<Employee>> get_employees_list_async()
+        {
+            List<Employee> employees = new List<Employee>();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id LIKE 'E%'", c);
+
+                try
+                {
+                    await c.OpenAsync();
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            employees.Add(new Employee(rdr.GetString("user_id"), rdr.GetString("first_name"), rdr.GetString("last_name"), rdr.GetString("phone"), rdr.GetString("email"), rdr.GetString("address"), rdr.GetDateTime("birth_date"), rdr.GetString("position"), rdr.GetFloat("salary"), rdr.GetDateTime("hire_date")));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return employees;
+            }
+        }
+
+        public async Task<List<Employee>> get_clients_list_async()
+        {
+            List<Employee> employees = new List<Employee>();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id LIKE 'C%'", c);
+
+                try
+                {
+                    await c.OpenAsync();
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            employees.Add(new Employee(rdr.GetString("user_id"), rdr.GetString("first_name"), rdr.GetString("last_name"), rdr.GetString("phone"), rdr.GetString("email"), rdr.GetString("address"), rdr.GetDateTime("birth_date"), rdr.GetString("position"), rdr.GetFloat("salary"), rdr.GetDateTime("hire_date")));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return employees;
+            }
+        }
+
+        public async Task<List<Vehicle>> get_vehicles_list_async() //peut être agrémentée d'un filtre en arg (car / van / truck)
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicle", c);
+
+                try
+                {
+                    await c.OpenAsync();
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await rdr.ReadAsync())
+                        {
+                            switch (rdr.GetString("vehicle_type")) {
+                                case "CAR":
+                                    vehicles.Add(new Car(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("seats")));
+                                    break;
+                                case "VAN":
+                                    vehicles.Add(new Van(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetString("usage")));
+                                    break;
+                                case "TRUCK":
+                                    vehicles.Add(new Truck(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("volume"), rdr.GetString("truck_type")));
+                                    break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return vehicles;
+            }
         }
 
         #endregion

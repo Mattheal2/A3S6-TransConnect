@@ -11,9 +11,8 @@ namespace TransDebug
         static void Main(string[] args)
         {
             Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
-            
-
-
+            var x = trans_connexion.get_employees_list_async().Result;
+            var y = trans_connexion.get_vehicles_list_async().Result;
             while (true) ;
         }
 

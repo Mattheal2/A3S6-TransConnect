@@ -10,7 +10,7 @@ namespace TransLib
     {
         protected string client_id;
         
-        public Client(string first_name, string last_name, string phone, string email, string address, string birth_date, string id_client) : base(first_name, last_name, phone, email, address, birth_date)
+        public Client(string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string id_client) : base(first_name, last_name, phone, email, address, birth_date)
         {
             this.client_id = id_client;
         }

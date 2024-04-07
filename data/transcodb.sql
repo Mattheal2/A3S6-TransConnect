@@ -18,7 +18,7 @@ CREATE TABLE person (
     birth_date DATE NOT NULL,
     #Employee's specific
     position VARCHAR(50),
-    salary INT,
+    salary FLOAT,
     hire_date DATE,
     #Driver's specific
     license_type ENUM('CAR', 'TRUCK')
@@ -54,17 +54,24 @@ CREATE TABLE orders (
     FOREIGN KEY (vehicle_id) REFERENCES vehicle(license_plate)
 );
 
+INSERT INTO company VALUES ('company', '1 rue de la defense', 1000);
+
 INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E0', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E1', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E2', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+
+
 
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('EN-789-NL', 'Nissan', 'X-trail', 14000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('DZ-171-GT', 'Audi', 'TT', 7000.0, 'CAR', 4);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
-INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500);
-
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
 
 SELECT * FROM person;
 SELECT * FROM vehicle;
+SELECT * FROM company;
 
-SELECT COUNT(user_id) FROM person WHERE first_name = 'John';
-DELETE FROM person WHERE user_id = 'D0';
+UPDATE company 
+SET money = money + (-1000)
+WHERE company_name = 'company';
 

@@ -14,7 +14,7 @@ namespace TransLib
         public int VOLUME { get => volume; }
         public string TRUCK_TYPE { get => truck_type; }
 
-        public Truck(string license_plate, string brand, string model, int volume, string truck_type) : base(license_plate, brand, model)
+        public Truck(string license_plate, string brand, string model, float price, int volume, string truck_type) : base(license_plate, brand, model, price)
         {
             this.volume = volume;
             this.truck_type = truck_type;

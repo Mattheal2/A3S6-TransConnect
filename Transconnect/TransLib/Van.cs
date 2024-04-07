@@ -12,7 +12,7 @@ namespace TransLib
 
         public string Usage { get =>  usage; set => usage = value; }
 
-        public Van(string license_plate, string brand, string model, string usage) : base(license_plate, brand, model)
+        public Van(string license_plate, string brand, string model, float price, string usage) : base(license_plate, brand, model, price)
         {
             this.usage = usage;
         }

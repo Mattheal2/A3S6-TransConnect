@@ -12,7 +12,7 @@ namespace TransLib
 
         public int SEATS { get => seats; }
 
-        public Car(string license_plate, string brand, string model, int seats) : base(license_plate, brand, model)
+        public Car(string license_plate, string brand, string model, float price, int seats) : base(license_plate, brand, model, price)
         {
             this.seats = seats;
         }
