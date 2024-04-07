@@ -19,16 +19,34 @@ namespace TransLib
     {
         protected string name;
         protected string address;
+        protected float money;
         protected string db_connection_string;
 
         public string DB_CONNECTION_STRING { get => db_connection_string; }
 
-        public Company(string name, string address, string server = "localhost", string port = "3306", string database_name = "transcodb", string uid = "root", string pwd = "")
+        public Company(string name, string address, int money = 0, string server = "localhost", string port = "3306", string database_name = "transcodb", string uid = "root", string pwd = "")
         {
             this.name = name;
             this.address = address;
+            this.money = money;
 
             this.db_connection_string = $"server={server};Port={port};database={database_name};uid={uid};pwd={pwd};";
+
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                try
+                {
+                    c.Open();
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO company VALUES ('{this.name}', '{this.address}', {this.money});", c);
+                    cmd.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+
         }
 
         /// Display the company informations
@@ -37,6 +55,31 @@ namespace TransLib
             throw new NotImplementedException();
         }
 
+        #region Company management
+
+        ///Adds or removes money from company account. Doesn't check if there's enough money left.
+        public async Task<bool> update_money(float amount)
+        {
+            this.money += amount;
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                try
+                {
+                    await c.OpenAsync();
+                    MySqlCommand cmd = new MySqlCommand($"UPDATE company SET money = money + ({amount}) WHERE company_name = '{this.name}';", c);
+                    await cmd.ExecuteReaderAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+        }
+        
+        #endregion
         #region Staff management
         /// Gets the highest employee ID in the database and returns it. Type cab be "C" for client, "D" for driver etc...
         public async Task<int> get_available_id(string type)
@@ -213,17 +256,17 @@ namespace TransLib
         #endregion
 
         #region Vehicle management
-        public async Task<bool> buy_vehicle_async(Vehicle new_vehicle)
+        private async Task<bool> add_vehicle_async(Vehicle new_vehicle)
         {
             using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
             {
                 try
                 {
                     await c.OpenAsync();
-                    (string car_string_option, string car_string_arg) = new_vehicle is Car ? (", seats", $", {((Car)new_vehicle).SEATS}") : ("", "");
-                    (string van_string_option, string van_string_arg) = new_vehicle is Van ? (", usage", $", '{((Van)new_vehicle).Usage}'") : ("", "");
-                    (string truck_string_option, string truck_string_arg) = new_vehicle is Truck ? (", volume, truck_type", $", {((Truck)new_vehicle).VOLUME}, '{((Truck)new_vehicle).TRUCK_TYPE}'") : ("", "");
-                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO vehicle(license_plate, brand, model{car_string_option+van_string_option+truck_string_option}) VALUES('{new_vehicle.LICENSE_PLATE}', '{new_vehicle.BRAND}', '{new_vehicle.MODEL}'{car_string_arg + van_string_arg + truck_string_arg})", c);
+                    (string car_string_option, string car_string_arg) = new_vehicle is Car ? (", 'CAR', seats", $", {((Car)new_vehicle).SEATS}") : ("", "");
+                    (string van_string_option, string van_string_arg) = new_vehicle is Van ? (", 'VAN', usage", $", '{((Van)new_vehicle).Usage}'") : ("", "");
+                    (string truck_string_option, string truck_string_arg) = new_vehicle is Truck ? (", 'TRUCK', volume, truck_type", $", {((Truck)new_vehicle).VOLUME}, '{((Truck)new_vehicle).TRUCK_TYPE}'") : ("", "");
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO vehicle(license_plate, brand, model, price{car_string_option + van_string_option + truck_string_option}) VALUES('{new_vehicle.LICENSE_PLATE}', '{new_vehicle.BRAND}', '{new_vehicle.MODEL}', {new_vehicle.Price}{car_string_arg + van_string_arg + truck_string_arg})", c);
 
                     using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
                     {
@@ -233,6 +276,7 @@ namespace TransLib
                             Console.WriteLine();
                         }
                     }
+                    return true;
                 }
                 catch (Exception ex)
                 {
@@ -240,22 +284,44 @@ namespace TransLib
                     return false;
                 }
             }
-            //this.money -= new_vehicle.Price //Il faut MAJ les tables et les classes pour tenir compte du prix => plus tard tkt
-            return true;
 
         }
 
-        public async Task<bool> sell_vehicle_async(string license_plate)
+        public async Task<bool> buy_vehicle_async(Vehicle new_vehicle)
         {
-            if(await delete_vehicle_async(license_plate))
+            if (await add_vehicle_async(new_vehicle))
             {
-                //this.money += vehicle.price * 0.8 //à récupérer avec une query mais là j'ai trop la flemme (en vrai j'ai juste pas le temps hein)
+                Console.Write(await update_money(new_vehicle.Price) ? "" : "Error : vehicle added, but failed update money.\n");
                 return true;
             }
-            return false;
+            else return false;
         }
 
-        public async Task<bool> delete_vehicle_async(string license_plate)
+        public async Task<float> get_vehicle_price(string license_plate)
+        {
+            using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
+            {
+                try
+                {
+                    await c.OpenAsync();
+                    MySqlCommand cmd = new MySqlCommand($"SELECT price FROM vehicle WHERE license_plate = '{license_plate}'", c);
+
+                    using (DbDataReader rdr = await cmd.ExecuteReaderAsync())
+                    {
+                        await rdr.ReadAsync();
+                        return rdr.GetFloat(0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1f;
+                }
+            }
+
+        }
+
+        private async Task<bool> delete_vehicle_async(string license_plate)
         {
             using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
             {
@@ -282,6 +348,18 @@ namespace TransLib
             return true;
 
         }
+
+        public async Task<bool> sell_vehicle_async(string license_plate)
+        {
+            float price = get_vehicle_price(license_plate).Result;
+            if (await delete_vehicle_async(license_plate))
+            {
+                Console.Write(await update_money(price * 0.8f) ? "" : "Error : vehicle removed, but failed update money.\n");
+                return true;
+            }
+            else return false;
+        }
+
         #endregion
     }
 }

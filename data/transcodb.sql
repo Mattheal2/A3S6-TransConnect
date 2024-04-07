@@ -1,14 +1,21 @@
+DROP DATABASE IF EXISTS transcodb;
 CREATE DATABASE transcodb;
 USE transcodb;
 
-CREATE TABLE person (
-	user_id VARCHAR(30)  PRIMARY KEY,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
-    phone VARCHAR(30),
-    email VARCHAR(50),
+CREATE TABLE company(
+	company_name VARCHAR(100) PRIMARY KEY,
     address VARCHAR(100),
-    birth_date DATETIME,
+    money FLOAT
+);
+
+CREATE TABLE person (
+	user_id VARCHAR(30) NOT NULL PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    birth_date DATE NOT NULL,
     #Employee's specific
     position VARCHAR(50),
     salary INT,
@@ -18,10 +25,11 @@ CREATE TABLE person (
 );
 
 CREATE TABLE vehicle (
-	vehicle_id VARCHAR(30) PRIMARY KEY,
-	licence_plate VARCHAR(30) PRIMARY KEY,
-	brand VARCHAR(30),
-    model VARCHAR(30),
+	license_plate VARCHAR(30) NOT NULL PRIMARY KEY,
+	brand VARCHAR(30) NOT NULL,
+    model VARCHAR(30) NOT NULL,
+    price FLOAT NOT NULL,
+    vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
     #Truck's specific
     volume INT,
     truck_type VARCHAR(30),
@@ -33,21 +41,30 @@ CREATE TABLE vehicle (
 );
 
 CREATE TABLE orders (
-	order_id VARCHAR(30) PRIMARY KEY,
-    client_id VARCHAR(30),
-    driver_id VARCHAR(30),
-    vehicle_id VARCHAR(30),
-    departure_date DATETIME,
-    departure_city VARCHAR(40),
-    arrival_city VARCHAR(40),
-    order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed'),
+	order_id VARCHAR(30) NOT NULL PRIMARY KEY,
+    client_id VARCHAR(30) NOT NULL,
+    driver_id VARCHAR(30) NOT NULL,
+    vehicle_id VARCHAR(30) NOT NULL,
+    departure_date DATE NOT NULL,
+    departure_city VARCHAR(40) NOT NULL,
+    arrival_city VARCHAR(40) NOT NULL,
+    order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed') DEFAULT 'Pending',
 	FOREIGN KEY (client_id) REFERENCES person(user_id),
     FOREIGN KEY (driver_id) REFERENCES person(user_id),
-    FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id)
+    FOREIGN KEY (vehicle_id) REFERENCES vehicle(license_plate)
 );
 
-SELECT * FROM person;
-SELECT COUNT(user_id) FROM person WHERE first_name = 'John';
-DELETE FROM person WHERE user_id = 'D0'
+INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E0', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
 
-INSERT INTO vehicle (vehicle_id, brand, model, licence_plate) VALUES ()
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('EN-789-NL', 'Nissan', 'X-trail', 14000.0, 'CAR', 5);
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('DZ-171-GT', 'Audi', 'TT', 7000.0, 'CAR', 4);
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500);
+
+
+SELECT * FROM person;
+SELECT * FROM vehicle;
+
+SELECT COUNT(user_id) FROM person WHERE first_name = 'John';
+DELETE FROM person WHERE user_id = 'D0';
+
