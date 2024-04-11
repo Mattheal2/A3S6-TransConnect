@@ -5,7 +5,7 @@ using System.Diagnostics;
 /// </summary>
 /// We use an array to store the data, with an element counter to 
 /// <typeparam name="T"></typeparam>
-class List<T>: IListAlike<T> {
+public class List<T>: IListAlike<T> {
     #region Fields
     private T[] data; // An array to store the data
     private int count; // The number of elements in the list
@@ -28,6 +28,16 @@ class List<T>: IListAlike<T> {
     public List(int capacity) {
         data = new T[capacity];
         count = 0;
+    }
+
+    /// <summary>
+    /// Creates a list with the elements of another list.
+    /// </summary>
+    /// <param name="other"></param>
+    public List(IListAlike<T> other) {
+        data = new T[other.Length];
+        count = 0;
+        Extend(other);
     }
     #endregion
 
