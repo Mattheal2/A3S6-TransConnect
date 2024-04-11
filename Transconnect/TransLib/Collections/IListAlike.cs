@@ -87,5 +87,11 @@ public interface IListAlike<T> {
     /// </summary>
     /// <param name="fn"></param>
     void ForEach(IterFunc fn);
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a comma.
+    /// </summary>
+    /// <returns></returns>
+    string ToString();
     #endregion
 }

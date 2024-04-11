@@ -75,6 +75,16 @@ class ChainedList<T>: IListAlike<T>
         {
             return Next == null ? 1 : Next.Size() + 1;
         }
+
+        public override string ToString()
+        {
+            string s = Val?.ToString() ?? "null";
+            if (Next != null)
+            {
+                s += ", " + Next.ToString();
+            }
+            return s;
+        }
         #endregion
     }
 
@@ -329,6 +339,21 @@ class ChainedList<T>: IListAlike<T>
             fn(current.Val);
             current = current.Next;
         }
+    }
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a comma.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() {
+        string s = "ChainedList[";
+        
+        if (first != null)
+        {
+            s += first.ToString();
+        }
+        
+        return s + "]";
     }
     #endregion
 }

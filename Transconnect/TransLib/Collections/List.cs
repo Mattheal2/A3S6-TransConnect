@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 /// <summary>
 /// A simple resizable List (Vector) implementation.
 /// </summary>
@@ -147,7 +149,8 @@ class List<T>: IListAlike<T> {
 
         for (int i = 0; i < count; i++) {
             T elem = data[i];
-            if (elem != null && elem.Equals(value)) {
+            if (elem == null) throw new UnreachableException();
+            if (elem.Equals(value)) {
                 return i;
             }
         }
@@ -207,6 +210,25 @@ class List<T>: IListAlike<T> {
         for (int i = 0; i < count; i++) {
             fn(data[i]);
         }
+    }
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a comma.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() {
+        string s = "List[";
+        for (int i = 0; i < count; i++) {
+            T elem = data[i];
+            if (elem == null) throw new UnreachableException();
+            
+            s += elem.ToString();
+            if (i < count - 1) {
+                s += ", ";
+            }
+        }
+        s += "]";
+        return s;
     }
     #endregion
 }
