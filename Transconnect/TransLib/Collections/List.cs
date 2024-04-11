@@ -5,8 +5,12 @@ using System.Diagnostics;
 /// </summary>
 /// We use an array to store the data, with an element counter to 
 /// <typeparam name="T"></typeparam>
+<<<<<<< HEAD
 public class List<T> : IListAlike<T>
 {
+=======
+public class List<T>: IListAlike<T> {
+>>>>>>> 74ee83b57139ec6424e0320708b3e9dd6631bcd1
     #region Fields
     private T[] data; // An array to store the data
     private int count; // The number of elements in the list
@@ -31,6 +35,16 @@ public class List<T> : IListAlike<T>
     {
         data = new T[capacity];
         count = 0;
+    }
+
+    /// <summary>
+    /// Creates a list with the elements of another list.
+    /// </summary>
+    /// <param name="other"></param>
+    public List(IListAlike<T> other) {
+        data = new T[other.Length];
+        count = 0;
+        Extend(other);
     }
     #endregion
 
@@ -154,6 +168,20 @@ public class List<T> : IListAlike<T>
             data[i] = data[i + 1];
         }
         count--;
+    }
+
+    /// <summary>
+    /// Removes the first occurrence of the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>True if the value was found and removed, false otherwise.</returns>
+    public bool Remove(T value) {
+        int index = IndexOf(value);
+        if (index == -1) {
+            return false;
+        }
+        RemoveAt(index);
+        return true;
     }
 
     /// <summary>
