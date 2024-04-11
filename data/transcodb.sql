@@ -9,7 +9,8 @@ CREATE TABLE company(
 );
 
 CREATE TABLE person (
-	user_id VARCHAR(30) NOT NULL PRIMARY KEY,
+	user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    user_type ENUM('EMPLOYEE', 'CLIENT') NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     phone VARCHAR(30) NOT NULL,
@@ -19,9 +20,7 @@ CREATE TABLE person (
     #Employee's specific
     position VARCHAR(50),
     salary FLOAT,
-    hire_date DATE,
-    #Driver's specific
-    license_type ENUM('CAR', 'TRUCK')
+    hire_date DATE
 );
 
 CREATE TABLE vehicle (
@@ -41,9 +40,9 @@ CREATE TABLE vehicle (
 );
 
 CREATE TABLE orders (
-	order_id VARCHAR(30) NOT NULL PRIMARY KEY,
-    client_id VARCHAR(30) NOT NULL,
-    driver_id VARCHAR(30) NOT NULL,
+	order_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    client_id INT NOT NULL,
+    driver_id INT NOT NULL,
     vehicle_id VARCHAR(30) NOT NULL,
     departure_date DATE NOT NULL,
     departure_city VARCHAR(40) NOT NULL,
@@ -56,9 +55,9 @@ CREATE TABLE orders (
 
 INSERT INTO company VALUES ('company', '1 rue de la defense', 1000);
 
-INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E0', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
-INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E1', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
-INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES ('E2', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
 
 
 

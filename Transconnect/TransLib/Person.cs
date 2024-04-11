@@ -31,5 +31,7 @@ namespace TransLib
         }
 
         public abstract MySqlCommand save_command();
+        public abstract Task<List<Person>> from_reader(DbDataReader reader);
+       
     }
 }

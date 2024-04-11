@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -32,9 +33,21 @@ namespace TransLib
             return cmd;
         }
 
-        public static Client client_from_reader(DbDataReader reader)
+        /// Returns a Client object from a reader. If muliple rows are returned, only the first one is used.
+        public static new Client from_reader(DbDataReader reader)
         {
+            return new Client(reader.GetString("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"));
+        }
 
+        /// Returns a Client list from a reader.
+        public async static Task<List<Client>> from_reader_mulitple_async(DbDataReader reader)
+        {
+            List<Client> clients = new List<Client>();
+            while (await reader.ReadAsync())
+            {
+                clients.Append(Client.from_reader(reader));
+            }
+            return clients;
         }
 
         public bool new_order(Order new_order)

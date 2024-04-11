@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Security.Cryptography;
@@ -43,15 +44,27 @@ namespace TransLib
             cmd.Parameters.AddWithValue("@position", this.position);
             cmd.Parameters.AddWithValue("@salary", this.salary);
             cmd.Parameters.AddWithValue("@hire_date", this.hire_date);
-            if(this is Driver) cmd.Parameters.AddWithValue("@license_type", ((Driver)this).License_type);
 
             return cmd;
         }
 
-        public static Employee employee_from_reader(DbDataReader reader)
+        /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
+        public static new Employee from_reader(DbDataReader reader)
         {
-
+            return new Employee(reader.GetString("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"), reader.GetString("position"), reader.GetFloat("salary"), reader.GetDateTime("hire_date"));
         }
+
+        /// Returns an Employee list from a reader.
+        public async static Task<List<Employee>> from_reader_mulitple_async(DbDataReader reader)
+        {
+            List<Employee> employees = new List<Employee>();
+            while(await reader.ReadAsync())
+            {
+                 employees.Append(Employee.from_reader(reader));
+            }
+            return employees;
+        }
+
 
         public DateTime[] get_schedule()
         {

@@ -5,7 +5,8 @@ using System.Diagnostics;
 /// </summary>
 /// We use an array to store the data, with an element counter to 
 /// <typeparam name="T"></typeparam>
-class List<T>: IListAlike<T> {
+public class List<T> : IListAlike<T>
+{
     #region Fields
     private T[] data; // An array to store the data
     private int count; // The number of elements in the list
@@ -15,7 +16,8 @@ class List<T>: IListAlike<T> {
     /// <summary>
     /// Creates an empty list.
     /// </summary>
-    public List() {
+    public List()
+    {
         data = new T[0];
         count = 0;
     }
@@ -25,7 +27,8 @@ class List<T>: IListAlike<T> {
     /// We guarantee that the list will not resize until it reaches the specified capacity.
     /// </summary>
     /// <param name="capacity"></param>
-    public List(int capacity) {
+    public List(int capacity)
+    {
         data = new T[capacity];
         count = 0;
     }
@@ -37,9 +40,11 @@ class List<T>: IListAlike<T> {
     /// </summary>
     /// <param name="new_elem_count">next number of elements</param>
     /// <returns></returns>
-    private int GetNextAllocSize(int new_elem_count) {
+    private int GetNextAllocSize(int new_elem_count)
+    {
         int newSize = data.Length == 0 ? 1 : data.Length;
-        while (new_elem_count >= newSize) {
+        while (new_elem_count >= newSize)
+        {
             newSize *= 2;
         }
         return newSize;
@@ -49,10 +54,12 @@ class List<T>: IListAlike<T> {
     /// Resize the list to the next capacity.
     /// </summary>
     /// <param name="next">next number of elements</param>
-    private void Resize(int next) {
+    private void Resize(int next)
+    {
         int newSize = GetNextAllocSize(next);
         T[] newData = new T[newSize];
-        for (int i = 0; i < data.Length; i++) {
+        for (int i = 0; i < data.Length; i++)
+        {
             newData[i] = data[i];
         }
         data = newData;
@@ -71,7 +78,8 @@ class List<T>: IListAlike<T> {
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public T Get(int index) {
+    public T Get(int index)
+    {
         if (index < 0 || index >= count) throw new IndexOutOfRangeException();
         return data[index];
     }
@@ -81,9 +89,11 @@ class List<T>: IListAlike<T> {
     /// </summary>
     /// <param name="value"></param>
     /// <exception cref="ArgumentNullException">If value is null.</exception>
-    public void Append(T value) {
+    public void Append(T value)
+    {
         if (value == null) throw new ArgumentNullException();
-        if (count == data.Length) {
+        if (count == data.Length)
+        {
             Resize(count + 1);
         }
         data[count] = value;
@@ -94,12 +104,15 @@ class List<T>: IListAlike<T> {
     /// Extends the list with the elements of another list.
     /// </summary>
     /// <param name="other"></param>
-    public void Extend(IListAlike<T> other) {
+    public void Extend(IListAlike<T> other)
+    {
         int newCount = count + other.Length;
-        if (newCount > data.Length) {
+        if (newCount > data.Length)
+        {
             Resize(newCount);
         }
-        for (int i = 0; i < other.Length; i++) {
+        for (int i = 0; i < other.Length; i++)
+        {
             data[count + i] = other.Get(i);
         }
         count = newCount;
@@ -112,14 +125,17 @@ class List<T>: IListAlike<T> {
     /// <param name="value"></param>
     /// <exception cref="IndexOutOfRangeException">If the index is out of bounds or negative.</exception>
     /// <exception cref="ArgumentNullException">If value is null.</exception>
-    public void Insert(int index, T value) {
+    public void Insert(int index, T value)
+    {
         if (index > count || index < 0) throw new IndexOutOfRangeException();
         if (value == null) throw new ArgumentNullException();
-        if (count == data.Length) {
+        if (count == data.Length)
+        {
             Resize(count + 1);
         }
 
-        for (int i = count; i > index; i--) {
+        for (int i = count; i > index; i--)
+        {
             data[i] = data[i - 1];
         }
         data[index] = value;
@@ -130,9 +146,11 @@ class List<T>: IListAlike<T> {
     /// Removes the value at the specified index.
     /// </summary>
     /// <param name="index"></param>
-    public void RemoveAt(int index) {
+    public void RemoveAt(int index)
+    {
         if (index >= count || index < 0) throw new IndexOutOfRangeException();
-        for (int i = index; i < count - 1; i++) {
+        for (int i = index; i < count - 1; i++)
+        {
             data[i] = data[i + 1];
         }
         count--;
@@ -144,13 +162,16 @@ class List<T>: IListAlike<T> {
     /// <param name="value"></param>
     /// <returns>-1 if not found, index otherwise</returns>
     /// <exception cref="ArgumentNullException">if value is null</exception>
-    public int IndexOf(T value) {
+    public int IndexOf(T value)
+    {
         if (value == null) throw new ArgumentNullException();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             T elem = data[i];
             if (elem == null) throw new UnreachableException();
-            if (elem.Equals(value)) {
+            if (elem.Equals(value))
+            {
                 return i;
             }
         }
@@ -162,10 +183,13 @@ class List<T>: IListAlike<T> {
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IListAlike<T> Filter(IListAlike<T>.MapFunc<bool> predicate) {
+    public IListAlike<T> Filter(IListAlike<T>.MapFunc<bool> predicate)
+    {
         List<T> result = new List<T>();
-        for (int i = 0; i < count; i++) {
-            if (predicate(data[i])) {
+        for (int i = 0; i < count; i++)
+        {
+            if (predicate(data[i]))
+            {
                 result.Append(data[i]);
             }
         }
@@ -176,10 +200,14 @@ class List<T>: IListAlike<T> {
     /// Sorts the list based on a comparison function. Algorithm is implementation-specific.
     /// </summary>
     /// <param name="compare"></param>
-    public void Sort(IListAlike<T>.Compare compare) {
-        for (int i = 0; i < count; i++) {
-            for (int j = i + 1; j < count; j++) {
-                if (compare(data[i], data[j]) > 0) {
+    public void Sort(IListAlike<T>.Compare compare)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            for (int j = i + 1; j < count; j++)
+            {
+                if (compare(data[i], data[j]) > 0)
+                {
                     T temp = data[i];
                     data[i] = data[j];
                     data[j] = temp;
@@ -194,9 +222,11 @@ class List<T>: IListAlike<T> {
     /// <typeparam name="U"></typeparam>
     /// <param name="map"></param>
     /// <returns></returns>
-    public IListAlike<U> Map<U>(IListAlike<T>.MapFunc<U> map) {
+    public IListAlike<U> Map<U>(IListAlike<T>.MapFunc<U> map)
+    {
         List<U> result = new List<U>(count);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             result.Append(map(data[i]));
         }
         return result;
@@ -206,8 +236,10 @@ class List<T>: IListAlike<T> {
     /// Iterates over the elements of the list.
     /// </summary>
     /// <param name="fn"></param>
-    public void ForEach(IListAlike<T>.IterFunc fn) {
-        for (int i = 0; i < count; i++) {
+    public void ForEach(IListAlike<T>.IterFunc fn)
+    {
+        for (int i = 0; i < count; i++)
+        {
             fn(data[i]);
         }
     }
@@ -216,14 +248,17 @@ class List<T>: IListAlike<T> {
     /// Converts the list to a string, with each element separated by a comma.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() {
+    public override string ToString()
+    {
         string s = "List[";
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
+        {
             T elem = data[i];
             if (elem == null) throw new UnreachableException();
-            
+
             s += elem.ToString();
-            if (i < count - 1) {
+            if (i < count - 1)
+            {
                 s += ", ";
             }
         }

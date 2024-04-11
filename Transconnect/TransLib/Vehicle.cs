@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,5 +26,8 @@ namespace TransLib
             this.model = model;
             this.price = price;
         }
+
+        public abstract MySqlCommand save_command();
+        public 
     }
 }

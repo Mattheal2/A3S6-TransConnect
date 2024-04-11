@@ -60,7 +60,6 @@ namespace TransLib
 
         #region Database connection
         /// Connects to the database, query and returns the reader
-
         private async Task<DbDataReader> query(MySqlCommand command)
         {
             using (MySqlConnection connection = new MySqlConnection(this.db_connection_string))
@@ -77,6 +76,17 @@ namespace TransLib
                     return null;
                 }
             }
+        }
+
+        private async Task<string> reader_to_string(DbDataReader reader)
+        {
+            string buffer = "";
+            while (await reader.ReadAsync())
+            {
+                for (int i = 0; i < reader.FieldCount; i++) buffer += reader[i] + " ";
+                buffer += "\n";
+            }
+            return buffer;
         }
         #endregion
 
@@ -103,7 +113,8 @@ namespace TransLib
         #endregion
         #region Staff management
         /// Gets the highest employee ID in the database and returns it. Type cab be "C" for client, "D" for driver etc...
-        public async Task<int> get_available_id(string type)
+        /// Deprecated (id auto increment in database)
+        /*public async Task<int> get_available_id(string type)
         {
             try
             {
@@ -122,40 +133,21 @@ namespace TransLib
                 Console.WriteLine(ex.Message);
             }
             return 0;
-        }
+        }*/
 
         /// Adds a new employee and returns true if the operation was successful
         public async Task<bool> hire_employee_async(Employee new_employee) //A reviser : enlever classe Driver et tout faire en fn de position & ID (1re lettre)
         {
             try
             {
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO person (user_id, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES(@user_id, @first_name, @last_name, @phone, @email, @address, @birth_date, @position, @salary, @hire_date, @license_type);");
-                cmd.Parameters.AddWithValue("@user_id", new_employee.Id_employee);
-                cmd.Parameters.AddWithValue("@first_name", new_employee.First_name);
-                cmd.Parameters.AddWithValue("@last_name", new_employee.Last_name);
-                cmd.Parameters.AddWithValue("@phone", new_employee.Phone);
-                cmd.Parameters.AddWithValue("@email", new_employee.Email);
-                cmd.Parameters.AddWithValue("@address", new_employee.Address);
-                cmd.Parameters.AddWithValue("@birth_date", new_employee.Birth_date);
-                cmd.Parameters.AddWithValue("@position", new_employee.Position);
-                cmd.Parameters.AddWithValue("@salary", new_employee.Salary);
-                cmd.Parameters.AddWithValue("@hire_date", new_employee.Hire_date);
-                cmd.Parameters.AddWithValue("@license_type", ((Driver)new_employee).License_type);
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
-                        Console.WriteLine();
-                    }
-                }
+                Console.WriteLine(reader_to_string(await query(new_employee.save_command())));
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
             }
-            return true;
         }
 
         /// Finds en employee using his first and last name and returns his ID.
@@ -165,12 +157,12 @@ namespace TransLib
             bool found = false;
             try
             {
-                MySqlCommand get_count = new MySqlCommand($"" +
+                MySqlCommand get_count_query = new MySqlCommand($"" +
                     $"SELECT COUNT(*) " +
                     $"FROM person " +
                     $"WHERE first_name = \"{first_name}\" AND last_name = \"{last_name}\";");
 
-                using (DbDataReader rdr = await query(get_count))
+                using (DbDataReader rdr = await query(get_count_query))
                 {
                     await rdr.ReadAsync();
                     if (rdr.GetInt32(0) == 0) Console.WriteLine($"Error : No employee found with name : {first_name} {last_name}");
@@ -210,14 +202,7 @@ namespace TransLib
 
             try
             {
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
-                        Console.WriteLine();
-                    }
-                }
+                Console.WriteLine(reader_to_string(await query(cmd)));
             }
             catch (Exception ex)
             {
@@ -230,30 +215,17 @@ namespace TransLib
         /// Try to remove an employee using it's name. If 2 employees with same name are found, operation is cancelled
         public async Task<bool> fire_employee_by_name_async(string first_name, string last_name)
         {
-            MySqlCommand count_query = new MySqlCommand($"SELECT COUNT(user_id) FROM person WHERE first_name = '{first_name}' AND last_name='{last_name}'");
+            MySqlCommand get_count_query = new MySqlCommand($"SELECT COUNT(user_id) FROM person WHERE first_name = '{first_name}' AND last_name='{last_name}'");
             MySqlCommand delete_query = new MySqlCommand($"DELETE FROM person WHERE first_name = '{first_name}' AND last_name='{last_name}'");
 
             try
             {
-                string buffer = "";
-                using (DbDataReader rdr = await query(count_query))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) buffer += rdr[i];
-                    }
-                }
+                string output = await reader_to_string(await query(get_count_query));
 
-                if (int.Parse(buffer) > 1) throw new Exception("Error : can't delete multiple users with same name");
-                if (int.Parse(buffer) == 0) throw new Exception("Error : user not found");
-                using (DbDataReader rdr = await query(delete_query))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
-                        Console.WriteLine();
-                    }
-                }
+                if (int.Parse(output) > 1) throw new Exception("Error : can't delete multiple users with same name");
+                if (int.Parse(output) == 0) throw new Exception("Error : user not found");
+
+                Console.WriteLine(await reader_to_string(await query(delete_query)));
             }
             catch (Exception ex)
             {
@@ -269,19 +241,8 @@ namespace TransLib
         {
             try
             {
-                (string car_string_option, string car_string_arg) = new_vehicle is Car ? (", 'CAR', seats", $", {((Car)new_vehicle).SEATS}") : ("", "");
-                (string van_string_option, string van_string_arg) = new_vehicle is Van ? (", 'VAN', usage", $", '{((Van)new_vehicle).Usage}'") : ("", "");
-                (string truck_string_option, string truck_string_arg) = new_vehicle is Truck ? (", 'TRUCK', volume, truck_type", $", {((Truck)new_vehicle).VOLUME}, '{((Truck)new_vehicle).TRUCK_TYPE}'") : ("", "");
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO vehicle(license_plate, brand, model, price{car_string_option + van_string_option + truck_string_option}) VALUES('{new_vehicle.LICENSE_PLATE}', '{new_vehicle.BRAND}', '{new_vehicle.MODEL}', {new_vehicle.Price}{car_string_arg + van_string_arg + truck_string_arg})");
-
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
-                        Console.WriteLine();
-                    }
-                }
+                MySqlCommand cmd = new_vehicle.save_command();
+                Console.WriteLine(reader_to_string(await query(cmd)));
                 return true;
             }
             catch (Exception ex)
@@ -358,49 +319,40 @@ namespace TransLib
 
         #region Monitoring functions
 
-        public async Task<List<Employee>> get_employees_list_async()
+        public async Task<List<Employee>?> get_employees_list_async()
         {
-            List<Employee> employees = new List<Employee>();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id LIKE 'E%'");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_type = 'EMPLOYEE'");
 
             try
             {
                 using (DbDataReader rdr = await query(cmd))
                 {
-                    while (await rdr.ReadAsync())
-                    {
-                        employees.Add(new Employee(rdr.GetString("user_id"), rdr.GetString("first_name"), rdr.GetString("last_name"), rdr.GetString("phone"), rdr.GetString("email"), rdr.GetString("address"), rdr.GetDateTime("birth_date"), rdr.GetString("position"), rdr.GetFloat("salary"), rdr.GetDateTime("hire_date")));
-                    }
+                    return await Employee.from_reader_mulitple_async(rdr);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return null;
             }
-            return employees;
-
         }
 
-        public async Task<List<Employee>> get_clients_list_async()
+        public async Task<List<Client>?> get_clients_list_async()
         {
-            List<Employee> employees = new List<Employee>();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id LIKE 'C%'");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_type = 'CLIENT'");
 
             try
             {
                 using (DbDataReader rdr = await query(cmd))
                 {
-                    while (await rdr.ReadAsync())
-                    {
-                        employees.Add(new Employee(rdr.GetString("user_id"), rdr.GetString("first_name"), rdr.GetString("last_name"), rdr.GetString("phone"), rdr.GetString("email"), rdr.GetString("address"), rdr.GetDateTime("birth_date"), rdr.GetString("position"), rdr.GetFloat("salary"), rdr.GetDateTime("hire_date")));
-                    }
+                    return await Client.from_reader_mulitple_async(rdr);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return null;
             }
-            return employees;
         }
 
         public async Task<List<Vehicle>> get_vehicles_list_async() //peut être agrémentée d'un filtre en arg (car / van / truck)
@@ -417,13 +369,13 @@ namespace TransLib
                         switch (rdr.GetString("vehicle_type"))
                         {
                             case "CAR":
-                                vehicles.Add(new Car(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("seats")));
+                                vehicles.Append(new Car(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("seats")));
                                 break;
                             case "VAN":
-                                vehicles.Add(new Van(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetString("usage")));
+                                vehicles.Append(new Van(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetString("usage")));
                                 break;
                             case "TRUCK":
-                                vehicles.Add(new Truck(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("volume"), rdr.GetString("truck_type")));
+                                vehicles.Append(new Truck(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("volume"), rdr.GetString("truck_type")));
                                 break;
                         }
                     }
