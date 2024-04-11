@@ -1,4 +1,7 @@
-﻿namespace TransLib
+﻿using MySql.Data.MySqlClient;
+using System.Data.Common;
+
+namespace TransLib
 {
     public abstract class Person
     {
@@ -26,5 +29,7 @@
             this.address = address;
             this.birth_date = birth_date;
         }
+
+        public abstract MySqlCommand save_command();
     }
 }
