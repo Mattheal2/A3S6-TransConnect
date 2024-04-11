@@ -4,30 +4,27 @@ using System.Diagnostics;
 /// A singly linked list that supports chaining operations.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-class ChainedList<T>: IListAlike<T>
-{
+public class ChainedList<T> : IListAlike<T> {
     /// <summary>
     /// A Node in a singly linked list.
     /// Safety: this class should never be exposed to the user.
     /// Values are public for simplicity.
     /// </summary>
-    internal class ChainedListNode
-    {
-        
+    internal class ChainedListNode {
+
         #region Fields
         /// <summary>
         /// The next node in the list (null if this is the last node).
         /// </summary>
-        public ChainedListNode? Next;
+        internal ChainedListNode? Next;
         /// <summary>
         /// The value of this node.
         /// </summary>
-        public T Val;
+        internal T Val;
         #endregion
 
         #region Constructors
-        public ChainedListNode(T v)
-        {
+        internal ChainedListNode(T v) {
             Val = v;
         }
         #endregion
@@ -37,8 +34,7 @@ class ChainedList<T>: IListAlike<T>
         /// Returns the last node in the list.
         /// </summary>
         /// <returns>The last node in the linked list.</returns>
-        public ChainedListNode GetLast()
-        {
+        internal ChainedListNode GetLast() {
             return Next == null ? this : Next.GetLast();
         }
 
@@ -47,8 +43,7 @@ class ChainedList<T>: IListAlike<T>
         /// Sets the next node of the last node in the list.
         /// </summary>
         /// <param name="node">The node to set as the next node of the last node.</param>
-        public void SetLast(ChainedListNode node)
-        {
+        internal void SetLast(ChainedListNode node) {
             GetLast().Next = node;
         }
 
@@ -61,8 +56,7 @@ class ChainedList<T>: IListAlike<T>
         /// Do not call this method with a negative index.
         /// Returns null if the index is out of bounds.
         /// </remarks>
-        public ChainedListNode? GetNthChild(int index)
-        {
+        internal ChainedListNode? GetNthChild(int index) {
             if (index < 0) return this;
             if (Next == null) return null;
             return Next.GetNthChild(index - 1);
@@ -71,18 +65,17 @@ class ChainedList<T>: IListAlike<T>
         ///  Returns the number of children of this node + 1.
         /// </summary>
         /// <returns></returns>
-        public int Size()
-        {
+        internal int Size() {
             return Next == null ? 1 : Next.Size() + 1;
         }
 
-        public override string ToString()
-        {
+        /// <summary>
+        /// Returns the representation of the list starting from this node.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
             string s = Val?.ToString() ?? "null";
-            if (Next != null)
-            {
-                s += ", " + Next.ToString();
-            }
+            if (Next != null) s += ", " + Next.ToString();
             return s;
         }
         #endregion
@@ -105,18 +98,18 @@ class ChainedList<T>: IListAlike<T>
     /// <summary>
     ///  Creates an empty list.
     /// </summary>
-    public ChainedList()
-    {
+    public ChainedList() {
         first = null;
     }
 
     /// <summary>
-    /// Creates a list with a single element as its first element.
+    /// Creates a list with the elements of another list.
     /// </summary>
-    /// <param name="v"></param>
-    public ChainedList(T v)
-    {
-        first = new ChainedListNode(v);
+    /// <param name="other"></param>
+    public ChainedList(IListAlike<T> other) {
+        first = null;
+        length = 0;
+        Extend(other);
     }
     #endregion
 
@@ -126,25 +119,18 @@ class ChainedList<T>: IListAlike<T>
     /// The length of the list.
     /// </summary>
     int IListAlike<T>.Length { get { return length; } }
-    
+
     /// <summary>
     /// Gets the value at the specified index.
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
     /// <exception cref="IndexOutOfRangeException">If the index is out of bounds or negative.</exception>
-    public T Get(int index)
-    {
-        if (index < 0 || first == null)
-        {
-            throw new IndexOutOfRangeException();
-        }
+    public T Get(int index) {
+        if (index < 0 || first == null) throw new IndexOutOfRangeException();
 
         ChainedListNode? node = first.GetNthChild(index);
-        if (node == null)
-        {
-            throw new IndexOutOfRangeException();
-        }
+        if (node == null) throw new IndexOutOfRangeException();
 
         return node.Val;
     }
@@ -153,42 +139,31 @@ class ChainedList<T>: IListAlike<T>
     /// Appends a value to the end of the list.
     /// </summary>
     /// <param name="value"></param>
-    public void Append(T value)
-    {
+    public void Append(T value) {
         ChainedListNode nw = new ChainedListNode(value);
-        if (first == null)
-        {
+        if (first == null) {
             first = nw;
-        }
-        else
-        {
+        } else {
             first.SetLast(nw);
         }
+        length++;
     }
 
     /// <summary>
     /// Extends the list with the elements of another list.
     /// </summary>
     /// <param name="other"></param>
-    /// <remarks>Performs a fast append if the other list is also a ChainedList.</remarks>
-    public void Extend(IListAlike<T> other)
-    {
+    public void Extend(IListAlike<T> other){
+        // NOTE: we removed fast-path if other is also a ChainedList because we want to clone the list.
         this.length += other.Length;
-        if (other is ChainedList<T> cl)
-        {
-            if (first == null)
-            {
-                first = cl.first;
+        other.ForEach(e => {
+            ChainedListNode nw = new ChainedListNode(e);
+            if (first == null) {
+                first = nw;
+            } else {
+                first.SetLast(nw);
             }
-            else if (cl.first != null)
-            {
-                first.SetLast(cl.first);
-            }
-        }
-        else
-        {
-            other.ForEach(e => Append(e));
-        }
+        });
     }
 
     /// <summary>
@@ -197,23 +172,16 @@ class ChainedList<T>: IListAlike<T>
     /// <param name="index"></param>
     /// <param name="value"></param>
     /// <exception cref="IndexOutOfRangeException">If the index is out of bounds or negative.</exception>
-    public void Insert(int index, T value)
-    {
-        if (index < 0 || index > length)
-        {
-            throw new IndexOutOfRangeException();
-        }
+    public void Insert(int index, T value) {
+        if (index < 0 || index > length) throw new IndexOutOfRangeException();
 
         ChainedListNode nw = new ChainedListNode(value);
-        if (index == 0)
-        {
+        if (index == 0) {
             nw.Next = first;
             first = nw;
-        }
-        else
-        {
+        } else {
             ChainedListNode? prev = first?.GetNthChild(index - 1);
-            if (prev == null)throw new UnreachableException(); // bound already checked
+            if (prev == null) throw new UnreachableException(); // bound already checked
             nw.Next = prev.Next;
             prev.Next = nw;
         }
@@ -225,15 +193,12 @@ class ChainedList<T>: IListAlike<T>
     /// </summary>
     /// <param name="index"></param>
     /// <exception cref="IndexOutOfRangeException"></exception>
-    public void RemoveAt(int index)
-    {
-        if (index < 0 || index >= length || first == null)
-        {
+    public void RemoveAt(int index) {
+        if (index < 0 || index >= length || first == null) {
             throw new IndexOutOfRangeException();
         }
 
-        if (index == 0)
-        {
+        if (index == 0) {
             first = first.Next;
         } else {
             ChainedListNode? prev = first.GetNthChild(index - 1);
@@ -247,59 +212,45 @@ class ChainedList<T>: IListAlike<T>
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public int IndexOf(T value)
-    {
+    public int IndexOf(T value) {
         ChainedListNode? current = first;
         int index = 0;
-        while (current != null && current.Val != null)
-        {
-            if (current.Val.Equals(value))
-            {
-                return index;
-            }
+        while (current != null && current.Val != null) {
+            if (current.Val.Equals(value)) return index;
             current = current.Next;
             index++;
         }
         return -1;
     }
-    
-    
+
+
     /// <summary>
     /// Filters the list, keeping only the elements that satisfy the predicate.
     /// </summary>
     /// <param name="predicate"></param>
     /// <returns></returns>
-    public IListAlike<T> Filter(IListAlike<T>.MapFunc<bool> predicate)
-    {
+    public IListAlike<T> Filter(IListAlike<T>.MapFunc<bool> predicate) {
         ChainedList<T> result = new ChainedList<T>();
         ChainedListNode? current = first;
-        while (current != null)
-        {
-            if (predicate(current.Val))
-            {
-                result.Append(current.Val);
-            }
+        while (current != null) {
+            if (predicate(current.Val)) result.Append(current.Val);
             current = current.Next;
         }
         return result;
     }
 
-    
+
 
     /// <summary>
     /// Sorts the list in place using bubble sort.
     /// </summary>
     /// <param name="compare"></param>
-    public void Sort(IListAlike<T>.Compare compare)
-    {
+    public void Sort(IListAlike<T>.Compare compare) {
         ChainedListNode? current = first;
-        while (current != null)
-        {
+        while (current != null){
             ChainedListNode? next = current.Next;
-            while (next != null)
-            {
-                if (compare(current.Val, next.Val) > 0)
-                {
+            while (next != null) {
+                if (compare(current.Val, next.Val) > 0) {
                     T temp = current.Val;
                     current.Val = next.Val;
                     next.Val = temp;
@@ -316,12 +267,10 @@ class ChainedList<T>: IListAlike<T>
     /// <typeparam name="U"></typeparam>
     /// <param name="func"></param>
     /// <returns></returns>
-    public IListAlike<U> Map<U>(IListAlike<T>.MapFunc<U> func)
-    {
+    public IListAlike<U> Map<U>(IListAlike<T>.MapFunc<U> func) {
         ChainedList<U> result = new ChainedList<U>();
         ChainedListNode? current = first;
-        while (current != null)
-        {
+        while (current != null) {
             result.Append(func(current.Val));
             current = current.Next;
         }
@@ -334,8 +283,7 @@ class ChainedList<T>: IListAlike<T>
     /// <param name="fn"></param>
     public void ForEach(IListAlike<T>.IterFunc fn) {
         ChainedListNode? current = first;
-        while (current != null)
-        {
+        while (current != null) {
             fn(current.Val);
             current = current.Next;
         }
@@ -347,12 +295,9 @@ class ChainedList<T>: IListAlike<T>
     /// <returns></returns>
     public override string ToString() {
         string s = "ChainedList[";
-        
-        if (first != null)
-        {
-            s += first.ToString();
-        }
-        
+
+        if (first != null) s += first.ToString();
+
         return s + "]";
     }
     #endregion
