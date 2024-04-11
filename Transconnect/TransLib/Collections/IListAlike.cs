@@ -39,6 +39,7 @@ public interface IListAlike<T> {
     /// Appends a value to the end of the list.
     /// </summary>
     /// <param name="value"></param>
+    /// <exception cref="ArgumentNullException">if value is null</exception>
     void Append(T value);
     /// <summary>
     /// Extends the list with the elements of another list.
@@ -51,12 +52,22 @@ public interface IListAlike<T> {
     /// </summary>
     /// <param name="index"></param>
     /// <param name="value"></param>
+    /// <exception cref="IndexOutOfRangeException">If the index is out of bounds or negative.</exception>
+    /// <exception cref="ArgumentNullException">If value is null.</exception>
+    /// <exception cref="NotSupportedException">If the collection is a set (use Append instead).</exception>
     void Insert(int index, T value);
     /// <summary>
     /// Removes the value at the specified index.
     /// </summary>
     /// <param name="index"></param>
     void RemoveAt(int index);
+    /// <summary>
+    /// Removes the first occurrence of the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>True if the value was found and removed, false otherwise.</returns>
+    /// <exception cref="ArgumentNullException">if value is null</exception>
+    bool Remove(T value);
     /// <summary>
     /// Removes the first occurrence of the specified value.
     /// </summary>
@@ -81,6 +92,7 @@ public interface IListAlike<T> {
     /// <typeparam name="U"></typeparam>
     /// <param name="map"></param>
     /// <returns></returns>
+    /// <exception cref="NotImplementedException">Mapping is not supported in a set.</exception>
     IListAlike<U> Map<U>(MapFunc<U> map);
     /// <summary>
     /// Iterates over the elements of the list.

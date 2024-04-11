@@ -155,15 +155,7 @@ public class ChainedList<T> : IListAlike<T> {
     /// <param name="other"></param>
     public void Extend(IListAlike<T> other){
         // NOTE: we removed fast-path if other is also a ChainedList because we want to clone the list.
-        this.length += other.Length;
-        other.ForEach(e => {
-            ChainedListNode nw = new ChainedListNode(e);
-            if (first == null) {
-                first = nw;
-            } else {
-                first.SetLast(nw);
-            }
-        });
+        other.ForEach(Append);
     }
 
     /// <summary>
@@ -207,6 +199,18 @@ public class ChainedList<T> : IListAlike<T> {
         }
         length--;
     }
+
+    /// <summary>
+    /// Removes the first occurrence of the specified value.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>
+    public bool Remove(T value) {
+        int idx = IndexOf(value);
+        if (idx != -1) RemoveAt(idx);
+        return idx != -1;
+    }
+
     /// <summary>
     /// Removes the first occurrence of the specified value.
     /// </summary>

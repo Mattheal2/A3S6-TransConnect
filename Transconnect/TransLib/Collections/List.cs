@@ -152,6 +152,20 @@ public class List<T>: IListAlike<T> {
     /// Removes the first occurrence of the specified value.
     /// </summary>
     /// <param name="value"></param>
+    /// <returns>True if the value was found and removed, false otherwise.</returns>
+    public bool Remove(T value) {
+        int index = IndexOf(value);
+        if (index == -1) {
+            return false;
+        }
+        RemoveAt(index);
+        return true;
+    }
+
+    /// <summary>
+    /// Removes the first occurrence of the specified value.
+    /// </summary>
+    /// <param name="value"></param>
     /// <returns>-1 if not found, index otherwise</returns>
     /// <exception cref="ArgumentNullException">if value is null</exception>
     public int IndexOf(T value) {
