@@ -20,7 +20,7 @@ namespace TransLib
         protected string order_id;
         protected Client client;
         protected Vehicle vehicle;
-        protected Driver driver;
+        protected Employee driver;
         protected DateTime departure_date;
         protected string departure_city;
         protected string arrival_city;
@@ -31,6 +31,7 @@ namespace TransLib
 
         public Order(string order_id, Client client, Vehicle vehicle, DateTime departure_date, string departure_city, string arrival_city)
         {
+            this.order_id = order_id;
             this.client = client;
             this.vehicle = vehicle;
             this.departure_date = departure_date;
@@ -41,7 +42,7 @@ namespace TransLib
         }
 
         //finds the most appropriate driver for the order, returns null if no driver is available on this date
-        private (Driver, OrderStatus) find_driver()
+        private (Employee, OrderStatus) find_driver()
         {
             throw new NotImplementedException();
         }

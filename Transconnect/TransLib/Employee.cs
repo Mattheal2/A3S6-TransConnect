@@ -12,17 +12,17 @@ namespace TransLib
 {
     public class Employee : Person
     {
-        protected string id_employee;
+        protected int id_employee;
         protected string position;
         protected float salary;
         protected DateTime hire_date;
 
-        public string Id_employee { get => id_employee;}
+        public int Id_employee { get => id_employee; }
         public string Position { get => position; set => position = value; }
         public float Salary { get => salary; set => salary = value; }
         public DateTime Hire_date { get => hire_date; }
 
-        public Employee(string id_employee, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string position, float salary, DateTime hire_date) : base(first_name, last_name, phone, email, address, birth_date)
+        public Employee(int id_employee, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string position, float salary, DateTime hire_date) : base(id_employee, first_name, last_name, phone, email, address, birth_date)
         {
             this.id_employee = id_employee;
             this.position = position;
@@ -49,20 +49,47 @@ namespace TransLib
         }
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public static new Employee from_reader(DbDataReader reader)
+        public async new static Task<Employee> from_reader_async(DbDataReader? reader)
         {
-            return new Employee(reader.GetString("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"), reader.GetString("position"), reader.GetFloat("salary"), reader.GetDateTime("hire_date"));
+            using (reader)
+            {
+                if (reader == null) throw new Exception("reader is null");
+                await reader.ReadAsync();
+                return Employee.cast_from_open_reader(reader);
+            }
         }
 
-        /// Returns an Employee list from a reader.
-        public async static Task<List<Employee>> from_reader_mulitple_async(DbDataReader reader)
+        public async static new Task<List<Employee>> from_reader_mulitple_async(DbDataReader? reader)
         {
-            List<Employee> employees = new List<Employee>();
-            while(await reader.ReadAsync())
+            using (reader)
             {
-                 employees.Append(Employee.from_reader(reader));
+                if (reader == null) throw new Exception("reader is null");
+                List<Employee> employees = new List<Employee>();
+                while (await reader.ReadAsync())
+                {
+                    employees.Append(Employee.cast_from_open_reader(reader));
+                }
+                return employees;
             }
-            return employees;
+        }
+
+        protected static new Employee cast_from_open_reader(DbDataReader? reader)
+        {
+
+                if (reader == null) throw new Exception("reader is null");
+                if (!reader.IsClosed)
+                {
+                    if (reader.GetString("user_type") == "EMPLOYEE")
+                    {
+                        return new Employee(reader.GetInt32("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"), reader.GetString("position"), reader.GetFloat("salary"), reader.GetDateTime("hire_date"));
+                    }
+                    else throw new Exception("invalid user_type");
+                }
+                else
+                {
+                    throw new Exception("unable to read closed reader");
+                }
+            
         }
 
 

@@ -28,7 +28,7 @@ CREATE TABLE vehicle (
 	brand VARCHAR(30) NOT NULL,
     model VARCHAR(30) NOT NULL,
     price FLOAT NOT NULL,
-    vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
+    vehicle_type ENUM('TRUCK', 'CAR', 'VAN') NOT NULL,
     #Truck's specific
     volume INT,
     truck_type VARCHAR(30),
@@ -55,9 +55,9 @@ CREATE TABLE orders (
 
 INSERT INTO company VALUES ('company', '1 rue de la defense', 1000);
 
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16', 'CAR');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16');
 
 
 

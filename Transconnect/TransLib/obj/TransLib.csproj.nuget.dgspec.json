@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj": {}
+    "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj": {}
   },
   "projects": {
-    "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj": {
+    "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj",
+        "projectUniqueName": "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj",
         "projectName": "TransLib",
-        "projectPath": "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj",
-        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\obj\\",
+        "projectPath": "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\TransLib.csproj",
+        "packagesPath": "C:\\Users\\Matthéo\\.nuget\\packages\\",
+        "outputPath": "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL\\Transconnect\\TransLib\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Matthéo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -5,12 +5,7 @@ using System.Diagnostics;
 /// </summary>
 /// We use an array to store the data, with an element counter to 
 /// <typeparam name="T"></typeparam>
-<<<<<<< HEAD
-public class List<T> : IListAlike<T>
-{
-=======
 public class List<T>: IListAlike<T> {
->>>>>>> 74ee83b57139ec6424e0320708b3e9dd6631bcd1
     #region Fields
     private T[] data; // An array to store the data
     private int count; // The number of elements in the list

@@ -60,26 +60,25 @@ namespace TransLib
 
         #region Database connection
         /// Connects to the database, query and returns the reader
-        private async Task<DbDataReader> query(MySqlCommand command)
+        private async Task<DbDataReader?> query(MySqlCommand command)
         {
-            using (MySqlConnection connection = new MySqlConnection(this.db_connection_string))
+            MySqlConnection connection = new MySqlConnection(this.db_connection_string);
+            await connection.OpenAsync();
+            try
             {
-                try
-                {
-                    await connection.OpenAsync();
-                    command.Connection = connection;
-                    return await command.ExecuteReaderAsync();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    return null;
-                }
+                command.Connection = connection;
+                return await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
             }
         }
 
-        private async Task<string> reader_to_string(DbDataReader reader)
+        private async Task<string> reader_to_string(DbDataReader? reader)
         {
+            if (reader == null) return "";
             string buffer = "";
             while (await reader.ReadAsync())
             {
@@ -99,7 +98,7 @@ namespace TransLib
 
             try
             {
-                DbDataReader reader = await query(new MySqlCommand($"UPDATE company SET money = money + ({amount}) WHERE company_name = '{this.name}';"));
+                DbDataReader? reader = await query(new MySqlCommand($"UPDATE company SET money = money + ({amount}) WHERE company_name = '{this.name}';"));
                 return true;
             }
             catch (Exception ex)
@@ -111,6 +110,7 @@ namespace TransLib
         }
 
         #endregion
+
         #region Staff management
         /// Gets the highest employee ID in the database and returns it. Type cab be "C" for client, "D" for driver etc...
         /// Deprecated (id auto increment in database)
@@ -162,8 +162,9 @@ namespace TransLib
                     $"FROM person " +
                     $"WHERE first_name = \"{first_name}\" AND last_name = \"{last_name}\";");
 
-                using (DbDataReader rdr = await query(get_count_query))
+                using (DbDataReader? rdr = await query(get_count_query))
                 {
+                    if (rdr == null) throw new Exception("reader is null");
                     await rdr.ReadAsync();
                     if (rdr.GetInt32(0) == 0) Console.WriteLine($"Error : No employee found with name : {first_name} {last_name}");
                     else if (rdr.GetInt32(0) > 1) Console.WriteLine($"Error : Multiple employees found with name : {first_name} {last_name}");
@@ -176,8 +177,9 @@ namespace TransLib
                     $"FROM person " +
                     $"WHERE first_name = \"{first_name}\" AND last_name = \"{last_name}\";");
 
-                    using (DbDataReader rdr = await query(cmd))
+                    using (DbDataReader? rdr = await query(cmd))
                     {
+                        if (rdr == null) throw new Exception("reader is null");
                         while (await rdr.ReadAsync())
                         {
                             return rdr.GetString(0);
@@ -268,8 +270,9 @@ namespace TransLib
             {
                 MySqlCommand cmd = new MySqlCommand($"SELECT price FROM vehicle WHERE license_plate = '{license_plate}'");
 
-                using (DbDataReader rdr = await query(cmd))
+                using (DbDataReader? rdr = await query(cmd))
                 {
+                    if (rdr == null) throw new Exception("reader is null");
                     await rdr.ReadAsync();
                     return rdr.GetFloat(0);
                 }
@@ -287,8 +290,9 @@ namespace TransLib
 
             try
             {
-                using (DbDataReader rdr = await query(cmd))
+                using (DbDataReader? rdr = await query(cmd))
                 {
+                    if (rdr == null) throw new Exception("reader is null");
                     while (await rdr.ReadAsync())
                     {
                         for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
@@ -325,10 +329,7 @@ namespace TransLib
 
             try
             {
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    return await Employee.from_reader_mulitple_async(rdr);
-                }
+                return await Employee.from_reader_mulitple_async(await query(cmd));
             }
             catch (Exception ex)
             {
@@ -343,10 +344,7 @@ namespace TransLib
 
             try
             {
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    return await Client.from_reader_mulitple_async(rdr);
-                }
+                return await Client.from_reader_mulitple_async(await query(cmd));
             }
             catch (Exception ex)
             {
@@ -355,31 +353,14 @@ namespace TransLib
             }
         }
 
-        public async Task<List<Vehicle>> get_vehicles_list_async() //peut être agrémentée d'un filtre en arg (car / van / truck)
+        public async Task<List<Vehicle>?> get_vehicles_list_async() //peut être agrémentée d'un filtre en arg (car / van / truck)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicle");
 
             try
             {
-                using (DbDataReader rdr = await query(cmd))
-                {
-                    while (await rdr.ReadAsync())
-                    {
-                        switch (rdr.GetString("vehicle_type"))
-                        {
-                            case "CAR":
-                                vehicles.Append(new Car(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("seats")));
-                                break;
-                            case "VAN":
-                                vehicles.Append(new Van(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetString("usage")));
-                                break;
-                            case "TRUCK":
-                                vehicles.Append(new Truck(rdr.GetString("license_plate"), rdr.GetString("brand"), rdr.GetString("model"), rdr.GetFloat("price"), rdr.GetInt32("volume"), rdr.GetString("truck_type")));
-                                break;
-                        }
-                    }
-                }
+                return await Vehicle.from_reader_multiple_async(await query(cmd));
             }
             catch (Exception ex)
             {
