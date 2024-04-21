@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
+using Org.BouncyCastle.Crypto;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace TransLib
@@ -321,6 +322,22 @@ namespace TransLib
         }
         #endregion
 
+        #region Orders management
+        public async Task<bool> new_order(Order new_order)
+        {
+            try
+            {
+                MySqlCommand cmd = new_order.save_command();
+                Console.WriteLine(reader_to_string(await query(cmd)));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
         #region Monitoring functions
 
         public async Task<List<Employee>?> get_employees_list_async()
@@ -367,6 +384,22 @@ namespace TransLib
                 Console.WriteLine(ex.Message);
             }
             return vehicles;
+        }
+
+        public async Task<List<Order>?> get_orders_list_async()
+        {
+            List<Order> orders = new List<Order>();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM orders");
+
+            try
+            {
+                return await Order.from_reader_multiple_async(await query(cmd));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return orders;
         }
 
         #endregion

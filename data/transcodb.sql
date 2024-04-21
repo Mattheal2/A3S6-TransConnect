@@ -28,7 +28,7 @@ CREATE TABLE vehicle (
 	brand VARCHAR(30) NOT NULL,
     model VARCHAR(30) NOT NULL,
     price FLOAT NOT NULL,
-    vehicle_type ENUM('TRUCK', 'CAR', 'VAN') NOT NULL,
+    vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
     #Truck's specific
     volume INT,
     truck_type VARCHAR(30),
@@ -40,7 +40,7 @@ CREATE TABLE vehicle (
 );
 
 CREATE TABLE orders (
-	order_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	order_id INT AUTO_INCREMENT,
     client_id INT NOT NULL,
     driver_id INT NOT NULL,
     vehicle_id VARCHAR(30) NOT NULL,
@@ -48,7 +48,8 @@ CREATE TABLE orders (
     departure_city VARCHAR(40) NOT NULL,
     arrival_city VARCHAR(40) NOT NULL,
     order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed') DEFAULT 'Pending',
-	FOREIGN KEY (client_id) REFERENCES person(user_id),
+	PRIMARY KEY(order_id),
+    FOREIGN KEY (client_id) REFERENCES person(user_id),
     FOREIGN KEY (driver_id) REFERENCES person(user_id),
     FOREIGN KEY (vehicle_id) REFERENCES vehicle(license_plate)
 );
@@ -66,9 +67,13 @@ INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VA
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
 
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '2025-10-21', 'Toulouse', 'Paris');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '2025-10-21', 'Toulouse', 'Paris');
+
 SELECT * FROM person;
 SELECT * FROM vehicle;
 SELECT * FROM company;
+SELECT * FROM orders;
 
 UPDATE company 
 SET money = money + (-1000)

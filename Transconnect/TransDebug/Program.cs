@@ -2,7 +2,9 @@
 using Mysqlx.Crud;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using TransLib;
+using TransLib.Maps;
 
 namespace TransDebug
 {
@@ -10,16 +12,32 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
+            test_route();
+            test_get_db();
+            while (true) ;
+
+        }
+
+        public async static void test_route()
+        {
+            Route route = new Route(Route.RouteType.Driving, "Toulouse", "Paris");
+            await route.process_async();
+            Console.WriteLine("Itinerary type : " + route.Type);
+            Console.WriteLine("Distance : " + route.get_distance());
+            Console.WriteLine("Duration : " + route.get_duration());
+
+        }
+
+        public static void test_get_db()
+        {
             Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
             var x = trans_connexion.get_employees_list_async().Result;
             var y = trans_connexion.get_vehicles_list_async().Result;
 
             Console.WriteLine("Liste d'employés :");
-            if(x != null) x.ForEach(a => Console.WriteLine(a));
+            if (x != null) x.ForEach(a => Console.WriteLine(a));
             Console.WriteLine("Liste de véhicules :");
             if (y != null) y.ForEach(a => Console.WriteLine(a));
-
-            while (true) ;
         }
 
         public static async void display_async_query(MySqlCommand cmd, string connection_string)

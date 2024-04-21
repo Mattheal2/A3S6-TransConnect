@@ -6,31 +6,23 @@ namespace TransLib
 {
     public abstract class Person
     {
-        protected int user_id;
-        protected string first_name;
-        protected string last_name;
-        protected string phone;
-        protected string email;
-        protected string address;
-        protected DateTime birth_date;
-
-        public string First_name { get => first_name; }
-        public string Last_name { get => last_name; }
-        public string Phone { get => phone; set => this.phone = value; }
-        public string Email { get => email; set => this.email = value; }
-        public string Address { get => address; set => this.address = value; }
-        public DateTime Birth_date { get => birth_date; set => this.birth_date = value; }
-
+        public int USER_ID { get; }
+        public string FIRST_NAME { get; }
+        public string LAST_NAME { get; }
+        public string PHONE { get; }
+        public string EMAIL { get; }
+        public string ADDRESS { get; }
+        public DateTime BIRTH_DATE { get; }
 
         public Person(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date)
         {
-            this.user_id = user_id;
-            this.first_name = first_name;
-            this.last_name = last_name;
-            this.phone = phone;
-            this.email = email;
-            this.address = address;
-            this.birth_date = birth_date;
+            this.USER_ID = user_id;
+            this.FIRST_NAME = first_name;
+            this.LAST_NAME = last_name;
+            this.PHONE = phone;
+            this.EMAIL = email;
+            this.ADDRESS = address;
+            this.BIRTH_DATE = birth_date;
         }
 
         public abstract MySqlCommand save_command();
@@ -88,7 +80,7 @@ namespace TransLib
 
         public override string ToString()
         {
-            return $"{first_name} {last_name}";
+            return $"{FIRST_NAME} {LAST_NAME}";
         }
     }
 }

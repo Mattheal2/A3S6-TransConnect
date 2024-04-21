@@ -18,14 +18,14 @@ namespace TransLib
         public override MySqlCommand save_command()
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO person (user_id, user_type, first_name, last_name, phone, email, address, birth_date) VALUES(@user_id, @user_type, @first_name, @last_name, @phone, @email, @address, @birth_date);");
-            cmd.Parameters.AddWithValue("@user_id", this.user_id);
+            cmd.Parameters.AddWithValue("@user_id", this.USER_ID);
             cmd.Parameters.AddWithValue("@user_type", "CLIENT");
-            cmd.Parameters.AddWithValue("@first_name", this.first_name);
-            cmd.Parameters.AddWithValue("@last_name", this.last_name);
-            cmd.Parameters.AddWithValue("@phone", this.phone);
-            cmd.Parameters.AddWithValue("@email", this.email);
-            cmd.Parameters.AddWithValue("@address", this.address);
-            cmd.Parameters.AddWithValue("@birth_date", this.birth_date);
+            cmd.Parameters.AddWithValue("@first_name", this.FIRST_NAME);
+            cmd.Parameters.AddWithValue("@last_name", this.LAST_NAME);
+            cmd.Parameters.AddWithValue("@phone", this.PHONE);
+            cmd.Parameters.AddWithValue("@email", this.EMAIL);
+            cmd.Parameters.AddWithValue("@address", this.ADDRESS);
+            cmd.Parameters.AddWithValue("@birth_date", this.BIRTH_DATE);
 
             return cmd;
         }
