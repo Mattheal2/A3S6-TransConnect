@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransLib
+namespace TransLib.Persons
 {
     public class Client : Person
     {
@@ -18,14 +18,14 @@ namespace TransLib
         public override MySqlCommand save_command()
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO person (user_id, user_type, first_name, last_name, phone, email, address, birth_date) VALUES(@user_id, @user_type, @first_name, @last_name, @phone, @email, @address, @birth_date);");
-            cmd.Parameters.AddWithValue("@user_id", this.USER_ID);
+            cmd.Parameters.AddWithValue("@user_id", USER_ID);
             cmd.Parameters.AddWithValue("@user_type", "CLIENT");
-            cmd.Parameters.AddWithValue("@first_name", this.FIRST_NAME);
-            cmd.Parameters.AddWithValue("@last_name", this.LAST_NAME);
-            cmd.Parameters.AddWithValue("@phone", this.PHONE);
-            cmd.Parameters.AddWithValue("@email", this.EMAIL);
-            cmd.Parameters.AddWithValue("@address", this.ADDRESS);
-            cmd.Parameters.AddWithValue("@birth_date", this.BIRTH_DATE);
+            cmd.Parameters.AddWithValue("@first_name", FIRST_NAME);
+            cmd.Parameters.AddWithValue("@last_name", LAST_NAME);
+            cmd.Parameters.AddWithValue("@phone", PHONE);
+            cmd.Parameters.AddWithValue("@email", EMAIL);
+            cmd.Parameters.AddWithValue("@address", ADDRESS);
+            cmd.Parameters.AddWithValue("@birth_date", BIRTH_DATE);
 
             return cmd;
         }
@@ -37,7 +37,7 @@ namespace TransLib
                 if (reader == null) throw new Exception("reader is null");
 
                 await reader.ReadAsync();
-                return Client.cast_from_open_reader(reader);
+                return cast_from_open_reader(reader);
             }
         }
 
@@ -51,7 +51,7 @@ namespace TransLib
                 List<Client> clients = new List<Client>();
                 while (await reader.ReadAsync())
                 {
-                    clients.Append(Client.cast_from_open_reader(reader));
+                    clients.Append(cast_from_open_reader(reader));
                 }
                 return clients;
             }

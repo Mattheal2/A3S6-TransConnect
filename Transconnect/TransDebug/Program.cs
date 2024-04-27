@@ -5,6 +5,9 @@ using System.Data.Common;
 using System.Diagnostics;
 using TransLib;
 using TransLib.Maps;
+using TransLib.Schedule;
+using TransLib.Persons;
+using System.Runtime.CompilerServices;
 
 namespace TransDebug
 {
@@ -12,15 +15,14 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
-            test_route();
-            test_get_db();
-            while (true) ;
-
+            test_schedule();
+            //test_route().Wait();
+            //test_get_db().Wait();
         }
 
-        public async static void test_route()
+        public async static Task test_route()
         {
-            Route route = new Route(Route.RouteType.Driving, "Toulouse", "Paris");
+            Route route = new Route(Route.RouteType.Driving, "Chatou", "Paris");
             await route.process_async();
             Console.WriteLine("Itinerary type : " + route.Type);
             Console.WriteLine("Distance : " + route.get_distance());
@@ -28,11 +30,20 @@ namespace TransDebug
 
         }
 
-        public static void test_get_db()
+        public static void test_schedule()
+        {
+            Schedule schedule = Schedule.from_database($"server=localhost;Port=3306;database=transcodb;uid=root;pwd=;");
+            Employee? d1 = schedule.find_driver(new DateTime(2025, 10, 21, 9, 0, 0));
+            if(d1 != null) Console.WriteLine(d1.FIRST_NAME + " " + d1.LAST_NAME);
+            else Console.WriteLine("No driver available");
+            Console.WriteLine(schedule.to_json());
+        }
+
+        public async static Task test_get_db()
         {
             Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
-            var x = trans_connexion.get_employees_list_async().Result;
-            var y = trans_connexion.get_vehicles_list_async().Result;
+            var x = await trans_connexion.get_employees_list_async();
+            var y = await trans_connexion.get_vehicles_list_async();
 
             Console.WriteLine("Liste d'employés :");
             if (x != null) x.ForEach(a => Console.WriteLine(a));

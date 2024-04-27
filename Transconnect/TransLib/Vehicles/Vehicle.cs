@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TransLib
+namespace TransLib.Vehicles
 {
     public abstract class Vehicle
     {
@@ -34,7 +34,7 @@ namespace TransLib
 
         public override string ToString()
         {
-            return $"{this.license_plate} {this.brand} {this.model}";
+            return $"{license_plate} {brand} {model}";
         }
 
         //Casts the object in reader into correct vehicle

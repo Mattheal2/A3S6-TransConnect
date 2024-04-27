@@ -44,7 +44,8 @@ CREATE TABLE orders (
     client_id INT NOT NULL,
     driver_id INT NOT NULL,
     vehicle_id VARCHAR(30) NOT NULL,
-    departure_date DATE NOT NULL,
+    departure_date DATETIME NOT NULL,
+    arrival_date DATETIME,
     departure_city VARCHAR(40) NOT NULL,
     arrival_city VARCHAR(40) NOT NULL,
     order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed') DEFAULT 'Pending',
@@ -56,9 +57,9 @@ CREATE TABLE orders (
 
 INSERT INTO company VALUES ('company', '1 rue de la defense', 1000);
 
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-21', 'Driver', '30000', '2020-04-16');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-16');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-10-21', 'Driver', '30000', '2020-04-16');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-27', 'Driver', '30000', '2020-03-16');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-19');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-9-20', 'Driver', '30000', '2020-04-16');
 
 
 
@@ -67,8 +68,8 @@ INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VA
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
 
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '2025-10-21', 'Toulouse', 'Paris');
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '2025-10-21', 'Toulouse', 'Paris');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '2025-10-21 09:00:00', 'Toulouse', 'Paris');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '2025-11-21 09:00:00', 'Toulouse', 'Paris');
 
 SELECT * FROM person;
 SELECT * FROM vehicle;
@@ -79,3 +80,12 @@ UPDATE company
 SET money = money + (-1000)
 WHERE company_name = 'company';
 
+SELECT departure_date, departure_city, arrival_city, order_id, driver_id, vehicle_id, vehicle_type
+FROM orders
+INNER JOIN vehicle ON orders.vehicle_id = vehicle.license_plate
+;
+SET @start = '2025-11-21 8:00:00';
+SET @end = NULL;
+SET @vehicle_type = 'CAR'
+SELECT user_id, user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date FROM person WHERE user_id NOT IN (SELECT driver_id FROM orders WHERE departure_date BETWEEN @start AND @end OR arrival_date BETWEEN @start AND @end OR DATE(departure_date) = DATE(@start) OR DATE(arrival_date) = DATE(@end)) ORDER BY hire_date DESC;
+SELECT license_plate, brand, model FROM vehicle WHERE vehicle_type = @vehicle_type AND license_plate NOT IN (SELECT vehicle_id FROM orders WHERE departure_date BETWEEN @start AND @end OR arrival_date BETWEEN @start AND @end OR DATE(departure_date) BETWEEN DATE(@start) AND DATE(@end) OR DATE(arrival_date) BETWEEN DATE(@start) AND DATE(@end));

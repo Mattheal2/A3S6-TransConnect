@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -73,7 +76,5 @@ namespace TransLib.Maps
                 return JsonSerializer.Deserialize<int>(this.Result.RootElement.GetProperty("resourceSets")[0].GetProperty("resources")[0].GetProperty("travelDuration").GetInt32());
             }
         }
-
-
     }
 }

@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
-using Org.BouncyCastle.Crypto;
-using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using TransLib.Persons;
+using TransLib.Vehicles;
+using TransLib.Schedule;
 
 namespace TransLib
 {
@@ -22,6 +22,7 @@ namespace TransLib
         protected string address;
         protected float money;
         protected string db_connection_string;
+        protected Schedule.Schedule schedule;
 
         public string DB_CONNECTION_STRING { get => db_connection_string; }
 
@@ -30,6 +31,7 @@ namespace TransLib
             this.name = name;
             this.address = address;
             this.money = money;
+            this.schedule = Schedule.Schedule.from_database(this.DB_CONNECTION_STRING);
 
             this.db_connection_string = $"server={server};Port={port};database={database_name};uid={uid};pwd={pwd};";
 
@@ -56,6 +58,11 @@ namespace TransLib
         /// Display the company informations
         public void display()
         {
+            throw new NotImplementedException();
+        }
+
+        public string to_json() { 
+            //returns all employees informations in json format
             throw new NotImplementedException();
         }
 

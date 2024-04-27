@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace TransLib
+namespace TransLib.Vehicles
 {
     public class Truck : Vehicle
     {
@@ -24,13 +24,13 @@ namespace TransLib
         public override MySqlCommand save_command()
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES(@license_plate, @brand, @model, @price, @vehicle_type, @volume, @truck_type);");
-            cmd.Parameters.AddWithValue("@license_plate", this.license_plate);
-            cmd.Parameters.AddWithValue("@brand", this.brand);
-            cmd.Parameters.AddWithValue("@model", this.model);
-            cmd.Parameters.AddWithValue("@price", this.price);
+            cmd.Parameters.AddWithValue("@license_plate", license_plate);
+            cmd.Parameters.AddWithValue("@brand", brand);
+            cmd.Parameters.AddWithValue("@model", model);
+            cmd.Parameters.AddWithValue("@price", price);
             cmd.Parameters.AddWithValue("@vehicle_type", "TRUCK");
-            cmd.Parameters.AddWithValue("@volume", this.volume);
-            cmd.Parameters.AddWithValue("@truck_type", this.truck_type);
+            cmd.Parameters.AddWithValue("@volume", volume);
+            cmd.Parameters.AddWithValue("@truck_type", truck_type);
 
             return cmd;
         }

@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using MySql.Data;
 using TransLib.Maps;
 using System.Data;
+using TransLib.Vehicles;
+using TransLib.Persons;
+using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace TransLib
 {
     public class Order
     {
-        public static float PRICE_PER_KM = 1.0f;
+        public static readonly float DEFAULT_PRICE_PER_KM = 0.8f;
         public enum OrderStatus
         {
             Pending,
@@ -30,12 +33,23 @@ namespace TransLib
         protected Employee driver;
         protected Route route;
         protected DateTime departure_date;
+        protected DateTime arrival_date;
         protected string departure_city;
         protected string arrival_city;
         protected OrderStatus status;
+        public float price_per_km;
 
-        //gets the price from delivery price calculation function -> peut etre redondant ?
-        public int Price { get => throw new NotImplementedException(); }
+        public float Price_per_km { get => this.price_per_km; set => this.price_per_km = value; }
+        public int Order_id { get => this.order_id; }
+        public Client Client { get => this.client; }
+        public Vehicle Vehicle { get => this.vehicle; }
+        public Employee Driver { get => this.driver; }
+        public Route Route { get => this.route; }
+        public DateTime Departure_date { get => this.departure_date; }
+        public DateTime DateTime { get => this.arrival_date; }
+        public string Departure_city { get => this.departure_city; }
+        public string Arrival_city { get => this.arrival_city; }
+        public OrderStatus Status { get => this.status; set => this.status = value; }
 
         public Order(int order_id, Client client, Vehicle vehicle, DateTime departure_time, string departure_city, string arrival_city)
         {
@@ -50,16 +64,20 @@ namespace TransLib
             this.route = new Route(type, departure_city, arrival_city);
             route.process_async().Wait();
 
-            (this.driver, this.status) = find_driver(); //+ approprié de trouver un driver automatiquement
+            this.arrival_date = departure_time.AddSeconds(route.get_duration());
+
+            (this.driver, this.status) = find_driver();
+            this.price_per_km = 0.8f + ((DateTime.Now.Year - driver.Hire_date.Year)/4) * 0.1f; //Price per km increases by 0.1 every 4 years
         }
 
         public MySqlCommand save_command()
         {
-            MySqlCommand cmd = new MySqlCommand($"INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city, order_status) VALUES(@client_id, @driver_id, @vehicle_id, @departure_date, @departure_city, @arrival_city, @order_status);");
+            MySqlCommand cmd = new MySqlCommand($"INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, arrival_date, departure_city, arrival_city, order_status) VALUES(@client_id, @driver_id, @vehicle_id, @departure_date, @arrival_date, @departure_city, @arrival_city, @order_status);");
             cmd.Parameters.AddWithValue("@client_id", this.client.USER_ID);
             cmd.Parameters.AddWithValue("@driver_id", this.driver.USER_ID);
             cmd.Parameters.AddWithValue("@vehicle_id", this.vehicle.LICENSE_PLATE);
             cmd.Parameters.AddWithValue("@departure_date", this.departure_date);
+            cmd.Parameters.AddWithValue("@arrival_date", this.arrival_date);
             cmd.Parameters.AddWithValue("@departure_city", this.departure_city);
             cmd.Parameters.AddWithValue("@arrival_city", this.arrival_city);
 
@@ -93,12 +111,12 @@ namespace TransLib
 
         public int calculate_price()
         {
-            return (int)(route.get_distance() * PRICE_PER_KM);
+            return (int)(route.get_distance() * this.price_per_km);
         }
 
         public async static Task<int> estimate_price(string departure_city, string arrival_city)
         {
-            return (int)(await calculate_distance(departure_city, arrival_city) * PRICE_PER_KM);
+            return (int)(await calculate_distance(departure_city, arrival_city) * DEFAULT_PRICE_PER_KM);
         }
 
         protected async static Task<Order> cast_from_open_reader(DbDataReader? reader)
