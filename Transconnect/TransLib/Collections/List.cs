@@ -288,5 +288,15 @@ public class List<T>: IListAlike<T> {
         s += "]";
         return s;
     }
+
+    public T[] ToArray()
+    {
+        T[] array = new T[count];
+        for(int i = 0; i < count; i++)
+        {
+            array[i] = data[i];
+        }
+        return array;
+    }
     #endregion
 }

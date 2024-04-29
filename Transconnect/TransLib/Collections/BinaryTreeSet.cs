@@ -291,6 +291,22 @@ public class BinaryTreeSet<T>: IListAlike<T> where T: IComparable<T>, IEquatable
     }
 
     /// <summary>
+    /// Returns an array of the elements in the list.
+    /// </summary>
+    /// <returns></returns>
+    public T[] ToArray()
+    {
+        T[] array = new T[count];
+        int i = 0;
+        ForEach((T elem) =>
+        {
+            array[i] = elem;
+            i++;
+        });
+        return array;
+    }
+
+    /// <summary>
     /// Converts the list to a string, with each element separated by a comma.
     /// </summary>
     /// <returns></returns>

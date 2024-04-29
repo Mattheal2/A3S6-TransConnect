@@ -1,0 +1,6 @@
+@TAPI_HostAddress = https://localhost:32772
+
+GET {{TAPI_HostAddress}}/WeatherForecast/
+Accept: application/json
+
+###

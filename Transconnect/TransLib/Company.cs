@@ -26,14 +26,15 @@ namespace TransLib
 
         public string DB_CONNECTION_STRING { get => db_connection_string; }
 
-        public Company(string name, string address, int money = 0, string server = "localhost", string port = "3306", string database_name = "transcodb", string uid = "root", string pwd = "")
+        public Company(string name, string address, int money = 0, string server = "127.0.0.1", string port = "3306", string database_name = "transcodb", string uid = "root", string pwd = "")
         {
             this.name = name;
             this.address = address;
             this.money = money;
+            this.db_connection_string = $"server={server};Port={port};database={database_name};uid={uid};pwd={pwd};";
+
             this.schedule = Schedule.Schedule.from_database(this.DB_CONNECTION_STRING);
 
-            this.db_connection_string = $"server={server};Port={port};database={database_name};uid={uid};pwd={pwd};";
 
             using (MySqlConnection c = new MySqlConnection(this.db_connection_string))
             {

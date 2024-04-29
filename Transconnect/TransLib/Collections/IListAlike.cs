@@ -101,6 +101,12 @@ public interface IListAlike<T> {
     void ForEach(IterFunc fn);
 
     /// <summary>
+    /// Converts the list to an array.
+    /// </summary>
+    /// <returns></returns>
+    T[] ToArray();
+
+    /// <summary>
     /// Converts the list to a string, with each element separated by a comma.
     /// </summary>
     /// <returns></returns>

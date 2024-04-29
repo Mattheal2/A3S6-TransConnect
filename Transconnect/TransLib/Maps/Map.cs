@@ -9,7 +9,7 @@ namespace TransLib.Maps
 {
     public static class Map
     {
-        public static string CREDENTIALS_PATH = "../../../../../data/credentials.json";
+        public static string CREDENTIALS_PATH = "./data/credentials.json";
 
         public static string BING_KEY = read_bing_credentials_async();
 

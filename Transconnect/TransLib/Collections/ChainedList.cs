@@ -294,6 +294,20 @@ public class ChainedList<T> : IListAlike<T> {
     }
 
     /// <summary>
+    /// Returns a copy of the list as an array.
+    /// </summary>
+    /// <returns></returns>
+    public T[] ToArray()
+    {
+        T[] array = new T[length];
+        for(int i = 0; i < length; i++)
+        {
+            array[i] = Get(i);
+        }
+        return array;
+    }
+
+    /// <summary>
     /// Converts the list to a string, with each element separated by a comma.
     /// </summary>
     /// <returns></returns>

@@ -15,9 +15,17 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
-            test_schedule();
+            //test_schedule();
             //test_route().Wait();
             //test_get_db().Wait();
+            Console.WriteLine(test_get_clients().Result);
+            while (true) ;
+        }
+
+        public async static Task<List<Client>?> test_get_clients()
+        {
+            Company transconnect = new Company("TransConnect", "12 rue de ESLIV");
+            return await transconnect.get_clients_list_async();
         }
 
         public async static Task test_route()
