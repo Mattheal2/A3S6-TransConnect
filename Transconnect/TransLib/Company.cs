@@ -69,7 +69,7 @@ namespace TransLib
 
         #region Database connection
         /// Connects to the database, query and returns the reader
-        private async Task<DbDataReader?> query(MySqlCommand command)
+        public async Task<DbDataReader?> query(MySqlCommand command)
         {
             MySqlConnection connection = new MySqlConnection(this.db_connection_string);
             await connection.OpenAsync();
