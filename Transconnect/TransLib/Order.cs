@@ -67,14 +67,14 @@ namespace TransLib
             this.arrival_date = departure_time.AddSeconds(route.get_duration());
 
             (this.driver, this.status) = find_driver();
-            this.price_per_km = 0.8f + ((DateTime.Now.Year - driver.Hire_date.Year)/4) * 0.1f; //Price per km increases by 0.1 every 4 years
+            this.price_per_km = 0.8f + ((DateTime.Now.Year - driver.hire_date.Year)/4) * 0.1f; //Price per km increases by 0.1 every 4 years
         }
 
         public MySqlCommand save_command()
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, arrival_date, departure_city, arrival_city, order_status) VALUES(@client_id, @driver_id, @vehicle_id, @departure_date, @arrival_date, @departure_city, @arrival_city, @order_status);");
-            cmd.Parameters.AddWithValue("@client_id", this.client.USER_ID);
-            cmd.Parameters.AddWithValue("@driver_id", this.driver.USER_ID);
+            cmd.Parameters.AddWithValue("@client_id", this.client.user_id);
+            cmd.Parameters.AddWithValue("@driver_id", this.driver.user_id);
             cmd.Parameters.AddWithValue("@vehicle_id", this.vehicle.LICENSE_PLATE);
             cmd.Parameters.AddWithValue("@departure_date", this.departure_date);
             cmd.Parameters.AddWithValue("@arrival_date", this.arrival_date);

@@ -323,5 +323,22 @@ public class BinaryTreeSet<T>: IListAlike<T> where T: IComparable<T>, IEquatable
         s += "]";
         return s;
     }
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a specified separator.
+    /// </summary>
+    /// <param name="separator"></param>
+    public string Join(string separator) {
+        string s = "";
+        int length = 0;
+
+        ForEach((T elem) => {
+            if (length > 0) s += separator;
+            s += elem.ToString();
+            length++;
+        });
+
+        return s;
+    }
     #endregion
 }

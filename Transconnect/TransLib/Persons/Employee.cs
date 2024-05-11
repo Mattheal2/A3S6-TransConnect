@@ -12,15 +12,10 @@ namespace TransLib.Persons
 {
     public class Employee : Person
     {
-        protected int id_employee;
-        protected string position;
-        protected float salary;
-        protected DateTime hire_date;
-
-        public int Id_employee { get => id_employee; }
-        public string Position { get => position; set => position = value; }
-        public float Salary { get => salary; set => salary = value; }
-        public DateTime Hire_date { get => hire_date; }
+        public int id_employee { get; }
+        public string position { get; }
+        public float salary { get; }
+        public DateTime hire_date { get; }
 
         public Employee(int id_employee, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string position, float salary, DateTime hire_date) : base(id_employee, first_name, last_name, phone, email, address, birth_date)
         {
@@ -35,12 +30,12 @@ namespace TransLib.Persons
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO person (user_id, user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date, license_type) VALUES(@user_id, @user_type, @first_name, @last_name, @phone, @email, @address, @birth_date, @position, @salary, @hire_date, @license_type);");
             cmd.Parameters.AddWithValue("@user_id", id_employee);
             cmd.Parameters.AddWithValue("@user_type", "EMPLOYEE");
-            cmd.Parameters.AddWithValue("@first_name", FIRST_NAME);
-            cmd.Parameters.AddWithValue("@last_name", LAST_NAME);
-            cmd.Parameters.AddWithValue("@phone", PHONE);
-            cmd.Parameters.AddWithValue("@email", EMAIL);
-            cmd.Parameters.AddWithValue("@address", ADDRESS);
-            cmd.Parameters.AddWithValue("@birth_date", BIRTH_DATE);
+            cmd.Parameters.AddWithValue("@first_name", first_name);
+            cmd.Parameters.AddWithValue("@last_name", last_name);
+            cmd.Parameters.AddWithValue("@phone", phone);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@birth_date", birth_date);
             cmd.Parameters.AddWithValue("@position", position);
             cmd.Parameters.AddWithValue("@salary", salary);
             cmd.Parameters.AddWithValue("@hire_date", hire_date);

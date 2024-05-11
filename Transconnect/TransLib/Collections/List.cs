@@ -298,5 +298,22 @@ public class List<T>: IListAlike<T> {
         }
         return array;
     }
+
+    public string Join(string separator)
+    {
+        string s = "";
+        for (int i = 0; i < count; i++)
+        {
+            T elem = data[i];
+            if (elem == null) throw new UnreachableException();
+
+            s += elem.ToString();
+            if (i < count - 1)
+            {
+                s += separator;
+            }
+        }
+        return s;
+    }
     #endregion
 }

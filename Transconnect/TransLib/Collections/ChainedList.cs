@@ -318,5 +318,22 @@ public class ChainedList<T> : IListAlike<T> {
 
         return s + "]";
     }
+
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a specified separator.
+    /// </summary>
+    /// <param name="separator"></param>
+    /// <returns></returns>
+    public string Join(string separator) {
+        string s = "";
+        ChainedListNode? current = first;
+        while (current != null && current.Val != null) {
+            s += current.Val.ToString();
+            current = current.Next;
+            if (current != null) s += separator;
+        }
+        return s;
+    }
     #endregion
 }

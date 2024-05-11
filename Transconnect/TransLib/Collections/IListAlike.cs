@@ -111,5 +111,12 @@ public interface IListAlike<T> {
     /// </summary>
     /// <returns></returns>
     string ToString();
+
+    /// <summary>
+    /// Converts the list to a string, with each element separated by a specified separator.
+    /// </summary>
+    /// <param name="separator"></param>
+    /// <returns></returns>
+    string Join(string separator);
     #endregion
 }
