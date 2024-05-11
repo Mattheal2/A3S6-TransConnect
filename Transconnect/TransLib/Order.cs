@@ -75,7 +75,7 @@ namespace TransLib
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, arrival_date, departure_city, arrival_city, order_status) VALUES(@client_id, @driver_id, @vehicle_id, @departure_date, @arrival_date, @departure_city, @arrival_city, @order_status);");
             cmd.Parameters.AddWithValue("@client_id", this.client.user_id);
             cmd.Parameters.AddWithValue("@driver_id", this.driver.user_id);
-            cmd.Parameters.AddWithValue("@vehicle_id", this.vehicle.LICENSE_PLATE);
+            cmd.Parameters.AddWithValue("@vehicle_id", this.vehicle.license_plate);
             cmd.Parameters.AddWithValue("@departure_date", this.departure_date);
             cmd.Parameters.AddWithValue("@arrival_date", this.arrival_date);
             cmd.Parameters.AddWithValue("@departure_city", this.departure_city);

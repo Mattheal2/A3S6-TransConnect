@@ -12,15 +12,10 @@ namespace TransLib.Vehicles
 {
     public abstract class Vehicle
     {
-        protected string license_plate;
-        protected string brand;
-        protected string model;
-        protected float price;
-
-        public string LICENSE_PLATE { get => license_plate; }
-        public string MODEL { get => model; }
-        public string BRAND { get => brand; }
-        public float Price { get => price; set => price = value; }
+        public string license_plate  { get; set; }
+        public string brand { get; set; }
+        public string model { get; set; }
+        public float price { get; set; }
 
         public Vehicle(string license_plate, string brand, string model, float price)
         {

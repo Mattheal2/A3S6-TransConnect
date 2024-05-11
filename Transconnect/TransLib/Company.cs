@@ -267,7 +267,7 @@ namespace TransLib
         {
             if (await add_vehicle_async(new_vehicle))
             {
-                Console.Write(await update_money(-new_vehicle.Price) ? "" : "Error : vehicle added, but failed update money.\n");
+                Console.Write(await update_money(-new_vehicle.price) ? "" : "Error : vehicle added, but failed update money.\n");
                 return true;
             }
             else return false;

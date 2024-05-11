@@ -9,11 +9,8 @@ namespace TransLib.Vehicles
 {
     public class Truck : Vehicle
     {
-        protected int volume;
-        protected string truck_type;
-
-        public int VOLUME { get => volume; }
-        public string TRUCK_TYPE { get => truck_type; }
+        public int volume { get; set; }
+        public string truck_type { get; set; }
 
         public Truck(string license_plate, string brand, string model, float price, int volume, string truck_type) : base(license_plate, brand, model, price)
         {
