@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 namespace TransLib.Auth;
 
 public static class AuthorizationToken {
-    public static string generate_token() {
+    private static string generate_token() {
         byte[] token = new byte[32];
         using (var rng = RandomNumberGenerator.Create())
         {
