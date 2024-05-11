@@ -11,6 +11,9 @@ using TransLib.Persons;
 using TransLib.Vehicles;
 using TransLib.Maps;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
+using System.Text.Json.Nodes;
+using System.Text.Json;
 
 namespace TransLib.Schedule
 {
@@ -26,19 +29,6 @@ namespace TransLib.Schedule
             public int order_id;
             public int driver_id;
             public string vehicle_id;
-
-
-            public string to_json()
-            {
-                string json = "{";
-                json += $"\"start\":\"{start.ToString("yyyy-MM-dd HH:mm:ss")}\",";
-                json += $"\"end\":\"{end.ToString("yyyy-MM-dd HH:mm:ss")}\",";
-                json += $"\"order_id\":\"{order_id}\",";
-                json += $"\"driver_id\":\"{driver_id}\",";
-                json += $"\"vehicle_id\":\"{vehicle_id}\"";
-                json += "}";
-                return json;
-            }
         }
 
         private List<ScheduleEntry> reservations;
@@ -89,7 +79,7 @@ namespace TransLib.Schedule
         public string to_json()
         {
             string json_array =  this.reservations.Map(res => {
-                return res.to_json();
+                return JsonSerializer.Serialize(res);
             }).Join(",");
             return $"[{json_array}]";
         }
