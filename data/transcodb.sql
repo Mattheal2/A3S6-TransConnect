@@ -17,10 +17,12 @@ CREATE TABLE person (
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
     birth_date DATE NOT NULL,
+    password_hash VARCHAR(100),
     -- Employee's specific
     position VARCHAR(50),
     salary FLOAT,
-    hire_date DATE
+    hire_date DATE,
+    license_type VARCHAR(30),
 );
 
 CREATE TABLE auth_tokens(
