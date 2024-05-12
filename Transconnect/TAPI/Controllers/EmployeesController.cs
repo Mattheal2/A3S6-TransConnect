@@ -49,7 +49,7 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet(Name = "GetEmployees")]
-    public async Task<ApiResponse<List<Employee>>> GetEmployees([FromQuery] int limit, [FromQuery] int offset, [FromQuery] string order_field, [FromQuery] string order_dir)
+    public async Task<ApiResponse<List<Employee>>> GetEmployees([FromQuery] string order_field, [FromQuery] string order_dir)
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<List<Employee>>();
@@ -61,16 +61,8 @@ public class EmployeesController : ControllerBase
         if (order_dir != "ASC" && order_dir != "DESC") {
             return ApiResponse<List<Employee>>.Failure(400, "employee.invalid_order_dir", "Invalid order direction");
         }
-
-        if (limit < 0) {
-            return ApiResponse<List<Employee>>.Failure(400, "employee.invalid_limit", "Invalid limit");
-        }
-
-        if (offset < 0) {
-            return ApiResponse<List<Employee>>.Failure(400, "employee.invalid_offset", "Invalid offset");
-        }
         
-        var employees = await Employee.list_employees(Config.cfg, order_field, order_dir, limit, offset);
+        var employees = await Employee.list_employees(Config.cfg, order_field, order_dir);
         return ApiResponse<List<Employee>>.Success(employees);
     }
 
@@ -140,5 +132,15 @@ public class EmployeesController : ControllerBase
         await employee.delete(Config.cfg);
 
         return ApiResponse<bool>.Success(true);
+    }
+
+    [HttpPost(Name = "GetEmployeesOrgChart")]
+    public async Task<ApiResponse<MultiNodeTree<Employee>>> GetEmployeesOrgChart()
+    {
+        Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+        if (!auth.is_employee()) return auth.get_unauthorized_error<MultiNodeTree<Employee>>();
+
+        MultiNodeTree<Employee> employees = await Employee.get_org_chart(Config.cfg);
+        return ApiResponse<MultiNodeTree<Employee>>.Success(employees);
     }
 }

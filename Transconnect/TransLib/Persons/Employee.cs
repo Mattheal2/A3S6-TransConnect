@@ -130,9 +130,9 @@ namespace TransLib.Persons
             return null;
         }
 
-        public static async Task<List<Employee>> list_employees(AppConfig cfg, string order_field, string order_dir, int limit, int offset)
+        public static async Task<List<Employee>> list_employees(AppConfig cfg, string order_field, string order_dir)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted ORDER BY {order_field} {order_dir};");
             using (DbDataReader reader = await cfg.query(cmd))
             {
                 return await from_reader_multiple(reader);
@@ -165,6 +165,14 @@ namespace TransLib.Persons
             cmd.Parameters.AddWithValue("@supervisor_id", supervisor_id);
             cmd.Parameters.AddWithValue("@user_id", user_id);
             await cfg.query(cmd);
+        }
+
+        public static async Task<MultiNodeTree<Employee>> get_org_chart(AppConfig cfg)
+        {
+            List<Employee> employees = await list_employees(cfg, "user_id", "ASC");
+            MultiNodeTree<Employee> tree = new MultiNodeTree<Employee>();
+            employees.ForEach(e => tree.AddNode(e, e.user_id, e.supervisor_id));
+            return tree;
         }
     }
 }
