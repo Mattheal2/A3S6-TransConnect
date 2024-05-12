@@ -169,7 +169,11 @@ namespace TransLib.Persons
 
         public static async Task<MultiNodeTree<Employee>> get_org_chart(AppConfig cfg)
         {
-            List<Employee> employees = await list_employees(cfg, "user_id", "ASC");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted AND show_on_org_chart;");
+            List<Employee> employees;
+            using (DbDataReader reader = await cfg.query(cmd))
+                employees =  await from_reader_multiple(reader);
+            
             MultiNodeTree<Employee> tree = new MultiNodeTree<Employee>();
             employees.ForEach(e => tree.AddNode(e, e.user_id, e.supervisor_id));
             return tree;
