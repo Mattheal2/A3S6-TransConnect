@@ -16,13 +16,14 @@ namespace TransLib.Persons
         public string address { get; set; }
         public string city { get; set; }
         public long birth_date { get; set; }
+        public bool deleted { get; set; }
         
 
         // ! internal fields, never to be sent over the wire !
         [JsonIgnore]
         protected string? password_hash { get; private set; }
 
-        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash)
+        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, bool deleted, string? password_hash)
         {
             this.user_id = user_id;
             this.first_name = first_name;
@@ -32,31 +33,34 @@ namespace TransLib.Persons
             this.address = address;
             this.city = city;
             this.birth_date = birth_date;
+            this.deleted = deleted;
             this.password_hash = password_hash;
         }
 
         public abstract string user_type { get; }
+        public abstract Task create(AppConfig cfg);
+        public abstract Task delete(AppConfig cfg);
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static Task<Person?> from_reader_async(DbDataReader reader)
+        public async static Task<Person?> from_reader_async(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
                 bool more = await reader.ReadAsync();
                 if (!more) return null;
-                return cast_from_open_reader(reader);
+                return cast_from_open_reader(reader, prefix);
             }
         }
 
         /// Returns an Employee list from a reader.
-        public async static Task<List<Person>> from_reader_multiple(DbDataReader reader)
+        public async static Task<List<Person>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
                 List<Person> persons = new List<Person>();
                 while (await reader.ReadAsync())
                 {
-                    Person? person = cast_from_open_reader(reader);
+                    Person? person = cast_from_open_reader(reader, prefix);
                     if (person != null)
                         persons.Append(person);
                 }
@@ -64,8 +68,8 @@ namespace TransLib.Persons
             }
         }
 
-        protected static Person cast_from_open_reader(DbDataReader reader) {
-            switch (reader.GetString("user_type"))
+        protected static Person cast_from_open_reader(DbDataReader reader, string prefix = "") {
+            switch (reader.GetString($"{prefix}user_type"))
             {
                 case "EMPLOYEE":
                     return Employee.cast_from_open_reader(reader);
@@ -98,7 +102,7 @@ namespace TransLib.Persons
 
         public static async Task<Person?> get_person_by_email(AppConfig cfg, string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email AND NOT deleted");
             cmd.Parameters.AddWithValue("@email", email);
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader_async(reader);
@@ -106,7 +110,7 @@ namespace TransLib.Persons
 
         public static async Task<Person?> get_person_by_id(AppConfig cfg, int user_id)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND NOT deleted");
             cmd.Parameters.AddWithValue("@user_id", user_id);
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader_async(reader);
@@ -162,8 +166,5 @@ namespace TransLib.Persons
             await update_field(cfg, "birth_date", birth_date);
             this.birth_date = birth_date;
         }
-
-        
-
     }
 }

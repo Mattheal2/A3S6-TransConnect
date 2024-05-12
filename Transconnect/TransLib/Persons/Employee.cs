@@ -13,17 +13,17 @@ namespace TransLib.Persons
     public class Employee : Person
     {
         public string position { get; }
-        public float salary { get; }
+        public float salary { get; } // in cents
         public long hire_date { get; }
         public string license_type { get; }
         public int supervisor_id { get; set; }
         public bool show_on_org_chart { get; set; }
 
         public Employee(
-            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_date,
+            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, bool deleted,
             string password_hash, string position, float salary, long hire_date, string license_type,
             int supervisor_id, bool show_on_org_chart) :
-            base(id_employee, first_name, last_name, phone, email, address, city, birth_date, password_hash)
+            base(id_employee, first_name, last_name, phone, email, address, city, birth_date, deleted, password_hash)
         {
             this.position = position;
             this.salary = salary;
@@ -33,7 +33,7 @@ namespace TransLib.Persons
             this.show_on_org_chart = show_on_org_chart;
         }
 
-        public async Task CreateEmployee(AppConfig cfg)
+        public override async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(
                 @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, position, salary, hire_date, license_type, password_hash, supervisor_id, show_on_org_chart)
@@ -62,7 +62,7 @@ namespace TransLib.Persons
         public override string user_type { get; } = "EMPLOYEE";
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static new Task<Employee?> from_reader_async(DbDataReader reader)
+        public async static new Task<Employee?> from_reader_async(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
@@ -73,7 +73,7 @@ namespace TransLib.Persons
         }
 
         /// Returns an Employee list from a reader.
-        public async static new Task<List<Employee>> from_reader_multiple(DbDataReader reader)
+        public async static new Task<List<Employee>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
@@ -88,26 +88,27 @@ namespace TransLib.Persons
             }
         }
 
-        protected static new Employee cast_from_open_reader(DbDataReader reader)
+        protected static new Employee cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
-            if (reader.GetString("user_type") == "EMPLOYEE")
+            if (reader.GetString($"{prefix}user_type") == "EMPLOYEE")
             {
                 return new Employee(
-                    reader.GetInt32("user_id"),
-                    reader.GetString("first_name"),
-                    reader.GetString("last_name"),
-                    reader.GetString("phone"),
-                    reader.GetString("email"),
-                    reader.GetString("address"),
-                    reader.GetString("city"),
-                    reader.GetInt64("birth_date"),
-                    reader.GetString("password_hash"),
-                    reader.GetString("position"),
-                    reader.GetFloat("salary"),
-                    reader.GetInt64("hire_date"),
-                    reader.GetString("license_type"),
-                    reader.GetInt32("supervisor_id"),
-                    reader.GetBoolean("show_on_org_chart")
+                    reader.GetInt32($"{prefix}user_id"),
+                    reader.GetString($"{prefix}first_name"),
+                    reader.GetString($"{prefix}last_name"),
+                    reader.GetString($"{prefix}phone"),
+                    reader.GetString($"{prefix}email"),
+                    reader.GetString($"{prefix}address"),
+                    reader.GetString($"{prefix}city"),
+                    reader.GetInt64($"{prefix}birth_date"),
+                    reader.GetBoolean($"{prefix}deleted"),
+                    reader.GetString($"{prefix}password_hash"),
+                    reader.GetString($"{prefix}position"),
+                    reader.GetFloat($"{prefix}salary"),
+                    reader.GetInt64($"{prefix}hire_date"),
+                    reader.GetString($"{prefix}license_type"),
+                    reader.GetInt32($"{prefix}supervisor_id"),
+                    reader.GetBoolean($"{prefix}show_on_org_chart")
                 );
             }
             else throw new Exception("invalid user_type");
@@ -119,5 +120,51 @@ namespace TransLib.Persons
             throw new NotImplementedException();
         }
 
+        public string? validate()
+        {
+            long current_time = DateTimeOffset.Now.ToUnixTimeSeconds();
+
+            if (current_time < birth_date) return "Birth date is in the future";
+            if (salary < 0) return "Salary cannot be negative";
+
+            return null;
+        }
+
+        public static async Task<List<Employee>> list_employees(AppConfig cfg, string order_field, string order_dir, int limit, int offset)
+        {
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");
+            using (DbDataReader reader = await cfg.query(cmd))
+            {
+                return await from_reader_multiple(reader);
+            }
+        }
+
+        public override async Task delete(AppConfig cfg)
+        {
+            // Move all subordinates to supervisor
+            await move_all_subordinates_to_supervisor(cfg);
+            MySqlCommand cmd = new MySqlCommand(@"
+                UPDATE person
+                SET 
+                    deleted = true, first_name = '', last_name = '', phone = '', email = '', address = '', city = '', birth_date = 0,
+                    position = '', salary = 0, hire_date = 0, license_type = '', supervisor_id = 0, show_on_org_chart = false
+                WHERE user_id = @user_id");
+            cmd.Parameters.AddWithValue("@user_id", user_id);
+            await cfg.query(cmd);
+
+            
+            this.deleted = true;
+        }
+
+        private async Task move_all_subordinates_to_supervisor(AppConfig cfg)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"
+                UPDATE person
+                SET supervisor_id = @supervisor_id
+                WHERE supervisor_id = @user_id AND user_type = 'EMPLOYEE' AND NOT deleted;");
+            cmd.Parameters.AddWithValue("@supervisor_id", supervisor_id);
+            cmd.Parameters.AddWithValue("@user_id", user_id);
+            await cfg.query(cmd);
+        }
     }
 }

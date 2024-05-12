@@ -27,13 +27,13 @@ public class ClientsController : ControllerBase
         if (!auth.is_employee()) return auth.get_unauthorized_error<Client>();
 
         Client new_client = new Client(
-            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_date, null, 0
+            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_date, false, null, 0
         );
 
-        string? error = new_client.ValidateClient();
+        string? error = new_client.validate();
         if (error != null) return ApiResponse<Client>.Failure(400, "client.invalid_client", error);
 
-        await new_client.Create(Config.cfg);
+        await new_client.create(Config.cfg);
 
         return ApiResponse<Client>.Success(new_client);
     }
@@ -85,11 +85,11 @@ public class ClientsController : ControllerBase
         public string? email { get; set; }
         public string? address { get; set; }
         public string? city { get; set; }
-        public long birth_date { get; set; }
+        public long? birth_date { get; set; }
     }
 
     [HttpPost(Name = "UpdateClient")]
-    public async Task<ApiResponse<Client>> UpdateClient([FromBody] Client body)
+    public async Task<ApiResponse<Client>> UpdateClient([FromBody] UpdateClientRequest body)
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<Client>();
@@ -98,10 +98,6 @@ public class ClientsController : ControllerBase
         if (person == null || person is not Client) return ApiResponse<Client>.Failure(404, "client.not_found", "Client not found");
 
         Client client = (Client)person;
-        
-
-        string? error = client.ValidateClient();
-        if (error != null) return ApiResponse<Client>.Failure(400, "client.invalid_client", error);
         
         if (body.first_name != null)
             await client.set_first_name(Config.cfg, body.first_name);
@@ -115,8 +111,8 @@ public class ClientsController : ControllerBase
             await client.set_address(Config.cfg, body.address);
         if (body.city != null)
             await client.set_city(Config.cfg, body.city);
-        if (body.birth_date != 0)
-            await client.set_birth_date(Config.cfg, body.birth_date);
+        if (body.birth_date != null)
+            await client.set_birth_date(Config.cfg, (long)body.birth_date);
 
         return ApiResponse<Client>.Success(client);
     }

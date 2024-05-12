@@ -12,6 +12,7 @@ CREATE TABLE person (
     address VARCHAR(100) NOT NULL,
     city VARCHAR(30) NOT NULL,
     birth_date DATE NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE,
     password_hash VARCHAR(100),
     -- Employee's specific
     position VARCHAR(50),
