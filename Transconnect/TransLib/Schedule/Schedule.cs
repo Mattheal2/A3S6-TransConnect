@@ -78,10 +78,7 @@ namespace TransLib.Schedule
 
         public string to_json()
         {
-            string json_array =  this.reservations.Map(res => {
-                return JsonSerializer.Serialize(res);
-            }).Join(",");
-            return $"[{json_array}]";
+            return JsonSerializer.Serialize(this.reservations.ToArray());
         }
 
         public Employee? find_driver(DateTime start, DateTime? end = null)
