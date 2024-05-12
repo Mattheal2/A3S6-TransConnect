@@ -17,10 +17,16 @@ CREATE TABLE person (
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
     birth_date DATE NOT NULL,
-    #Employee's specific
+    -- Employee's specific
     position VARCHAR(50),
     salary FLOAT,
     hire_date DATE
+);
+
+CREATE TABLE auth_tokens(
+    token VARCHAR(50) PRIMARY KEY,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES person(user_id)
 );
 
 CREATE TABLE vehicle (
@@ -29,12 +35,12 @@ CREATE TABLE vehicle (
     model VARCHAR(30) NOT NULL,
     price FLOAT NOT NULL,
     vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
-    #Truck's specific
+    -- Truck's specific
     volume INT,
     truck_type VARCHAR(30),
-    #Van's specific
+    -- Van's specific
     van_usage VARCHAR(30),
-    #Car's specific
+    -- Car's specific
     seats INT,
     CONSTRAINT check_seats CHECK (seats < 9)
 );

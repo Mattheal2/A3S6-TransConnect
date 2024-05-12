@@ -68,15 +68,5 @@ namespace TransLib.Auth {
 
             return true;
         }
-
-        public struct PasswordAuthenticationResult {
-            public bool success;
-            public string message;
-
-            public PasswordAuthenticationResult(bool success, string message) {
-                this.success = success;
-                this.message = message;
-            }
-        }
     }
 }

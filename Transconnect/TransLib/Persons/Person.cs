@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
+using System.Text.Json.Serialization;
 using TransLib.Auth;
 
 namespace TransLib.Persons
@@ -15,7 +16,10 @@ namespace TransLib.Persons
         public string address { get; }
         public DateTime birth_date { get; }
         
-        public string password_hash { get; private set; }
+
+        // ! internal fields, never to be sent over the wire !
+        [JsonIgnore]
+        protected string password_hash { get; private set; }
 
         public Person(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string password_hash)
         {
@@ -33,12 +37,11 @@ namespace TransLib.Persons
         public abstract string user_type { get; }
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static Task<Person?> from_reader_async(DbDataReader reader)
+        public async static Task<Person?> from_reader_async(DbDataReader? reader)
         {
+            if (reader == null) throw new Exception("reader is null");
             using (reader)
             {
-                if (reader == null) throw new Exception("reader is null");
-
                 await reader.ReadAsync();
                 return cast_from_open_reader(reader);
             }
@@ -62,7 +65,7 @@ namespace TransLib.Persons
             }
         }
 
-        protected static Person? cast_from_open_reader(DbDataReader reader)
+        protected static Person? cast_from_open_reader(DbDataReader? reader)
         {
             if (reader == null) throw new Exception("reader is null");
 
@@ -105,6 +108,15 @@ namespace TransLib.Persons
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
             cmd.Parameters.AddWithValue("@email", email);
+            DbDataReader? reader = await comp.query(cmd);
+            if (reader == null) throw new Exception("reader is null");
+            return await from_reader_async(reader);
+        }
+
+        public static async Task<Person?> get_person_by_id(Company comp, int user_id)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id");
+            cmd.Parameters.AddWithValue("@user_id", user_id);
             DbDataReader? reader = await comp.query(cmd);
             if (reader == null) throw new Exception("reader is null");
             return await from_reader_async(reader);
