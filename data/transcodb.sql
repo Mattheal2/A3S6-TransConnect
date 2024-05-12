@@ -10,13 +10,18 @@ CREATE TABLE person (
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
+    city VARCHAR(30) NOT NULL,
     birth_date DATE NOT NULL,
     password_hash VARCHAR(100),
     -- Employee's specific
     position VARCHAR(50),
     salary FLOAT,
     hire_date DATE,
-    license_type VARCHAR(30)
+    license_type VARCHAR(30),
+    supervisor_id INT,
+    show_on_org_chart BOOLEAN,
+    -- Clients
+    total_spent BIGINT DEFAULT 0,
 );
 
 CREATE TABLE auth_tokens(

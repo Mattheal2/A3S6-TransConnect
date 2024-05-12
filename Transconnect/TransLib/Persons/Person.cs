@@ -8,20 +8,21 @@ namespace TransLib.Persons
 {
     public abstract class Person
     {
-        public int user_id { get; }
-        public string first_name { get; }
-        public string last_name { get; }
-        public string phone { get; }
-        public string email { get; }
-        public string address { get; }
-        public DateTime birth_date { get; }
+        public int user_id { get; protected set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public long birth_date { get; set; }
         
 
         // ! internal fields, never to be sent over the wire !
         [JsonIgnore]
-        protected string password_hash { get; private set; }
+        protected string? password_hash { get; private set; }
 
-        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string password_hash)
+        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash)
         {
             this.user_id = user_id;
             this.first_name = first_name;
@@ -29,31 +30,29 @@ namespace TransLib.Persons
             this.phone = phone;
             this.email = email;
             this.address = address;
+            this.city = city;
             this.birth_date = birth_date;
             this.password_hash = password_hash;
         }
 
-        public abstract MySqlCommand save_command();
         public abstract string user_type { get; }
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static Task<Person?> from_reader_async(DbDataReader? reader)
+        public async static Task<Person?> from_reader_async(DbDataReader reader)
         {
-            if (reader == null) throw new Exception("reader is null");
             using (reader)
             {
-                await reader.ReadAsync();
+                bool more = await reader.ReadAsync();
+                if (!more) return null;
                 return cast_from_open_reader(reader);
             }
         }
 
         /// Returns an Employee list from a reader.
-        public async static Task<List<Person>> from_reader_mulitple_async(DbDataReader reader)
+        public async static Task<List<Person>> from_reader_multiple(DbDataReader reader)
         {
             using (reader)
             {
-                if (reader == null) throw new Exception("reader is null");
-
                 List<Person> persons = new List<Person>();
                 while (await reader.ReadAsync())
                 {
@@ -65,24 +64,16 @@ namespace TransLib.Persons
             }
         }
 
-        protected static Person? cast_from_open_reader(DbDataReader? reader)
-        {
-            if (reader == null) throw new Exception("reader is null");
-
-            if (!reader.IsClosed)
+        protected static Person cast_from_open_reader(DbDataReader reader) {
+            switch (reader.GetString("user_type"))
             {
-                switch (reader.GetString("user_type"))
-                {
-                    case "EMPLOYEE":
-                        return Employee.cast_from_open_reader(reader);
-                    case "CLIENT":
-                        return Client.cast_from_open_reader(reader);
-                    default:
-                        throw new Exception("invalid user_type");
-                }
+                case "EMPLOYEE":
+                    return Employee.cast_from_open_reader(reader);
+                case "CLIENT":
+                    return Client.cast_from_open_reader(reader);
+                default:
+                    throw new Exception("invalid user_type");
             }
-
-            return null;
         }
 
         public override string ToString()
@@ -101,6 +92,7 @@ namespace TransLib.Persons
 
         public bool check_password(string password)
         {
+            if (this.password_hash == null) return false;
             return PasswordAuthenticator.verify_password(password, this.password_hash);
         }
 
@@ -108,8 +100,7 @@ namespace TransLib.Persons
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
             cmd.Parameters.AddWithValue("@email", email);
-            DbDataReader? reader = await cfg.query(cmd);
-            if (reader == null) throw new Exception("reader is null");
+            DbDataReader reader = await cfg.query(cmd);
             return await from_reader_async(reader);
         }
 
@@ -117,9 +108,62 @@ namespace TransLib.Persons
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id");
             cmd.Parameters.AddWithValue("@user_id", user_id);
-            DbDataReader? reader = await cfg.query(cmd);
-            if (reader == null) throw new Exception("reader is null");
+            DbDataReader reader = await cfg.query(cmd);
             return await from_reader_async(reader);
         }
+
+        protected async Task update_field<T>(AppConfig cfg, string field, T value)
+        {
+            if (value == null) return;
+            MySqlCommand cmd = new MySqlCommand($"UPDATE person SET {field} = @value WHERE user_id = @user_id");
+            cmd.Parameters.AddWithValue("@value", value);
+            cmd.Parameters.AddWithValue("@user_id", user_id);
+            await cfg.query(cmd);
+        }
+
+        public async Task set_first_name(AppConfig cfg, string first_name)
+        {
+            await update_field(cfg, "first_name", first_name);
+            this.first_name = first_name;
+        }
+
+        public async Task set_last_name(AppConfig cfg, string last_name)
+        {
+            await update_field(cfg, "last_name", last_name);
+            this.last_name = last_name;
+        }
+
+        public async Task set_phone(AppConfig cfg, string phone)
+        {
+            await update_field(cfg, "phone", phone);
+            this.phone = phone;
+        }
+
+        public async Task set_email(AppConfig cfg, string email)
+        {
+            await update_field(cfg, "email", email);
+            this.email = email;
+        }
+
+        public async Task set_address(AppConfig cfg, string address)
+        {
+            await update_field(cfg, "address", address);
+            this.address = address;
+        }
+
+        public async Task set_city(AppConfig cfg, string city)
+        {
+            await update_field(cfg, "city", city);
+            this.city = city;
+        }
+
+        public async Task set_birth_date(AppConfig cfg, long birth_date)
+        {
+            await update_field(cfg, "birth_date", birth_date);
+            this.birth_date = birth_date;
+        }
+
+        
+
     }
 }

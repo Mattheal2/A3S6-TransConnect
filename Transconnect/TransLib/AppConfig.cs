@@ -20,19 +20,20 @@ public class AppConfig {
     }
 
     /// Connects to the database, query and returns the reader
-    public async Task<DbDataReader?> query(MySqlCommand command)
+    public async Task<DbDataReader> query(MySqlCommand command)
     {
         MySqlConnection connection = new MySqlConnection(this.mysql_connection_string);
         await connection.OpenAsync();
-        try
-        {
-            command.Connection = connection;
-            return await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            return null;
-        }
+        command.Connection = connection;
+        return await command.ExecuteReaderAsync(CommandBehavior.CloseConnection);
+    }
+
+    public async Task<MySqlConnection> execute(MySqlCommand command)
+    {
+        MySqlConnection connection = new MySqlConnection(this.mysql_connection_string);
+        await connection.OpenAsync();
+        command.Connection = connection;
+        await command.ExecuteNonQueryAsync();
+        return connection;
     }
 }

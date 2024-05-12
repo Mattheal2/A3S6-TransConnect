@@ -11,22 +11,23 @@ namespace TAPI.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
+    public struct LoginRequest {
+        public string email { get; set; }
+        public string password { get; set; }
+    }
+
     [HttpPost(Name = "Login")]
-    public async Task<ApiResponse<bool>> Login() {
-        // fetch the user from the database
-        string? email = Request.Form["email"];
-        string? password = Request.Form["password"];
-
-        if (email == null || password == null)
-            return ApiResponse<bool>.Failure(400, "auth.invalid_request", "Email or password not provided");
-
-        Person? login_person = await Person.get_person_by_email(Config.cfg, email);
+    public async Task<ApiResponse<bool>> Login([FromBody] LoginRequest body) {
+        Person? login_person = await Person.get_person_by_email(Config.cfg, body.email);
         if (login_person == null)
             return ApiResponse<bool>.Failure(401, "auth.invalid_credentials", "Incorrect email or password");
     
 
-        if (!login_person.check_password(password))
+        if (!login_person.check_password(body.password))
             return ApiResponse<bool>.Failure(401, "auth.invalid_credentials", "Incorrect email or password");
+
+        if (!(login_person is Employee))
+            return ApiResponse<bool>.Failure(401, "auth.login_forbidden", "Login forbidden for this user type");
 
         // OK - Create session
         string session_id = await AuthorizationToken.create_user_session(Config.cfg, login_person);
@@ -46,38 +47,39 @@ public class AuthController : ControllerBase
     [HttpPost(Name = "Logout")]
     public async Task<ApiResponse<bool>> Logout() {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_authorized()) return auth.get_unauthorized_error<bool>();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<bool>();
 
         await auth.logout(Config.cfg, Request.HttpContext);
         return ApiResponse<bool>.Success(true);
     }
 
     [HttpGet(Name = "GetLoggedInUser")]
-    public async Task<ApiResponse<Person>> GetLoggedInUser() {
+    public async Task<ApiResponse<Employee>> GetLoggedInEmployee() {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_authorized()) return auth.get_unauthorized_error<Person>();
-        Person user = auth.get_user();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<Employee>();
+        Employee user = auth.get_employee();
 
-        return ApiResponse<Person>.Success(user);
+        return ApiResponse<Employee>.Success(user);
+    }
+    
+    public struct ChangePasswordRequest {
+        public string old_password { get; set; }
+        public string new_password { get; set; }
     }
 
     [HttpPost(Name = "ChangePassword")]
-    public async Task<ApiResponse<bool>> ChangePassword() {
+    public async Task<ApiResponse<bool>> ChangePassword([FromBody] ChangePasswordRequest body) {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_authorized()) return auth.get_unauthorized_error<bool>();
-        Person user = auth.get_user();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<bool>();
+        Employee user = auth.get_employee();
 
-        string? old_password = Request.Form["old_password"];
-        string? new_password = Request.Form["new_password"];
+        if (body.old_password == body.new_password)
+            return ApiResponse<bool>.Failure(400, "auth.invalid_password", "New password cannot be the same as the old password");
 
-        if (old_password == null || new_password == null)
-            return ApiResponse<bool>.Failure(400, "auth.invalid_request", "Old or new password not provided");
-        
-
-        if (!user.check_password(old_password))
+        if (!user.check_password(body.old_password))
             return ApiResponse<bool>.Failure(401, "auth.invalid_credentials", "Incorrect password");
 
-        await user.update_password(Config.cfg, new_password);
+        await user.update_password(Config.cfg, body.new_password);
 
         return ApiResponse<bool>.Success(true);
     }

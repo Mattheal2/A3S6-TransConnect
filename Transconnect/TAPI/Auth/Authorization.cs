@@ -31,17 +31,17 @@ public class Authorization {
         return new Authorization(user);
     }
 
-    public bool is_authorized() {
-        return user != null;
+    public bool is_employee() {
+        return user != null && user is Employee;
     }
 
     public ApiResponse<T> get_unauthorized_error<T>() {
-        if (is_authorized()) throw new Exception("Invalid call to get_unauthorized_error");
+        if (is_employee()) throw new Exception("Invalid call to get_unauthorized_error");
         else return ApiResponse<T>.Failure(401, "auth.unauthorized", "Unauthorized");
     }
 
-    public Person get_user() {
-        if (user == null) throw new Exception("Unauthorized");
-        return user;
+    public Employee get_employee() {
+        if (user == null || !(user is Employee)) throw new Exception("Unauthorized");
+        return (Employee)user;
     }
 }
