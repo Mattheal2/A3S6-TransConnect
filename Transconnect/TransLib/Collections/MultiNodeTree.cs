@@ -63,4 +63,26 @@ public class MultiNodeTree<T> {
 
         return parent;
     }
+
+    #region JSON
+    public class JsonNode {
+        public T value { get; private set; }
+        public JsonNode[] children { get; private set; }
+        public JsonNode(Node node) {
+            value = node.value;
+            children = new JsonNode[node.children.Length];
+            for (int i = 0; i < node.children.Length; i++) {
+                children[i] = new JsonNode(node.children.Get(i));
+            }
+        }
+    }
+
+    public JsonNode[] ToJson() {
+        JsonNode[] json = new JsonNode[root.Length];
+        for (int i = 0; i < root.Length; i++) {
+            json[i] = new JsonNode(root.Get(i));
+        }
+        return json;
+    }
+    #endregion
 }

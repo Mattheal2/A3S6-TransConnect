@@ -135,12 +135,12 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost(Name = "GetEmployeesOrgChart")]
-    public async Task<ApiResponse<MultiNodeTree<Employee>>> GetEmployeesOrgChart()
+    public async Task<ApiResponse<MultiNodeTree<Employee>.JsonNode[]>> GetEmployeesOrgChart()
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_employee()) return auth.get_unauthorized_error<MultiNodeTree<Employee>>();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<MultiNodeTree<Employee>.JsonNode[]>();
 
         MultiNodeTree<Employee> employees = await Employee.get_org_chart(Config.cfg);
-        return ApiResponse<MultiNodeTree<Employee>>.Success(employees);
+        return ApiResponse<MultiNodeTree<Employee>.JsonNode[]>.Success(employees.ToJson());
     }
 }
