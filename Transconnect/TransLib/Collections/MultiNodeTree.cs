@@ -1,9 +1,9 @@
 public class MultiNodeTree<T> {
     public class Node {
-        public T value;
-        public List<Node> children;
-        public int id;
-        public int parent_id;
+        public T value { get; private set; }
+        public List<Node> children { get; private set; }
+        public int id { get; private set; }
+        public int parent_id { get; private set; }
         public Node(T value, int id, int parent_id) {
             this.value = value;
             this.id = id;
@@ -14,7 +14,7 @@ public class MultiNodeTree<T> {
             children.Append(child);
         }
     }
-    private List<Node> root;
+    public List<Node> root { get; private set; }
 
     public MultiNodeTree() {
         root = new List<Node>();
