@@ -11,9 +11,9 @@ namespace TransLib.Maps
     {
         public static string CREDENTIALS_PATH = "./data/credentials.json";
 
-        public static string BING_KEY = read_bing_credentials_async();
+        public static string BING_KEY = read_bing_credentials();
 
-        private static string read_bing_credentials_async()
+        private static string read_bing_credentials()
         {
             using (StreamReader reader = new System.IO.StreamReader(CREDENTIALS_PATH))
             {

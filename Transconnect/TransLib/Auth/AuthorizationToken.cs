@@ -29,12 +29,12 @@ public static class AuthorizationToken {
     /// <param name="comp">Company</param>
     /// <param name="user">the Person to create a session for</param>
     /// <returns></returns>
-    public static async Task<string> create_user_session(Company comp, Person user) {
+    public static async Task<string> create_user_session(AppConfig cfg, Person user) {
         string token = generate_token();
         MySqlCommand cmd = new MySqlCommand($"INSERT INTO auth_tokens(token_id, user_id) VALUES(@token_id, @user_id)");
         cmd.Parameters.AddWithValue("@token_id", token);
         cmd.Parameters.AddWithValue("@user_id", user.user_id);
-        await comp.query(cmd);
+        await cfg.query(cmd);
         return token;
     }
 
@@ -44,11 +44,11 @@ public static class AuthorizationToken {
     /// <param name="comp">Company</param>
     /// <param name="token">The cookie value</param>
     /// <returns></returns>
-    public static async Task<Person?> get_user_from_token(Company comp, string token) {
+    public static async Task<Person?> get_user_from_token(AppConfig cfg, string token) {
         // with natural join on person table
         MySqlCommand cmd = new MySqlCommand($"SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1");
         cmd.Parameters.AddWithValue("@token_id", token);
-        DbDataReader? reader = await comp.query(cmd);
+        DbDataReader? reader = await cfg.query(cmd);
         Person? authorized_user = await Person.from_reader_async(reader);
 
         return authorized_user;
@@ -60,9 +60,9 @@ public static class AuthorizationToken {
     /// <param name="comp"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    public static async Task delete_user_session(Company comp, string token) {
+    public static async Task delete_user_session(AppConfig cfg, string token) {
         MySqlCommand cmd = new MySqlCommand($"DELETE FROM auth_tokens WHERE token_id = @token_id");
         cmd.Parameters.AddWithValue("@token_id", token);
-        await comp.query(cmd);
+        await cfg.query(cmd);
     }
 }

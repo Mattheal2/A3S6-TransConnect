@@ -401,3 +401,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 *.v2
+
+
+data/credentials.json

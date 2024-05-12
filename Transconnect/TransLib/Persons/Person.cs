@@ -90,13 +90,13 @@ namespace TransLib.Persons
             return $"{first_name} {last_name}";
         }
 
-        public async Task update_password(Company comp, string password)
+        public async Task update_password(AppConfig cfg, string password)
         {
             this.password_hash = PasswordAuthenticator.hash_password(password);
             MySqlCommand cmd = new MySqlCommand("UPDATE person SET password_hash = @password_hash WHERE user_id = @user_id");
             cmd.Parameters.AddWithValue("@password_hash", this.password_hash);
             cmd.Parameters.AddWithValue("@user_id", this.user_id);
-            await comp.query(cmd);
+            await cfg.query(cmd);
         }
 
         public bool check_password(string password)
@@ -104,20 +104,20 @@ namespace TransLib.Persons
             return PasswordAuthenticator.verify_password(password, this.password_hash);
         }
 
-        public static async Task<Person?> get_person_by_email(Company comp, string email)
+        public static async Task<Person?> get_person_by_email(AppConfig cfg, string email)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
             cmd.Parameters.AddWithValue("@email", email);
-            DbDataReader? reader = await comp.query(cmd);
+            DbDataReader? reader = await cfg.query(cmd);
             if (reader == null) throw new Exception("reader is null");
             return await from_reader_async(reader);
         }
 
-        public static async Task<Person?> get_person_by_id(Company comp, int user_id)
+        public static async Task<Person?> get_person_by_id(AppConfig cfg, int user_id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id");
             cmd.Parameters.AddWithValue("@user_id", user_id);
-            DbDataReader? reader = await comp.query(cmd);
+            DbDataReader? reader = await cfg.query(cmd);
             if (reader == null) throw new Exception("reader is null");
             return await from_reader_async(reader);
         }

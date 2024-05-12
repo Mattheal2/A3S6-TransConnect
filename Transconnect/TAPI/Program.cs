@@ -5,6 +5,9 @@ namespace TAPI
     {
         public static void Main(string[] args)
         {
+            // Load config from args
+            Config.SetFromArgs(args);
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

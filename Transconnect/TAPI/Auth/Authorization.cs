@@ -6,31 +6,28 @@ using TransLib;
 using TransLib.Auth;
 using TransLib.Persons;
 
-public struct Authorization {
+public class Authorization {
     private Person? user;
     private Authorization(Person? user) {
         this.user = user;
     }
 
     public override string ToString() {
-        if (user == null) 
-            return "Unauthorized";
-        else
-            return ((Person)user).ToString();
+        return user == null ? "Unauthorized" : user.ToString();
     }
 
-    public async Task logout(Company comp, HttpContext context) {
+    public async Task logout(AppConfig cfg, HttpContext context) {
         string? token = context.Request.Cookies["session_id"];
         if (token == null) return;
         context.Response.Cookies.Delete("session_id");
         context.Response.Cookies.Delete("user_id");
-        await AuthorizationToken.delete_user_session(comp, token);
+        await AuthorizationToken.delete_user_session(cfg, token);
     }
 
-    public static async Task<Authorization> obtain(Company comp, HttpContext context) {
+    public static async Task<Authorization> obtain(AppConfig cfg, HttpContext context) {
         string? token = context.Request.Cookies["session_id"];
         if (token == null) return new Authorization(null);
-        Person? user = await AuthorizationToken.get_user_from_token(comp, token);
+        Person? user = await AuthorizationToken.get_user_from_token(cfg, token);
         return new Authorization(user);
     }
 
@@ -45,6 +42,6 @@ public struct Authorization {
 
     public Person get_user() {
         if (user == null) throw new Exception("Unauthorized");
-        return (Person)user;
+        return user;
     }
 }

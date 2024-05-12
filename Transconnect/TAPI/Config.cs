@@ -4,6 +4,17 @@ namespace TAPI
 {
     internal static class Config
     {
-        public static Company transconnect = new Company("TransConnect", "12 rue de ESLIV");
+        private static AppConfig? _cfg = null;
+        
+        public static AppConfig cfg { get {
+            if (_cfg == null) throw new Exception("Config not loaded");
+            return _cfg;
+        } }
+
+        public static void SetFromArgs(string[] args)
+        {
+            string path = args.Length > 0 ? args[0] : "data/credentials.json";
+            _cfg = AppConfig.read_config(path);
+        }
     }
 }

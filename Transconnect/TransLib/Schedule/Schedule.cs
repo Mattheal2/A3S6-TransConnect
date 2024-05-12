@@ -22,13 +22,13 @@ namespace TransLib.Schedule
     //Provides the schedule ready for the UI to display
     public class Schedule
     {
-        public struct ScheduleEntry
+        public class ScheduleEntry
         {
             public DateTime start;
             public DateTime end;
             public int order_id;
             public int driver_id;
-            public string vehicle_id;
+            public required string vehicle_id;
         }
 
         private List<ScheduleEntry> reservations;
