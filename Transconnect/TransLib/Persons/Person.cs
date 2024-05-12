@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
+using TransLib.Auth;
 
 namespace TransLib.Persons
 {
@@ -13,8 +14,10 @@ namespace TransLib.Persons
         public string email { get; }
         public string address { get; }
         public DateTime birth_date { get; }
+        
+        public string password_hash { get; private set; }
 
-        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date)
+        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string password_hash)
         {
             this.user_id = user_id;
             this.first_name = first_name;
@@ -23,12 +26,14 @@ namespace TransLib.Persons
             this.email = email;
             this.address = address;
             this.birth_date = birth_date;
+            this.password_hash = password_hash;
         }
 
         public abstract MySqlCommand save_command();
+        public abstract string user_type { get; }
 
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static Task<Person> from_reader_async(DbDataReader reader)
+        public async static Task<Person?> from_reader_async(DbDataReader reader)
         {
             using (reader)
             {
@@ -49,13 +54,15 @@ namespace TransLib.Persons
                 List<Person> persons = new List<Person>();
                 while (await reader.ReadAsync())
                 {
-                    persons.Append(cast_from_open_reader(reader));
+                    Person? person = cast_from_open_reader(reader);
+                    if (person != null)
+                        persons.Append(person);
                 }
                 return persons;
             }
         }
 
-        protected static Person cast_from_open_reader(DbDataReader reader)
+        protected static Person? cast_from_open_reader(DbDataReader reader)
         {
             if (reader == null) throw new Exception("reader is null");
 
@@ -64,23 +71,43 @@ namespace TransLib.Persons
                 switch (reader.GetString("user_type"))
                 {
                     case "EMPLOYEE":
-                        return new Employee(reader.GetInt32("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"), reader.GetString("position"), reader.GetFloat("salary"), reader.GetDateTime("hire_date"));
+                        return Employee.cast_from_open_reader(reader);
                     case "CLIENT":
-                        return new Client(reader.GetInt32("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"));
+                        return Client.cast_from_open_reader(reader);
                     default:
                         throw new Exception("invalid user_type");
                 }
             }
 
-            else
-            {
-                throw new Exception("unable to read closed reader");
-            }
+            return null;
         }
 
         public override string ToString()
         {
             return $"{first_name} {last_name}";
+        }
+
+        public async Task update_password(Company comp, string password)
+        {
+            this.password_hash = PasswordAuthenticator.hash_password(password);
+            MySqlCommand cmd = new MySqlCommand("UPDATE person SET password_hash = @password_hash WHERE user_id = @user_id");
+            cmd.Parameters.AddWithValue("@password_hash", this.password_hash);
+            cmd.Parameters.AddWithValue("@user_id", this.user_id);
+            await comp.query(cmd);
+        }
+
+        public bool check_password(string password)
+        {
+            return PasswordAuthenticator.verify_password(password, this.password_hash);
+        }
+
+        public static async Task<Person?> get_person_by_email(Company comp, string email)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
+            cmd.Parameters.AddWithValue("@email", email);
+            DbDataReader? reader = await comp.query(cmd);
+            if (reader == null) throw new Exception("reader is null");
+            return await from_reader_async(reader);
         }
     }
 }

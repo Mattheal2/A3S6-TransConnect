@@ -11,24 +11,29 @@ namespace TransLib.Persons
 {
     public class Client : Person
     {
-        public Client(int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date) : base(user_id, first_name, last_name, phone, email, address, birth_date)
+        public Client(
+            int user_id, string first_name, string last_name, string phone, string email, string address, DateTime birth_date, string password_hash
+        ) : base(user_id, first_name, last_name, phone, email, address, birth_date, password_hash)
         {
         }
 
         public override MySqlCommand save_command()
         {
-            MySqlCommand cmd = new MySqlCommand($"INSERT INTO person (user_id, user_type, first_name, last_name, phone, email, address, birth_date) VALUES(@user_id, @user_type, @first_name, @last_name, @phone, @email, @address, @birth_date);");
+            MySqlCommand cmd = new MySqlCommand($"INSERT INTO person (user_id, user_type, first_name, last_name, phone, email, address, birth_date, password_hash) VALUES(@user_id, @user_type, @first_name, @last_name, @phone, @email, @address, @birth_date, @password_hash);");
             cmd.Parameters.AddWithValue("@user_id", user_id);
-            cmd.Parameters.AddWithValue("@user_type", "CLIENT");
+            cmd.Parameters.AddWithValue("@user_type", user_type);
             cmd.Parameters.AddWithValue("@first_name", first_name);
             cmd.Parameters.AddWithValue("@last_name", last_name);
             cmd.Parameters.AddWithValue("@phone", phone);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@address", address);
             cmd.Parameters.AddWithValue("@birth_date", birth_date);
+            cmd.Parameters.AddWithValue("@password_hash", password_hash);
 
             return cmd;
         }
+
+        public override string user_type { get; } = "CLIENT";
 
         public async static new Task<Client> from_reader_async(DbDataReader? reader)
         {
@@ -66,7 +71,16 @@ namespace TransLib.Persons
                 if (reader.GetString("user_type") == "CLIENT")
                 {
 
-                    return new Client(reader.GetInt32("user_id"), reader.GetString("first_name"), reader.GetString("last_name"), reader.GetString("phone"), reader.GetString("email"), reader.GetString("address"), reader.GetDateTime("birth_date"));
+                    return new Client(
+                        reader.GetInt32("user_id"),
+                        reader.GetString("first_name"),
+                        reader.GetString("last_name"),
+                        reader.GetString("phone"),
+                        reader.GetString("email"),
+                        reader.GetString("address"),
+                        reader.GetDateTime("birth_date"),
+                        reader.GetString("password_hash")
+                    );
                 }
                 else throw new Exception("invalid user_type");
             }

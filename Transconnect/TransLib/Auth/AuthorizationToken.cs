@@ -43,4 +43,10 @@ public static class AuthorizationToken {
             return u;
         }
     }
+
+    public static async Task delete_user_session(Company comp, string token) {
+        MySqlCommand cmd = new MySqlCommand($"DELETE FROM auth_tokens WHERE token_id = @token_id");
+        cmd.Parameters.AddWithValue("@token_id", token);
+        await comp.query(cmd);
+    }
 }
