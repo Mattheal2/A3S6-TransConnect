@@ -37,6 +37,7 @@ CREATE TABLE vehicle (
     model VARCHAR(30) NOT NULL,
     price FLOAT NOT NULL,
     vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
+    deleted BOOLEAN DEFAULT FALSE,
     -- Truck's specific
     volume INT,
     truck_type VARCHAR(30),

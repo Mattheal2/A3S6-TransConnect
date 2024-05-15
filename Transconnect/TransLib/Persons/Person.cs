@@ -41,8 +41,13 @@ namespace TransLib.Persons
         public abstract Task create(AppConfig cfg);
         public abstract Task delete(AppConfig cfg);
 
+        /// <summary>
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static Task<Person?> from_reader_async(DbDataReader reader, string prefix = "")
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        public async static Task<Person?> from_reader(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
@@ -52,7 +57,12 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
         /// Returns an Employee list from a reader.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
         public async static Task<List<Person>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             using (reader)
@@ -105,7 +115,7 @@ namespace TransLib.Persons
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email AND NOT deleted");
             cmd.Parameters.AddWithValue("@email", email);
             DbDataReader reader = await cfg.query(cmd);
-            return await from_reader_async(reader);
+            return await from_reader(reader);
         }
 
         public static async Task<Person?> get_person_by_id(AppConfig cfg, int user_id)
@@ -113,7 +123,7 @@ namespace TransLib.Persons
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND NOT deleted");
             cmd.Parameters.AddWithValue("@user_id", user_id);
             DbDataReader reader = await cfg.query(cmd);
-            return await from_reader_async(reader);
+            return await from_reader(reader);
         }
 
         protected async Task update_field<T>(AppConfig cfg, string field, T value)

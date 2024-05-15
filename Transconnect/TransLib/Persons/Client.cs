@@ -39,7 +39,7 @@ namespace TransLib.Persons
 
         public override string user_type { get; } = "CLIENT";
 
-        public async static new Task<Client?> from_reader_async(DbDataReader reader, string prefix = "")
+        public async static new Task<Client?> from_reader(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
@@ -49,7 +49,12 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
         /// Returns an Employee list from a reader.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
         public async static new Task<List<Client>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             using (reader)
@@ -102,6 +107,12 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
+        /// Deletes the object from the database by deleting all informations excepted primary key. 
+        /// Keep track of the user is necessary while orders may be still linked to it.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
         public override async Task delete(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"

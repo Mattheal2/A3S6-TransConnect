@@ -49,7 +49,7 @@ public static class AuthorizationToken {
         MySqlCommand cmd = new MySqlCommand($"SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1");
         cmd.Parameters.AddWithValue("@token_id", token);
         DbDataReader? reader = await cfg.query(cmd);
-        Person? authorized_user = await Person.from_reader_async(reader);
+        Person? authorized_user = await Person.from_reader(reader);
 
         return authorized_user;
     }

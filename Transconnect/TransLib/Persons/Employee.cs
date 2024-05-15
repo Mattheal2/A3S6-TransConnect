@@ -61,8 +61,13 @@ namespace TransLib.Persons
 
         public override string user_type { get; } = "EMPLOYEE";
 
+        /// <summary>
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
-        public async static new Task<Employee?> from_reader_async(DbDataReader reader, string prefix = "")
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        public async static new Task<Employee?> from_reader(DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
@@ -72,7 +77,12 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
         /// Returns an Employee list from a reader.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
         public async static new Task<List<Employee>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             using (reader)
@@ -139,6 +149,12 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
+        /// Deletes the object from the database by deleting all informations excepted primary key. 
+        /// Keep track of the user is necessary while orders may be still linked to it.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
         public override async Task delete(AppConfig cfg)
         {
             // Move all subordinates to supervisor
@@ -148,7 +164,7 @@ namespace TransLib.Persons
                 SET 
                     deleted = true, first_name = '', last_name = '', phone = '', email = '', address = '', city = '', birth_date = 0,
                     position = '', salary = 0, hire_date = 0, license_type = '', supervisor_id = 0, show_on_org_chart = false
-                WHERE user_id = @user_id");
+                WHERE user_id = @user_id;");
             cmd.Parameters.AddWithValue("@user_id", user_id);
             await cfg.query(cmd);
 
