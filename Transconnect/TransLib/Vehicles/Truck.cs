@@ -87,7 +87,7 @@ namespace TransLib.Vehicles
         public async Task set_truck_type(AppConfig cfg, string truck_type)
         {
             await update_field(cfg, "truck_type", truck_type);
-            this.truck_type = truck_type;s
+            this.truck_type = truck_type;
         }
     }
 }

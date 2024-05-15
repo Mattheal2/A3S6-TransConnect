@@ -128,6 +128,29 @@ namespace TransLib.Vehicles
             await update_field(cfg, "price", price_in_cents);
         }
 
+        /// <summary>
+        /// Returns a list of vehicles with optionnal ordering and filtering 
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <param name="filter"></param>
+        /// <param name="order_field"></param>
+        /// <param name="order_dir"></param>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public static async Task<List<Vehicle>> list_vehicles(AppConfig cfg, string filter = "", string order_field = "license_plate", string order_dir = "ASC", int limit = 100, int offset = 0)
+        {
+            if (filter != "") filter = $"WHERE {filter}";
+            MySqlCommand cmd = new MySqlCommand(@$"
+                SELECT * FROM vehicle
+                {filter}
+                ORDER BY {order_field} {order_dir}
+                LIMIT {limit}
+                OFFSET {offset}        
+            ;");
+            using (DbDataReader reader = await cfg.query(cmd))
+                return await from_reader_multiple(reader);
+        }
         public override string ToString()
         {
             return $"{license_plate} {brand} {model}";
