@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 import matplotlib.pyplot as plt
 from pyproj import Proj, transform
+import json
 
 df = pd.read_csv('E-Road_2011.csv', sep="\t", decimal=",")
 # each row is a line: 
@@ -68,6 +69,7 @@ df_new = df_new.drop_duplicates(subset=['xD', 'yD', 'xF', 'yF'])
 #%%
 nodes = []
 
+export_nodes = {}
 plt.figure(figsize=(10, 10))
 for i in df_new.index:
     color = {
@@ -75,14 +77,46 @@ for i in df_new.index:
         'C': 'darkorange',
     }[df_new['concessionPrD'][i]]
     plt.plot([df_new['xD'][i], df_new['xF'][i]], [df_new['yD'][i], df_new['yF'][i]], color)
-    nodes.append((df_new['xD'][i], df_new['yD'][i]))
-    nodes.append((df_new['xF'][i], df_new['yF'][i]))
+
+    
+    start = (int(df_new['xD'][i]), int(df_new['yD'][i]))
+    end = (int(df_new['xF'][i]), int(df_new['yF'][i]))
+
+    nodes.append(start)
+    nodes.append(end)
+    link_kind = {
+                    'N': 'national',
+                    'C': 'highway',
+                }[df_new['concessionPrD'][i]]
+    dist = round(np.sqrt((df_new['xF'][i]-df_new['xD'][i])**2 + (df_new['yF'][i]-df_new['yD'][i])**2))
+
+    export_nodes[start] = {
+        'city': None,
+        'links': [
+            {
+                'coords': end,
+                'distance': dist,
+                'kind': link_kind
+            }
+        ]
+    }
+    export_nodes[end] = {
+        'city': None,
+        'links': [
+            {
+                'coords': start,
+                'distance': dist,
+                'kind': link_kind
+            }
+        ]
+    }
 
 
 def latlon_to_lambert93(lon, lat):
     lambert93 = Proj(init='epsg:2154')
     wgs84 = Proj(init='epsg:4326')
     return transform(wgs84, lambert93, lon, lat)
+
 def find_nearest_node(node, nodes):
     min_dist = 1e9
     nearest = None
@@ -97,6 +131,7 @@ cities = pd.read_csv('villes.csv')
 new_lines = []
 for i in cities.index:
     lat, lon = latlon_to_lambert93(cities['lattitude'][i], cities['longitude'][i])
+    lat, lon = int(lat), int(lon)
     # check if in range:
     if topX > lat > botX and topY > lon > botY:
         nearest= find_nearest_node((lat, lon), nodes)
@@ -105,16 +140,49 @@ for i in cities.index:
         plt.plot([nearest[0], lat], [nearest[1], lon], 'b')
         plt.plot(lat, lon, 'ro')
         
-    
+        dist = round(np.sqrt((nearest[0]-lat)**2 + (nearest[1]-lon)**2))
+        export_nodes[(lat, lon)] = {
+            'city': {
+                'name': cities['nom'][i],
+                'postal_codes': cities['code_postal'][i].split('-')
+            },
+            'links': [
+                {
+                    'coords': tuple(nearest),
+                    'distance': dist,
+                    'kind': 'road'
+                }
+            ]
+        }
+
+        export_nodes[nearest]['links'].append({
+            'coords': (lat, lon),
+            'distance': dist,
+            'kind': 'road'
+        })
+
+coords_to_id = {key: i for i, key in enumerate(export_nodes.keys())}
+export_nodes = [
+    {
+        'id': coords_to_id[key],
+        'coords': key,
+        'city': value['city'],
+        'links': [
+            {
+                'id': coords_to_id[link['coords']],
+                'distance': link['distance'],
+                'kind': link['kind']
+            }
+            for link in value['links']
+        ]
+    }
+    for i, (key, value) in enumerate(export_nodes.items())
+]
+with open('nodes.json', 'w') as f:
+    json.dump(export_nodes, f, indent=4)
+        
 
 plt.show()
 
-#%%
-# export_roads = []
 
-# for node in nodes:
-#     export_nodes.append({
-#         'x': node[0],
-#         'y': node[1],
-#         'pr
-#     })
+# %%
