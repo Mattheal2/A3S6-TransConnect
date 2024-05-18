@@ -60,15 +60,15 @@ namespace TransLib.Vehicles
                 List<Vehicle> vehicles = new List<Vehicle>();
                 while (await reader.ReadAsync())
                 {
-                    Vehicle? person = cast_from_open_reader(reader, prefix);
-                    if (person != null)
-                        vehicles.Append(person);
+                    Vehicle? vehicle = cast_from_open_reader(reader, prefix);
+                    if (vehicle != null)
+                        vehicles.Append(vehicle);
                 }
                 return vehicles;
             }
         }
 
-        protected static Vehicle cast_from_open_reader(DbDataReader reader, string prefix = "")
+        public static Vehicle cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             switch (reader.GetString($"{prefix}vehicle_type"))
             {

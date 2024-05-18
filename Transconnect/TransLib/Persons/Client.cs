@@ -70,7 +70,7 @@ namespace TransLib.Persons
             }
         }
 
-        protected static new Client cast_from_open_reader(DbDataReader reader, string prefix = "")
+        public static new Client cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}user_type") == "CLIENT") {
                 return new Client(

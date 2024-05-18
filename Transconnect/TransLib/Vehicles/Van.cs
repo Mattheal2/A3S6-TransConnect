@@ -61,7 +61,7 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
-        protected static new Van cast_from_open_reader(DbDataReader reader, string prefix = "")
+        public static new Van cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}vehicle_type") == "VAN")
             {
