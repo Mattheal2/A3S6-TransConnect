@@ -14,7 +14,7 @@ namespace TransLib.Vehicles
         public int volume { get; set; }
         public string truck_type { get; set; }
 
-        public Truck(string license_plate, string brand, string model, float price, int volume, string truck_type) : base(license_plate, brand, model, price)
+        public Truck(string license_plate, string brand, string model, int price, int volume, string truck_type) : base(license_plate, brand, model, price)
         {
             this.volume = volume;
             this.truck_type = truck_type;
@@ -70,7 +70,7 @@ namespace TransLib.Vehicles
                 return new Truck(reader.GetString("license_plate"),
                     reader.GetString("brand"),
                     reader.GetString("model"),
-                    reader.GetFloat("price"),
+                    reader.GetInt32("price"),
                     reader.GetInt32("volume"),
                     reader.GetString("truck_type")
                     );

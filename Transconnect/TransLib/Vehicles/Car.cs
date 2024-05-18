@@ -19,7 +19,7 @@ namespace TransLib.Vehicles
         public int seats { get; set; }
 
 
-        public Car(string license_plate, string brand, string model, float price, int seats) : base(license_plate, brand, model, price)
+        public Car(string license_plate, string brand, string model, int price, int seats) : base(license_plate, brand, model, price)
         {
             this.seats = seats;
         }
@@ -73,7 +73,7 @@ namespace TransLib.Vehicles
                     reader.GetString("license_plate"),
                     reader.GetString("brand"),
                     reader.GetString("model"),
-                    reader.GetFloat("price"),
+                    reader.GetInt32("price"),
                     reader.GetInt32("seats")
                  );
             }

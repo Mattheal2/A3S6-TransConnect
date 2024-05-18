@@ -14,7 +14,7 @@ namespace TransLib.Vehicles
         public string usage { get; set; }
 
 
-        public Van(string license_plate, string brand, string model, float price, string usage) : base(license_plate, brand, model, price)
+        public Van(string license_plate, string brand, string model, int price, string usage) : base(license_plate, brand, model, price)
         {
             this.usage = usage;
         }
@@ -68,7 +68,7 @@ namespace TransLib.Vehicles
                 return new Van(reader.GetString("license_plate"),
                     reader.GetString("brand"),
                     reader.GetString("model"),
-                    reader.GetFloat("price"),
+                    reader.GetInt32("price"),
                     reader.GetString("usage")
                     );
             }
