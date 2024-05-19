@@ -98,7 +98,7 @@ namespace TransLib.Persons
             }
         }
 
-        protected static new Employee cast_from_open_reader(DbDataReader reader, string prefix = "")
+        public static new Employee cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}user_type") == "EMPLOYEE")
             {

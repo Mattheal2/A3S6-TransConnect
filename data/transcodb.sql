@@ -11,22 +11,22 @@ CREATE TABLE person (
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
     city VARCHAR(30) NOT NULL,
-    birth_date DATE NOT NULL,
+    birth_date LONG NOT NULL,
     deleted BOOLEAN DEFAULT FALSE,
     password_hash VARCHAR(100),
     -- Employee's specific
     position VARCHAR(50),
     salary FLOAT,
-    hire_date DATE,
+    hire_date LONG,
     license_type VARCHAR(30),
     supervisor_id INT,
     show_on_org_chart BOOLEAN,
     -- Clients
-    total_spent BIGINT DEFAULT 0,
+    total_spent BIGINT DEFAULT 0
 );
 
 CREATE TABLE auth_tokens(
-    token VARCHAR(50) PRIMARY KEY,
+    token_id VARCHAR(50) PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES person(user_id)
 );
@@ -53,8 +53,8 @@ CREATE TABLE orders (
     client_id INT NOT NULL,
     driver_id INT NOT NULL,
     vehicle_id VARCHAR(30) NOT NULL,
-    departure_date DATETIME NOT NULL,
-    arrival_date DATETIME,
+    departure_date LONG NOT NULL,
+    arrival_date LONG,
     departure_city VARCHAR(40) NOT NULL,
     arrival_city VARCHAR(40) NOT NULL,
     order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed') DEFAULT 'Pending',
@@ -65,9 +65,9 @@ CREATE TABLE orders (
 );
 
 
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', '1977-10-27', 'Driver', '30000', '2020-03-16');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', '1978-10-21', 'Driver', '30000', '2020-04-19');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, birth_date, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', '1979-9-20', 'Driver', '30000', '2020-04-16');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', 'Puteaux', '232878792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716102592');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', 'Paris', '230286792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716100592');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', 'Pibrac', '227608392', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716107512');
 
 
 
@@ -76,5 +76,11 @@ INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VA
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
 
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '2025-10-21 09:00:00', 'Toulouse', 'Paris');
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '2025-11-21 09:00:00', 'Toulouse', 'Paris');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '1742373192', 'Toulouse', 'Paris');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '1742373192', 'Toulouse', 'Paris');
+
+SELECT * FROM PERSON;
+SELECT * FROM auth_tokens;
+INSERT INTO auth_tokens VALUES('xxx', 1);
+SET @token_id = 'xxx';
+SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1

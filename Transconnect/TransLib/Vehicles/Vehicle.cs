@@ -95,11 +95,14 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
-        public async Task set_brand_and_model(AppConfig cfg, string brand, string model)
+        public async Task set_brand(AppConfig cfg, string brand)
         {
             await update_field(cfg, "brand", brand);
             this.brand = brand;
+        }
 
+        public async Task set_model(AppConfig cfg, string model)
+        {
             await update_field(cfg, "model", model);
             this.model = model;
         }
@@ -151,6 +154,16 @@ namespace TransLib.Vehicles
             using (DbDataReader reader = await cfg.query(cmd))
                 return await from_reader_multiple(reader);
         }
+
+        public static async Task<Vehicle?> get_vehicle_by_license_plate(AppConfig cfg, string license_plate)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicle WHERE license_plate = @license_plate");
+            cmd.Parameters.AddWithValue("@license_plate", license_plate);
+
+            DbDataReader reader = await cfg.query(cmd);
+            return await from_reader(reader);
+        }
+
         public override string ToString()
         {
             return $"{license_plate} {brand} {model}";
