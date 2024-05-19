@@ -38,6 +38,7 @@ for i in range(len(df)):
     coords.append(f)
 
 coords = np.array(coords)
+# 20 km clustering
 clustering = DBSCAN(eps=20_000, min_samples=1).fit(coords)
 
 
@@ -144,7 +145,7 @@ for i in cities.index:
         export_nodes[(lat, lon)] = {
             'city': {
                 'name': cities['nom'][i],
-                'postal_codes': cities['code_postal'][i].split('-')
+                'postal_codes': int(cities['code_postal'][i].split('-')[0])
             },
             'links': [
                 {

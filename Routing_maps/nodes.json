@@ -3,7 +3,7 @@
         "id": 0,
         "coords": [
             651452,
-            6850905
+            6850906
         ],
         "city": null,
         "links": [
@@ -14,27 +14,27 @@
             },
             {
                 "id": 167,
-                "distance": 11522,
+                "distance": 11521,
                 "kind": "road"
             },
             {
                 "id": 195,
-                "distance": 10788,
+                "distance": 10787,
                 "kind": "road"
             },
             {
                 "id": 200,
-                "distance": 19715,
+                "distance": 19714,
                 "kind": "road"
             },
             {
                 "id": 202,
-                "distance": 22506,
+                "distance": 22505,
                 "kind": "road"
             },
             {
                 "id": 203,
-                "distance": 14060,
+                "distance": 14059,
                 "kind": "road"
             },
             {
@@ -44,12 +44,12 @@
             },
             {
                 "id": 208,
-                "distance": 18971,
+                "distance": 18970,
                 "kind": "road"
             },
             {
                 "id": 210,
-                "distance": 16927,
+                "distance": 16926,
                 "kind": "road"
             },
             {
@@ -64,27 +64,27 @@
             },
             {
                 "id": 213,
-                "distance": 18996,
+                "distance": 18995,
                 "kind": "road"
             },
             {
                 "id": 214,
-                "distance": 17661,
+                "distance": 17660,
                 "kind": "road"
             },
             {
                 "id": 215,
-                "distance": 25141,
+                "distance": 25140,
                 "kind": "road"
             },
             {
                 "id": 217,
-                "distance": 17438,
+                "distance": 17437,
                 "kind": "road"
             },
             {
                 "id": 218,
-                "distance": 18107,
+                "distance": 18106,
                 "kind": "road"
             },
             {
@@ -94,22 +94,22 @@
             },
             {
                 "id": 221,
-                "distance": 12743,
+                "distance": 12742,
                 "kind": "road"
             },
             {
                 "id": 228,
-                "distance": 21270,
+                "distance": 21269,
                 "kind": "road"
             },
             {
                 "id": 231,
-                "distance": 8581,
+                "distance": 8580,
                 "kind": "road"
             },
             {
                 "id": 232,
-                "distance": 16490,
+                "distance": 16489,
                 "kind": "road"
             },
             {
@@ -119,27 +119,27 @@
             },
             {
                 "id": 237,
-                "distance": 2999,
+                "distance": 3000,
                 "kind": "road"
             },
             {
                 "id": 238,
-                "distance": 15089,
+                "distance": 15088,
                 "kind": "road"
             },
             {
                 "id": 241,
-                "distance": 16226,
+                "distance": 16225,
                 "kind": "road"
             },
             {
                 "id": 242,
-                "distance": 27273,
+                "distance": 27272,
                 "kind": "road"
             },
             {
                 "id": 244,
-                "distance": 7431,
+                "distance": 7430,
                 "kind": "road"
             },
             {
@@ -149,7 +149,7 @@
             },
             {
                 "id": 251,
-                "distance": 5237,
+                "distance": 5236,
                 "kind": "road"
             }
         ]
@@ -193,33 +193,33 @@
         "id": 3,
         "coords": [
             703542,
-            7046402
+            7046403
         ],
         "city": null,
         "links": [
             {
-                "id": 59,
-                "distance": 79095,
+                "id": 2,
+                "distance": 56286,
                 "kind": "highway"
             },
             {
                 "id": 175,
-                "distance": 13244,
+                "distance": 13243,
                 "kind": "road"
             },
             {
                 "id": 204,
-                "distance": 22225,
+                "distance": 22224,
                 "kind": "road"
             },
             {
                 "id": 205,
-                "distance": 23578,
+                "distance": 23577,
                 "kind": "road"
             },
             {
                 "id": 233,
-                "distance": 19860,
+                "distance": 19859,
                 "kind": "road"
             }
         ]
@@ -358,7 +358,7 @@
         "id": 12,
         "coords": [
             1046505,
-            6841948
+            6841949
         ],
         "city": null,
         "links": [
@@ -409,7 +409,7 @@
         "links": [
             {
                 "id": 17,
-                "distance": 42590,
+                "distance": 42591,
                 "kind": "highway"
             }
         ]
@@ -437,7 +437,7 @@
     {
         "id": 17,
         "coords": [
-            867669,
+            867670,
             6759532
         ],
         "city": null,
@@ -452,8 +452,8 @@
     {
         "id": 18,
         "coords": [
-            702951,
-            6775834
+            702952,
+            6775835
         ],
         "city": null,
         "links": [
@@ -474,7 +474,7 @@
         "links": [
             {
                 "id": 20,
-                "distance": 80644,
+                "distance": 80643,
                 "kind": "highway"
             }
         ]
@@ -483,7 +483,7 @@
         "id": 20,
         "coords": [
             841221,
-            6654473
+            6654474
         ],
         "city": null,
         "links": [
@@ -497,7 +497,7 @@
     {
         "id": 21,
         "coords": [
-            840517,
+            840518,
             6578379
         ],
         "city": null,
@@ -562,8 +562,8 @@
     {
         "id": 24,
         "coords": [
-            842236,
-            6336201
+            842237,
+            6336202
         ],
         "city": null,
         "links": [
@@ -629,7 +629,7 @@
         "links": [
             {
                 "id": 28,
-                "distance": 94413,
+                "distance": 94414,
                 "kind": "highway"
             },
             {
@@ -787,8 +787,8 @@
     {
         "id": 35,
         "coords": [
-            614163,
-            6767386
+            614164,
+            6767387
         ],
         "city": null,
         "links": [
@@ -814,7 +814,7 @@
         "links": [
             {
                 "id": 37,
-                "distance": 42827,
+                "distance": 42826,
                 "kind": "highway"
             }
         ]
@@ -852,7 +852,7 @@
     {
         "id": 39,
         "coords": [
-            522881,
+            522882,
             6695442
         ],
         "city": null,
@@ -864,7 +864,7 @@
             },
             {
                 "id": 190,
-                "distance": 5735,
+                "distance": 5734,
                 "kind": "road"
             }
         ]
@@ -872,7 +872,7 @@
     {
         "id": 40,
         "coords": [
-            492326,
+            492327,
             6613879
         ],
         "city": null,
@@ -884,7 +884,7 @@
             },
             {
                 "id": 209,
-                "distance": 3712,
+                "distance": 3711,
                 "kind": "road"
             }
         ]
@@ -899,7 +899,7 @@
         "links": [
             {
                 "id": 42,
-                "distance": 51794,
+                "distance": 51793,
                 "kind": "highway"
             }
         ]
@@ -914,7 +914,7 @@
         "links": [
             {
                 "id": 134,
-                "distance": 40406,
+                "distance": 40405,
                 "kind": "national"
             },
             {
@@ -927,14 +927,14 @@
     {
         "id": 43,
         "coords": [
-            420853,
+            420854,
             6475264
         ],
         "city": null,
         "links": [
             {
                 "id": 44,
-                "distance": 45933,
+                "distance": 45934,
                 "kind": "highway"
             }
         ]
@@ -942,29 +942,29 @@
     {
         "id": 44,
         "coords": [
-            426639,
-            6429696
+            426640,
+            6429697
         ],
         "city": null,
         "links": [
             {
                 "id": 133,
-                "distance": 97452,
+                "distance": 97453,
                 "kind": "national"
             },
             {
                 "id": 174,
-                "distance": 11920,
+                "distance": 11922,
                 "kind": "road"
             },
             {
                 "id": 230,
-                "distance": 15955,
+                "distance": 15956,
                 "kind": "road"
             },
             {
                 "id": 243,
-                "distance": 17322,
+                "distance": 17324,
                 "kind": "road"
             }
         ]
@@ -987,7 +987,7 @@
     {
         "id": 46,
         "coords": [
-            488991,
+            488992,
             6774714
         ],
         "city": null,
@@ -999,7 +999,7 @@
             },
             {
                 "id": 185,
-                "distance": 4923,
+                "distance": 4922,
                 "kind": "road"
             }
         ]
@@ -1007,8 +1007,8 @@
     {
         "id": 47,
         "coords": [
-            445988,
-            6723450
+            445989,
+            6723451
         ],
         "city": null,
         "links": [
@@ -1019,7 +1019,7 @@
             },
             {
                 "id": 183,
-                "distance": 16698,
+                "distance": 16699,
                 "kind": "road"
             }
         ]
@@ -1042,8 +1042,8 @@
     {
         "id": 49,
         "coords": [
-            354120,
-            6691230
+            354121,
+            6691231
         ],
         "city": null,
         "links": [
@@ -1077,7 +1077,7 @@
     {
         "id": 51,
         "coords": [
-            551966,
+            551967,
             6932389
         ],
         "city": null,
@@ -1089,7 +1089,7 @@
             },
             {
                 "id": 197,
-                "distance": 10136,
+                "distance": 10135,
                 "kind": "road"
             }
         ]
@@ -1117,8 +1117,8 @@
     {
         "id": 53,
         "coords": [
-            453889,
-            6902694
+            453890,
+            6902695
         ],
         "city": null,
         "links": [
@@ -1129,7 +1129,7 @@
             },
             {
                 "id": 199,
-                "distance": 2033,
+                "distance": 2032,
                 "kind": "road"
             }
         ]
@@ -1137,8 +1137,8 @@
     {
         "id": 54,
         "coords": [
-            623903,
-            6926492
+            623904,
+            6926493
         ],
         "city": null,
         "links": [
@@ -1149,7 +1149,7 @@
             },
             {
                 "id": 252,
-                "distance": 9584,
+                "distance": 9583,
                 "kind": "road"
             }
         ]
@@ -1157,7 +1157,7 @@
     {
         "id": 55,
         "coords": [
-            644530,
+            644531,
             6973115
         ],
         "city": null,
@@ -1178,13 +1178,13 @@
         "id": 56,
         "coords": [
             615393,
-            7004768
+            7004769
         ],
         "city": null,
         "links": [
             {
                 "id": 51,
-                "distance": 96237,
+                "distance": 96238,
                 "kind": "national"
             }
         ]
@@ -1223,7 +1223,7 @@
         "id": 59,
         "coords": [
             642590,
-            7096809
+            7096810
         ],
         "city": null,
         "links": [
@@ -1242,7 +1242,7 @@
     {
         "id": 60,
         "coords": [
-            628564,
+            628565,
             6684512
         ],
         "city": null,
@@ -1273,7 +1273,7 @@
         "id": 62,
         "coords": [
             576806,
-            6575395
+            6575396
         ],
         "city": null,
         "links": [
@@ -1303,7 +1303,7 @@
         "id": 64,
         "coords": [
             578465,
-            6448990
+            6448991
         ],
         "city": null,
         "links": [
@@ -1324,7 +1324,7 @@
         "links": [
             {
                 "id": 66,
-                "distance": 76807,
+                "distance": 76808,
                 "kind": "highway"
             },
             {
@@ -1337,14 +1337,14 @@
     {
         "id": 66,
         "coords": [
-            576874,
-            6277086
+            576875,
+            6277087
         ],
         "city": null,
         "links": [
             {
                 "id": 144,
-                "distance": 118763,
+                "distance": 118764,
                 "kind": "national"
             },
             {
@@ -1388,7 +1388,7 @@
         "id": 69,
         "coords": [
             510679,
-            6730331
+            6730332
         ],
         "city": null,
         "links": [
@@ -1402,14 +1402,14 @@
     {
         "id": 70,
         "coords": [
-            488120,
-            6819611
+            488121,
+            6819612
         ],
         "city": null,
         "links": [
             {
                 "id": 71,
-                "distance": 63633,
+                "distance": 63632,
                 "kind": "highway"
             }
         ]
@@ -1417,8 +1417,8 @@
     {
         "id": 71,
         "coords": [
-            511937,
-            6878618
+            511938,
+            6878619
         ],
         "city": null,
         "links": [
@@ -1433,7 +1433,7 @@
         "id": 72,
         "coords": [
             909233,
-            6935787
+            6935788
         ],
         "city": null,
         "links": [
@@ -1478,7 +1478,7 @@
         "id": 75,
         "coords": [
             921304,
-            6832152
+            6832153
         ],
         "city": null,
         "links": [
@@ -1489,7 +1489,7 @@
             },
             {
                 "id": 201,
-                "distance": 20801,
+                "distance": 20800,
                 "kind": "road"
             }
         ]
@@ -1497,8 +1497,8 @@
     {
         "id": 76,
         "coords": [
-            830216,
-            6961917
+            830217,
+            6961918
         ],
         "city": null,
         "links": [
@@ -1527,7 +1527,7 @@
     {
         "id": 78,
         "coords": [
-            1026350,
+            1026351,
             6797586
         ],
         "city": null,
@@ -1562,8 +1562,8 @@
     {
         "id": 80,
         "coords": [
-            1008691,
-            6740059
+            1008692,
+            6740060
         ],
         "city": null,
         "links": [
@@ -1574,7 +1574,7 @@
             },
             {
                 "id": 198,
-                "distance": 17617,
+                "distance": 17615,
                 "kind": "road"
             }
         ]
@@ -1582,8 +1582,8 @@
     {
         "id": 81,
         "coords": [
-            909645,
-            6680701
+            909646,
+            6680702
         ],
         "city": null,
         "links": [
@@ -1632,14 +1632,14 @@
     {
         "id": 84,
         "coords": [
-            946873,
-            6565373
+            946874,
+            6565374
         ],
         "city": null,
         "links": [
             {
                 "id": 88,
-                "distance": 42285,
+                "distance": 42286,
                 "kind": "highway"
             }
         ]
@@ -1647,8 +1647,8 @@
     {
         "id": 85,
         "coords": [
-            916537,
-            6562483
+            916538,
+            6562484
         ],
         "city": null,
         "links": [
@@ -1662,14 +1662,14 @@
     {
         "id": 86,
         "coords": [
-            912054,
+            912055,
             6458305
         ],
         "city": null,
         "links": [
             {
                 "id": 152,
-                "distance": 47167,
+                "distance": 47166,
                 "kind": "national"
             },
             {
@@ -1683,7 +1683,7 @@
         "id": 87,
         "coords": [
             930478,
-            6498488
+            6498489
         ],
         "city": null,
         "links": [
@@ -1694,7 +1694,7 @@
             },
             {
                 "id": 245,
-                "distance": 2730,
+                "distance": 2729,
                 "kind": "road"
             }
         ]
@@ -1709,7 +1709,7 @@
         "links": [
             {
                 "id": 84,
-                "distance": 42285,
+                "distance": 42286,
                 "kind": "highway"
             }
         ]
@@ -1732,7 +1732,7 @@
     {
         "id": 90,
         "coords": [
-            883055,
+            883056,
             6499013
         ],
         "city": null,
@@ -1748,7 +1748,7 @@
         "id": 91,
         "coords": [
             988865,
-            6459759
+            6459760
         ],
         "city": null,
         "links": [
@@ -1783,13 +1783,13 @@
         "id": 93,
         "coords": [
             921137,
-            6295762
+            6295763
         ],
         "city": null,
         "links": [
             {
                 "id": 94,
-                "distance": 59928,
+                "distance": 59927,
                 "kind": "highway"
             }
         ]
@@ -1812,14 +1812,14 @@
     {
         "id": 95,
         "coords": [
-            940948,
+            940949,
             6376063
         ],
         "city": null,
         "links": [
             {
                 "id": 152,
-                "distance": 40928,
+                "distance": 40929,
                 "kind": "national"
             }
         ]
@@ -1879,7 +1879,7 @@
         "links": [
             {
                 "id": 102,
-                "distance": 91077,
+                "distance": 91076,
                 "kind": "highway"
             }
         ]
@@ -1902,7 +1902,7 @@
     {
         "id": 101,
         "coords": [
-            396379,
+            396380,
             6377606
         ],
         "city": null,
@@ -1939,7 +1939,7 @@
         "links": [
             {
                 "id": 104,
-                "distance": 42627,
+                "distance": 42626,
                 "kind": "highway"
             }
         ]
@@ -1954,7 +1954,7 @@
         "links": [
             {
                 "id": 66,
-                "distance": 55029,
+                "distance": 55030,
                 "kind": "highway"
             }
         ]
@@ -1984,7 +1984,7 @@
         "links": [
             {
                 "id": 107,
-                "distance": 75622,
+                "distance": 75621,
                 "kind": "highway"
             },
             {
@@ -2012,8 +2012,8 @@
     {
         "id": 108,
         "coords": [
-            711181,
-            6532182
+            711182,
+            6532183
         ],
         "city": null,
         "links": [
@@ -2024,7 +2024,7 @@
             },
             {
                 "id": 188,
-                "distance": 12676,
+                "distance": 12678,
                 "kind": "road"
             }
         ]
@@ -2054,7 +2054,7 @@
         "links": [
             {
                 "id": 127,
-                "distance": 30975,
+                "distance": 30976,
                 "kind": "highway"
             }
         ]
@@ -2099,7 +2099,7 @@
         "links": [
             {
                 "id": 114,
-                "distance": 33409,
+                "distance": 33410,
                 "kind": "national"
             }
         ]
@@ -2108,7 +2108,7 @@
         "id": 114,
         "coords": [
             701971,
-            6334253
+            6334254
         ],
         "city": null,
         "links": [
@@ -2212,8 +2212,8 @@
     {
         "id": 121,
         "coords": [
-            355847,
-            6789746
+            355848,
+            6789747
         ],
         "city": null,
         "links": [
@@ -2224,7 +2224,7 @@
             },
             {
                 "id": 176,
-                "distance": 5620,
+                "distance": 5621,
                 "kind": "road"
             }
         ]
@@ -2233,7 +2233,7 @@
         "id": 122,
         "coords": [
             375464,
-            6842213
+            6842214
         ],
         "city": null,
         "links": [
@@ -2247,7 +2247,7 @@
     {
         "id": 123,
         "coords": [
-            407239,
+            407240,
             6880828
         ],
         "city": null,
@@ -2269,7 +2269,7 @@
         "links": [
             {
                 "id": 39,
-                "distance": 43968,
+                "distance": 43969,
                 "kind": "highway"
             }
         ]
@@ -2299,7 +2299,7 @@
         "links": [
             {
                 "id": 127,
-                "distance": 99971,
+                "distance": 99972,
                 "kind": "highway"
             }
         ]
@@ -2314,7 +2314,7 @@
         "links": [
             {
                 "id": 110,
-                "distance": 30975,
+                "distance": 30976,
                 "kind": "highway"
             }
         ]
@@ -2357,8 +2357,8 @@
     {
         "id": 130,
         "coords": [
-            425867,
-            6520378
+            425868,
+            6520379
         ],
         "city": null,
         "links": [
@@ -2372,7 +2372,7 @@
     {
         "id": 131,
         "coords": [
-            705643,
+            705644,
             6921806
         ],
         "city": null,
@@ -2388,7 +2388,7 @@
         "id": 132,
         "coords": [
             765831,
-            6986943
+            6986944
         ],
         "city": null,
         "links": [
@@ -2403,7 +2403,7 @@
         "id": 133,
         "coords": [
             478038,
-            6512492
+            6512493
         ],
         "city": null,
         "links": [
@@ -2417,8 +2417,8 @@
     {
         "id": 134,
         "coords": [
-            383622,
-            6572379
+            383623,
+            6572380
         ],
         "city": null,
         "links": [
@@ -2429,7 +2429,7 @@
             },
             {
                 "id": 220,
-                "distance": 3811,
+                "distance": 3813,
                 "kind": "road"
             }
         ]
@@ -2459,7 +2459,7 @@
         "links": [
             {
                 "id": 139,
-                "distance": 64197,
+                "distance": 64196,
                 "kind": "national"
             }
         ]
@@ -2468,7 +2468,7 @@
         "id": 137,
         "coords": [
             299548,
-            6825375
+            6825376
         ],
         "city": null,
         "links": [
@@ -2512,7 +2512,7 @@
     {
         "id": 140,
         "coords": [
-            397029,
+            397030,
             6916622
         ],
         "city": null,
@@ -2558,7 +2558,7 @@
         "id": 143,
         "coords": [
             938159,
-            6730152
+            6730153
         ],
         "city": null,
         "links": [
@@ -2572,7 +2572,7 @@
     {
         "id": 144,
         "coords": [
-            603240,
+            603241,
             6161287
         ],
         "city": null,
@@ -2603,7 +2603,7 @@
         "id": 146,
         "coords": [
             960237,
-            6768522
+            6768523
         ],
         "city": null,
         "links": [
@@ -2668,7 +2668,7 @@
         "id": 150,
         "coords": [
             780787,
-            6597255
+            6597256
         ],
         "city": null,
         "links": [
@@ -2704,7 +2704,7 @@
         "links": [
             {
                 "id": 95,
-                "distance": 40928,
+                "distance": 40929,
                 "kind": "national"
             }
         ]
@@ -2789,7 +2789,7 @@
         "links": [
             {
                 "id": 158,
-                "distance": 27947,
+                "distance": 27946,
                 "kind": "national"
             }
         ]
@@ -2828,7 +2828,7 @@
         "id": 160,
         "coords": [
             535908,
-            6575973
+            6575974
         ],
         "city": null,
         "links": [
@@ -2879,7 +2879,7 @@
         "links": [
             {
                 "id": 164,
-                "distance": 97031,
+                "distance": 97032,
                 "kind": "national"
             },
             {
@@ -2947,34 +2947,12 @@
         ],
         "city": {
             "name": "Paris",
-            "postal_codes": [
-                "75001",
-                "75002",
-                "75003",
-                "75004",
-                "75005",
-                "75006",
-                "75007",
-                "75008",
-                "75009",
-                "75010",
-                "75011",
-                "75012",
-                "75013",
-                "75014",
-                "75015",
-                "75016",
-                "75017",
-                "75018",
-                "75019",
-                "75020",
-                "75116"
-            ]
+            "postal_codes": 75001
         },
         "links": [
             {
                 "id": 0,
-                "distance": 11522,
+                "distance": 11521,
                 "kind": "road"
             }
         ]
@@ -2987,24 +2965,7 @@
         ],
         "city": {
             "name": "Marseille",
-            "postal_codes": [
-                "13001",
-                "13002",
-                "13003",
-                "13004",
-                "13005",
-                "13006",
-                "13007",
-                "13008",
-                "13009",
-                "13010",
-                "13011",
-                "13012",
-                "13013",
-                "13014",
-                "13015",
-                "13016"
-            ]
+            "postal_codes": 13001
         },
         "links": [
             {
@@ -3022,17 +2983,7 @@
         ],
         "city": {
             "name": "Lyon",
-            "postal_codes": [
-                "69001",
-                "69002",
-                "69003",
-                "69004",
-                "69005",
-                "69006",
-                "69007",
-                "69008",
-                "69009"
-            ]
+            "postal_codes": 69001
         },
         "links": [
             {
@@ -3050,14 +3001,7 @@
         ],
         "city": {
             "name": "Toulouse",
-            "postal_codes": [
-                "31000",
-                "31100",
-                "31200",
-                "31300",
-                "31400",
-                "31500"
-            ]
+            "postal_codes": 31000
         },
         "links": [
             {
@@ -3075,12 +3019,7 @@
         ],
         "city": {
             "name": "Nice",
-            "postal_codes": [
-                "06000",
-                "06100",
-                "06200",
-                "06300"
-            ]
+            "postal_codes": 6000
         },
         "links": [
             {
@@ -3098,12 +3037,7 @@
         ],
         "city": {
             "name": "Nantes",
-            "postal_codes": [
-                "44000",
-                "44100",
-                "44200",
-                "44300"
-            ]
+            "postal_codes": 44000
         },
         "links": [
             {
@@ -3121,12 +3055,7 @@
         ],
         "city": {
             "name": "Montpellier",
-            "postal_codes": [
-                "34000",
-                "34070",
-                "34080",
-                "34090"
-            ]
+            "postal_codes": 34000
         },
         "links": [
             {
@@ -3144,18 +3073,12 @@
         ],
         "city": {
             "name": "Bordeaux",
-            "postal_codes": [
-                "33000",
-                "33100",
-                "33200",
-                "33300",
-                "33800"
-            ]
+            "postal_codes": 33000
         },
         "links": [
             {
                 "id": 44,
-                "distance": 11920,
+                "distance": 11922,
                 "kind": "road"
             }
         ]
@@ -3168,18 +3091,12 @@
         ],
         "city": {
             "name": "Lille",
-            "postal_codes": [
-                "59000",
-                "59160",
-                "59260",
-                "59777",
-                "59800"
-            ]
+            "postal_codes": 59000
         },
         "links": [
             {
                 "id": 3,
-                "distance": 13244,
+                "distance": 13243,
                 "kind": "road"
             }
         ]
@@ -3192,16 +3109,12 @@
         ],
         "city": {
             "name": "Rennes",
-            "postal_codes": [
-                "35000",
-                "35200",
-                "35700"
-            ]
+            "postal_codes": 35000
         },
         "links": [
             {
                 "id": 121,
-                "distance": 5620,
+                "distance": 5621,
                 "kind": "road"
             }
         ]
@@ -3214,9 +3127,7 @@
         ],
         "city": {
             "name": "Reims",
-            "postal_codes": [
-                "51100"
-            ]
+            "postal_codes": 51100
         },
         "links": [
             {
@@ -3234,11 +3145,7 @@
         ],
         "city": {
             "name": "Le Havre",
-            "postal_codes": [
-                "76600",
-                "76610",
-                "76620"
-            ]
+            "postal_codes": 76600
         },
         "links": [
             {
@@ -3256,11 +3163,7 @@
         ],
         "city": {
             "name": "Saint-\u00c9tienne",
-            "postal_codes": [
-                "42000",
-                "42100",
-                "42230"
-            ]
+            "postal_codes": 42000
         },
         "links": [
             {
@@ -3278,11 +3181,7 @@
         ],
         "city": {
             "name": "Toulon",
-            "postal_codes": [
-                "83000",
-                "83100",
-                "83200"
-            ]
+            "postal_codes": 83000
         },
         "links": [
             {
@@ -3300,10 +3199,7 @@
         ],
         "city": {
             "name": "Grenoble",
-            "postal_codes": [
-                "38000",
-                "38100"
-            ]
+            "postal_codes": 38000
         },
         "links": [
             {
@@ -3321,10 +3217,7 @@
         ],
         "city": {
             "name": "Dijon",
-            "postal_codes": [
-                "21000",
-                "21100"
-            ]
+            "postal_codes": 21000
         },
         "links": [
             {
@@ -3342,15 +3235,12 @@
         ],
         "city": {
             "name": "Angers",
-            "postal_codes": [
-                "49000",
-                "49100"
-            ]
+            "postal_codes": 49000
         },
         "links": [
             {
                 "id": 47,
-                "distance": 16698,
+                "distance": 16699,
                 "kind": "road"
             }
         ]
@@ -3363,9 +3253,7 @@
         ],
         "city": {
             "name": "Villeurbanne",
-            "postal_codes": [
-                "69100"
-            ]
+            "postal_codes": 69100
         },
         "links": [
             {
@@ -3383,15 +3271,12 @@
         ],
         "city": {
             "name": "Le Mans",
-            "postal_codes": [
-                "72000",
-                "72100"
-            ]
+            "postal_codes": 72000
         },
         "links": [
             {
                 "id": 46,
-                "distance": 4923,
+                "distance": 4922,
                 "kind": "road"
             }
         ]
@@ -3404,10 +3289,7 @@
         ],
         "city": {
             "name": "N\u00eemes",
-            "postal_codes": [
-                "30000",
-                "30900"
-            ]
+            "postal_codes": 30000
         },
         "links": [
             {
@@ -3425,13 +3307,7 @@
         ],
         "city": {
             "name": "Aix-en-Provence",
-            "postal_codes": [
-                "13080",
-                "13090",
-                "13100",
-                "13290",
-                "13540"
-            ]
+            "postal_codes": 13080
         },
         "links": [
             {
@@ -3449,15 +3325,12 @@
         ],
         "city": {
             "name": "Clermont-Ferrand",
-            "postal_codes": [
-                "63000",
-                "63100"
-            ]
+            "postal_codes": 63000
         },
         "links": [
             {
                 "id": 108,
-                "distance": 12676,
+                "distance": 12678,
                 "kind": "road"
             }
         ]
@@ -3470,11 +3343,7 @@
         ],
         "city": {
             "name": "Limoges",
-            "postal_codes": [
-                "87000",
-                "87100",
-                "87280"
-            ]
+            "postal_codes": 87000
         },
         "links": [
             {
@@ -3492,16 +3361,12 @@
         ],
         "city": {
             "name": "Tours",
-            "postal_codes": [
-                "37000",
-                "37100",
-                "37200"
-            ]
+            "postal_codes": 37000
         },
         "links": [
             {
                 "id": 39,
-                "distance": 5735,
+                "distance": 5734,
                 "kind": "road"
             }
         ]
@@ -3514,11 +3379,7 @@
         ],
         "city": {
             "name": "Amiens",
-            "postal_codes": [
-                "80000",
-                "80080",
-                "80090"
-            ]
+            "postal_codes": 80000
         },
         "links": [
             {
@@ -3536,11 +3397,7 @@
         ],
         "city": {
             "name": "Metz",
-            "postal_codes": [
-                "57000",
-                "57050",
-                "57070"
-            ]
+            "postal_codes": 57000
         },
         "links": [
             {
@@ -3558,10 +3415,7 @@
         ],
         "city": {
             "name": "Perpignan",
-            "postal_codes": [
-                "66000",
-                "66100"
-            ]
+            "postal_codes": 66000
         },
         "links": [
             {
@@ -3579,9 +3433,7 @@
         ],
         "city": {
             "name": "Besan\u00e7on",
-            "postal_codes": [
-                "25000"
-            ]
+            "postal_codes": 25000
         },
         "links": [
             {
@@ -3599,14 +3451,12 @@
         ],
         "city": {
             "name": "Boulogne-Billancourt",
-            "postal_codes": [
-                "92100"
-            ]
+            "postal_codes": 92100
         },
         "links": [
             {
                 "id": 0,
-                "distance": 10788,
+                "distance": 10787,
                 "kind": "road"
             }
         ]
@@ -3619,10 +3469,7 @@
         ],
         "city": {
             "name": "Orl\u00e9ans",
-            "postal_codes": [
-                "45000",
-                "45100"
-            ]
+            "postal_codes": 45000
         },
         "links": [
             {
@@ -3640,15 +3487,12 @@
         ],
         "city": {
             "name": "Rouen",
-            "postal_codes": [
-                "76000",
-                "76100"
-            ]
+            "postal_codes": 76000
         },
         "links": [
             {
                 "id": 51,
-                "distance": 10136,
+                "distance": 10135,
                 "kind": "road"
             }
         ]
@@ -3661,15 +3505,12 @@
         ],
         "city": {
             "name": "Mulhouse",
-            "postal_codes": [
-                "68100",
-                "68200"
-            ]
+            "postal_codes": 68100
         },
         "links": [
             {
                 "id": 80,
-                "distance": 17617,
+                "distance": 17615,
                 "kind": "road"
             }
         ]
@@ -3682,14 +3523,12 @@
         ],
         "city": {
             "name": "Caen",
-            "postal_codes": [
-                "14000"
-            ]
+            "postal_codes": 14000
         },
         "links": [
             {
                 "id": 53,
-                "distance": 2033,
+                "distance": 2032,
                 "kind": "road"
             }
         ]
@@ -3702,15 +3541,12 @@
         ],
         "city": {
             "name": "Saint-Denis",
-            "postal_codes": [
-                "93200",
-                "93210"
-            ]
+            "postal_codes": 93200
         },
         "links": [
             {
                 "id": 0,
-                "distance": 19715,
+                "distance": 19714,
                 "kind": "road"
             }
         ]
@@ -3723,14 +3559,12 @@
         ],
         "city": {
             "name": "Nancy",
-            "postal_codes": [
-                "54100"
-            ]
+            "postal_codes": 54100
         },
         "links": [
             {
                 "id": 75,
-                "distance": 20801,
+                "distance": 20800,
                 "kind": "road"
             }
         ]
@@ -3743,14 +3577,12 @@
         ],
         "city": {
             "name": "Argenteuil",
-            "postal_codes": [
-                "95100"
-            ]
+            "postal_codes": 95100
         },
         "links": [
             {
                 "id": 0,
-                "distance": 22506,
+                "distance": 22505,
                 "kind": "road"
             }
         ]
@@ -3763,14 +3595,12 @@
         ],
         "city": {
             "name": "Montreuil",
-            "postal_codes": [
-                "93100"
-            ]
+            "postal_codes": 93100
         },
         "links": [
             {
                 "id": 0,
-                "distance": 14060,
+                "distance": 14059,
                 "kind": "road"
             }
         ]
@@ -3783,14 +3613,12 @@
         ],
         "city": {
             "name": "Roubaix",
-            "postal_codes": [
-                "59100"
-            ]
+            "postal_codes": 59100
         },
         "links": [
             {
                 "id": 3,
-                "distance": 22225,
+                "distance": 22224,
                 "kind": "road"
             }
         ]
@@ -3803,14 +3631,12 @@
         ],
         "city": {
             "name": "Tourcoing",
-            "postal_codes": [
-                "59200"
-            ]
+            "postal_codes": 59200
         },
         "links": [
             {
                 "id": 3,
-                "distance": 23578,
+                "distance": 23577,
                 "kind": "road"
             }
         ]
@@ -3823,9 +3649,7 @@
         ],
         "city": {
             "name": "Cr\u00e9teil",
-            "postal_codes": [
-                "94000"
-            ]
+            "postal_codes": 94000
         },
         "links": [
             {
@@ -3843,9 +3667,7 @@
         ],
         "city": {
             "name": "Avignon",
-            "postal_codes": [
-                "84000"
-            ]
+            "postal_codes": 84000
         },
         "links": [
             {
@@ -3863,14 +3685,12 @@
         ],
         "city": {
             "name": "Nanterre",
-            "postal_codes": [
-                "92000"
-            ]
+            "postal_codes": 92000
         },
         "links": [
             {
                 "id": 0,
-                "distance": 18971,
+                "distance": 18970,
                 "kind": "road"
             }
         ]
@@ -3883,14 +3703,12 @@
         ],
         "city": {
             "name": "Poitiers",
-            "postal_codes": [
-                "86000"
-            ]
+            "postal_codes": 86000
         },
         "links": [
             {
                 "id": 40,
-                "distance": 3712,
+                "distance": 3711,
                 "kind": "road"
             }
         ]
@@ -3903,14 +3721,12 @@
         ],
         "city": {
             "name": "Courbevoie",
-            "postal_codes": [
-                "92400"
-            ]
+            "postal_codes": 92400
         },
         "links": [
             {
                 "id": 0,
-                "distance": 16927,
+                "distance": 16926,
                 "kind": "road"
             }
         ]
@@ -3923,9 +3739,7 @@
         ],
         "city": {
             "name": "Versailles",
-            "postal_codes": [
-                "78000"
-            ]
+            "postal_codes": 78000
         },
         "links": [
             {
@@ -3943,9 +3757,7 @@
         ],
         "city": {
             "name": "Vitry-sur-Seine",
-            "postal_codes": [
-                "94400"
-            ]
+            "postal_codes": 94400
         },
         "links": [
             {
@@ -3963,14 +3775,12 @@
         ],
         "city": {
             "name": "Colombes",
-            "postal_codes": [
-                "92700"
-            ]
+            "postal_codes": 92700
         },
         "links": [
             {
                 "id": 0,
-                "distance": 18996,
+                "distance": 18995,
                 "kind": "road"
             }
         ]
@@ -3983,14 +3793,12 @@
         ],
         "city": {
             "name": "Asni\u00e8res-sur-Seine",
-            "postal_codes": [
-                "92600"
-            ]
+            "postal_codes": 92600
         },
         "links": [
             {
                 "id": 0,
-                "distance": 17661,
+                "distance": 17660,
                 "kind": "road"
             }
         ]
@@ -4003,14 +3811,12 @@
         ],
         "city": {
             "name": "Aulnay-sous-Bois",
-            "postal_codes": [
-                "93600"
-            ]
+            "postal_codes": 93600
         },
         "links": [
             {
                 "id": 0,
-                "distance": 25141,
+                "distance": 25140,
                 "kind": "road"
             }
         ]
@@ -4023,9 +3829,7 @@
         ],
         "city": {
             "name": "Pau",
-            "postal_codes": [
-                "64000"
-            ]
+            "postal_codes": 64000
         },
         "links": [
             {
@@ -4043,14 +3847,12 @@
         ],
         "city": {
             "name": "Rueil-Malmaison",
-            "postal_codes": [
-                "92500"
-            ]
+            "postal_codes": 92500
         },
         "links": [
             {
                 "id": 0,
-                "distance": 17438,
+                "distance": 17437,
                 "kind": "road"
             }
         ]
@@ -4063,14 +3865,12 @@
         ],
         "city": {
             "name": "Aubervilliers",
-            "postal_codes": [
-                "93300"
-            ]
+            "postal_codes": 93300
         },
         "links": [
             {
                 "id": 0,
-                "distance": 18107,
+                "distance": 18106,
                 "kind": "road"
             }
         ]
@@ -4083,9 +3883,7 @@
         ],
         "city": {
             "name": "Champigny-sur-Marne",
-            "postal_codes": [
-                "94500"
-            ]
+            "postal_codes": 94500
         },
         "links": [
             {
@@ -4103,14 +3901,12 @@
         ],
         "city": {
             "name": "La Rochelle",
-            "postal_codes": [
-                "17000"
-            ]
+            "postal_codes": 17000
         },
         "links": [
             {
                 "id": 134,
-                "distance": 3811,
+                "distance": 3813,
                 "kind": "road"
             }
         ]
@@ -4123,15 +3919,12 @@
         ],
         "city": {
             "name": "Saint-Maur-des-Foss\u00e9s",
-            "postal_codes": [
-                "94100",
-                "94210"
-            ]
+            "postal_codes": 94100
         },
         "links": [
             {
                 "id": 0,
-                "distance": 12743,
+                "distance": 12742,
                 "kind": "road"
             }
         ]
@@ -4144,10 +3937,7 @@
         ],
         "city": {
             "name": "Antibes",
-            "postal_codes": [
-                "06600",
-                "06160"
-            ]
+            "postal_codes": 6600
         },
         "links": [
             {
@@ -4165,9 +3955,7 @@
         ],
         "city": {
             "name": "Calais",
-            "postal_codes": [
-                "62100"
-            ]
+            "postal_codes": 62100
         },
         "links": [
             {
@@ -4185,10 +3973,7 @@
         ],
         "city": {
             "name": "Cannes",
-            "postal_codes": [
-                "06400",
-                "06150"
-            ]
+            "postal_codes": 6400
         },
         "links": [
             {
@@ -4206,9 +3991,7 @@
         ],
         "city": {
             "name": "B\u00e9ziers",
-            "postal_codes": [
-                "34500"
-            ]
+            "postal_codes": 34500
         },
         "links": [
             {
@@ -4226,9 +4009,7 @@
         ],
         "city": {
             "name": "Colmar",
-            "postal_codes": [
-                "68000"
-            ]
+            "postal_codes": 68000
         },
         "links": [
             {
@@ -4246,9 +4027,7 @@
         ],
         "city": {
             "name": "Saint-Nazaire",
-            "postal_codes": [
-                "44600"
-            ]
+            "postal_codes": 44600
         },
         "links": [
             {
@@ -4266,14 +4045,12 @@
         ],
         "city": {
             "name": "Drancy",
-            "postal_codes": [
-                "93700"
-            ]
+            "postal_codes": 93700
         },
         "links": [
             {
                 "id": 0,
-                "distance": 21270,
+                "distance": 21269,
                 "kind": "road"
             }
         ]
@@ -4286,9 +4063,7 @@
         ],
         "city": {
             "name": "Bourges",
-            "postal_codes": [
-                "18000"
-            ]
+            "postal_codes": 18000
         },
         "links": [
             {
@@ -4306,14 +4081,12 @@
         ],
         "city": {
             "name": "M\u00e9rignac",
-            "postal_codes": [
-                "33700"
-            ]
+            "postal_codes": 33700
         },
         "links": [
             {
                 "id": 44,
-                "distance": 15955,
+                "distance": 15956,
                 "kind": "road"
             }
         ]
@@ -4326,14 +4099,12 @@
         ],
         "city": {
             "name": "Issy-les-Moulineaux",
-            "postal_codes": [
-                "92130"
-            ]
+            "postal_codes": 92130
         },
         "links": [
             {
                 "id": 0,
-                "distance": 8581,
+                "distance": 8580,
                 "kind": "road"
             }
         ]
@@ -4346,14 +4117,12 @@
         ],
         "city": {
             "name": "Levallois-Perret",
-            "postal_codes": [
-                "92300"
-            ]
+            "postal_codes": 92300
         },
         "links": [
             {
                 "id": 0,
-                "distance": 16490,
+                "distance": 16489,
                 "kind": "road"
             }
         ]
@@ -4366,16 +4135,12 @@
         ],
         "city": {
             "name": "Villeneuve-d'Ascq",
-            "postal_codes": [
-                "59491",
-                "59493",
-                "59650"
-            ]
+            "postal_codes": 59491
         },
         "links": [
             {
                 "id": 3,
-                "distance": 19860,
+                "distance": 19859,
                 "kind": "road"
             }
         ]
@@ -4388,9 +4153,7 @@
         ],
         "city": {
             "name": "Valence",
-            "postal_codes": [
-                "26000"
-            ]
+            "postal_codes": 26000
         },
         "links": [
             {
@@ -4408,9 +4171,7 @@
         ],
         "city": {
             "name": "Noisy-le-Grand",
-            "postal_codes": [
-                "93160"
-            ]
+            "postal_codes": 93160
         },
         "links": [
             {
@@ -4428,9 +4189,7 @@
         ],
         "city": {
             "name": "La Seyne-sur-Mer",
-            "postal_codes": [
-                "83500"
-            ]
+            "postal_codes": 83500
         },
         "links": [
             {
@@ -4448,14 +4207,12 @@
         ],
         "city": {
             "name": "Antony",
-            "postal_codes": [
-                "92160"
-            ]
+            "postal_codes": 92160
         },
         "links": [
             {
                 "id": 0,
-                "distance": 2999,
+                "distance": 3000,
                 "kind": "road"
             }
         ]
@@ -4468,14 +4225,12 @@
         ],
         "city": {
             "name": "Neuilly-sur-Seine",
-            "postal_codes": [
-                "92200"
-            ]
+            "postal_codes": 92200
         },
         "links": [
             {
                 "id": 0,
-                "distance": 15089,
+                "distance": 15088,
                 "kind": "road"
             }
         ]
@@ -4488,9 +4243,7 @@
         ],
         "city": {
             "name": "Troyes",
-            "postal_codes": [
-                "10000"
-            ]
+            "postal_codes": 10000
         },
         "links": [
             {
@@ -4508,9 +4261,7 @@
         ],
         "city": {
             "name": "V\u00e9nissieux",
-            "postal_codes": [
-                "69200"
-            ]
+            "postal_codes": 69200
         },
         "links": [
             {
@@ -4528,14 +4279,12 @@
         ],
         "city": {
             "name": "Clichy",
-            "postal_codes": [
-                "92110"
-            ]
+            "postal_codes": 92110
         },
         "links": [
             {
                 "id": 0,
-                "distance": 16226,
+                "distance": 16225,
                 "kind": "road"
             }
         ]
@@ -4548,14 +4297,12 @@
         ],
         "city": {
             "name": "Sarcelles",
-            "postal_codes": [
-                "95200"
-            ]
+            "postal_codes": 95200
         },
         "links": [
             {
                 "id": 0,
-                "distance": 27273,
+                "distance": 27272,
                 "kind": "road"
             }
         ]
@@ -4568,14 +4315,12 @@
         ],
         "city": {
             "name": "Pessac",
-            "postal_codes": [
-                "33600"
-            ]
+            "postal_codes": 33600
         },
         "links": [
             {
                 "id": 44,
-                "distance": 17322,
+                "distance": 17324,
                 "kind": "road"
             }
         ]
@@ -4588,14 +4333,12 @@
         ],
         "city": {
             "name": "Ivry-sur-Seine",
-            "postal_codes": [
-                "94200"
-            ]
+            "postal_codes": 94200
         },
         "links": [
             {
                 "id": 0,
-                "distance": 7431,
+                "distance": 7430,
                 "kind": "road"
             }
         ]
@@ -4608,14 +4351,12 @@
         ],
         "city": {
             "name": "Chamb\u00e9ry",
-            "postal_codes": [
-                "73000"
-            ]
+            "postal_codes": 73000
         },
         "links": [
             {
                 "id": 87,
-                "distance": 2730,
+                "distance": 2729,
                 "kind": "road"
             }
         ]
@@ -4628,9 +4369,7 @@
         ],
         "city": {
             "name": "Niort",
-            "postal_codes": [
-                "79000"
-            ]
+            "postal_codes": 79000
         },
         "links": [
             {
@@ -4648,9 +4387,7 @@
         ],
         "city": {
             "name": "Lorient",
-            "postal_codes": [
-                "56100"
-            ]
+            "postal_codes": 56100
         },
         "links": [
             {
@@ -4668,10 +4405,7 @@
         ],
         "city": {
             "name": "Cergy",
-            "postal_codes": [
-                "95000",
-                "95800"
-            ]
+            "postal_codes": 95000
         },
         "links": [
             {
@@ -4689,9 +4423,7 @@
         ],
         "city": {
             "name": "Montauban",
-            "postal_codes": [
-                "82000"
-            ]
+            "postal_codes": 82000
         },
         "links": [
             {
@@ -4709,9 +4441,7 @@
         ],
         "city": {
             "name": "Saint-Quentin",
-            "postal_codes": [
-                "02100"
-            ]
+            "postal_codes": 2100
         },
         "links": [
             {
@@ -4729,14 +4459,12 @@
         ],
         "city": {
             "name": "Villejuif",
-            "postal_codes": [
-                "94800"
-            ]
+            "postal_codes": 94800
         },
         "links": [
             {
                 "id": 0,
-                "distance": 5237,
+                "distance": 5236,
                 "kind": "road"
             }
         ]
@@ -4749,14 +4477,12 @@
         ],
         "city": {
             "name": "Beauvais",
-            "postal_codes": [
-                "60155"
-            ]
+            "postal_codes": 60155
         },
         "links": [
             {
                 "id": 54,
-                "distance": 9584,
+                "distance": 9583,
                 "kind": "road"
             }
         ]
@@ -4769,9 +4495,7 @@
         ],
         "city": {
             "name": "Hy\u00e8res",
-            "postal_codes": [
-                "83400"
-            ]
+            "postal_codes": 83400
         },
         "links": [
             {
