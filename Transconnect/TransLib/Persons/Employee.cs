@@ -194,5 +194,15 @@ namespace TransLib.Persons
             employees.ForEach(e => tree.AddNode(e, e.user_id, e.supervisor_id));
             return tree;
         }
+
+        public static async Task<Employee> get_employee_by_id(AppConfig cfg, int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND user_type = 'EMPLOYEE' AND NOT deleted;");
+            cmd.Parameters.AddWithValue("@user_id", id);
+            DbDataReader reader = await cfg.query(cmd);
+            Employee? employee = await from_reader(reader);
+            if (employee == null) throw new Exception("Employee not found");
+            return employee;
+        }
     }
 }

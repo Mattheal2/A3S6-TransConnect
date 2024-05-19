@@ -65,9 +65,9 @@ CREATE TABLE orders (
 );
 
 
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', 'Puteaux', '232878792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716102592');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', 'Paris', '230286792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716100592');
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', 'Pibrac', '227608392', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716107512');
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', 'Puteaux', '232878792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716102592', 'B', 3, FALSE);
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', 'Paris', '230286792', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716100592', 'B', 3, FALSE);
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, password_hash, position, salary, hire_date, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', 'Pibrac', '227608392', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Driver', '30000', '1716107512', 'B', 3, FALSE);
 
 
 
@@ -79,8 +79,15 @@ INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, t
 INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(1, 2, 'EN-789-NL', '1742373192', 'Toulouse', 'Paris');
 INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, departure_city, arrival_city) VALUES(2, 3, 'FT-519-KG', '1742373192', 'Toulouse', 'Paris');
 
-SELECT * FROM PERSON;
+SELECT * FROM vehicle;
+SELECT * FROM person;
 SELECT * FROM auth_tokens;
 INSERT INTO auth_tokens VALUES('xxx', 1);
 SET @token_id = 'xxx';
-SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1
+SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1;
+
+SELECT * FROM person WHERE user_type = 'EMPLOYEE' ORDER BY RAND() LIMIT 1;
+                SELECT driver_id 
+                FROM orders 
+                WHERE departure_date > @arrival_time AND arrival_date < @departure_time
+                LIMIT 1;
