@@ -10,8 +10,8 @@ SELECT * FROM auth_tokens NATURAL JOIN person WHERE token_id = @token_id LIMIT 1
 SELECT * FROM person WHERE user_type = 'EMPLOYEE' ORDER BY RAND() LIMIT 1;
 
 -- Find driver
-SET @departure_time = 1742373192;
-SET @arrival_time = 1742396793;
+SET @departure_time = 0; -- 1742373192;
+SET @arrival_time = 111742396793;
 
 SELECT user_id FROM person
 WHERE user_id not IN (
@@ -36,4 +36,6 @@ AND vehicle_type = 'CAR'
 ORDER BY RAND()
 LIMIT 1;
 
-SELECT * FROM person WHERE user_id = '5' OR '1' = '1'
+SELECT *
+FROM orders
+WHERE departure_date >= @departure_time AND departure_date <= @arrival_time;

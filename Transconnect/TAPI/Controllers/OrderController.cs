@@ -58,7 +58,7 @@ namespace TAPI.Controllers
 
             List<Order> orders = await Order.list_orders(Config.cfg, filter, limit, offset, order_field, order_dir);
             string? error = null;
-            orders.ForEach(order => error = order.validate());
+            orders.ForEach(order => error += order.validate());
             if (error != null) return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
 
             return ApiResponse<Order[]>.Success(orders.ToArray());
@@ -92,6 +92,33 @@ namespace TAPI.Controllers
             if (error != null) return ApiResponse<Order>.Failure(400, "order.invalid_order", error);
 
             return ApiResponse<Order>.Success(order);
+        }
+
+        [HttpPost(Name = "DeleteOrder")]
+        public async Task<ApiResponse<Order>> DeleteOrder([FromBody] int order_id)
+        {
+            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
+
+            Order? order = await Order.get_order(Config.cfg, order_id);
+            if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
+
+            await order.delete(Config.cfg);
+            return ApiResponse<Order>.Success(order);
+        }
+
+        [HttpGet(Name = "ListOrdersByClientId")]
+        public async Task<ApiResponse<Order[]>> ListOrdersByClientId([FromQuery] int client_id)
+        {
+            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
+
+            List<Order> orders = await Order.list_orders_by_client_id(Config.cfg, client_id);
+            string? error = null;
+            orders.ForEach(order => error += order.validate());
+            if (error != null) return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
+
+            return ApiResponse<Order[]>.Success(orders.ToArray());
         }
     }
 }
