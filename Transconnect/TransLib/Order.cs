@@ -338,12 +338,12 @@ namespace TransLib
         }
 
         /// <summary>
-        /// Gets an order by user_id
+        /// Gets an order by order_id
         /// </summary>
         /// <param name="cfg">The CFG.</param>
         /// <param name="order_id">The order identifier.</param>
         /// <returns></returns>
-        public static async Task<Order?> get_order_by_user_id(AppConfig cfg, int order_id)
+        public static async Task<Order?> get_order_by_order_id(AppConfig cfg, int order_id)
         {
             MySqlCommand cmd = new MySqlCommand(@"
                 SELECT * FROM orders
