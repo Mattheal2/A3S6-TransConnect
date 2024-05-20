@@ -20,7 +20,7 @@ $("#login-form").submit(function (event) {
         "/api/Auth/Login",
         { email: email, password: password },
         function (response) {
-            window.location.href = "/home";
+            window.location.href = "/";
         },
         showError
     );
@@ -54,3 +54,7 @@ $("#email-input, #password-input").keyup(function () {
 });
 
 $("#email-input").focus();
+
+if (AUTH.isAuthenticated) {
+    window.location.href = "/";
+}

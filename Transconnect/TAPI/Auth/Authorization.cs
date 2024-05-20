@@ -24,8 +24,16 @@ public class Authorization {
     public async Task logout(AppConfig cfg, HttpContext context) {
         string? token = context.Request.Cookies["session_id"];
         if (token == null) return;
-        context.Response.Cookies.Delete("session_id");
-        context.Response.Cookies.Delete("user_id");
+        context.Response.Cookies.Delete("session_id", new CookieOptions() {
+            HttpOnly = true,
+            SameSite = SameSiteMode.Strict,
+            Path = "/"
+        });
+        context.Response.Cookies.Delete("user_id", new CookieOptions() {
+            HttpOnly = false,
+            SameSite = SameSiteMode.Strict,
+            Path = "/"
+        });
         await AuthorizationToken.delete_user_session(cfg, token);
     }
 

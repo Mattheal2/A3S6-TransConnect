@@ -34,11 +34,13 @@ public class AuthController : ControllerBase
         
         Response.Cookies.Append("session_id", session_id, new CookieOptions() {
             HttpOnly = true,
-            SameSite = SameSiteMode.Strict
+            SameSite = SameSiteMode.Strict,
+            Path = "/"
         });
         Response.Cookies.Append("user_id", login_person.user_id.ToString(), new CookieOptions() {
-            HttpOnly = true,
-            SameSite = SameSiteMode.Strict
+            HttpOnly = false,
+            SameSite = SameSiteMode.Strict,
+            Path = "/"
         });
 
         return ApiResponse<bool>.Success(true);
