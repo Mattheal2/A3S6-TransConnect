@@ -10,7 +10,10 @@ using MySql.Data;
 using System.Data;
 using TransLib.Vehicles;
 using TransLib.Persons;
+using TransLib.Itinerary;
 using System.Runtime.Serialization;
+//using Google.Protobuf.WellKnownTypes;
+using System.Security.Policy;
 
 namespace TransLib
 {
@@ -38,7 +41,13 @@ namespace TransLib
         public OrderStatus status { get; set; }
         public int price_per_km { get; set; }
 
-        // new order constructor
+        /// <summary>
+        /// New order constructor
+        /// </summary>
+        /// <param name="client_id"></param>
+        /// <param name="departure_time"></param>
+        /// <param name="departure_city"></param>
+        /// <param name="arrival_city"></param>
         public Order(int client_id, long departure_time, string departure_city, string arrival_city)
         {
             this.client_id = client_id;
@@ -54,7 +63,19 @@ namespace TransLib
 
         }
 
-        // existing order constructor
+        /// <summary>
+        /// Existing order constructor
+        /// </summary>
+        /// <param name="order_id"></param>
+        /// <param name="client_id"></param>
+        /// <param name="vehicle_license_plate"></param>
+        /// <param name="driver_id"></param>
+        /// <param name="departure_time"></param>
+        /// <param name="arrival_time"></param>
+        /// <param name="departure_city"></param>
+        /// <param name="arrival_city"></param>
+        /// <param name="price_per_km"></param>
+        /// <param name="status"></param>
         public Order(int order_id, int client_id, string vehicle_license_plate, int? driver_id, long departure_time, long? arrival_time, string departure_city, string arrival_city, int price_per_km, string status)
         {
             this.order_id = order_id;
@@ -281,6 +302,65 @@ namespace TransLib
 
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader(reader);
+        }
+
+        public static async Task<List<Order>> list_orders(AppConfig cfg, string filter = "", int limit = 20, int offset = 0, string order_field = "departure_time", string order_dir = "DESC")
+        {
+            MySqlCommand cmd = new MySqlCommand(@$"
+                SELECT * FROM orders
+                WHERE client_id LIKE @filter OR departure_city LIKE @filter OR arrival_city LIKE @filter
+                ORDER BY @order_field @order_dir
+                LIMIT @limit 
+                OFFSET @offset;
+            ");
+            cmd.Parameters.AddWithValue("@filter", $"%{filter}%");
+            cmd.Parameters.AddWithValue("@limit", limit);
+            cmd.Parameters.AddWithValue("@offset", offset);
+            cmd.Parameters.AddWithValue("@order_field", order_field);
+            cmd.Parameters.AddWithValue("@order_dir", order_dir);
+
+            DbDataReader reader = await cfg.query(cmd);
+            return await from_reader_multiple(reader);
+        }
+        
+        public async Task update_field<T>(AppConfig cfg, string field, T value)
+        {
+            MySqlCommand cmd = new MySqlCommand(@$"
+                UPDATE orders
+                SET {field} = @value
+                WHERE order_id = @order_id;
+            ");
+            cmd.Parameters.AddWithValue("@value", value);
+            cmd.Parameters.AddWithValue("@order_id", order_id);
+            await cfg.execute(cmd);
+
+        }
+
+        public async Task set_departure_time(AppConfig cfg, long departure_time)
+        {
+            await update_field(cfg, "departure_date", departure_time);
+            this.departure_time = departure_time;
+
+            this.arrival_time = calculate_arrival_time();
+            await update_field(cfg, "arrival_date", arrival_time);
+        }
+
+        public async Task set_departure_city(AppConfig cfg, string departure_city)
+        {
+            await update_field(cfg, "departure_city", departure_city);
+            this.departure_city = departure_city;
+
+            this.arrival_time = calculate_arrival_time();
+            await update_field(cfg, "arrival_date", arrival_time);
+        }
+
+        public async Task set_arrival_city(AppConfig cfg, string arrival_city)
+        {
+            await update_field(cfg, "arrival_city", arrival_city);
+            this.arrival_city = arrival_city;
+
+            this.arrival_time = calculate_arrival_time();
+            await update_field(cfg, "arrival_date", arrival_time);
         }
 
         //checks some things and updates the status if necessary

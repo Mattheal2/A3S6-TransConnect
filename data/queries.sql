@@ -35,3 +35,5 @@ WHERE license_plate not IN (
 AND NOT deleted AND vehicle_type = 'CAR'
 ORDER BY RAND()
 LIMIT 1;
+
+SELECT * FROM person WHERE user_id = '5' OR '1' = '1' AND NOT deleted

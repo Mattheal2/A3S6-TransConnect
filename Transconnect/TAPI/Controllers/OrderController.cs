@@ -2,6 +2,7 @@
 using TAPI.Auth;
 using TransLib;
 using TransLib.Auth;
+using TransLib.Vehicles;
 
 
 namespace TAPI.Controllers
@@ -32,7 +33,7 @@ namespace TAPI.Controllers
 
             string? error = new_order.validate();
             if (error != null) return ApiResponse<Order>.Failure(400, "order.invalid_order", error);
-            
+
             await new_order.create(Config.cfg);
             return ApiResponse<Order>.Success(new_order);
         }
@@ -45,6 +46,50 @@ namespace TAPI.Controllers
 
             Order? order = await Order.get_order(Config.cfg, order_id);
             if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
+
+            return ApiResponse<Order>.Success(order);
+        }
+
+        [HttpGet(Name = "ListOrders")]
+        public async Task<ApiResponse<Order[]>> ListOrder([FromQuery] string filter = "", [FromQuery] int limit = 20, [FromQuery] int offset = 0, [FromQuery] string order_field = "departure_time", string order_dir = "DESC")
+        {
+            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
+
+            List<Order> orders = await Order.list_orders(Config.cfg, filter, limit, offset, order_field, order_dir);
+            string? error = null;
+            orders.ForEach(order => error = order.validate());
+            if (error != null) return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
+
+            return ApiResponse<Order[]>.Success(orders.ToArray());
+        }
+
+        public struct OrderUpdateRequest
+        {
+            public int order_id { get; set; }
+            public long? departure_time { get; set; }
+            public string? departure_city { get; set; }
+            public string? arrival_city { get; set; }
+        }
+
+        [HttpPost(Name = "UpdateOrder")]
+        public async Task<ApiResponse<Order>> UpdateOrder([FromBody] OrderUpdateRequest body)
+        {
+            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
+            
+            Order? order = await Order.get_order(Config.cfg, body.order_id);
+            if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
+
+            if (body.departure_time != null) 
+                await order.set_departure_time(Config.cfg, body.departure_time.Value);
+            if (body.departure_city != null) 
+                await order.set_departure_city(Config.cfg, body.departure_city);
+            if (body.arrival_city != null)
+                await order.set_arrival_city(Config.cfg, body.arrival_city);
+
+            string? error = order.validate();
+            if (error != null) return ApiResponse<Order>.Failure(400, "order.invalid_order", error);
 
             return ApiResponse<Order>.Success(order);
         }

@@ -16,7 +16,8 @@ public class ItineraryService {
     /// <param name="path"></param>
     /// <returns></returns>
     public static ItineraryService Load(string path) {
-        RouteNode[]? nodes = JsonSerializer.Deserialize<RouteNode[]>(path);
+        string json = File.ReadAllText(path);
+        RouteNode[]? nodes = JsonSerializer.Deserialize<RouteNode[]>(json, new JsonSerializerOptions { IncludeFields = true }); ;
         if (nodes == null) throw new Exception("Failed to load nodes.");
         return new ItineraryService(nodes);
     }

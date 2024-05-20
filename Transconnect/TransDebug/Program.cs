@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
 using TransLib;
-using TransLib.Maps;
-using TransLib.Schedule;
+using TransLib.Itinerary;
 using TransLib.Persons;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace TransDebug
 {
@@ -15,75 +15,27 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
-            //test_schedule();
-            //test_route().Wait();
-            //test_get_db().Wait();
-            Console.WriteLine(test_get_clients().Result);
-            while (true) ;
-        }
+            string json = File.ReadAllText("./Routing_maps/nodes.json");
+            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
+            RouteNode[] nodes = service.GetNodes();
 
-        public async static Task<List<Client>?> test_get_clients()
-        {
-            Company transconnect = new Company("TransConnect", "12 rue de ESLIV");
-            return await transconnect.get_clients_list_async();
-        }
+            string dep = "Colombes";
+            string arr = "Paris";
 
-        public async static Task test_route()
-        {
-            Route route = new Route(Route.RouteType.Driving, "Chatou", "Paris");
-            await route.process_async();
-            Console.WriteLine("Itinerary type : " + route.Type);
-            Console.WriteLine("Distance : " + route.get_distance());
-            Console.WriteLine("Duration : " + route.get_duration());
+            RouteNode? start = null;
+            RouteNode? end = null;
 
-        }
-
-        public static void test_schedule()
-        {
-            Schedule schedule = Schedule.from_database($"server=localhost;Port=3306;database=transcodb;uid=root;pwd=;");
-            Employee? d1 = schedule.find_driver(new DateTime(2025, 10, 21, 9, 0, 0));
-            if(d1 != null) Console.WriteLine(d1.FIRST_NAME + " " + d1.LAST_NAME);
-            else Console.WriteLine("No driver available");
-            Console.WriteLine(schedule.to_json());
-        }
-
-        public async static Task test_get_db()
-        {
-            Company trans_connexion = new Company("Transgxe", "12 rue des pommes");
-            var x = await trans_connexion.get_employees_list_async();
-            var y = await trans_connexion.get_vehicles_list_async();
-
-            Console.WriteLine("Liste d'employés :");
-            if (x != null) x.ForEach(a => Console.WriteLine(a));
-            Console.WriteLine("Liste de véhicules :");
-            if (y != null) y.ForEach(a => Console.WriteLine(a));
-        }
-
-        public static async void display_async_query(MySqlCommand cmd, string connection_string)
-        {
-
-            using (MySqlConnection db_connection = new MySqlConnection(connection_string))
+            foreach(RouteNode node in nodes)
             {
+                if (start != null && end != null) break;
 
-                try
-                {   
-                    await db_connection.OpenAsync();
-                    cmd.Connection = db_connection;
-
-                    Console.WriteLine($"Connection to the database established. SQL version : {db_connection.ServerVersion}");
-
-                    DbDataReader rdr = await cmd.ExecuteReaderAsync();
-                    while (await rdr.ReadAsync())
-                    {
-                        for (int i = 0; i < rdr.FieldCount; i++) Console.Write(rdr[i] + "\t");
-                        Console.WriteLine();
-                    }
-                    rdr.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                if (node.city != null && node.city.name == dep) start = node;
+                if(node.city != null && node.city.name == arr) end = node;
+            }
+            if (start != null && end != null)
+            {
+                Itinerary route = service.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
+                Console.WriteLine(route.time + " minutes");
             }
         }
     }
