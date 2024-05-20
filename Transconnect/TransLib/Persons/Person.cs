@@ -16,14 +16,13 @@ namespace TransLib.Persons
         public string address { get; set; }
         public string city { get; set; }
         public long birth_date { get; set; }
-        public bool deleted { get; set; }
         
 
         // ! internal fields, never to be sent over the wire !
         [JsonIgnore]
         protected string? password_hash { get; private set; }
 
-        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, bool deleted, string? password_hash)
+        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash)
         {
             this.user_id = user_id;
             this.first_name = first_name;
@@ -33,13 +32,11 @@ namespace TransLib.Persons
             this.address = address;
             this.city = city;
             this.birth_date = birth_date;
-            this.deleted = deleted;
             this.password_hash = password_hash;
         }
 
         public abstract string user_type { get; }
         public abstract Task create(AppConfig cfg);
-        public abstract Task delete(AppConfig cfg);
 
         /// <summary>
         /// Returns an Employee object from a reader. If muliple rows are returned, only the first one is used.
@@ -136,7 +133,7 @@ namespace TransLib.Persons
         /// <returns></returns>
         public static async Task<Person?> get_person_by_email(AppConfig cfg, string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email AND NOT deleted");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email");
             cmd.Parameters.AddWithValue("@email", email);
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader(reader);
@@ -150,7 +147,7 @@ namespace TransLib.Persons
         /// <returns></returns>
         public static async Task<Person?> get_person_by_id(AppConfig cfg, int user_id)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND NOT deleted");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id");
             cmd.Parameters.AddWithValue("@user_id", user_id);
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader(reader);
@@ -248,6 +245,18 @@ namespace TransLib.Persons
         {
             await update_field(cfg, "birth_date", birth_date);
             this.birth_date = birth_date;
+        }
+
+        /// <summary>
+        /// Deletes the person from the database.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
+        public async Task delete(AppConfig cfg)
+        {
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM person WHERE user_id = @user_id;");
+            cmd.Parameters.AddWithValue("@user_id", user_id);
+            await cfg.query(cmd);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace TransLib.Persons
     {
         public int total_spent { get; private set; } // in cents
         public Client(
-            int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, bool deleted, string? password_hash, int total_spent
-        ) : base(user_id, first_name, last_name, phone, email, address, city, birth_date, deleted, password_hash)
+            int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash, int total_spent
+        ) : base(user_id, first_name, last_name, phone, email, address, city, birth_date, password_hash)
         {
             this.total_spent = total_spent;
         }
@@ -99,7 +99,6 @@ namespace TransLib.Persons
                     reader.GetString($"{prefix}address"),
                     reader.GetString($"{prefix}city"),
                     reader.GetInt64($"{prefix}birth_date"),
-                    reader.GetBoolean($"{prefix}deleted"),
                     reader.GetString($"{prefix}password_hash"),
                     reader.GetInt32($"{prefix}total_spent")
                 );
@@ -130,29 +129,11 @@ namespace TransLib.Persons
         /// <returns></returns>
         public static async Task<List<Client>> list_clients(AppConfig cfg, string order_field, string order_dir, int limit, int offset)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'CLIENT' AND NOT deleted ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'CLIENT' ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");
             using (DbDataReader reader = await cfg.query(cmd))
             {
                 return await from_reader_multiple(reader);
             }
-        }
-
-        /// <summary>
-        /// Deletes the object from the database by deleting all informations excepted primary key. 
-        /// Keep track of the user is necessary while orders may be still linked to it.
-        /// </summary>
-        /// <param name="cfg"></param>
-        /// <returns></returns>
-        public override async Task delete(AppConfig cfg)
-        {
-            MySqlCommand cmd = new MySqlCommand(@"
-                UPDATE person
-                SET 
-                    deleted = true, first_name = '', last_name = '', phone = '', email = '', address = '', city = '', birth_date = 0
-                WHERE user_id = @user_id");
-            cmd.Parameters.AddWithValue("@user_id", user_id);
-            await cfg.query(cmd);
-            this.deleted = true;
         }
     }
 }

@@ -36,7 +36,7 @@ public class EmployeesController : ControllerBase
         long hire_date = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         Employee new_employee = new Employee(
             -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city,
-            body.birth_date, false, password_hash, body.position, body.salary, hire_date, body.license_type,
+            body.birth_date, password_hash, body.position, body.salary, hire_date, body.license_type,
             body.supervisor_id, body.show_on_org_chart
         );
 

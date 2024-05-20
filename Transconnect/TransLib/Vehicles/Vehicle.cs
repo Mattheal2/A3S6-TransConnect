@@ -29,7 +29,6 @@ namespace TransLib.Vehicles
 
         public abstract string vehicle_type { get; }
         public abstract Task create(AppConfig cfg);
-        public abstract Task delete(AppConfig cfg);
 
         /// <summary>
         /// Casts the object in reader into correct vehicle
@@ -203,6 +202,22 @@ namespace TransLib.Vehicles
         public override string ToString()
         {
             return $"{license_plate} {brand} {model}";
+        }
+
+        /// <summary>
+        /// Deletes the object from the database by deleting all informations excepted primary key. 
+        /// Keep track of the vehicle is necessary while orders may be still linked to it.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
+        public async Task delete(AppConfig cfg)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"
+                DELETE FROM vehicle WHERE license_plate = @license_plate;
+            ");
+            cmd.Parameters.AddWithValue("@license_plate", license_plate);
+
+            await cfg.execute(cmd);
         }
     }
 }

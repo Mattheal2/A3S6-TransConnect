@@ -17,8 +17,8 @@ SELECT user_id FROM person
 WHERE user_id not IN (
 SELECT driver_id 
 FROM orders
-WHERE (@departure_time < arrival_time AND @arrival_time > departure_time)
-) AND NOT deleted AND user_type = 'EMPLOYEE'
+WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
+) AND user_type = 'EMPLOYEE'
 ORDER BY RAND()
 LIMIT 1;
 
@@ -32,10 +32,10 @@ WHERE license_plate not IN (
 	FROM orders
 	WHERE (@departure_time < arrival_time AND @arrival_time > departure_time)
 ) 
-AND NOT deleted AND vehicle_type = 'CAR'
+AND vehicle_type = 'CAR'
 ORDER BY RAND()
 LIMIT 1;
 
 SELECT *
 FROM orders
-WHERE client_id = @user_id;
+WHERE departure_date >= @departure_time AND departure_date <= @arrival_time;

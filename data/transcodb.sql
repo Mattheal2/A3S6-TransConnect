@@ -12,7 +12,6 @@ CREATE TABLE person (
     address VARCHAR(100) NOT NULL,
     city VARCHAR(30) NOT NULL,
     birth_date LONG NOT NULL,
-    deleted BOOLEAN DEFAULT FALSE,
     password_hash VARCHAR(100),
     -- Employee's specific
     position VARCHAR(50),
@@ -37,7 +36,6 @@ CREATE TABLE vehicle (
     model VARCHAR(30) NOT NULL,
     price FLOAT NOT NULL,
     vehicle_type ENUM('TRUCK', 'CAR', 'VAN'),
-    deleted BOOLEAN DEFAULT FALSE,
     -- Truck's specific
     volume INT,
     truck_type VARCHAR(30),
