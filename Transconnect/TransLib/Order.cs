@@ -323,6 +323,18 @@ namespace TransLib
             return await from_reader_multiple(reader);
         }
         
+        public static async Task<List<Order>> list_orders_by_client_id(AppConfig cfg, int client_id)
+        {
+               MySqlCommand cmd = new MySqlCommand(@"
+                SELECT * FROM orders
+                WHERE client_id = @client_id;
+            ");
+            cmd.Parameters.AddWithValue("@client_id", client_id);
+
+            DbDataReader reader = await cfg.query(cmd);
+            return await from_reader_multiple(reader);
+        }
+
         public async Task update_field<T>(AppConfig cfg, string field, T value)
         {
             MySqlCommand cmd = new MySqlCommand(@$"
