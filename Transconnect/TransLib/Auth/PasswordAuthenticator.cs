@@ -53,7 +53,7 @@ namespace TransLib.Auth {
             
             // extract salt from the next 16 bytes
             byte[] salt = new byte[16];
-            Array.Copy(hash_bytes, 0, salt, 1, 16);
+            Array.Copy(hash_bytes, 1, salt, 0, 16);
 
             // hash the password with the retrieved salt
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000, HashAlgorithmName.SHA512);
