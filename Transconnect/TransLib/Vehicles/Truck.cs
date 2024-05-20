@@ -43,26 +43,7 @@ namespace TransLib.Vehicles
 
             await cfg.execute(cmd);
         }
-
-        /// <summary>
-        /// Deletes the object from the database by deleting all informations excepted primary key. 
-        /// Keep track of the vehicle is necessary while orders may be still linked to it.
-        /// </summary>
-        /// <param name="cfg"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async override Task delete(AppConfig cfg)
-        {
-            MySqlCommand cmd = new MySqlCommand(@"
-                UPDATE vehicle 
-                SET deleted = TRUE, brand = '', model = '', price = 0, volume = 0
-                WHERE license_plate = @license_plate;
-            ");
-            cmd.Parameters.AddWithValue("@license_plate", license_plate);
-
-            await cfg.execute(cmd);
-        }
-
+        
         public static new Truck cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}vehicle_type") == "TRUCK")

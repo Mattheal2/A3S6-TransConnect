@@ -1,5 +1,5 @@
 // when pressed
-$("#show-password-btn").click(function() {
+$("#show-password-btn").click(function () {
     var password = $("#password-input");
     var passwordType = password.attr("type");
     if (passwordType === "password") {
@@ -9,29 +9,42 @@ $("#show-password-btn").click(function() {
     }
 });
 
-$("#login-form").submit(function(event) {
+$("#login-form").submit(function (event) {
     event.preventDefault();
 
     var email = $("#email-input").val();
     var password = $("#password-input").val();
-    
+
     // postJson
-    $.ajax({
-        url: "/api/Auth/Login",
-        method: "POST",
-        data: JSON.stringify({ email: email, password: password }),
-        contentType: "application/json",
-        cache: false,
-        success: function(response) {
+    postJson(
+        "/api/Auth/Login",
+        { email: email, password: password },
+        function (response) {
             window.location.href = "/home";
         },
-        error: function(msg) {
-            showError(msg.message);
-        }
-    });
+        showError
+    );
 });
 
 function showError(error) {
     $("#error-message").text(error);
     $("#error-alert").show();
+}
+
+function postJson(url, data, success, error) {
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        cache: false,
+        success: function (response) {
+            if (response.error) {
+                error(response.error.message);
+                return;
+            }
+            success(response);
+        },
+        error: error
+    });
 }

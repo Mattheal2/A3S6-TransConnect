@@ -146,7 +146,7 @@ namespace TransLib
                     FROM orders
                     WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
                 ) 
-                AND NOT deleted AND user_type = 'EMPLOYEE'
+                AND user_type = 'EMPLOYEE'
                 ORDER BY RAND()
                 LIMIT 1;
             ");
@@ -198,7 +198,7 @@ namespace TransLib
                     FROM orders
                     WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
                 ) 
-                AND NOT deleted AND vehicle_type = @vehicle_type
+                AND vehicle_type = @vehicle_type
                 {(vehicle_type == "truck" ? "AND (vehicle.truck_type = @truck_type)" : "")}
                 ORDER BY RAND()
                 LIMIT 1;

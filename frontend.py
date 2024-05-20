@@ -7,7 +7,7 @@ class StaticFileHandler(http.server.SimpleHTTPRequestHandler):
         # Get the requested file path
         path = self.path.split("?")[0].removesuffix("/")
         
-        path = f"output{path}"
+        path = f"frontend{path}"
 
         # Look for the requested file, or default to index.html if it's a directory
         if os.path.exists(path) and not os.path.isdir(path):

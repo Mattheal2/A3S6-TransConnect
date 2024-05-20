@@ -20,10 +20,10 @@ namespace TransLib.Persons
         public bool show_on_org_chart { get; set; }
 
         public Employee(
-            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, bool deleted,
+            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_date,
             string password_hash, string position, float salary, long hire_date, string license_type,
             int supervisor_id, bool show_on_org_chart) :
-            base(id_employee, first_name, last_name, phone, email, address, city, birth_date, deleted, password_hash)
+            base(id_employee, first_name, last_name, phone, email, address, city, birth_date, password_hash)
         {
             this.position = position;
             this.salary = salary;
@@ -111,7 +111,6 @@ namespace TransLib.Persons
                     reader.GetString($"{prefix}address"),
                     reader.GetString($"{prefix}city"),
                     reader.GetInt64($"{prefix}birth_date"),
-                    reader.GetBoolean($"{prefix}deleted"),
                     reader.GetString($"{prefix}password_hash"),
                     reader.GetString($"{prefix}position"),
                     reader.GetFloat($"{prefix}salary"),
@@ -142,7 +141,7 @@ namespace TransLib.Persons
 
         public static async Task<List<Employee>> list_employees(AppConfig cfg, string order_field, string order_dir)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted ORDER BY {order_field} {order_dir};");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' ORDER BY {order_field} {order_dir};");
             using (DbDataReader reader = await cfg.query(cmd))
             {
                 return await from_reader_multiple(reader);
@@ -150,34 +149,16 @@ namespace TransLib.Persons
         }
 
         /// <summary>
-        /// Deletes the object from the database by deleting all informations excepted primary key. 
-        /// Keep track of the user is necessary while orders may be still linked to it.
+        /// Move all subordinates to the supervisor of this employee.
         /// </summary>
         /// <param name="cfg"></param>
         /// <returns></returns>
-        public override async Task delete(AppConfig cfg)
-        {
-            // Move all subordinates to supervisor
-            await move_all_subordinates_to_supervisor(cfg);
-            MySqlCommand cmd = new MySqlCommand(@"
-                UPDATE person
-                SET 
-                    deleted = true, first_name = '', last_name = '', phone = '', email = '', address = '', city = '', birth_date = 0,
-                    position = '', salary = 0, hire_date = 0, license_type = '', supervisor_id = 0, show_on_org_chart = false
-                WHERE user_id = @user_id;");
-            cmd.Parameters.AddWithValue("@user_id", user_id);
-            await cfg.query(cmd);
-
-            
-            this.deleted = true;
-        }
-
         private async Task move_all_subordinates_to_supervisor(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
                 UPDATE person
                 SET supervisor_id = @supervisor_id
-                WHERE supervisor_id = @user_id AND user_type = 'EMPLOYEE' AND NOT deleted;");
+                WHERE supervisor_id = @user_id AND user_type = 'EMPLOYEE';");
             cmd.Parameters.AddWithValue("@supervisor_id", supervisor_id);
             cmd.Parameters.AddWithValue("@user_id", user_id);
             await cfg.query(cmd);
@@ -185,7 +166,7 @@ namespace TransLib.Persons
 
         public static async Task<MultiNodeTree<Employee>> get_org_chart(AppConfig cfg)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted AND show_on_org_chart;");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE';");
             List<Employee> employees;
             using (DbDataReader reader = await cfg.query(cmd))
                 employees =  await from_reader_multiple(reader);
@@ -197,7 +178,7 @@ namespace TransLib.Persons
 
         public static async Task<Employee> get_employee_by_id(AppConfig cfg, int id)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND user_type = 'EMPLOYEE' AND NOT deleted;");
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND user_type = 'EMPLOYEE';");
             cmd.Parameters.AddWithValue("@user_id", id);
             DbDataReader reader = await cfg.query(cmd);
             Employee? employee = await from_reader(reader);

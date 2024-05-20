@@ -27,7 +27,7 @@ public class ClientsController : ControllerBase
         if (!auth.is_employee()) return auth.get_unauthorized_error<Client>();
 
         Client new_client = new Client(
-            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_date, false, null, 0
+            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_date, null, 0
         );
 
         string? error = new_client.validate();
