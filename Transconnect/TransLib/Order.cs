@@ -90,6 +90,10 @@ namespace TransLib
             this.price_per_km = price_per_km;
         }
 
+        /// <summary>
+        /// Creates the order in the database.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
         public async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
@@ -110,6 +114,10 @@ namespace TransLib
             order_id = (int)cmd.LastInsertedId;
         }
 
+        /// <summary>
+        /// Deletes the order from the database.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
         public async Task delete(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
@@ -121,6 +129,10 @@ namespace TransLib
             await cfg.execute(cmd);
         }
 
+        /// <summary>
+        /// Validates everything is ok.
+        /// </summary>
+        /// <returns></returns>
         public string? validate()
         {
             if (this.driver_id == null)
@@ -224,12 +236,21 @@ namespace TransLib
             }
         }
 
+        /// <summary>
+        /// Calculates the arrival time.
+        /// </summary>
+        /// <returns></returns>
         public long calculate_arrival_time()
         {
             return departure_time + 3600; //by default 1 hour ¯\_(ツ)_/¯
             //return departure_time + route.get_duration();
         }
 
+        /// <summary>
+        /// Calculates the price of the order.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public int calculate_price()
         {
             throw new NotImplementedException();
@@ -248,11 +269,23 @@ namespace TransLib
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Estimates the price of an order between 2 cities.
+        /// </summary>
+        /// <param name="departure_city">The departure city.</param>
+        /// <param name="arrival_city">The arrival city.</param>
+        /// <returns></returns>
         public async static Task<int> estimate_price(string departure_city, string arrival_city)
         {
             return (int)(await calculate_distance(departure_city, arrival_city) * DEFAULT_PRICE_PER_KM);
         }
 
+        /// <summary>
+        /// Casts an Order from open reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
         protected static Order cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             return new Order(
@@ -269,6 +302,12 @@ namespace TransLib
             );
         }
 
+        /// <summary>
+        /// Returns an Order from a reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
         public async static Task<Order?> from_reader(DbDataReader reader, string prefix = "")
         {
             using (reader)
@@ -279,6 +318,12 @@ namespace TransLib
             }
         }
 
+        /// <summary>
+        /// Returns an Order list from a reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
         public async static Task<List<Order>> from_reader_multiple(DbDataReader reader, string prefix = "")
         {
             List<Order> orders = new List<Order>();
@@ -292,7 +337,13 @@ namespace TransLib
             return orders;
         }
 
-        public static async Task<Order?> get_order(AppConfig cfg, int order_id)
+        /// <summary>
+        /// Gets an order by user_id
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="order_id">The order identifier.</param>
+        /// <returns></returns>
+        public static async Task<Order?> get_order_by_user_id(AppConfig cfg, int order_id)
         {
             MySqlCommand cmd = new MySqlCommand(@"
                 SELECT * FROM orders
@@ -304,6 +355,16 @@ namespace TransLib
             return await from_reader(reader);
         }
 
+        /// <summary>
+        /// Returns all the orders according to all filters.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="filter">The filter.</param>
+        /// <param name="limit">The limit.</param>
+        /// <param name="offset">The offset.</param>
+        /// <param name="order_field">The order field.</param>
+        /// <param name="order_dir">The order dir.</param>
+        /// <returns></returns>
         public static async Task<List<Order>> list_orders(AppConfig cfg, string filter = "", int limit = 20, int offset = 0, string order_field = "departure_time", string order_dir = "DESC")
         {
             MySqlCommand cmd = new MySqlCommand(@$"
@@ -322,7 +383,13 @@ namespace TransLib
             DbDataReader reader = await cfg.query(cmd);
             return await from_reader_multiple(reader);
         }
-        
+
+        /// <summary>
+        /// Returns all the orders of a client.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="client_id">The client identifier.</param>
+        /// <returns></returns>
         public static async Task<List<Order>> list_orders_by_client_id(AppConfig cfg, int client_id)
         {
                MySqlCommand cmd = new MySqlCommand(@"
@@ -335,6 +402,13 @@ namespace TransLib
             return await from_reader_multiple(reader);
         }
 
+        /// <summary>
+        /// Generic function to update a field.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
         public async Task update_field<T>(AppConfig cfg, string field, T value)
         {
             MySqlCommand cmd = new MySqlCommand(@$"
@@ -348,6 +422,11 @@ namespace TransLib
 
         }
 
+        /// <summary>
+        /// Sets the departure time and updates the arrival time.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="departure_time">The departure time.</param>
         public async Task set_departure_time(AppConfig cfg, long departure_time)
         {
             await update_field(cfg, "departure_time", departure_time);
@@ -357,6 +436,11 @@ namespace TransLib
             await update_field(cfg, "arrival_time", arrival_time);
         }
 
+        /// <summary>
+        /// Sets the departure city and updates the arrival time.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="departure_city">The departure city.</param>
         public async Task set_departure_city(AppConfig cfg, string departure_city)
         {
             await update_field(cfg, "departure_city", departure_city);
@@ -366,6 +450,11 @@ namespace TransLib
             await update_field(cfg, "arrival_time", arrival_time);
         }
 
+        /// <summary>
+        /// Sets the arrival city and updates the arrival time.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="arrival_city">The arrival city.</param>
         public async Task set_arrival_city(AppConfig cfg, string arrival_city)
         {
             await update_field(cfg, "arrival_city", arrival_city);
@@ -375,7 +464,10 @@ namespace TransLib
             await update_field(cfg, "arrival_time", arrival_time);
         }
 
-        //checks some things and updates the status if necessary
+        /// <summary>
+        /// checks some things and updates the status if necessary
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public void update_status()
         {
             throw new NotImplementedException();

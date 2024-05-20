@@ -10,8 +10,15 @@ using System.Data.Common;
 
 namespace TransLib.Miscellaneous
 {
+
     public static class Other
     {
+        /// <summary>
+        /// Returns a random employee, in order to fire him/her.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">No employees found</exception>
         public static async Task<Employee> fire_wheel(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"

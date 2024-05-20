@@ -63,6 +63,13 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
+        /// <summary>
+        /// Casts a Truck from open reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">invalid vehicle_type</exception>
         public static new Truck cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}vehicle_type") == "TRUCK")
@@ -78,12 +85,22 @@ namespace TransLib.Vehicles
             else throw new Exception("invalid vehicle_type");
         }
 
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="volume">The volume.</param>
         public async Task set_volume(AppConfig cfg, int volume)
         {
             await update_field(cfg, "volume", volume);
             this.volume = volume;
         }
 
+        /// <summary>
+        /// Sets the type of the truck.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="truck_type">Type of the truck.</param>
         public async Task set_truck_type(AppConfig cfg, string truck_type)
         {
             await update_field(cfg, "truck_type", truck_type);

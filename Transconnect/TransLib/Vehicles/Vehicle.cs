@@ -68,6 +68,13 @@ namespace TransLib.Vehicles
             }
         }
 
+        /// <summary>
+        /// Casts any kind of Vehicle from open reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">invalid user_type</exception>
         public static Vehicle cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             switch (reader.GetString($"{prefix}vehicle_type"))
@@ -83,6 +90,13 @@ namespace TransLib.Vehicles
             }
         }
 
+        /// <summary>
+        /// Generic method to update a field in the database
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
         protected async Task update_field<T>(AppConfig cfg, string field, T value)
         {
             MySqlCommand cmd = new MySqlCommand(@$"
@@ -95,12 +109,22 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
+        /// <summary>
+        /// Sets the brand.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="brand">The brand.</param>
         public async Task set_brand(AppConfig cfg, string brand)
         {
             await update_field(cfg, "brand", brand);
             this.brand = brand;
         }
 
+        /// <summary>
+        /// Sets the model.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="model">The model.</param>
         public async Task set_model(AppConfig cfg, string model)
         {
             await update_field(cfg, "model", model);
@@ -155,6 +179,12 @@ namespace TransLib.Vehicles
                 return await from_reader_multiple(reader);
         }
 
+        /// <summary>
+        /// Gets a vehicle by license plate.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="license_plate">The license plate.</param>
+        /// <returns></returns>
         public static async Task<Vehicle?> get_vehicle_by_license_plate(AppConfig cfg, string license_plate)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicle WHERE license_plate = @license_plate");
@@ -164,6 +194,12 @@ namespace TransLib.Vehicles
             return await from_reader(reader);
         }
 
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return $"{license_plate} {brand} {model}";

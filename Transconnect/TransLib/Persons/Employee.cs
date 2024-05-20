@@ -33,6 +33,11 @@ namespace TransLib.Persons
             this.show_on_org_chart = show_on_org_chart;
         }
 
+        /// <summary>
+        /// Creates the object in the database.
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
         public override async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(
@@ -98,6 +103,13 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
+        /// Casts a person from an open reader.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static new Employee cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}user_type") == "EMPLOYEE")
@@ -124,12 +136,10 @@ namespace TransLib.Persons
             else throw new Exception("invalid user_type");
         }
 
-
-        public DateTime[] get_schedule()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Validates everything ok
+        /// </summary>
+        /// <returns></returns>
         public string? validate()
         {
             long current_time = DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -140,6 +150,13 @@ namespace TransLib.Persons
             return null;
         }
 
+        /// <summary>
+        /// Lists the employees.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="order_field">The order field.</param>
+        /// <param name="order_dir">The order dir.</param>
+        /// <returns></returns>
         public static async Task<List<Employee>> list_employees(AppConfig cfg, string order_field, string order_dir)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted ORDER BY {order_field} {order_dir};");
@@ -172,6 +189,10 @@ namespace TransLib.Persons
             this.deleted = true;
         }
 
+        /// <summary>
+        /// Moves all subordinates to supervisor.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
         private async Task move_all_subordinates_to_supervisor(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
@@ -183,6 +204,11 @@ namespace TransLib.Persons
             await cfg.query(cmd);
         }
 
+        /// <summary>
+        /// Gets the org chart.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <returns></returns>
         public static async Task<MultiNodeTree<Employee>> get_org_chart(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE' AND NOT deleted AND show_on_org_chart;");
@@ -195,6 +221,13 @@ namespace TransLib.Persons
             return tree;
         }
 
+        /// <summary>
+        /// Gets the employee by identifier.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">Employee not found</exception>
         public static async Task<Employee> get_employee_by_id(AppConfig cfg, int id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND user_type = 'EMPLOYEE' AND NOT deleted;");

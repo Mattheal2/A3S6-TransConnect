@@ -61,6 +61,13 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
+        /// <summary>
+        /// Casts a Van from open reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">invalid vehicle_type</exception>
         public static new Van cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}vehicle_type") == "VAN")
@@ -75,6 +82,11 @@ namespace TransLib.Vehicles
             else throw new Exception("invalid vehicle_type");
         }
 
+        /// <summary>
+        /// Sets the usage.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="usage">The usage.</param>
         public async Task set_usage(AppConfig cfg, string usage)
         {
             await update_field(cfg, "usage", usage);

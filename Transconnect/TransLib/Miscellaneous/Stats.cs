@@ -19,6 +19,13 @@ namespace TransLib.Miscellaneous
             public string last_name;
             public int count;
         }
+
+        /// <summary>
+        /// Returns the number of deliveries made by each driver.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">No driver found</exception>
         public async static Task<List<DeliveriesByDriverResponse>> deliveries_by_driver(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
@@ -50,6 +57,13 @@ namespace TransLib.Miscellaneous
             return result;
         }
 
+        /// <summary>
+        /// Returns the deliveries between the specified time frame.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="end">The end.</param>
+        /// <returns></returns>
         public async static Task<List<Order>> deliveries_between(AppConfig cfg, long start, long end)
         {
             MySqlCommand cmd = new MySqlCommand(@"
@@ -65,6 +79,12 @@ namespace TransLib.Miscellaneous
 
         }
 
+        /// <summary>
+        /// Returns the average total spent by a client.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">No client found</exception>
         public async static Task<int> average_total_spent(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"SELECT AVG(person.total_spent) AS average_client_account

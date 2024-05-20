@@ -19,6 +19,10 @@ namespace TransLib.Persons
             this.total_spent = total_spent;
         }
 
+        /// <summary>
+        /// Creates the specified client in the database.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
         public override async Task create(AppConfig cfg) {
             MySqlCommand cmd = new MySqlCommand(
                 @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date) 
@@ -39,6 +43,12 @@ namespace TransLib.Persons
 
         public override string user_type { get; } = "CLIENT";
 
+        /// <summary>
+        /// Returns a Client from a reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
         public async static new Task<Client?> from_reader(DbDataReader reader, string prefix = "")
         {
             using (reader)
@@ -70,6 +80,13 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
+        /// Casts Client from open reader.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">invalid user_type</exception>
         public static new Client cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}user_type") == "CLIENT") {
@@ -89,6 +106,10 @@ namespace TransLib.Persons
             } else throw new Exception("invalid user_type");
         }
 
+        /// <summary>
+        /// Validates everything is ok
+        /// </summary>
+        /// <returns></returns>
         public string? validate()
         {
             long current_time = DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -98,6 +119,15 @@ namespace TransLib.Persons
             return null;
         }
 
+        /// <summary>
+        /// Lists the clients.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="order_field">The order field.</param>
+        /// <param name="order_dir">The order dir.</param>
+        /// <param name="limit">The limit.</param>
+        /// <param name="offset">The offset.</param>
+        /// <returns></returns>
         public static async Task<List<Client>> list_clients(AppConfig cfg, string order_field, string order_dir, int limit, int offset)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'CLIENT' AND NOT deleted ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");

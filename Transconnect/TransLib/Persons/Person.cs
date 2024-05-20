@@ -78,6 +78,13 @@ namespace TransLib.Persons
             }
         }
 
+        /// <summary>
+        /// Casts a person from an open reader.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="prefix"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         protected static Person cast_from_open_reader(DbDataReader reader, string prefix = "") {
             switch (reader.GetString($"{prefix}user_type"))
             {
@@ -95,6 +102,11 @@ namespace TransLib.Persons
             return $"{first_name} {last_name}";
         }
 
+        /// <summary>
+        /// Updates the password.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="password">The password.</param>
         public async Task update_password(AppConfig cfg, string password)
         {
             this.password_hash = PasswordAuthenticator.hash_password(password);
@@ -104,12 +116,24 @@ namespace TransLib.Persons
             await cfg.query(cmd);
         }
 
+
+        /// <summary>
+        /// Checks the password.
+        /// </summary>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public bool check_password(string password)
         {
             if (this.password_hash == null) return false;
             return PasswordAuthenticator.verify_password(password, this.password_hash);
         }
 
+        /// <summary>
+        /// Gets the person by email.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="email">The email.</param>
+        /// <returns></returns>
         public static async Task<Person?> get_person_by_email(AppConfig cfg, string email)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE email = @email AND NOT deleted");
@@ -118,6 +142,12 @@ namespace TransLib.Persons
             return await from_reader(reader);
         }
 
+        /// <summary>
+        /// Gets the person by identifier.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="user_id">The user identifier.</param>
+        /// <returns></returns>
         public static async Task<Person?> get_person_by_id(AppConfig cfg, int user_id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM person WHERE user_id = @user_id AND NOT deleted");
@@ -126,6 +156,13 @@ namespace TransLib.Persons
             return await from_reader(reader);
         }
 
+        /// <summary>
+        /// Generic function to update a field.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
         protected async Task update_field<T>(AppConfig cfg, string field, T value)
         {
             if (value == null) return;
@@ -135,42 +172,78 @@ namespace TransLib.Persons
             await cfg.query(cmd);
         }
 
+        /// <summary>
+        /// Sets the first name.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="first_name">The first name.</param>
         public async Task set_first_name(AppConfig cfg, string first_name)
         {
             await update_field(cfg, "first_name", first_name);
             this.first_name = first_name;
         }
 
+        /// <summary>
+        /// Sets the last name.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="last_name">The last name.</param>
         public async Task set_last_name(AppConfig cfg, string last_name)
         {
             await update_field(cfg, "last_name", last_name);
             this.last_name = last_name;
         }
 
+        /// <summary>
+        /// Sets the phone.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="phone">The phone.</param>
         public async Task set_phone(AppConfig cfg, string phone)
         {
             await update_field(cfg, "phone", phone);
             this.phone = phone;
         }
 
+        /// <summary>
+        /// Sets the email.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="email">The email.</param>
         public async Task set_email(AppConfig cfg, string email)
         {
             await update_field(cfg, "email", email);
             this.email = email;
         }
 
+        /// <summary>
+        /// Sets the address.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="address">The address.</param>
         public async Task set_address(AppConfig cfg, string address)
         {
             await update_field(cfg, "address", address);
             this.address = address;
         }
 
+        /// <summary>
+        /// Sets the city.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="city">The city.</param>
         public async Task set_city(AppConfig cfg, string city)
         {
             await update_field(cfg, "city", city);
             this.city = city;
         }
 
+
+        /// <summary>
+        /// Sets the birth date.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="birth_date">The birth date.</param>
         public async Task set_birth_date(AppConfig cfg, long birth_date)
         {
             await update_field(cfg, "birth_date", birth_date);
