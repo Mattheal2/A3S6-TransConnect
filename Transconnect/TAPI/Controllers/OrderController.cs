@@ -57,9 +57,9 @@ namespace TAPI.Controllers
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
 
             List<Order> orders = await Order.list_orders(Config.cfg, filter, limit, offset, order_field, order_dir);
-            string? error = null;
+            string error = "";
             orders.ForEach(order => error += order.validate());
-            if (error != null) return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
+            if (error != "") return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
 
             return ApiResponse<Order[]>.Success(orders.ToArray());
         }
