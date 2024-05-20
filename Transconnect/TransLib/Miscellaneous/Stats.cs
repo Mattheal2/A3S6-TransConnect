@@ -55,7 +55,7 @@ namespace TransLib.Miscellaneous
             MySqlCommand cmd = new MySqlCommand(@"
                 SELECT *
                 FROM orders
-                WHERE departure_date >= @departure_time AND departure_date <= @arrival_time;
+                WHERE departure_time >= @departure_time AND departure_time <= @arrival_time;
             ");
             cmd.Parameters.AddWithValue("@departure_time", start);
             cmd.Parameters.AddWithValue("@arrival_time", end);

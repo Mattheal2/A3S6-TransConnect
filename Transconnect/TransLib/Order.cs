@@ -93,14 +93,14 @@ namespace TransLib
         public async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
-                INSERT INTO orders (client_id, driver_id, vehicle_id, departure_date, arrival_date, departure_city, arrival_city, price_per_km, order_status)
-                VALUES(@client_id, @driver_id, @vehicle_id, @departure_date, @arrival_date, @departure_city, @arrival_city, @price_per_km, @order_status);
+                INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, order_status)
+                VALUES(@client_id, @driver_id, @vehicle_id, @departure_time, @arrival_time, @departure_city, @arrival_city, @price_per_km, @order_status);
             ");
             cmd.Parameters.AddWithValue("@client_id", client_id);
             cmd.Parameters.AddWithValue("@driver_id", driver_id);
             cmd.Parameters.AddWithValue("@vehicle_id", vehicle_license_plate);
-            cmd.Parameters.AddWithValue("@departure_date", departure_time);
-            cmd.Parameters.AddWithValue("@arrival_date", calculate_arrival_time());
+            cmd.Parameters.AddWithValue("@departure_time", departure_time);
+            cmd.Parameters.AddWithValue("@arrival_time", calculate_arrival_time());
             cmd.Parameters.AddWithValue("@departure_city", departure_city);
             cmd.Parameters.AddWithValue("@arrival_city", arrival_city);
             cmd.Parameters.AddWithValue("@price_per_km", price_per_km);
@@ -144,7 +144,7 @@ namespace TransLib
                 WHERE user_id not IN (
                     SELECT driver_id 
                     FROM orders
-                    WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
+                    WHERE (@departure_time < arrival_time AND @arrival_time > departure_time)
                 ) 
                 AND NOT deleted AND user_type = 'EMPLOYEE'
                 ORDER BY RAND()
@@ -196,7 +196,7 @@ namespace TransLib
                 WHERE license_plate not IN (
                     SELECT vehicle_id 
                     FROM orders
-                    WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
+                    WHERE (@departure_time < arrival_time AND @arrival_time > departure_time)
                 ) 
                 AND NOT deleted AND vehicle_type = @vehicle_type
                 {(vehicle_type == "truck" ? "AND (vehicle.truck_type = @truck_type)" : "")}
@@ -260,8 +260,8 @@ namespace TransLib
                 reader.GetInt32("client_id"),
                 reader.GetString("vehicle_id"),
                 reader.GetInt32("driver_id"),
-                reader.GetInt64("departure_date"),
-                reader.GetInt64("arrival_date"),
+                reader.GetInt64("departure_time"),
+                reader.GetInt64("arrival_time"),
                 reader.GetString("departure_city"),
                 reader.GetString("arrival_city"),
                 reader.GetInt32("price_per_km"),
@@ -350,11 +350,11 @@ namespace TransLib
 
         public async Task set_departure_time(AppConfig cfg, long departure_time)
         {
-            await update_field(cfg, "departure_date", departure_time);
+            await update_field(cfg, "departure_time", departure_time);
             this.departure_time = departure_time;
 
             this.arrival_time = calculate_arrival_time();
-            await update_field(cfg, "arrival_date", arrival_time);
+            await update_field(cfg, "arrival_time", arrival_time);
         }
 
         public async Task set_departure_city(AppConfig cfg, string departure_city)
@@ -363,7 +363,7 @@ namespace TransLib
             this.departure_city = departure_city;
 
             this.arrival_time = calculate_arrival_time();
-            await update_field(cfg, "arrival_date", arrival_time);
+            await update_field(cfg, "arrival_time", arrival_time);
         }
 
         public async Task set_arrival_city(AppConfig cfg, string arrival_city)
@@ -372,7 +372,7 @@ namespace TransLib
             this.arrival_city = arrival_city;
 
             this.arrival_time = calculate_arrival_time();
-            await update_field(cfg, "arrival_date", arrival_time);
+            await update_field(cfg, "arrival_time", arrival_time);
         }
 
         //checks some things and updates the status if necessary
