@@ -166,10 +166,9 @@ namespace TransLib.Persons
         }
 
         /// <summary>
-        /// Move all subordinates to the supervisor of this employee.
+        /// Moves all subordinates to supervisor.
         /// </summary>
-        /// <param name="cfg"></param>
-        /// <returns></returns>
+        /// <param name="cfg">The CFG.</param>
         private async Task move_all_subordinates_to_supervisor(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
