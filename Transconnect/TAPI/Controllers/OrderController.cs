@@ -44,7 +44,7 @@ namespace TAPI.Controllers
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
 
-            Order? order = await Order.get_order_by_user_id(Config.cfg, order_id);
+            Order? order = await Order.get_order_by_order_id(Config.cfg, order_id);
             if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
 
             return ApiResponse<Order>.Success(order);
@@ -78,7 +78,7 @@ namespace TAPI.Controllers
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
             
-            Order? order = await Order.get_order_by_user_id(Config.cfg, body.order_id);
+            Order? order = await Order.get_order_by_order_id(Config.cfg, body.order_id);
             if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
 
             if (body.departure_time != null) 
@@ -100,7 +100,7 @@ namespace TAPI.Controllers
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
 
-            Order? order = await Order.get_order_by_user_id(Config.cfg, order_id);
+            Order? order = await Order.get_order_by_order_id(Config.cfg, order_id);
             if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
 
             await order.delete(Config.cfg);
