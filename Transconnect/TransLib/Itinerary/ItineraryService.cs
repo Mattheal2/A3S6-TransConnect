@@ -82,26 +82,32 @@ public class ItineraryService {
     /// <param name="current"></param>
     /// <returns></returns>
     private Itinerary ReconstructPath(Dictionary<int, int> cameFrom, RouteNode current) {
-        List<int> path_nodes = new();
-        RouteNode node = current;
-        int total_distance = 0;
-        int total_time = 0;
-        int total_cost = 0;
-        while (cameFrom.ContainsKey(node.id)) {
-            path_nodes.Append(node.id);
-            node = nodes[cameFrom[node.id]];
-            total_distance += node.links.First(link => link.id == node.id).distance;
-            total_time += node.links.First(link => link.id == node.id).GetRoadTime();
-            total_cost += node.links.First(link => link.id == node.id).GetRoadCost();
+        List<RouteNode> path = new();
+        path.Append(current);
+        while (cameFrom.ContainsKey(current.id)) {
+            current = nodes[cameFrom[current.id]];
+            path.Append(current);
         }
-        // Reverse the list
-        int[] reversed = new int[nodes.Length];
-        for (int i = nodes.Length - 1; i >= 0; i--) {
-            reversed.Append(path_nodes.Get(i));
+        
+        int[] reversed = new int[path.Length];
+        for (int i = 0; i < path.Length; i++) {
+            reversed[i] = path.Get(path.Length - i - 1).id;
         }
-        return new Itinerary(reversed, total_distance, total_cost, total_time);
-    }
 
+        // Calculate the distance, cost and time of the route
+        int distance = 0;
+        int cost = 0;
+        int time = 0;
+
+        for (int i = 0; i < reversed.Length - 1; i++) {
+            RouteNode.NodeLink link = nodes[reversed[i]].links.First(link => link.id == reversed[i + 1]);
+            distance += link.distance;
+            cost += link.GetRoadCost();
+            time += link.GetRoadTime();
+        }
+        return new Itinerary(reversed, distance, cost, time);
+    }
+    
     #region Heuristics
     /// <summary>
     /// Heuristic function for the A* algorithm.

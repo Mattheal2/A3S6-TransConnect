@@ -48,3 +48,9 @@ function postJson(url, data, success, error) {
         error: error
     });
 }
+
+$("#email-input, #password-input").keyup(function () {
+    $("#error-alert").hide();
+});
+
+$("#email-input").focus();

@@ -61,6 +61,8 @@ public class RouteNode {
         /// </summary>
         /// <returns></returns>
         public int GetRoadTime() {
+            // distance en m
+
             int speed = 80; // km/h
             switch (kind) {
                 case "highway":
@@ -70,7 +72,9 @@ public class RouteNode {
                     break;
             }
 
-            return (int)(distance / speed * 3600);
+            float speed_m_s = speed / 3.6f;
+
+            return (int)(distance / speed_m_s);
         }
     }
 

@@ -51,7 +51,7 @@ class StaticFileHandler(http.server.SimpleHTTPRequestHandler):
 if __name__ == '__main__':
     class CustomHandler(StaticFileHandler):
         def do_GET(self):
-            if self.path.startswith('/api/'):
+            if self.path.startswith('/api/') or self.path.startswith('/swagger'):
                 return self.do_API()
             else:
                 return super().do_GET()

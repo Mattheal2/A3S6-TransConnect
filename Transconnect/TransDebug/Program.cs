@@ -8,15 +8,15 @@ using TransLib.Itinerary;
 using TransLib.Persons;
 using System.Runtime.CompilerServices;
 using System.IO;
-
+using TransLib.Auth;
 namespace TransDebug
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string json = File.ReadAllText("./Routing_maps/nodes.json");
-            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
+            string json = File.ReadAllText("../Routing_maps/nodes.json");
+            ItineraryService service = ItineraryService.Load("../Routing_maps/nodes.json");
             RouteNode[] nodes = service.GetNodes();
 
             string dep = "Colombes";
@@ -35,8 +35,13 @@ namespace TransDebug
             if (start != null && end != null)
             {
                 Itinerary route = service.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
-                Console.WriteLine(route.time + " minutes");
+                Console.WriteLine("Route from " + start.city.name + " to " + end.city.name + ":");
+                Console.WriteLine(route.cost + " euros");
+                Console.WriteLine(route.distance + " mètres");
+                Console.WriteLine((float)(route.time)/60f + " minutes");
             }
+
+            Console.WriteLine(TransLib.Auth.PasswordAuthenticator.hash_password("password"));
         }
     }
 }
