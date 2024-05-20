@@ -14,20 +14,20 @@ namespace TransLib.Persons
     {
         public string position { get; }
         public float salary { get; } // in cents
-        public long hire_date { get; }
+        public long hire_time { get; }
         public string license_type { get; }
         public int supervisor_id { get; set; }
         public bool show_on_org_chart { get; set; }
 
         public Employee(
-            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_date,
-            string password_hash, string position, float salary, long hire_date, string license_type,
+            int id_employee, string first_name, string last_name, string phone, string email, string address, string city, long birth_time,
+            string password_hash, string position, float salary, long hire_time, string license_type,
             int supervisor_id, bool show_on_org_chart) :
-            base(id_employee, first_name, last_name, phone, email, address, city, birth_date, password_hash)
+            base(id_employee, first_name, last_name, phone, email, address, city, birth_time, password_hash)
         {
             this.position = position;
             this.salary = salary;
-            this.hire_date = hire_date;
+            this.hire_time = hire_time;
             this.license_type = license_type;
             this.supervisor_id = supervisor_id;
             this.show_on_org_chart = show_on_org_chart;
@@ -41,8 +41,8 @@ namespace TransLib.Persons
         public override async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(
-                @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date, position, salary, hire_date, license_type, password_hash, supervisor_id, show_on_org_chart)
-                VALUES(@user_type, @first_name, @last_name, @phone, @email, @address, @city, @birth_date, @position, @salary, @hire_date, @license_type, @password_hash, @supervisor_id, @show_on_org_chart);");
+                @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, position, salary, hire_time, license_type, password_hash, supervisor_id, show_on_org_chart)
+                VALUES(@user_type, @first_name, @last_name, @phone, @email, @address, @city, @birth_time, @position, @salary, @hire_time, @license_type, @password_hash, @supervisor_id, @show_on_org_chart);");
             
             cmd.Parameters.AddWithValue("@user_type", user_type);
             cmd.Parameters.AddWithValue("@first_name", first_name);
@@ -51,10 +51,10 @@ namespace TransLib.Persons
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@address", address);
             cmd.Parameters.AddWithValue("@city", city);
-            cmd.Parameters.AddWithValue("@birth_date", birth_date);
+            cmd.Parameters.AddWithValue("@birth_time", birth_time);
             cmd.Parameters.AddWithValue("@position", position);
             cmd.Parameters.AddWithValue("@salary", salary);
-            cmd.Parameters.AddWithValue("@hire_date", hire_date);
+            cmd.Parameters.AddWithValue("@hire_time", hire_time);
             cmd.Parameters.AddWithValue("@license_type", license_type);
             cmd.Parameters.AddWithValue("@password_hash", password_hash);
             cmd.Parameters.AddWithValue("@supervisor_id", supervisor_id);
@@ -122,11 +122,11 @@ namespace TransLib.Persons
                     reader.GetString($"{prefix}email"),
                     reader.GetString($"{prefix}address"),
                     reader.GetString($"{prefix}city"),
-                    reader.GetInt64($"{prefix}birth_date"),
+                    reader.GetInt64($"{prefix}birth_time"),
                     reader.GetString($"{prefix}password_hash"),
                     reader.GetString($"{prefix}position"),
                     reader.GetFloat($"{prefix}salary"),
-                    reader.GetInt64($"{prefix}hire_date"),
+                    reader.GetInt64($"{prefix}hire_time"),
                     reader.GetString($"{prefix}license_type"),
                     reader.GetInt32($"{prefix}supervisor_id"),
                     reader.GetBoolean($"{prefix}show_on_org_chart")
@@ -143,7 +143,7 @@ namespace TransLib.Persons
         {
             long current_time = DateTimeOffset.Now.ToUnixTimeSeconds();
 
-            if (current_time < birth_date) return "Birth date is in the future";
+            if (current_time < birth_time) return "Birth date is in the future";
             if (salary < 0) return "Salary cannot be negative";
 
             return null;

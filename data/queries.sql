@@ -17,7 +17,7 @@ SELECT user_id FROM person
 WHERE user_id not IN (
 SELECT driver_id 
 FROM orders
-WHERE (@departure_time < arrival_date AND @arrival_time > departure_date)
+WHERE (@departure_time < arrival_time AND @arrival_time > departure_time)
 ) AND user_type = 'EMPLOYEE'
 ORDER BY RAND()
 LIMIT 1;
@@ -38,4 +38,4 @@ LIMIT 1;
 
 SELECT *
 FROM orders
-WHERE departure_date >= @departure_time AND departure_date <= @arrival_time;
+WHERE departure_time >= @departure_time AND departure_time <= @arrival_time;

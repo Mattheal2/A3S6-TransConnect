@@ -18,7 +18,7 @@ public class EmployeesController : ControllerBase
         public required string email { get; set; }
         public required string address { get; set; }
         public required string city { get; set; }
-        public required int birth_date { get; set; }
+        public required int birth_time { get; set; }
         public required string password { get; set; }
         public required string position { get; set; }
         public required int salary { get; set; } // in cents
@@ -33,10 +33,10 @@ public class EmployeesController : ControllerBase
         if (!auth.is_employee()) return auth.get_unauthorized_error<Employee>();
         
         string password_hash =  PasswordAuthenticator.hash_password(body.password);
-        long hire_date = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        long hire_time = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         Employee new_employee = new Employee(
             -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city,
-            body.birth_date, password_hash, body.position, body.salary, hire_date, body.license_type,
+            body.birth_time, password_hash, body.position, body.salary, hire_time, body.license_type,
             body.supervisor_id, body.show_on_org_chart
         );
 
@@ -87,7 +87,7 @@ public class EmployeesController : ControllerBase
         public string? email { get; set; }
         public string? address { get; set; }
         public string? city { get; set; }
-        public long? birth_date { get; set; }
+        public long? birth_time { get; set; }
     }
 
     [HttpPost(Name = "UpdateEmployee")]
@@ -113,8 +113,8 @@ public class EmployeesController : ControllerBase
             await employee.set_address(Config.cfg, body.address);
         if (body.city != null)
             await employee.set_city(Config.cfg, body.city);
-        if (body.birth_date != null)
-            await employee.set_birth_date(Config.cfg, (long)body.birth_date);
+        if (body.birth_time != null)
+            await employee.set_birth_time(Config.cfg, (long)body.birth_time);
 
         return ApiResponse<Employee>.Success(employee);
     }

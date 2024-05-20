@@ -152,7 +152,7 @@ namespace TransLib
         public async Task find_driver(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
-                SELECT user_id, hire_date FROM person
+                SELECT user_id, hire_time FROM person
                 WHERE user_id not IN (
                     SELECT driver_id 
                     FROM orders
@@ -174,8 +174,8 @@ namespace TransLib
                     this.driver_id = reader.GetInt32("user_id");
                     this.status = OrderStatus.WaitingPayment;
 
-                    long hire_date = reader.GetInt64("hire_date");
-                    this.price_per_km = 80 + ((DateTime.Now.Year - DateTimeOffset.FromUnixTimeSeconds(hire_date).DateTime.Year) / 4) * 10; //Price per km increases by 10 every 4 years
+                    long hire_time = reader.GetInt64("hire_time");
+                    this.price_per_km = 80 + ((DateTime.Now.Year - DateTimeOffset.FromUnixTimeSeconds(hire_time).DateTime.Year) / 4) * 10; //Price per km increases by 10 every 4 years
                 }
                 else
                 {

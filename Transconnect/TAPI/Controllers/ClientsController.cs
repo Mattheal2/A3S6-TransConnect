@@ -18,7 +18,7 @@ public class ClientsController : ControllerBase
         public required string email { get; set; }
         public required string address { get; set; }
         public required string city { get; set; }
-        public required int birth_date { get; set; }
+        public required int birth_time { get; set; }
     }
 
     [HttpPost(Name = "CreateClient")]
@@ -27,7 +27,7 @@ public class ClientsController : ControllerBase
         if (!auth.is_employee()) return auth.get_unauthorized_error<Client>();
 
         Client new_client = new Client(
-            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_date, null, 0
+            -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city, body.birth_time, null, 0
         );
 
         string? error = new_client.validate();
@@ -85,7 +85,7 @@ public class ClientsController : ControllerBase
         public string? email { get; set; }
         public string? address { get; set; }
         public string? city { get; set; }
-        public long? birth_date { get; set; }
+        public long? birth_time { get; set; }
     }
 
     [HttpPost(Name = "UpdateClient")]
@@ -111,8 +111,8 @@ public class ClientsController : ControllerBase
             await client.set_address(Config.cfg, body.address);
         if (body.city != null)
             await client.set_city(Config.cfg, body.city);
-        if (body.birth_date != null)
-            await client.set_birth_date(Config.cfg, (long)body.birth_date);
+        if (body.birth_time != null)
+            await client.set_birth_time(Config.cfg, (long)body.birth_time);
 
         return ApiResponse<Client>.Success(client);
     }

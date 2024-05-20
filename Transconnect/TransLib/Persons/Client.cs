@@ -13,8 +13,8 @@ namespace TransLib.Persons
     {
         public int total_spent { get; private set; } // in cents
         public Client(
-            int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash, int total_spent
-        ) : base(user_id, first_name, last_name, phone, email, address, city, birth_date, password_hash)
+            int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_time, string? password_hash, int total_spent
+        ) : base(user_id, first_name, last_name, phone, email, address, city, birth_time, password_hash)
         {
             this.total_spent = total_spent;
         }
@@ -25,8 +25,8 @@ namespace TransLib.Persons
         /// <param name="cfg">The CFG.</param>
         public override async Task create(AppConfig cfg) {
             MySqlCommand cmd = new MySqlCommand(
-                @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_date) 
-                VALUES(@user_type, @first_name, @last_name, @phone, @email, @address, @city, @birth_date);");
+                @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time) 
+                VALUES(@user_type, @first_name, @last_name, @phone, @email, @address, @city, @birth_time);");
             
             cmd.Parameters.AddWithValue("@user_type", user_type);
             cmd.Parameters.AddWithValue("@first_name", first_name);
@@ -35,7 +35,7 @@ namespace TransLib.Persons
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@address", address);
             cmd.Parameters.AddWithValue("@city", city);
-            cmd.Parameters.AddWithValue("@birth_date", birth_date);
+            cmd.Parameters.AddWithValue("@birth_time", birth_time);
 
             await cfg.execute(cmd);
             user_id = (int)cmd.LastInsertedId;
@@ -98,7 +98,7 @@ namespace TransLib.Persons
                     reader.GetString($"{prefix}email"),
                     reader.GetString($"{prefix}address"),
                     reader.GetString($"{prefix}city"),
-                    reader.GetInt64($"{prefix}birth_date"),
+                    reader.GetInt64($"{prefix}birth_time"),
                     reader.GetString($"{prefix}password_hash"),
                     reader.GetInt32($"{prefix}total_spent")
                 );
@@ -113,7 +113,7 @@ namespace TransLib.Persons
         {
             long current_time = DateTimeOffset.Now.ToUnixTimeSeconds();
 
-            if (current_time < birth_date) return "Birth date is in the future";
+            if (current_time < birth_time) return "Birth date is in the future";
 
             return null;
         }

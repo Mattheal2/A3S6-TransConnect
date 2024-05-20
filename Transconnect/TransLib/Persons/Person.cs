@@ -15,14 +15,14 @@ namespace TransLib.Persons
         public string email { get; set; }
         public string address { get; set; }
         public string city { get; set; }
-        public long birth_date { get; set; }
+        public long birth_time { get; set; }
         
 
         // ! internal fields, never to be sent over the wire !
         [JsonIgnore]
         protected string? password_hash { get; private set; }
 
-        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_date, string? password_hash)
+        public Person(int user_id, string first_name, string last_name, string phone, string email, string address, string city, long birth_time, string? password_hash)
         {
             this.user_id = user_id;
             this.first_name = first_name;
@@ -31,7 +31,7 @@ namespace TransLib.Persons
             this.email = email;
             this.address = address;
             this.city = city;
-            this.birth_date = birth_date;
+            this.birth_time = birth_time;
             this.password_hash = password_hash;
         }
 
@@ -240,11 +240,11 @@ namespace TransLib.Persons
         /// Sets the birth date.
         /// </summary>
         /// <param name="cfg">The CFG.</param>
-        /// <param name="birth_date">The birth date.</param>
-        public async Task set_birth_date(AppConfig cfg, long birth_date)
+        /// <param name="birth_time">The birth date.</param>
+        public async Task set_birth_time(AppConfig cfg, long birth_time)
         {
-            await update_field(cfg, "birth_date", birth_date);
-            this.birth_date = birth_date;
+            await update_field(cfg, "birth_time", birth_time);
+            this.birth_time = birth_time;
         }
 
         /// <summary>
