@@ -7,7 +7,7 @@ class StaticFileHandler(http.server.SimpleHTTPRequestHandler):
         # Get the requested file path
         path = self.path.split("?")[0].removesuffix("/")
         
-        path = f"frontend{path}"
+        path = f"public{path}"
 
         # Look for the requested file, or default to index.html if it's a directory
         if os.path.exists(path) and not os.path.isdir(path):
@@ -47,8 +47,30 @@ class StaticFileHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(response.content)
         self.wfile.flush()
+
+
+def register_watchdog():
+    # on any changes on the templates folder, re-render the public folder
+    import watchdog.events
+    import watchdog.observers
+    import render_v2
+
+    class Handler(watchdog.events.PatternMatchingEventHandler):
+        def on_any_event(self, event):
+            print(f"Detected change in {event.src_path}")
+            try:
+                render_v2.render_simple_pages()
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+        
+    observer = watchdog.observers.Observer()
+    observer.schedule(Handler(), "templates/", recursive=True)
+    observer.start()
+
     
 if __name__ == '__main__':
+    register_watchdog()
     class CustomHandler(StaticFileHandler):
         def do_GET(self):
             if self.path.startswith('/api/') or self.path.startswith('/swagger'):

@@ -1,0 +1,30 @@
+[
+    {
+        "src": "index.html",
+        "dest": "index.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/index.js"
+        ],
+        "title": "Accueil",
+        "icon": "home"
+    },
+    {
+        "src": "employees.html",
+        "dest": "employees.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/employees.js"
+        ],
+        "title": "Employés",
+        "icon": "people"
+    },
+    {
+        "src": "sign-in.html",
+        "dest": "sign-in.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/sign-in.js"
+        ]
+    }
+]

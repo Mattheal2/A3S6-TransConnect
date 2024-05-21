@@ -1,0 +1,35 @@
+<footer class="footer footer-transparent d-print-none">
+    <div class="container-xl">
+      <div class="row text-center align-items-center flex-row">
+        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+          <ul class="list-inline list-inline-dots mb-0">
+            <li class="list-inline-item">
+              Copyright &copy; 2024
+              <a href="https://www.linkedin.com/in/mattheobodin/" class="link-secondary">Matthéo Bodin</a>
+              &
+              <a href="https://www.linkedin.com/in/remi-langdorph/" class="link-secondary">Rémi Langdorph</a>.
+              Ce projet est réalisé dans le cadre du cours de C# Avancé de l'ESILV.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</div>
+<!-- Tabler Core -->
+<script src="./dist/js/tabler.min.js?1684106062" defer></script>
+<script src="./dist/js/demo.min.js?1684106062" defer></script>
+<script src="./dist/libs/jquery/jquery.min.js"></script>
+
+<!-- Libs JS -->
+{% for script in inline_scripts %}
+<script>
+    {{ script|safe }}
+</script>
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script|safe }}"></script>
+{% endfor %}
+</body>
+</html>
