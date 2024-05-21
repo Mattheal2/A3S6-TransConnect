@@ -56,8 +56,8 @@ namespace TransLib
             this.departure_city = departure_city;
             this.arrival_city = arrival_city;
 
-            this.arrival_time = calculate_arrival_time();
             this.route = build_itinerary();
+            this.arrival_time = calculate_arrival_time();
             this.total_price = calculate_price();
 
         }

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Datatypes;
 using System;
 using System.Collections.Generic;
 using System.Data;

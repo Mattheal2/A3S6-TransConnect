@@ -11,7 +11,8 @@ namespace TAPI.Controllers;
 [ApiController]
 public class EmployeesController : ControllerBase
 {
-    public struct CreateEmployeeRequest {
+    public struct CreateEmployeeRequest
+    {
         public required string first_name { get; set; }
         public required string last_name { get; set; }
         public required string phone { get; set; }
@@ -28,7 +29,8 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost(Name = "CreateEmployee")]
-    public async Task<ApiResponse<Employee>> CreateEmployee([FromBody] CreateEmployeeRequest body) {
+    public async Task<ApiResponse<Employee>> CreateEmployee([FromBody] CreateEmployeeRequest body)
+    {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<Employee>();
 
@@ -54,11 +56,13 @@ public class EmployeesController : ControllerBase
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<Employee[]>();
 
-        if (order_field != "city" && order_field != "last_name" && order_field != "total_spent") {
+        if (order_field != "city" && order_field != "last_name" && order_field != "total_spent")
+        {
             return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_field", "Invalid order field");
         }
 
-        if (order_dir != "ASC" && order_dir != "DESC") {
+        if (order_dir != "ASC" && order_dir != "DESC")
+        {
             return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_dir", "Invalid order direction");
         }
 
@@ -79,7 +83,8 @@ public class EmployeesController : ControllerBase
     }
 
 
-    public struct UpdateEmployeeRequest {
+    public struct UpdateEmployeeRequest
+    {
         public required int user_id { get; set; }
         public string? first_name { get; set; }
         public string? last_name { get; set; }
@@ -88,6 +93,12 @@ public class EmployeesController : ControllerBase
         public string? address { get; set; }
         public string? city { get; set; }
         public long? birth_time { get; set; }
+        public string? position { get; set; }
+        public int? salary { get; set; }
+        public long? hire_time { get; set; }
+        public string? license_type { get; set; }
+        public int? supervisor_id { get; set; }
+        public bool? show_on_org_chart { get; set; }
     }
 
     [HttpPost(Name = "UpdateEmployee")]
@@ -115,6 +126,18 @@ public class EmployeesController : ControllerBase
             await employee.set_city(Config.cfg, body.city);
         if (body.birth_time != null)
             await employee.set_birth_time(Config.cfg, (long)body.birth_time);
+        if (body.position != null)
+            await employee.set_position(Config.cfg, body.position);
+        if (body.salary != null)
+            await employee.set_salary(Config.cfg, (int)body.salary);
+        if (body.hire_time != null)
+            await employee.set_hire_time(Config.cfg, (long)body.hire_time);
+        if (body.license_type != null)
+            await employee.set_license_type(Config.cfg, body.license_type);
+        if (body.supervisor_id != null)
+            await employee.set_supervisor_id(Config.cfg, (int)body.supervisor_id);
+        if (body.show_on_org_chart != null)
+            await employee.set_show_on_org_chart(Config.cfg, (bool)body.show_on_org_chart);
 
         return ApiResponse<Employee>.Success(employee);
     }

@@ -12,10 +12,10 @@ namespace TransLib.Persons
 {
     public class Employee : Person
     {
-        public string position { get; }
-        public float salary { get; } // in cents
-        public long hire_time { get; }
-        public string license_type { get; }
+        public string position { get; set; }
+        public float salary { get; set; } // in cents
+        public long hire_time { get; set; }
+        public string license_type { get; set; }
         public int supervisor_id { get; set; }
         public bool show_on_org_chart { get; set; }
 
@@ -252,6 +252,52 @@ namespace TransLib.Persons
                 }
             }
             return result;
+        }
+
+
+        //password_hash VARCHAR(100),
+        //-- Employee's specific
+        //position VARCHAR(50),
+        //salary FLOAT,
+        //hire_time LONG,
+        //license_type VARCHAR(30),
+        //supervisor_id INT,
+        //show_on_org_chart BOOLEAN,
+
+        public async Task set_position(AppConfig cfg, string position)
+        {
+            await update_field(cfg, "position", position);
+            this.position = position;
+        }
+
+        public async Task set_salary(AppConfig cfg, float salary)
+        {
+            await update_field(cfg, "salary", salary);
+            this.salary = salary;
+        }
+
+        public async Task set_hire_time(AppConfig cfg, long hire_time)
+        {
+            await update_field(cfg, "hire_time", hire_time);
+            this.hire_time = hire_time;
+        }
+
+        public async Task set_license_type(AppConfig cfg, string license_type)
+        {
+            await update_field(cfg, "license_type", license_type);
+            this.license_type = license_type;
+        }
+
+        public async Task set_supervisor_id(AppConfig cfg, int supervisor_id)
+        {
+            await update_field(cfg, "supervisor_id", supervisor_id);
+            this.supervisor_id = supervisor_id;
+        }
+
+        public async Task set_show_on_org_chart(AppConfig cfg, bool show_on_org_chart)
+        {
+            await update_field(cfg, "show_on_org_chart", show_on_org_chart);
+            this.show_on_org_chart = show_on_org_chart;
         }
     }
 }
