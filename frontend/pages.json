@@ -29,5 +29,19 @@
             "/app/common.js",
             "/app/sign-in.js"
         ]
+    },
+    {
+        "src": "organigram.html",
+        "dest": "organigram.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/organigram.js"
+        ],
+        "scripts": [
+            "/dist/js/raphael.js",
+            "/dist/js/threant.js"
+        ],
+        "title": "Organigramme",
+        "icon": "binary-tree"
     }
 ]

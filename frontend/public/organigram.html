@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Accueil - TransConnect</title>
+    <title>Organigramme - TransConnect</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
@@ -71,7 +71,7 @@
                     <div class="container-xl">
                         <ul class="navbar-nav">
                             
-                            <li class="nav-item active">
+                            <li class="nav-item ">
                                 <a class="nav-link" href="/">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             
-                            <li class="nav-item ">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="/organigram">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -131,7 +131,7 @@
                                 TransConnect - Espace Employé
                             </div>
                             <h2 class="page-title">
-                                Accueil
+                                Organigramme
                             </h2>
                         </div>
 
@@ -147,44 +147,7 @@
 <!-- Page body -->
 <div class="page-body">
   <div class="container-xl">
-    <div class="row row-deck row-cards">
-
-      <div class="col-sm-6 col-lg-3">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex align-items-center">
-              <div class="subheader">Revenue</div>
-              <div class="ms-auto lh-1">
-                <div class="dropdown">
-                  <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Last 7 days</a>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item active" href="#">Last 7 days</a>
-                    <a class="dropdown-item" href="#">Last 30 days</a>
-                    <a class="dropdown-item" href="#">Last 3 months</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex align-items-baseline">
-              <div class="h1 mb-0 me-2">$4,300</div>
-              <div class="me-auto">
-                <span class="text-green d-inline-flex align-items-center lh-1">
-                  8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M3 17l6 -6l4 4l8 -8" />
-                    <path d="M14 7l7 0l0 7" />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div id="chart-revenue-bg" class="chart-sm"></div>
-        </div>
-      </div>
-    </div>
+    <div class="chart" id="chart" style="height: 1000px; overflow: scroll;">
   </div>
 </div>
 <footer class="footer footer-transparent d-print-none">
@@ -212,6 +175,10 @@
 <script src="./dist/libs/jquery/jquery.min.js"></script>
 
 <!-- Libs JS -->
+
+<script src="/dist/js/raphael.js?_=ec5950d3"></script>
+
+<script src="/dist/js/threant.js?_=5c037169"></script>
 
 
 
@@ -293,7 +260,70 @@ $(document).ready(function() {
 </script>
 
 <script>
+    $(document).ready(function() {
+    $.ajax({
+        url: '/api/Employees/GetEmployeesOrgChart',
+        method: 'POST',
+        cache: false,
+        success: function(response) {
+            if (response.error) {
+                alert(response.error.message);
+                return;
+            }
+
+            renderOrganigram(response.data);
+        },
+        error: alert
+    });
+});
+
+function recGenStruct(employee) {
+    const val = {
+        text: {
+            name: employee.value.first_name + ' ' + employee.value.last_name,
+            title: employee.value.position
+        },
+        children: []
+    }
+
+    if (!employee.value.show_on_org_chart) {
+        val.text.name = 'Employé masqué';
+    }
+
+    for (const child of employee.children) {
+        const processed = recGenStruct(child);
+        if (processed) val.children.push(processed);
+    }
+
+    return val;
+}
+
+function renderOrganigram(data) {
+    const children = [];
+    for (const child of data) {
+        const processed = recGenStruct(child);
+        if (processed) children.push(processed);
+    }
+
+    var config = {
+        chart: {
+            container: "#chart"
+        },
+        
+        nodeStructure: {
+            text: { 
+                name: "Transconnect"
+            },
+            children: children
+        }
+    };
+
+    console.log(config);
+
     
+    new Treant( config );
+}
+
 </script>
 
 </body>
