@@ -96,6 +96,17 @@ public class MultiNodeTree<T> {
             }
             return nodes;
         }
+
+        public Node? FindNode(int id) {
+            if (this.id == id) return this;
+            Node? found = null;
+            children.ForEach(child => {
+                if (found == null) {
+                    found = child.FindNode(id);
+                }
+            });
+            return found;
+        }
         #endregion
     }
     
@@ -138,7 +149,7 @@ public class MultiNodeTree<T> {
         // They are all in the root list
         for (int i = 0; i < root.Length; i++) {
             Node node = root.Get(i);
-            if (node.parent_id == id) {
+            if (node.parent_id == id && node.id != id) {
                 new_node.AddChild(node);
                 root.RemoveAt(i);
                 i--;
@@ -152,25 +163,13 @@ public class MultiNodeTree<T> {
     /// <param name="id"></param>
     /// <returns>Node or null if not found.</returns>
     public Node? FindNode(int id) {
-        List<Node> nodes = root;
-        Node? node_found = null;
-        while (node_found == null) {
-            nodes.ForEach(node => {
-                if (node.id == id) {
-                    node_found = node;
-                }
-            });
-
-            if (node_found == null) {
-                List<Node> new_nodes = new List<Node>();
-                nodes.ForEach(node => {
-                    new_nodes.Extend(node.children);
-                });
-                nodes = new_nodes;
+        Node? found = null;
+        root.ForEach(node => {
+            if (found == null) {
+                found = node.FindNode(id);
             }
-        }
-
-        return node_found;
+        });
+        return found;
     }
 
     /// <summary>

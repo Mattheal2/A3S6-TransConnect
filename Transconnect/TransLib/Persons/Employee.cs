@@ -190,7 +190,7 @@ namespace TransLib.Persons
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'EMPLOYEE';");
             List<Employee> employees;
             using (DbDataReader reader = await cfg.query(cmd))
-                employees =  await from_reader_multiple(reader);
+                employees = await from_reader_multiple(reader);
             
             MultiNodeTree<Employee> tree = new MultiNodeTree<Employee>();
             employees.ForEach(e => tree.AddNode(e, e.user_id, e.supervisor_id));

@@ -71,7 +71,7 @@
                         <ul class="navbar-nav">
                             
                             <li class="nav-item active">
-                                <a class="nav-link" href="index">
+                                <a class="nav-link" href="/">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         
@@ -89,7 +89,7 @@
                             </li>
                             
                             <li class="nav-item ">
-                                <a class="nav-link" href="employees">
+                                <a class="nav-link" href="/employees">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         
@@ -120,6 +120,13 @@
                                 Accueil
                             </h2>
                         </div>
+
+                        <!-- Page title actions -->
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list" id = "navbar-actions-list">
+                              
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -198,7 +205,13 @@
 const AUTH = function() {
     const user_id = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
 
-    const employee = JSON.parse(localStorage.getItem('employee_data'));
+    const stored = JSON.parse(localStorage.getItem('employee_data'));
+    let employee = null;
+    // 5 minutes cache on employee data
+    // if (stored !== null && stored.timestamp > new Date().getTime() - 300 * 1000) {
+    //     employee = stored.data;
+    // }
+
     return {
         isAuthenticated: user_id !== undefined,
         user_id: user_id,
@@ -220,7 +233,10 @@ $(document).ready(function() {
 
         AUTH.employee = response.data;
 
-        localStorage.setItem('employee_data', JSON.stringify(AUTH.employee));
+        localStorage.setItem('employee_data', JSON.stringify({
+            data: AUTH.employee,
+            timestamp: new Date().getTime()
+        }));
 
         onReady();
     }

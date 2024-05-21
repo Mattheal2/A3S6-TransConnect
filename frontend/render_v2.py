@@ -53,7 +53,15 @@ def minify(s):
     return minify_html.minify(s, minify_css=True, minify_js=True, do_not_minify_doctype=True,  keep_comments=False)
 
 def get_navbar(pages, current_page):
-    return [{'title': page['title'], 'link': page['dest'].removesuffix('.html'), 'active': page['dest'] == current_page, 'icon_svg': get_icon_svg(page['icon'])} for page in pages if 'title' in page and 'icon' in page]
+    return [
+        {
+            'title': page['title'],
+            'link': '/' + page['dest'].removesuffix('index.html').removesuffix('.html'),
+            'active': page['dest'] == current_page,
+            'icon_svg': get_icon_svg(page['icon'])
+        } 
+        for page in pages 
+        if 'title' in page and 'icon' in page]
 
 def get_icon_svg(name):
     return open(f"icons/{name}.svg", 'rb').read().decode('utf-8')

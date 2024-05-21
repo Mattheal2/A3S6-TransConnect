@@ -16,6 +16,9 @@
             "/app/common.js",
             "/app/employees.js"
         ],
+        "scripts": [
+            "/dist/libs/list.js/dist/list.min.js"
+        ],
         "title": "Employés",
         "icon": "people"
     },

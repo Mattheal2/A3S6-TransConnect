@@ -3,7 +3,13 @@
 const AUTH = function() {
     const user_id = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
 
-    const employee = JSON.parse(localStorage.getItem('employee_data'));
+    const stored = JSON.parse(localStorage.getItem('employee_data'));
+    let employee = null;
+    // 5 minutes cache on employee data
+    // if (stored !== null && stored.timestamp > new Date().getTime() - 300 * 1000) {
+    //     employee = stored.data;
+    // }
+
     return {
         isAuthenticated: user_id !== undefined,
         user_id: user_id,
@@ -25,7 +31,10 @@ $(document).ready(function() {
 
         AUTH.employee = response.data;
 
-        localStorage.setItem('employee_data', JSON.stringify(AUTH.employee));
+        localStorage.setItem('employee_data', JSON.stringify({
+            data: AUTH.employee,
+            timestamp: new Date().getTime()
+        }));
 
         onReady();
     }

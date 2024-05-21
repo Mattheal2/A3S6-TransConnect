@@ -49,21 +49,21 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet(Name = "GetEmployees")]
-    public async Task<ApiResponse<List<Employee>>> GetEmployees([FromQuery] string order_field, [FromQuery] string order_dir)
+    public async Task<ApiResponse<Employee[]>> GetEmployees([FromQuery] string order_field, [FromQuery] string order_dir)
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_employee()) return auth.get_unauthorized_error<List<Employee>>();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<Employee[]>();
         
         if (order_field != "city" && order_field != "last_name" && order_field != "total_spent") {
-            return ApiResponse<List<Employee>>.Failure(400, "employee.invalid_order_field", "Invalid order field");
+            return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_field", "Invalid order field");
         }
 
         if (order_dir != "ASC" && order_dir != "DESC") {
-            return ApiResponse<List<Employee>>.Failure(400, "employee.invalid_order_dir", "Invalid order direction");
+            return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_dir", "Invalid order direction");
         }
         
         var employees = await Employee.list_employees(Config.cfg, order_field, order_dir);
-        return ApiResponse<List<Employee>>.Success(employees);
+        return ApiResponse<Employee[]>.Success(employees.ToArray());
     }
 
     [HttpGet(Name = "GetEmployeeById")]
@@ -139,8 +139,8 @@ public class EmployeesController : ControllerBase
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<MultiNodeTree<Employee>.JsonNode[]>();
-
         MultiNodeTree<Employee> employees = await Employee.get_org_chart(Config.cfg);
+
         return ApiResponse<MultiNodeTree<Employee>.JsonNode[]>.Success(employees.ToJson());
     }
 }
