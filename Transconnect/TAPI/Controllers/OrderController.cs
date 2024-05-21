@@ -8,7 +8,8 @@ using TransLib.Vehicles;
 namespace TAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class OrderController : Controller
+    [ApiController]
+    public class OrderController : ControllerBase
     {
         public struct CreateOrderRequest
         {

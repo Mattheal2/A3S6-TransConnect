@@ -4,13 +4,13 @@ using TransLib;
 using TransLib.Vehicles;
 using TAPI.Auth;
 using TransLib.Persons;
-using System.Runtime.CompilerServices;
 
 namespace TAPI.Controllers
 {
 
     [Route("api/[controller]/[action]")]
-    public class VehicleController : Controller
+    [ApiController]
+    public class VehicleController : ControllerBase
     {
         private class VehicleResponse
         {
@@ -110,11 +110,11 @@ namespace TAPI.Controllers
 
         public struct UpdateVehicleRequest
         {
-            public string type { get; set; }
-            public string license_plate { get; set; }
-            public string? brand { get; set; }
-            public string? model { get; set; }
-            public int? price { get; set; }
+            public required string type { get; set; }
+            public required string license_plate { get; set; }
+            public required string brand { get; set; }
+            public required string model { get; set; }
+            public required int price { get; set; }
 
             public int? seats { get; set; } // for Car
             public string? usage { get; set; } // for Van
@@ -123,7 +123,7 @@ namespace TAPI.Controllers
         }
 
         [HttpPost(Name = "UpdateVehicle")]
-        public async Task<ApiResponse<VehicleResp>> UpdateVehicle([FromBody] CreateVehicleRequest body)
+        public async Task<ApiResponse<VehicleResp>> UpdateVehicle([FromBody] UpdateVehicleRequest body)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
@@ -151,7 +151,7 @@ namespace TAPI.Controllers
         }
 
         [HttpPost(Name = "DeleteVehicle")]
-        public async Task<ApiResponse<VehicleResp>> DeleteVehicle([FromBody] string license_plate)
+        public async Task<ApiResponse<VehicleResp>> DeleteVehicle([FromQuery] string license_plate)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
