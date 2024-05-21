@@ -47,8 +47,6 @@ namespace TransLib.Vehicles
             await cfg.execute(cmd);
         }
 
-        
-
         /// <summary>
         /// Casts a Car from open reader.
         /// </summary>
