@@ -52,52 +52,60 @@ namespace TAPI.Controllers
 
         }
 
+        /// <summary>
+        /// A temporary struct to represent any instance of vehicle as JSON without losing child class information.
+        /// </summary>
+        public class VehicleResp {
+            public Van? van { get; set; }
+            public Car? car { get; set; }
+            public Truck? truck { get; set; }
+
+            public VehicleResp(Vehicle vehicle) {
+                switch (vehicle.vehicle_type)
+                {
+                    case "CAR":
+                        car = (Car)vehicle;
+                        break;
+                    case "VAN":
+                        van = (Van)vehicle;
+                        break;
+                    case "TRUCK":
+                        truck = (Truck)vehicle;
+                        break;
+                }
+            }
+        }
+
         [HttpPost(Name = "AddVehicle")]
-        public async Task<ApiResponse<Vehicle>> AddVehicle([FromBody] CreateVehicleRequest body)
+        public async Task<ApiResponse<VehicleResp>> AddVehicle([FromBody] CreateVehicleRequest body)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Vehicle>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
 
             Vehicle new_vehicle = VehicleResponse.Parse(body);
             await new_vehicle.create(Config.cfg);
 
-            return ApiResponse<Vehicle>.Success(new_vehicle);
+            return ApiResponse<VehicleResp>.Success(new VehicleResp(new_vehicle));
         }
 
         [HttpGet(Name = "ListVehicles")]
-        public async Task<ApiResponse<Vehicle[]>> ListVehicles([FromQuery] string filter = "", [FromQuery] int limit = 20, [FromQuery] int offset = 0, [FromQuery] string order_field = "brand", [FromQuery] string order_dir = "ASC")
+        public async Task<ApiResponse<VehicleResp[]>> ListVehicles([FromQuery] string order_field = "brand", [FromQuery] string order_dir = "ASC")
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Vehicle[]>();
-
-            filter = filter.ToLower();
-            if (filter != null && filter != "" && filter != "car" && filter != "van" && filter != "truck")
-            {
-                return ApiResponse<Vehicle[]>.Failure(400, "vehicle.invalid_filter", "Invalid filter");
-            }
+            if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp[]>();
 
             if (order_field != "brand" && order_field != "model" && order_field != "price")
             {
-                return ApiResponse<Vehicle[]>.Failure(400, "vehicle.invalid_order_field", "Invalid order field");
+                return ApiResponse<VehicleResp[]>.Failure(400, "vehicle.invalid_order_field", "Invalid order field");
             }
 
             if (order_dir != "ASC" && order_dir != "DESC")
             {
-                return ApiResponse<Vehicle[]>.Failure(400, "vehicle.invalid_order_dir", "Invalid order direction");
+                return ApiResponse<VehicleResp[]>.Failure(400, "vehicle.invalid_order_dir", "Invalid order direction");
             }
 
-            if (limit < 0)
-            {
-                return ApiResponse<Vehicle[]>.Failure(400, "vehicle.invalid_limit", "Invalid limit");
-            }
-
-            if (offset < 0)
-            {
-                return ApiResponse<Vehicle[]>.Failure(400, "vehicle.invalid_offset", "Invalid offset");
-            }
-
-            var vehicles = (await Vehicle.list_vehicles(Config.cfg, "", order_field, order_dir, limit, offset)).ToArray();
-            return ApiResponse<Vehicle[]>.Success(vehicles);
+            var vehicles = (await Vehicle.list_vehicles(Config.cfg, "", order_field, order_dir)).Map(vehicle => new VehicleResp(vehicle)).ToArray();
+            return ApiResponse<VehicleResp[]>.Success(vehicles);
         }
 
         public struct UpdateVehicleRequest
@@ -115,14 +123,14 @@ namespace TAPI.Controllers
         }
 
         [HttpPost(Name = "UpdateVehicle")]
-        public async Task<ApiResponse<Vehicle>> UpdateVehicle([FromBody] CreateVehicleRequest body)
+        public async Task<ApiResponse<VehicleResp>> UpdateVehicle([FromBody] CreateVehicleRequest body)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Vehicle>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
 
             Vehicle? vehicle = await Vehicle.get_vehicle_by_license_plate(Config.cfg, body.license_plate);
 
-            if (vehicle == null) return ApiResponse<Vehicle>.Failure(404, "vehicle.not_found", "Vehicle not found");
+            if (vehicle == null) return ApiResponse<VehicleResp>.Failure(404, "vehicle.not_found", "Vehicle not found");
 
             if (body.brand != null)
                 await vehicle.set_brand(Config.cfg, body.brand);
@@ -139,32 +147,32 @@ namespace TAPI.Controllers
             if (body.type.ToLower() == "truck" && body.truck_type != null && vehicle is Truck)
                 await ((Truck)vehicle).set_truck_type(Config.cfg, body.truck_type);
 
-            return ApiResponse<Vehicle>.Success(vehicle);
+            return ApiResponse<VehicleResp>.Success(new VehicleResp(vehicle));
         }
 
         [HttpPost(Name = "DeleteVehicle")]
-        public async Task<ApiResponse<Vehicle>> DeleteVehicle([FromBody] string license_plate)
+        public async Task<ApiResponse<VehicleResp>> DeleteVehicle([FromBody] string license_plate)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Vehicle>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
 
             Vehicle? vehicle = await Vehicle.get_vehicle_by_license_plate(Config.cfg, license_plate);
-            if (vehicle == null) return ApiResponse<Vehicle>.Failure(404, "vehicle.not_found", "Vehicle not found");
+            if (vehicle == null) return ApiResponse<VehicleResp>.Failure(404, "vehicle.not_found", "Vehicle not found");
 
             await vehicle.delete(Config.cfg);
-            return ApiResponse<Vehicle>.Success(vehicle);
+            return ApiResponse<VehicleResp>.Success(new VehicleResp(vehicle));
         }
 
         [HttpGet(Name = "GetVehicleByLicensePlate")]
-        public async Task<ApiResponse<Vehicle>> GetVehicleByLicensePlate([FromQuery] string license_plate)
+        public async Task<ApiResponse<VehicleResp>> GetVehicleByLicensePlate([FromQuery] string license_plate)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Vehicle>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<VehicleResp>();
 
             Vehicle? vehicle = await Vehicle.get_vehicle_by_license_plate(Config.cfg, license_plate);
-            if (vehicle == null) return ApiResponse<Vehicle>.Failure(404, "vehicle.not_found", "Vehicle not found");
+            if (vehicle == null) return ApiResponse<VehicleResp>.Failure(404, "vehicle.not_found", "Vehicle not found");
 
-            return ApiResponse<Vehicle>.Success(vehicle);
+            return ApiResponse<VehicleResp>.Success(new VehicleResp(vehicle));
         }
 
     }

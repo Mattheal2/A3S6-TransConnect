@@ -12,6 +12,9 @@ using TransLib.Persons;
 
 namespace TransLib.Vehicles
 {
+    /// <summary>
+    /// A vehicle.
+    /// </summary>
     public abstract class Vehicle
     {
         public string license_plate { get; set; }
