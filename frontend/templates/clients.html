@@ -14,14 +14,12 @@
                 <th><button class="table-sort" data-sort="sort-ville">Ville</button></th>
                 <th><button class="table-sort" data-sort="sort-email">Email</button></th>
                 <th><button class="table-sort" data-sort="sort-tel">Téléphone</button></th>
-                <th><button class="table-sort" data-sort="sort-date">Date d'embauche</button></th>
-                <th><button class="table-sort" data-sort="sort-salaire">Salaire</button></th>
-                <th><button class="table-sort" data-sort="sort-licensetype">Type de permis</button></th>
+                <th><button class="table-sort" data-sort="sort-totalspent">Total dépensé</button></th>
                 <th><button class="table-sort" data-sort="sort-birthdate">Date de naissance</button></th>
                 <th></th>
               </tr>
             </thead>
-            <tbody class="table-tbody" id="employeestable">
+            <tbody class="table-tbody" id="clientstable">
 
             </tbody>
           </table>
@@ -36,7 +34,7 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h5 class="modal-title">Nouvel Employé</h5>
+          <h5 class="modal-title">Nouveau Client</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -65,7 +63,7 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Email @tmail.com" id="modal-create-email">
+                <input type="text" class="form-control" name="example-text-input" placeholder="Email" id="modal-create-email">
               </div>
             </div>
           </div>
@@ -90,68 +88,12 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Salaire (€)</label>
-                <input type="number" class="form-control" name="example-text-input" placeholder="30000" id="modal-create-salary">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Supérieur</label>
-                <input list="liste-employes" class="form-control" id="modal-create-supervisor"></input>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-create-position">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Afficher sur l'organigrame</label>
-                <input type="checkbox" class="form-check-input" id="modal-create-orgchart">
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Permis</label>
-                <input list="liste-permis" class="form-control" id="modal-create-licensetype"></input>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Mot de passe" id="modal-create-password">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
                 <label class="form-label">Date de naissance</label>
                 <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
                   data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-create-birthdate">
               </div>
-              
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Date de recrutement</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-create-hiredate">
-              </div>
             </div>
           </div>
-
-          
         </div>
         <div class="modal-footer">
           <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
@@ -177,7 +119,7 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h5 class="modal-title">Modifier un employé</h5>
+          <h5 class="modal-title">Modifier un client</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -231,64 +173,9 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Salaire (€)</label>
-                <input type="number" class="form-control" name="example-text-input" placeholder="30000" id="modal-edit-salary">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Supérieur</label>
-                <input list="liste-employes" class="form-control" id="modal-edit-supervisor"></input>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-edit-position">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Afficher sur l'organigrame</label>
-                <input type="checkbox" class="form-check-input" id="modal-edit-orgchart">
-              </div>
-            </div>
-          </div>
-
-          
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Permis</label>
-                <input list="liste-permis" class="form-control" id="modal-edit-licensetype"></input>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Mot de passe" id="modal-edit-password">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
                 <label class="form-label">Date de naissance</label>
                 <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
                   data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-edit-birthdate">
-              </div>
-              
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Date de recrutement</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-edit-hiredate">
               </div>
             </div>
           </div>
@@ -330,8 +217,8 @@
           <path d="M12 17h.01" />
         </svg>
         <h3>Etes vous sûr?</h3>
-        <div class="text-muted">Vous êtes sur le point de licencier <strong id="modal-delete-name"></strong>. Cette
-          action est irréversible.</div>
+        <div class="text-muted">Vous êtes sur le point de supprimer <strong id="modal-delete-name"></strong>. Cette
+          action est irréversible. (Hitman #993 sera envoyé sur site pour s'en charger)</div>
       </div>
       <div class="modal-footer">
         <div class="w-100">
@@ -452,7 +339,7 @@
   <option value='Hyères'></option>
 </datalist>
 
-<datalist id="liste-employes">
+<datalist id="liste-clients">
 
 </datalist>
 

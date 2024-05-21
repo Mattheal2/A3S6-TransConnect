@@ -39,29 +39,22 @@ public class ClientsController : ControllerBase
     }
 
     [HttpGet(Name = "GetClients")]
-    public async Task<ApiResponse<List<Client>>> GetClients([FromQuery] int limit, [FromQuery] int offset, [FromQuery] string order_field, [FromQuery] string order_dir)
+    public async Task<ApiResponse<Client[]>> GetClients([FromQuery] string order_field, [FromQuery] string order_dir)
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_employee()) return auth.get_unauthorized_error<List<Client>>();
+        if (!auth.is_employee()) return auth.get_unauthorized_error<Client[]>();
         
         if (order_field != "city" && order_field != "last_name" && order_field != "total_spent") {
-            return ApiResponse<List<Client>>.Failure(400, "client.invalid_order_field", "Invalid order field");
+            return ApiResponse<Client[]>.Failure(400, "client.invalid_order_field", "Invalid order field");
         }
 
         if (order_dir != "ASC" && order_dir != "DESC") {
-            return ApiResponse<List<Client>>.Failure(400, "client.invalid_order_dir", "Invalid order direction");
+            return ApiResponse<Client[]>.Failure(400, "client.invalid_order_dir", "Invalid order direction");
         }
 
-        if (limit < 0) {
-            return ApiResponse<List<Client>>.Failure(400, "client.invalid_limit", "Invalid limit");
-        }
-
-        if (offset < 0) {
-            return ApiResponse<List<Client>>.Failure(400, "client.invalid_offset", "Invalid offset");
-        }
         
-        var clients = await Client.list_clients(Config.cfg, order_field, order_dir, limit, offset);
-        return ApiResponse<List<Client>>.Success(clients);
+        var clients = await Client.list_clients(Config.cfg, order_field, order_dir);
+        return ApiResponse<Client[]>.Success(clients.ToArray());
     }
 
     [HttpGet(Name = "GetClientById")]

@@ -90,6 +90,9 @@ namespace TransLib.Persons
         public static new Client cast_from_open_reader(DbDataReader reader, string prefix = "")
         {
             if (reader.GetString($"{prefix}user_type") == "CLIENT") {
+                string? pass = null;
+                if (!reader.IsDBNull($"{prefix}password_hash")) pass = reader.GetString($"{prefix}password_hash");
+
                 return new Client(
                     reader.GetInt32($"{prefix}user_id"),
                     reader.GetString($"{prefix}first_name"),
@@ -99,7 +102,7 @@ namespace TransLib.Persons
                     reader.GetString($"{prefix}address"),
                     reader.GetString($"{prefix}city"),
                     reader.GetInt64($"{prefix}birth_time"),
-                    reader.GetString($"{prefix}password_hash"),
+                    pass,
                     reader.GetInt32($"{prefix}total_spent")
                 );
             } else throw new Exception("invalid user_type");
@@ -127,9 +130,9 @@ namespace TransLib.Persons
         /// <param name="limit">The limit.</param>
         /// <param name="offset">The offset.</param>
         /// <returns></returns>
-        public static async Task<List<Client>> list_clients(AppConfig cfg, string order_field, string order_dir, int limit, int offset)
+        public static async Task<List<Client>> list_clients(AppConfig cfg, string order_field, string order_dir)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'CLIENT' ORDER BY {order_field} {order_dir} LIMIT {limit} OFFSET {offset};");
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM person WHERE user_type = 'CLIENT' ORDER BY {order_field} {order_dir};");
             using (DbDataReader reader = await cfg.query(cmd))
             {
                 return await from_reader_multiple(reader);

@@ -43,5 +43,18 @@
         ],
         "title": "Organigramme",
         "icon": "binary-tree"
+    },
+    {
+        "src": "clients.html",
+        "dest": "clients.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/clients.js"
+        ],
+        "scripts": [
+            "/dist/libs/list.js/dist/list.min.js"
+        ],
+        "title": "Clients",
+        "icon": "user-dollar"
     }
 ]
