@@ -56,6 +56,7 @@ CREATE TABLE orders (
     departure_city VARCHAR(40) NOT NULL,
     arrival_city VARCHAR(40) NOT NULL,
     price_per_km INT DEFAULT 80,
+    total_price INT,
     order_status ENUM('Pending', 'InProgress', 'Stuck', 'WaitingPayment', 'Closed') DEFAULT 'Pending',
 	PRIMARY KEY(order_id),
     FOREIGN KEY (client_id) REFERENCES person(user_id),
@@ -75,8 +76,9 @@ INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VA
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
 
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, order_status) VALUES(1, 2, 'EN-789-NL', 1742373192, 1742376792, 'Toulouse', 'Paris', 80, 'InProgress');
-INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, order_status) VALUES(2, 3, 'FT-519-KG', 1742373192, 1742376792, 'Toulouse', 'Paris', 80, 'InProgress');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status) VALUES(1, 2, 'EN-789-NL', 1742373192, 1742376792, 'Colombes', 'Paris', 80, 800, 'InProgress');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status) VALUES(2, 3, 'FT-519-KG', 1742373192, 1742376792, 'Nanterre', 'Noisy-le-Grand', 80, 800, 'InProgress');
+INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status) VALUES(2, 3, 'FT-519-KG', 11742373192, 11742376792, 'Créteil', 'Saint-Denis', 80, 900, 'InProgress');
+
 
 INSERT INTO auth_tokens VALUES('xxx', 1);
-

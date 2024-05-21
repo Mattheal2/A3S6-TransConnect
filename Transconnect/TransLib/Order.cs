@@ -33,13 +33,14 @@ namespace TransLib
         public int client_id { get; set; }
         public string? vehicle_license_plate { get; set; }
         public int? driver_id { get; set; }
-        //public Route route { get; set; }
         public long departure_time { get; set; }
         public long? arrival_time { get; set; }
         public string departure_city { get; set; }
         public string arrival_city { get; set; }
         public OrderStatus status { get; set; }
         public int price_per_km { get; set; }
+        public int total_price { get; set; }
+        public Itinerary.Itinerary? route { get; set; }
 
         /// <summary>
         /// New order constructor
@@ -55,11 +56,9 @@ namespace TransLib
             this.departure_city = departure_city;
             this.arrival_city = arrival_city;
 
-            //Route.RouteType type = vehicle is Truck ? Route.RouteType.Truck : Route.RouteType.Driving;
-            //this.route = new Route(type, departure_city, arrival_city);
-            //route.process_async().Wait();
-
             this.arrival_time = calculate_arrival_time();
+            this.route = build_itinerary();
+            this.total_price = calculate_price();
 
         }
 
@@ -76,7 +75,7 @@ namespace TransLib
         /// <param name="arrival_city"></param>
         /// <param name="price_per_km"></param>
         /// <param name="status"></param>
-        public Order(int order_id, int client_id, string vehicle_license_plate, int? driver_id, long departure_time, long? arrival_time, string departure_city, string arrival_city, int price_per_km, string status)
+        public Order(int order_id, int client_id, string vehicle_license_plate, int? driver_id, long departure_time, long? arrival_time, string departure_city, string arrival_city, int price_per_km, int total_price, string status)
         {
             this.order_id = order_id;
             this.client_id = client_id;
@@ -88,6 +87,10 @@ namespace TransLib
             this.arrival_city = arrival_city;
             this.status = (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
             this.price_per_km = price_per_km;
+            this.total_price = total_price;
+
+            try { this.route = build_itinerary(); }
+            catch (Exception) { this.route = null; }
         }
 
         /// <summary>
@@ -97,18 +100,19 @@ namespace TransLib
         public async Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
-                INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, order_status)
-                VALUES(@client_id, @driver_id, @vehicle_id, @departure_time, @arrival_time, @departure_city, @arrival_city, @price_per_km, @order_status);
+                INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status)
+                VALUES(@client_id, @driver_id, @vehicle_id, @departure_time, @arrival_time, @departure_city, @arrival_city, @price_per_km, @total_price, @order_status);
             ");
             cmd.Parameters.AddWithValue("@client_id", client_id);
             cmd.Parameters.AddWithValue("@driver_id", driver_id);
             cmd.Parameters.AddWithValue("@vehicle_id", vehicle_license_plate);
             cmd.Parameters.AddWithValue("@departure_time", departure_time);
-            cmd.Parameters.AddWithValue("@arrival_time", calculate_arrival_time());
+            cmd.Parameters.AddWithValue("@arrival_time", arrival_time);
             cmd.Parameters.AddWithValue("@departure_city", departure_city);
             cmd.Parameters.AddWithValue("@arrival_city", arrival_city);
             cmd.Parameters.AddWithValue("@price_per_km", price_per_km);
             cmd.Parameters.AddWithValue("@order_status", status.ToString());
+            cmd.Parameters.AddWithValue("@total_price", total_price);
 
             await cfg.execute(cmd);
             order_id = (int)cmd.LastInsertedId;
@@ -139,6 +143,8 @@ namespace TransLib
                 return "No driver available for this order";
             if (this.vehicle_license_plate == null)
                 return "No vehicle available for this order";
+            if (this.route == null)
+                return "No route available for this order";
 
             this.status = OrderStatus.InProgress;
             return null;
@@ -237,13 +243,49 @@ namespace TransLib
         }
 
         /// <summary>
+        /// Builds the itinerary.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">
+        /// departure_city '{departure_city}' not found
+        /// or
+        /// arrival_city '{arrival_city}' not found
+        /// or
+        /// Unknown error ¯\\_(ツ)_/¯
+        /// </exception>
+        public Itinerary.Itinerary build_itinerary()
+        {
+            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
+            RouteNode[] nodes = service.GetNodes();
+
+            RouteNode? start = null;
+            RouteNode? end = null;
+
+            foreach (RouteNode node in nodes)
+            {
+                if (start != null && end != null) break;
+
+                if (node.city != null && node.city.name == departure_city) start = node;
+                if (node.city != null && node.city.name == arrival_city) end = node;
+            }
+            if (start != null && end != null)
+            {
+                return service.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
+            }
+            if (start == null) throw new Exception($"departure_city '{departure_city}' not found");
+            if (end == null) throw new Exception($"arrival_city '{arrival_city}' not found");
+            throw new Exception("Unknown error ¯\\_(ツ)_/¯");
+
+        }
+
+        /// <summary>
         /// Calculates the arrival time.
         /// </summary>
         /// <returns></returns>
         public long calculate_arrival_time()
         {
-            return departure_time + 3600; //by default 1 hour ¯\_(ツ)_/¯
-            //return departure_time + route.get_duration();
+            if(route == null) throw new Exception("No route set.");
+            return departure_time + route.time;
         }
 
         /// <summary>
@@ -253,31 +295,8 @@ namespace TransLib
         /// <exception cref="System.NotImplementedException"></exception>
         public int calculate_price()
         {
-            throw new NotImplementedException();
-            //return (int)(route.get_distance() * this.price_per_km);
-        }
-
-        /// <summary>
-        /// Estimates the distance between two cities without creating an order
-        /// </summary>
-        /// <param name="address1"></param>
-        /// <param name="address2"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async static Task<float> calculate_distance(string address1, string address2)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Estimates the price of an order between 2 cities.
-        /// </summary>
-        /// <param name="departure_city">The departure city.</param>
-        /// <param name="arrival_city">The arrival city.</param>
-        /// <returns></returns>
-        public async static Task<int> estimate_price(string departure_city, string arrival_city)
-        {
-            return (int)(await calculate_distance(departure_city, arrival_city) * DEFAULT_PRICE_PER_KM);
+            if (route == null) throw new Exception("No route set.");
+            return route.distance * price_per_km + route.cost;
         }
 
         /// <summary>
@@ -298,6 +317,7 @@ namespace TransLib
                 reader.GetString("departure_city"),
                 reader.GetString("arrival_city"),
                 reader.GetInt32("price_per_km"),
+                reader.GetInt32("total_price"),
                 reader.GetString("order_status")
             );
         }
@@ -471,6 +491,29 @@ namespace TransLib
         public void update_status()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Estimates the distance between two cities without creating an order
+        /// </summary>
+        /// <param name="address1"></param>
+        /// <param name="address2"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async static Task<float> calculate_distance(string address1, string address2)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Estimates the price of an order between 2 cities.
+        /// </summary>
+        /// <param name="departure_city">The departure city.</param>
+        /// <param name="arrival_city">The arrival city.</param>
+        /// <returns></returns>
+        public async static Task<int> estimate_price(string departure_city, string arrival_city)
+        {
+            return (int)(await calculate_distance(departure_city, arrival_city) * DEFAULT_PRICE_PER_KM);
         }
 
     }

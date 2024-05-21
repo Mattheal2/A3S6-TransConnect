@@ -31,8 +31,8 @@ public class EmployeesController : ControllerBase
     public async Task<ApiResponse<Employee>> CreateEmployee([FromBody] CreateEmployeeRequest body) {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<Employee>();
-        
-        string password_hash =  PasswordAuthenticator.hash_password(body.password);
+
+        string password_hash = PasswordAuthenticator.hash_password(body.password);
         long hire_time = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         Employee new_employee = new Employee(
             -1, body.first_name, body.last_name, body.phone, body.email, body.address, body.city,
@@ -53,7 +53,7 @@ public class EmployeesController : ControllerBase
     {
         Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
         if (!auth.is_employee()) return auth.get_unauthorized_error<Employee[]>();
-        
+
         if (order_field != "city" && order_field != "last_name" && order_field != "total_spent") {
             return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_field", "Invalid order field");
         }
@@ -61,7 +61,7 @@ public class EmployeesController : ControllerBase
         if (order_dir != "ASC" && order_dir != "DESC") {
             return ApiResponse<Employee[]>.Failure(400, "employee.invalid_order_dir", "Invalid order direction");
         }
-        
+
         var employees = await Employee.list_employees(Config.cfg, order_field, order_dir);
         return ApiResponse<Employee[]>.Success(employees.ToArray());
     }
@@ -100,7 +100,7 @@ public class EmployeesController : ControllerBase
         if (person == null || person is not Employee) return ApiResponse<Employee>.Failure(404, "employee.not_found", "Employee not found");
 
         Employee employee = (Employee)person;
-        
+
         if (body.first_name != null)
             await employee.set_first_name(Config.cfg, body.first_name);
         if (body.last_name != null)
@@ -142,5 +142,20 @@ public class EmployeesController : ControllerBase
         MultiNodeTree<Employee> employees = await Employee.get_org_chart(Config.cfg);
 
         return ApiResponse<MultiNodeTree<Employee>.JsonNode[]>.Success(employees.ToJson());
+    }
+
+    [HttpGet(Name = "GetSchedule")]
+    public async Task<ApiResponse<Employee.ScheduleEntry[]>> GetSchedule([FromQuery] int user_id, [FromQuery] long start, [FromQuery] long end)
+    {
+        Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+        if (!auth.is_employee()) return auth.get_unauthorized_error<Employee.ScheduleEntry[]>();
+
+        Person? person = await Person.get_person_by_id(Config.cfg, user_id);
+        if (person == null || person is not Employee) return ApiResponse<Employee.ScheduleEntry[]>.Failure(404, "employee.not_found", "Employee not found");
+
+        Employee employee = (Employee)person;
+        List<Employee.ScheduleEntry> schedule = await employee.get_schedule(Config.cfg, start, end);
+
+        return ApiResponse<Employee.ScheduleEntry[]>.Success(schedule.ToArray());
     }
 }

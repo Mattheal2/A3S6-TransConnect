@@ -43,7 +43,7 @@ namespace TransLib.Persons
             MySqlCommand cmd = new MySqlCommand(
                 @"INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, position, salary, hire_time, license_type, password_hash, supervisor_id, show_on_org_chart)
                 VALUES(@user_type, @first_name, @last_name, @phone, @email, @address, @city, @birth_time, @position, @salary, @hire_time, @license_type, @password_hash, @supervisor_id, @show_on_org_chart);");
-            
+
             cmd.Parameters.AddWithValue("@user_type", user_type);
             cmd.Parameters.AddWithValue("@first_name", first_name);
             cmd.Parameters.AddWithValue("@last_name", last_name);
@@ -191,7 +191,7 @@ namespace TransLib.Persons
             List<Employee> employees;
             using (DbDataReader reader = await cfg.query(cmd))
                 employees = await from_reader_multiple(reader);
-            
+
             MultiNodeTree<Employee> tree = new MultiNodeTree<Employee>();
             employees.ForEach(e => tree.AddNode(e, e.user_id, e.supervisor_id));
             return tree;
@@ -212,6 +212,46 @@ namespace TransLib.Persons
             Employee? employee = await from_reader(reader);
             if (employee == null) throw new Exception("Employee not found");
             return employee;
+        }
+
+        public struct ScheduleEntry
+        {
+            public long departure_time { get; set; }
+            public long arrival_time { get; set; }
+            public string departure_city { get; set; }
+            public string arrival_city { get; set; }
+        }
+        public async Task<List<ScheduleEntry>> get_schedule(AppConfig cfg, long start, long end)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"
+                SELECT departure_time, arrival_time, departure_city, arrival_city FROM orders
+                LEFT JOIN person ON orders.driver_id = person.user_id
+                WHERE person.user_id = @user_id 
+	                AND person.user_type = ""EMPLOYEE"" 
+                    AND LOWER(person.position) = 'driver'
+                    AND (orders.departure_time BETWEEN @departure_time AND @arrival_time);            
+            ");
+            cmd.Parameters.AddWithValue("@user_id", user_id);
+            cmd.Parameters.AddWithValue("@departure_time", start);
+            cmd.Parameters.AddWithValue("@arrival_time", end);
+            
+            DbDataReader reader = await cfg.query(cmd);
+            List<ScheduleEntry> result = new List<ScheduleEntry>();
+
+            using (reader)
+            {
+                while (await reader.ReadAsync())
+                {
+                    result.Append(new ScheduleEntry
+                    {
+                        departure_time = reader.GetInt64("departure_time"),
+                        arrival_time = reader.GetInt64("arrival_time"),
+                        departure_city = reader.GetString("departure_city"),
+                        arrival_city = reader.GetString("arrival_city")
+                    });
+                }
+            }
+            return result;
         }
     }
 }

@@ -15,12 +15,11 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
-            string json = File.ReadAllText("../Routing_maps/nodes.json");
-            ItineraryService service = ItineraryService.Load("../Routing_maps/nodes.json");
+            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
             RouteNode[] nodes = service.GetNodes();
 
             string dep = "Colombes";
-            string arr = "Paris";
+            string arr = "Noisy-le-Grand";
 
             RouteNode? start = null;
             RouteNode? end = null;
@@ -40,8 +39,6 @@ namespace TransDebug
                 Console.WriteLine(route.distance + " mètres");
                 Console.WriteLine((float)(route.time)/60f + " minutes");
             }
-
-            Console.WriteLine(TransLib.Auth.PasswordAuthenticator.hash_password("password"));
         }
     }
 }

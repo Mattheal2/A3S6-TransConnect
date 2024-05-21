@@ -12,6 +12,9 @@ namespace TransLib.Miscellaneous
 {
     public class Stats
     {
+        /// <summary>
+        /// struct for the response of deliveries_by_driver
+        /// </summary>
         public struct DeliveriesByDriverResponse
         {
             public int driver_id;
@@ -34,7 +37,6 @@ namespace TransLib.Miscellaneous
                 LEFT JOIN orders ON person.user_id = orders.driver_id
                 WHERE person.user_type = 'EMPLOYEE'
 	                AND LOWER(person.position) = 'driver'
-	                AND person.deleted = FALSE
                 GROUP BY person.user_id, person.first_name, person.last_name;
             ");
             DbDataReader reader = await cfg.query(cmd);
@@ -89,7 +91,7 @@ namespace TransLib.Miscellaneous
         {
             MySqlCommand cmd = new MySqlCommand(@"SELECT AVG(person.total_spent) AS average_client_account
                 FROM person
-                WHERE person.user_type = 'CLIENT' AND person.deleted = FALSE;
+                WHERE person.user_type = 'CLIENT';
             ");
 
             DbDataReader reader = await cfg.query(cmd);
@@ -98,6 +100,28 @@ namespace TransLib.Miscellaneous
                 if (!reader.HasRows) throw new Exception("No client found");
                 await reader.ReadAsync();
                 return reader.GetInt32("average_client_account");
+            }
+        }
+
+        /// <summary>
+        /// Returns the average command price.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">No command found</exception>
+        public async static Task<int> average_command_price(AppConfig cfg)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"
+                SELECT AVG(orders.total_price) AS average_command_price
+                FROM orders;
+            ");
+
+            DbDataReader reader = await cfg.query(cmd);
+            using (reader)
+            {
+                if (!reader.HasRows) throw new Exception("No command found");
+                await reader.ReadAsync();
+                return reader.GetInt32("average_command_price");
             }
         }
     }

@@ -39,3 +39,14 @@ LIMIT 1;
 SELECT *
 FROM orders
 WHERE departure_time >= @departure_time AND departure_time <= @arrival_time;
+
+SET @user_id = 3;
+SET @_start = 1742373190;
+SET @_end = 1742373199;
+SELECT departure_time, arrival_time, departure_city, arrival_city FROM orders
+LEFT JOIN person ON orders.driver_id = person.user_id
+WHERE person.user_id = @user_id 
+	AND person.user_type = "EMPLOYEE" 
+    AND LOWER(person.position) = 'driver'
+    AND (orders.departure_time BETWEEN @_start AND @_end)
+;
