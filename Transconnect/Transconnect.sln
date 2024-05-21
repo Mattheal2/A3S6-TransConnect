@@ -10,7 +10,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransDebug", "TransDebug\Tr
 		{7DDB5EAC-DB8C-421B-90A8-787F0DF907EB} = {7DDB5EAC-DB8C-421B-90A8-787F0DF907EB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAPI", "TAPI\TAPI.csproj", "{B1202184-269B-45B9-95AC-77986DD14234}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAPI", "TAPI\TAPI.csproj", "{B1202184-269B-45B9-95AC-77986DD14234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscoTests", "TranscoTests\TranscoTests.csproj", "{F800E684-D482-4CFA-8668-DF255DD69A23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 		{B1202184-269B-45B9-95AC-77986DD14234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1202184-269B-45B9-95AC-77986DD14234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1202184-269B-45B9-95AC-77986DD14234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F800E684-D482-4CFA-8668-DF255DD69A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F800E684-D482-4CFA-8668-DF255DD69A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F800E684-D482-4CFA-8668-DF255DD69A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F800E684-D482-4CFA-8668-DF255DD69A23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
