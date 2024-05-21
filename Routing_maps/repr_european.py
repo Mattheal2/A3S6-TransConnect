@@ -5,6 +5,7 @@ from sklearn.cluster import DBSCAN
 import matplotlib.pyplot as plt
 from pyproj import Proj, transform
 import json
+import random
 
 df = pd.read_csv('E-Road_2011.csv', sep="\t", decimal=",")
 # each row is a line: 
@@ -91,32 +92,42 @@ for i in df_new.index:
                 }[df_new['concessionPrD'][i]]
     dist = round(np.sqrt((df_new['xF'][i]-df_new['xD'][i])**2 + (df_new['yF'][i]-df_new['yD'][i])**2))
 
-    export_nodes[start] = {
-        'city': None,
-        'links': [
-            {
-                'coords': end,
-                'distance': dist,
-                'kind': link_kind
-            }
-        ]
-    }
-    export_nodes[end] = {
-        'city': None,
-        'links': [
-            {
-                'coords': start,
-                'distance': dist,
-                'kind': link_kind
-            }
-        ]
-    }
+    if start not in export_nodes:
+        export_nodes[start] = {
+            'city': None,
+            'links': []
+        }
+
+    export_nodes[start]['links'].append({
+        'coords': end,
+        'distance': dist,
+        'kind': link_kind
+    })
+    
+    if end not in export_nodes:
+        export_nodes[end] = {
+            'city': None,
+            'links': []
+        }
+
+    export_nodes[end]['links'].append({
+        'coords': start,
+        'distance': dist,
+        'kind': link_kind
+    })
+
+
 
 
 def latlon_to_lambert93(lon, lat):
     lambert93 = Proj(init='epsg:2154')
     wgs84 = Proj(init='epsg:4326')
     return transform(wgs84, lambert93, lon, lat)
+
+def lambert93_to_latlon(x, y):
+    lambert93 = Proj(init='epsg:2154')
+    wgs84 = Proj(init='epsg:4326')
+    return transform(lambert93, wgs84, x, y)
 
 def find_nearest_node(node, nodes):
     min_dist = 1e9
@@ -142,19 +153,20 @@ for i in cities.index:
         plt.plot(lat, lon, 'ro')
         
         dist = round(np.sqrt((nearest[0]-lat)**2 + (nearest[1]-lon)**2))
-        export_nodes[(lat, lon)] = {
-            'city': {
-                'name': cities['nom'][i],
-                'postal_codes': int(cities['code_postal'][i].split('-')[0])
-            },
-            'links': [
-                {
-                    'coords': tuple(nearest),
-                    'distance': dist,
-                    'kind': 'road'
-                }
-            ]
+        if (lat, lon) not in export_nodes:
+            export_nodes[(lat, lon)] = {
+                'links': []
+            }
+
+        export_nodes[(lat, lon)]['city'] = {
+            'name': cities['nom'][i],
+            'postal_codes': int(cities['code_postal'][i].split('-')[0])
         }
+        export_nodes[(lat, lon)]['links'].append({
+            'coords': tuple(nearest),
+            'distance': dist,
+            'kind': 'road'
+        })
 
         export_nodes[nearest]['links'].append({
             'coords': (lat, lon),
@@ -179,11 +191,42 @@ export_nodes = [
     }
     for i, (key, value) in enumerate(export_nodes.items())
 ]
+
+# add each links to both sides of the nodes
+for node in export_nodes:
+    for link in node['links']:
+        link_node = export_nodes[link['id']]
+        if node['id'] not in [l['id'] for l in link_node['links']]:
+            link_node['links'].append({
+                'id': node['id'],
+                'distance': link['distance'],
+                'kind': link['kind']
+            })
+
 with open('nodes.json', 'w') as f:
     json.dump(export_nodes, f, indent=4)
         
 
-plt.show()
+# merge nodes with same coords, and update the links
+# coords_nodes = {}
+# for node in export_nodes:
+#     coords = node['coords']
+#     if node['city']:
+#         coords_nodes[coords]['city'] = node['city']
 
+    
+#     if coords in coords_nodes:
+#         coords_nodes[coords]['links'] += node['links']
+#     else:
+#         coords_nodes[coords] = node
 
+for node in export_nodes:
+    # show the node id on the map
+    x, y = node['coords']
+    print(x, y)
+
+    if botX < x < topX and botY < y < topY:
+        plt.text(int(x), int(y), str(node['id']), color=random.choice(['b', 'r', 'g', 'y', 'k']))
+
+#
 # %%

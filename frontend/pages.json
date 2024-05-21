@@ -56,5 +56,18 @@
         ],
         "title": "Clients",
         "icon": "user-dollar"
+    },
+    {
+        "src": "vehicles.html",
+        "dest": "vehicles.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/vehicles.js"
+        ],
+        "scripts": [
+            "/dist/libs/list.js/dist/list.min.js"
+        ],
+        "title": "Véhicules",
+        "icon": "car"
     }
 ]

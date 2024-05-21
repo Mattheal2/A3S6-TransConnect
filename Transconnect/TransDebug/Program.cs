@@ -15,11 +15,12 @@ namespace TransDebug
     {
         static void Main(string[] args)
         {
-            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
+            string json = File.ReadAllText("../Routing_maps/nodes.json");
+            ItineraryService service = ItineraryService.Load("../Routing_maps/nodes.json");
             RouteNode[] nodes = service.GetNodes();
 
-            string dep = "Colombes";
-            string arr = "Noisy-le-Grand";
+            string dep = "Marseille";
+            string arr = "Paris";
 
             RouteNode? start = null;
             RouteNode? end = null;
@@ -35,10 +36,12 @@ namespace TransDebug
             {
                 Itinerary route = service.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
                 Console.WriteLine("Route from " + start.city.name + " to " + end.city.name + ":");
-                Console.WriteLine(route.cost + " euros");
+                Console.WriteLine((float)route.cost/100f + " euros");
                 Console.WriteLine(route.distance + " mètres");
                 Console.WriteLine((float)(route.time)/60f + " minutes");
             }
+
+            Console.WriteLine(TransLib.Auth.PasswordAuthenticator.hash_password("password"));
         }
     }
 }

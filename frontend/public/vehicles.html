@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Employés - TransConnect</title>
+    <title>Véhicules - TransConnect</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
@@ -89,7 +89,7 @@
                                 </a>
                             </li>
                             
-                            <li class="nav-item active">
+                            <li class="nav-item ">
                                 <a class="nav-link" href="/employees">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -128,7 +128,7 @@
                                 </a>
                             </li>
                             
-                            <li class="nav-item ">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="/vehicles">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -157,7 +157,7 @@
                                 TransConnect - Espace Employé
                             </div>
                             <h2 class="page-title">
-                                Employés
+                                Véhicules
                             </h2>
                         </div>
 
@@ -185,14 +185,12 @@
                 <th><button class="table-sort" data-sort="sort-ville">Ville</button></th>
                 <th><button class="table-sort" data-sort="sort-email">Email</button></th>
                 <th><button class="table-sort" data-sort="sort-tel">Téléphone</button></th>
-                <th><button class="table-sort" data-sort="sort-date">Date d'embauche</button></th>
-                <th><button class="table-sort" data-sort="sort-salaire">Salaire</button></th>
-                <th><button class="table-sort" data-sort="sort-licensetype">Type de permis</button></th>
+                <th><button class="table-sort" data-sort="sort-totalspent">Total dépensé</button></th>
                 <th><button class="table-sort" data-sort="sort-birthdate">Date de naissance</button></th>
                 <th></th>
               </tr>
             </thead>
-            <tbody class="table-tbody" id="employeestable">
+            <tbody class="table-tbody" id="vehiclestable">
 
             </tbody>
           </table>
@@ -207,7 +205,7 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h5 class="modal-title">Nouvel Employé</h5>
+          <h5 class="modal-title">Nouveau Véhicule</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -236,7 +234,7 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Email @tmail.com" id="modal-create-email">
+                <input type="text" class="form-control" name="example-text-input" placeholder="Email" id="modal-create-email">
               </div>
             </div>
           </div>
@@ -261,68 +259,12 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Salaire (€)</label>
-                <input type="number" class="form-control" name="example-text-input" placeholder="30000" id="modal-create-salary">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Supérieur</label>
-                <input list="liste-employes" class="form-control" id="modal-create-supervisor"></input>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-create-position">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Afficher sur l'organigrame</label>
-                <input type="checkbox" class="form-check-input" id="modal-create-orgchart">
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Permis</label>
-                <input list="liste-permis" class="form-control" id="modal-create-licensetype"></input>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Mot de passe" id="modal-create-password">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
                 <label class="form-label">Date de naissance</label>
                 <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
                   data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-create-birthdate">
               </div>
-              
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Date de recrutement</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-create-hiredate">
-              </div>
             </div>
           </div>
-
-          
         </div>
         <div class="modal-footer">
           <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
@@ -348,7 +290,7 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h5 class="modal-title">Modifier un employé</h5>
+          <h5 class="modal-title">Modifier un vehicule</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -402,64 +344,9 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Salaire (€)</label>
-                <input type="number" class="form-control" name="example-text-input" placeholder="30000" id="modal-edit-salary">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Supérieur</label>
-                <input list="liste-employes" class="form-control" id="modal-edit-supervisor"></input>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-edit-position">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Afficher sur l'organigrame</label>
-                <input type="checkbox" class="form-check-input" id="modal-edit-orgchart">
-              </div>
-            </div>
-          </div>
-
-          
-
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Permis</label>
-                <input list="liste-permis" class="form-control" id="modal-edit-licensetype"></input>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" name="example-text-input" placeholder="Mot de passe" id="modal-edit-password">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
                 <label class="form-label">Date de naissance</label>
                 <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
                   data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-edit-birthdate">
-              </div>
-              
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Date de recrutement</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-edit-hiredate">
               </div>
             </div>
           </div>
@@ -501,8 +388,8 @@
           <path d="M12 17h.01" />
         </svg>
         <h3>Etes vous sûr?</h3>
-        <div class="text-muted">Vous êtes sur le point de licencier <strong id="modal-delete-name"></strong>. Cette
-          action est irréversible.</div>
+        <div class="text-muted">Vous êtes sur le point de supprimer <strong id="modal-delete-name"></strong>. Cette
+          action est irréversible. (Hitman #993 sera envoyé sur site pour s'en charger)</div>
       </div>
       <div class="modal-footer">
         <div class="w-100">
@@ -520,120 +407,6 @@
   </div>
 </div>
 
-<datalist id="liste-villes">
-  <option value='Paris'></option>
-  <option value='Marseille'></option>
-  <option value='Lyon'></option>
-  <option value='Toulouse'></option>
-  <option value='Nice'></option>
-  <option value='Nantes'></option>
-  <option value='Strasbourg'></option>
-  <option value='Montpellier'></option>
-  <option value='Bordeaux'></option>
-  <option value='Lille'></option>
-  <option value='Rennes'></option>
-  <option value='Reims'></option>
-  <option value='Le Havre'></option>
-  <option value='Saint-Étienne'></option>
-  <option value='Toulon'></option>
-  <option value='Grenoble'></option>
-  <option value='Dijon'></option>
-  <option value='Angers'></option>
-  <option value='Villeurbanne'></option>
-  <option value='Saint-Denis'></option>
-  <option value='Le Mans'></option>
-  <option value='Nîmes'></option>
-  <option value='Aix-en-Provence'></option>
-  <option value='Brest'></option>
-  <option value='Clermont-Ferrand'></option>
-  <option value='Limoges'></option>
-  <option value='Tours'></option>
-  <option value='Amiens'></option>
-  <option value='Metz'></option>
-  <option value='Perpignan'></option>
-  <option value='Besançon'></option>
-  <option value='Boulogne-Billancourt'></option>
-  <option value='Orléans'></option>
-  <option value='Rouen'></option>
-  <option value='Mulhouse'></option>
-  <option value='Caen'></option>
-  <option value='Saint-Denis'></option>
-  <option value='Nancy'></option>
-  <option value='Saint-Paul'></option>
-  <option value='Argenteuil'></option>
-  <option value='Montreuil'></option>
-  <option value='Roubaix'></option>
-  <option value='Dunkerque'></option>
-  <option value='Tourcoing'></option>
-  <option value='Créteil'></option>
-  <option value='Avignon'></option>
-  <option value='Nanterre'></option>
-  <option value='Poitiers'></option>
-  <option value='Courbevoie'></option>
-  <option value='Fort-de-France'></option>
-  <option value='Versailles'></option>
-  <option value='Vitry-sur-Seine'></option>
-  <option value='Colombes'></option>
-  <option value='Asnières-sur-Seine'></option>
-  <option value='Aulnay-sous-Bois'></option>
-  <option value='Pau'></option>
-  <option value='Rueil-Malmaison'></option>
-  <option value='Saint-Pierre'></option>
-  <option value='Aubervilliers'></option>
-  <option value='Champigny-sur-Marne'></option>
-  <option value='La Rochelle'></option>
-  <option value='Saint-Maur-des-Fossés'></option>
-  <option value='Antibes'></option>
-  <option value='Calais'></option>
-  <option value='Tampon'></option>
-  <option value='Cannes'></option>
-  <option value='Béziers'></option>
-  <option value='Colmar'></option>
-  <option value='Saint-Nazaire'></option>
-  <option value='Drancy'></option>
-  <option value='Bourges'></option>
-  <option value='Mérignac'></option>
-  <option value='Ajaccio'></option>
-  <option value='Issy-les-Moulineaux'></option>
-  <option value='Levallois-Perret'></option>
-  <option value='Villeneuve-d' Ascq'></option>
-  <option value='Quimper'></option>
-  <option value='Valence'></option>
-  <option value='Noisy-le-Grand'></option>
-  <option value='La Seyne-sur-Mer'></option>
-  <option value='Antony'></option>
-  <option value='Neuilly-sur-Seine'></option>
-  <option value='Troyes'></option>
-  <option value='Vénissieux'></option>
-  <option value='Clichy'></option>
-  <option value='Sarcelles'></option>
-  <option value='Abymes'></option>
-  <option value='Pessac'></option>
-  <option value='Ivry-sur-Seine'></option>
-  <option value='Chambéry'></option>
-  <option value='Niort'></option>
-  <option value='Mamoudzou'></option>
-  <option value='Lorient'></option>
-  <option value='Cergy'></option>
-  <option value='Montauban'></option>
-  <option value='Saint-Quentin'></option>
-  <option value='Cayenne'></option>
-  <option value='Villejuif'></option>
-  <option value='Beauvais'></option>
-  <option value='Hyères'></option>
-</datalist>
-
-<datalist id="liste-employes">
-
-</datalist>
-
-<datalist id="liste-permis">
-  <option value='A'></option>
-  <option value='B'></option>
-  <option value='C'></option>
-  <option value='D'></option>
-  <option value='E'></option>
-</datalist>
 <footer class="footer footer-transparent d-print-none">
     <div class="container-xl">
       <div class="row text-center align-items-center flex-row">
@@ -742,16 +515,16 @@ $(document).ready(function() {
 </script>
 
 <script>
-    function fetchEmployees() {
+    function fetchVehicles() {
     $.ajax({
-        url: '/api/Employees/GetEmployees?order_field=last_name&order_dir=ASC',
+        url: '/api/Vehicles/GetVehicles?order_field=last_name&order_dir=ASC',
         type: 'GET',
         cache: false,
         success: function (resp) {
             if (resp.error) {
                 alert(resp.error.message);
             } else {
-                renderEmployees(resp.data);
+                renderVehicles(resp.data);
             }
         }
     });
@@ -776,59 +549,47 @@ function parseTime(localeDateString) {
 const svgEditButton = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>`;
 const svgDeleteButton = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7h16" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /><path d="M10 12l4 4m0 -4l-4 4" /></svg>`;
 
-async function renderEmployees(data) {
-    var table = $('#employeestable');
+async function renderVehicles(data) {
+    var table = $('#vehiclestable');
 
-    var employees_datalist = $('#liste-employes');
-    employees_datalist.empty();
+
     table.empty();
-    await data.forEach(function (employee) {
+    await data.forEach(function (vehicle) {
         var row = $('<tr>');
-        row.append($('<td>').text(employee.last_name).addClass('sort-lastname'));
-        row.append($('<td>').text(employee.first_name).addClass('sort-firstname'));
-        row.append($('<td>').text(employee.position).addClass('sort-poste'));
-        row.append($('<td>').text(employee.city).addClass('sort-ville'));
-        row.append($('<td>').text(employee.email).addClass('sort-email'));
-        row.append($('<td>').text(employee.phone).addClass('sort-tel'));
-        row.append($('<td>').text(convertTime(employee.hire_time)).addClass('sort-date').attr('data-date', employee.hire_time));
-        row.append($('<td>').text(employee.salary).addClass('sort-salaire'));
-        row.append($('<td>').text(employee.license_type).addClass('sort-licensetype'));
-        row.append($('<td>').text(convertTime(employee.birth_time)).addClass('sort-birthdate').attr('data-date', employee.birth_time));
+        row.append($('<td>').text(vehicle.last_name).addClass('sort-lastname'));
+        row.append($('<td>').text(vehicle.first_name).addClass('sort-firstname'));
+        row.append($('<td>').text(vehicle.position).addClass('sort-poste'));
+        row.append($('<td>').text(vehicle.city).addClass('sort-ville'));
+        row.append($('<td>').text(vehicle.email).addClass('sort-email'));
+        row.append($('<td>').text(vehicle.phone).addClass('sort-tel'));
+        row.append($('<td>').text(vehicle.total_spent).addClass('sort-totalspent'));
+        row.append($('<td>').text(convertTime(vehicle.birth_time)).addClass('sort-birthdate').attr('data-date', vehicle.birth_time));
 
         const editButton = $('<span style="cursor: pointer" class="text-blue">').click(function() {
-            STATE.user_id = employee.user_id;
+            STATE.user_id = vehicle.user_id;
             STATE.op = 'edit';
-            $('#modal-edit-firstname').val(employee.first_name);
-            $('#modal-edit-lastname').val(employee.last_name);
-            $('#modal-edit-position').val(employee.position);
-            $('#modal-edit-city').val(employee.city);
-            $('#modal-edit-address').val(employee.address);
-            $('#modal-edit-email').val(employee.email);
-            $('#modal-edit-phone').val(employee.phone);
-            $('#modal-edit-hiredate').val(convertTime(employee.hire_time));
-            $('#modal-edit-salary').val(employee.salary);
-            $('#modal-edit-licensetype').val(employee.license_type);
-            $('#modal-edit-birthdate').val(convertTime(employee.birth_time));
-            $('#modal-edit-password').val('');
-            $('#modal-edit-orgchart').prop('checked', employee.show_on_org_chart);
-            const supervisor = data.find(e => e.user_id === employee.supervisor_id);
-            $('#modal-edit-supervisor').val(supervisor ? supervisor.first_name + ' ' + supervisor.last_name : '');
+            $('#modal-edit-firstname').val(vehicle.first_name);
+            $('#modal-edit-lastname').val(vehicle.last_name);
+            $('#modal-edit-city').val(vehicle.city);
+            $('#modal-edit-address').val(vehicle.address);
+            $('#modal-edit-email').val(vehicle.email);
+            $('#modal-edit-phone').val(vehicle.phone);
+            $('#modal-edit-birthdate').val(convertTime(vehicle.birth_time));
+
             
             $('#modal-edit').modal('show');
         }).append($(svgEditButton));
 
         const deleteButton = $('<span style="cursor: pointer" class="text-red">').click(function() {
-            STATE.user_id = employee.user_id;
+            STATE.user_id = vehicle.user_id;
             STATE.op = 'delete';
-            $('#modal-delete-name').text(employee.first_name + ' ' + employee.last_name);
+            $('#modal-delete-name').text(vehicle.first_name + ' ' + vehicle.last_name);
             $('#modal-delete').modal('show');
         }).append($(svgDeleteButton));
 
         row.append($('<td>').append(editButton).append(deleteButton));
 
         table.append(row);
-
-        employees_datalist.append($('<option>').attr('value', employee.first_name + ' ' + employee.last_name).attr('data-id', employee.user_id));
     });
 
     const list = new List('table-default', {
@@ -842,27 +603,25 @@ async function renderEmployees(data) {
             'sort-adresse',
             'sort-email',
             'sort-tel',
-            { name: 'sort-date', attr: 'data-date' },
-            'sort-salaire',
-            'sort-licensetype',
+            'sort-totalspent',
             { name: 'sort-birthdate', attr: 'data-date' }
         ]
     });
 }
 
 
-$(document).ready(fetchEmployees);
+$(document).ready(fetchVehicles);
 
 $("#modal-delete-confirm").click(function() {
     $.ajax({
-        url: '/api/Employees/DeleteEmployee?user_id=' + STATE.user_id,
+        url: '/api/Vehicles/DeleteVehicle?user_id=' + STATE.user_id,
         type: 'POST',
         success: function (resp) {
             if (resp.error) {
                 alert(resp.error.message);
             } else {
                 $('#modal-delete').modal('hide');
-                fetchEmployees();
+                fetchVehicles();
             }
         }
     });
@@ -875,22 +634,15 @@ $("#modal-edit").submit(function(e) {
         'user_id': STATE.user_id,
         'first_name': $('#modal-edit-firstname').val(),
         'last_name': $('#modal-edit-lastname').val(),
-        'position': $('#modal-edit-position').val(),
         'city': $('#modal-edit-city').val(),
         'address': $('#modal-edit-address').val(),
         'email': $('#modal-edit-email').val(),
         'phone': $('#modal-edit-phone').val(),
-        'hire_time': parseTime($('#modal-edit-hiredate').val()),
-        'salary': $('#modal-edit-salary').val(),
-        'license_type': $('#modal-edit-licensetype').val(),
         'birth_time': parseTime($('#modal-edit-birthdate').val()),
-        'password': $('#modal-edit-password').val(),
-        'show_on_org_chart': $('#modal-edit-orgchart').prop('checked'),
-        'supervisor_id': $('#liste-employes option[value="' + $('#modal-edit-supervisor').val() + '"]').attr('data-id')
     };
 
     $.ajax({
-        url: '/api/Employees/UpdateEmployee',
+        url: '/api/Vehicles/UpdateVehicle',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -899,7 +651,7 @@ $("#modal-edit").submit(function(e) {
                 alert(resp.error.message || resp.errors["$"][0]);
             } else {
                 $('#modal-edit').modal('hide');
-                fetchEmployees();
+                fetchVehicles();
             }
         },
         error: function (xhr, status, error) {
@@ -912,9 +664,9 @@ $("#navbar-actions-list").append($(`
 <a href="#" class="btn btn-primary d-none d-sm-inline-block">
     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
-    Nouvel employé
+    Nouveau vehicle
 </a>
-<a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"aria-label="Nouvel employé">
+<a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"aria-label="Nouveau vehicle">
     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
 </a>
@@ -927,22 +679,15 @@ $("#modal-create").submit(function(e) {
     const data = {
         'first_name': $('#modal-create-firstname').val(),
         'last_name': $('#modal-create-lastname').val(),
-        'position': $('#modal-create-position').val(),
         'city': $('#modal-create-city').val(),
         'address': $('#modal-create-address').val(),
         'email': $('#modal-create-email').val(),
         'phone': $('#modal-create-phone').val(),
-        'hire_time': parseTime($('#modal-create-hiredate').val()),
-        'salary': $('#modal-create-salary').val(),
-        'license_type': $('#modal-create-licensetype').val(),
         'birth_time': parseTime($('#modal-create-birthdate').val()),
-        'password': $('#modal-create-password').val(),
-        'show_on_org_chart': $('#modal-create-orgchart').prop('checked'),
-        'supervisor_id': $('#liste-employes option[value="' + $('#modal-create-supervisor').val() + '"]').attr('data-id')
     };
 
     $.ajax({
-        url: '/api/Employees/CreateEmployee',
+        url: '/api/Vehicles/CreateVehicle',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -951,7 +696,7 @@ $("#modal-create").submit(function(e) {
                 alert(resp.error.message || resp.errors["$"][0]);
             } else {
                 $('#modal-create').modal('hide');
-                fetchEmployees();
+                fetchVehicles();
             }
         },
         error: function (xhr, status, error) {
