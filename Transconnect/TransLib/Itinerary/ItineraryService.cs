@@ -60,7 +60,7 @@ public class ItineraryService {
 
             openSet.Remove(current.id);
             closedSet.Add(current.id);
-            Console.WriteLine("Current node: " + current.id);
+            // Console.WriteLine("Current node: " + current.id);
             foreach (RouteNode.NodeLink link in current.links) {
                 RouteNode neighbor = nodes[link.id];
                 if (closedSet.Contains(neighbor.id)) continue;

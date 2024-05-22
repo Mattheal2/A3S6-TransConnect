@@ -149,7 +149,6 @@ async function renderOrders(data) {
         const employee = STATE._employees.find(e => e.user_id === order.driver_id) || { first_name: 'Conducteur', last_name: 'Inconnu' };
 
         const row = $('<tr>');
-        row.append($('<td>').text(order.order_id).addClass('sort-id'));
         row.append($('<td>').text(client.first_name + ' ' + client.last_name).addClass('sort-client'));
         row.append($('<td>').text(convertTimeFull(order.departure_time)).addClass('sort-departure-time').attr('data-date', order.departure_time));
         row.append($('<td>').text(convertTimeFull(order.arrival_time)).addClass('sort-arrival-time').attr('data-date', order.arrival_time));
@@ -191,7 +190,7 @@ async function renderOrders(data) {
             $('#modal-delete').modal('show');
         }).append($(svgDeleteButton));
 
-        row.append($('<td style="text-align: end">').append(deleteButton));
+        row.append($('<td style="text-align: end;white-space: pre;">').append(deleteButton));
 
         table.append(row);
     });
@@ -200,7 +199,6 @@ async function renderOrders(data) {
         sortClass: 'table-sort',
         listClass: 'table-tbody',
         valueNames: [
-            'sort-id',
             'sort-client',
             { name: 'sort-departure-time', attr: 'data-date' },
             { name: 'sort-arrival-time', attr: 'data-date' },

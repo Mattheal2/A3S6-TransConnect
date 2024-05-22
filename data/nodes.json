@@ -8,16 +8,6 @@
         "city": null,
         "links": [
             {
-                "id": 0,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 0,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
                 "id": 1,
                 "distance": 100887,
                 "kind": "highway"
@@ -53,142 +43,142 @@
                 "kind": "national"
             },
             {
-                "id": 167,
+                "id": 162,
                 "distance": 11521,
                 "kind": "road"
             },
             {
-                "id": 195,
+                "id": 190,
                 "distance": 10787,
                 "kind": "road"
             },
             {
-                "id": 200,
+                "id": 195,
                 "distance": 19714,
                 "kind": "road"
             },
             {
-                "id": 202,
+                "id": 197,
                 "distance": 22505,
                 "kind": "road"
             },
             {
-                "id": 203,
+                "id": 198,
                 "distance": 14059,
                 "kind": "road"
             },
             {
-                "id": 206,
+                "id": 201,
                 "distance": 9804,
                 "kind": "road"
             },
             {
-                "id": 208,
+                "id": 203,
                 "distance": 18970,
                 "kind": "road"
             },
             {
-                "id": 210,
+                "id": 205,
                 "distance": 16926,
                 "kind": "road"
             },
             {
-                "id": 211,
+                "id": 206,
                 "distance": 15914,
                 "kind": "road"
             },
             {
-                "id": 212,
+                "id": 207,
                 "distance": 5350,
                 "kind": "road"
             },
             {
-                "id": 213,
+                "id": 208,
                 "distance": 18995,
                 "kind": "road"
             },
             {
-                "id": 214,
+                "id": 209,
                 "distance": 17660,
                 "kind": "road"
             },
             {
-                "id": 215,
+                "id": 210,
                 "distance": 25140,
                 "kind": "road"
             },
             {
-                "id": 217,
+                "id": 212,
                 "distance": 17437,
                 "kind": "road"
             },
             {
-                "id": 218,
+                "id": 213,
                 "distance": 18106,
                 "kind": "road"
             },
             {
-                "id": 219,
+                "id": 214,
                 "distance": 14633,
                 "kind": "road"
             },
             {
-                "id": 221,
+                "id": 216,
                 "distance": 12742,
                 "kind": "road"
             },
             {
-                "id": 228,
+                "id": 223,
                 "distance": 21269,
                 "kind": "road"
             },
             {
-                "id": 231,
+                "id": 226,
                 "distance": 8580,
                 "kind": "road"
             },
             {
-                "id": 232,
+                "id": 227,
                 "distance": 16489,
                 "kind": "road"
             },
             {
-                "id": 235,
+                "id": 230,
                 "distance": 19656,
                 "kind": "road"
             },
             {
-                "id": 237,
+                "id": 232,
                 "distance": 3000,
                 "kind": "road"
             },
             {
-                "id": 238,
+                "id": 233,
                 "distance": 15088,
                 "kind": "road"
             },
             {
-                "id": 241,
+                "id": 236,
                 "distance": 16225,
                 "kind": "road"
             },
             {
-                "id": 242,
+                "id": 237,
                 "distance": 27272,
                 "kind": "road"
             },
             {
-                "id": 244,
+                "id": 239,
                 "distance": 7430,
                 "kind": "road"
             },
             {
-                "id": 248,
+                "id": 243,
                 "distance": 36720,
                 "kind": "road"
             },
             {
-                "id": 251,
+                "id": 246,
                 "distance": 5236,
                 "kind": "road"
             }
@@ -233,16 +223,6 @@
                 "kind": "highway"
             },
             {
-                "id": 2,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 2,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 4,
                 "distance": 63385,
                 "kind": "national"
@@ -263,7 +243,7 @@
                 "kind": "highway"
             },
             {
-                "id": 250,
+                "id": 245,
                 "distance": 22800,
                 "kind": "road"
             }
@@ -283,22 +263,12 @@
                 "kind": "highway"
             },
             {
-                "id": 3,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 3,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 59,
+                "id": 57,
                 "distance": 79095,
                 "kind": "national"
             },
             {
-                "id": 59,
+                "id": 57,
                 "distance": 79095,
                 "kind": "highway"
             },
@@ -308,22 +278,22 @@
                 "kind": "highway"
             },
             {
-                "id": 175,
+                "id": 170,
                 "distance": 13243,
                 "kind": "road"
             },
             {
-                "id": 204,
+                "id": 199,
                 "distance": 22224,
                 "kind": "road"
             },
             {
-                "id": 205,
+                "id": 200,
                 "distance": 23577,
                 "kind": "road"
             },
             {
-                "id": 233,
+                "id": 228,
                 "distance": 19859,
                 "kind": "road"
             }
@@ -378,16 +348,6 @@
                 "kind": "highway"
             },
             {
-                "id": 6,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 6,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 7,
                 "distance": 77711,
                 "kind": "highway"
@@ -403,27 +363,27 @@
                 "kind": "highway"
             },
             {
-                "id": 67,
+                "id": 65,
                 "distance": 65048,
                 "kind": "highway"
             },
             {
-                "id": 131,
+                "id": 141,
                 "distance": 66159,
                 "kind": "national"
             },
             {
-                "id": 76,
+                "id": 74,
                 "distance": 80578,
                 "kind": "national"
             },
             {
-                "id": 77,
+                "id": 75,
                 "distance": 43496,
                 "kind": "national"
             },
             {
-                "id": 177,
+                "id": 172,
                 "distance": 5258,
                 "kind": "road"
             }
@@ -478,32 +438,22 @@
                 "kind": "highway"
             },
             {
-                "id": 9,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 9,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 10,
                 "distance": 65293,
                 "kind": "highway"
             },
             {
-                "id": 72,
+                "id": 70,
                 "distance": 42063,
                 "kind": "national"
             },
             {
-                "id": 75,
+                "id": 73,
                 "distance": 64368,
                 "kind": "national"
             },
             {
-                "id": 192,
+                "id": 187,
                 "distance": 6951,
                 "kind": "road"
             }
@@ -526,16 +476,6 @@
                 "id": 11,
                 "distance": 39387,
                 "kind": "highway"
-            },
-            {
-                "id": 10,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 10,
-                "distance": 0,
-                "kind": "national"
             }
         ]
     },
@@ -550,16 +490,6 @@
             {
                 "id": 10,
                 "distance": 39387,
-                "kind": "highway"
-            },
-            {
-                "id": 11,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 11,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -583,17 +513,7 @@
                 "kind": "highway"
             },
             {
-                "id": 12,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 12,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 78,
+                "id": 76,
                 "distance": 48726,
                 "kind": "national"
             }
@@ -610,16 +530,6 @@
             {
                 "id": 0,
                 "distance": 77147,
-                "kind": "highway"
-            },
-            {
-                "id": 13,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 13,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -678,16 +588,6 @@
                 "kind": "highway"
             },
             {
-                "id": 15,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 15,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 17,
                 "distance": 42591,
                 "kind": "highway"
@@ -713,12 +613,12 @@
                 "kind": "highway"
             },
             {
-                "id": 68,
+                "id": 66,
                 "distance": 19227,
                 "kind": "highway"
             },
             {
-                "id": 239,
+                "id": 234,
                 "distance": 6544,
                 "kind": "road"
             }
@@ -738,22 +638,12 @@
                 "kind": "highway"
             },
             {
-                "id": 73,
+                "id": 71,
                 "distance": 27870,
                 "kind": "highway"
             },
             {
-                "id": 17,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 17,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 142,
+                "id": 138,
                 "distance": 36301,
                 "kind": "national"
             }
@@ -771,16 +661,6 @@
                 "id": 0,
                 "distance": 91037,
                 "kind": "national"
-            },
-            {
-                "id": 18,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 18,
-                "distance": 0,
-                "kind": "highway"
             },
             {
                 "id": 19,
@@ -833,32 +713,22 @@
                 "kind": "highway"
             },
             {
-                "id": 20,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 20,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 21,
                 "distance": 76098,
                 "kind": "highway"
             },
             {
-                "id": 73,
+                "id": 71,
                 "distance": 80617,
                 "kind": "highway"
             },
             {
-                "id": 82,
+                "id": 80,
                 "distance": 39925,
                 "kind": "highway"
             },
             {
-                "id": 151,
+                "id": 148,
                 "distance": 37524,
                 "kind": "national"
             }
@@ -883,22 +753,12 @@
                 "kind": "highway"
             },
             {
-                "id": 85,
+                "id": 83,
                 "distance": 77664,
                 "kind": "highway"
             },
             {
-                "id": 21,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 21,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 150,
+                "id": 147,
                 "distance": 62643,
                 "kind": "national"
             }
@@ -918,57 +778,47 @@
                 "kind": "highway"
             },
             {
-                "id": 22,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 22,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 23,
                 "distance": 152592,
                 "kind": "highway"
             },
             {
-                "id": 89,
+                "id": 87,
                 "distance": 56740,
                 "kind": "national"
             },
             {
-                "id": 87,
+                "id": 85,
                 "distance": 89909,
                 "kind": "highway"
             },
             {
-                "id": 90,
+                "id": 88,
                 "distance": 43547,
                 "kind": "highway"
             },
             {
-                "id": 110,
+                "id": 108,
                 "distance": 56573,
                 "kind": "highway"
             },
             {
-                "id": 169,
+                "id": 164,
                 "distance": 6912,
                 "kind": "road"
             },
             {
-                "id": 179,
+                "id": 174,
                 "distance": 44093,
                 "kind": "road"
             },
             {
-                "id": 184,
+                "id": 179,
                 "distance": 9012,
                 "kind": "road"
             },
             {
-                "id": 240,
+                "id": 235,
                 "distance": 5137,
                 "kind": "road"
             }
@@ -1013,16 +863,6 @@
                 "kind": "highway"
             },
             {
-                "id": 24,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 24,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 31,
                 "distance": 52423,
                 "kind": "highway"
@@ -1048,7 +888,7 @@
                 "kind": "highway"
             },
             {
-                "id": 207,
+                "id": 202,
                 "distance": 11054,
                 "kind": "road"
             }
@@ -1068,22 +908,12 @@
                 "kind": "highway"
             },
             {
-                "id": 26,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 26,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 27,
                 "distance": 31243,
                 "kind": "highway"
             },
             {
-                "id": 93,
+                "id": 91,
                 "distance": 41630,
                 "kind": "highway"
             },
@@ -1093,12 +923,12 @@
                 "kind": "highway"
             },
             {
-                "id": 168,
+                "id": 163,
                 "distance": 23294,
                 "kind": "road"
             },
             {
-                "id": 187,
+                "id": 182,
                 "distance": 8987,
                 "kind": "road"
             }
@@ -1123,17 +953,17 @@
                 "kind": "highway"
             },
             {
-                "id": 180,
+                "id": 175,
                 "distance": 43849,
                 "kind": "road"
             },
             {
-                "id": 236,
+                "id": 231,
                 "distance": 44128,
                 "kind": "road"
             },
             {
-                "id": 253,
+                "id": 248,
                 "distance": 51705,
                 "kind": "road"
             }
@@ -1158,7 +988,7 @@
                 "kind": "highway"
             },
             {
-                "id": 224,
+                "id": 219,
                 "distance": 11284,
                 "kind": "road"
             }
@@ -1198,12 +1028,12 @@
                 "kind": "highway"
             },
             {
-                "id": 171,
+                "id": 166,
                 "distance": 3376,
                 "kind": "road"
             },
             {
-                "id": 222,
+                "id": 217,
                 "distance": 19832,
                 "kind": "road"
             }
@@ -1223,16 +1053,6 @@
                 "kind": "highway"
             },
             {
-                "id": 31,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 31,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 32,
                 "distance": 120543,
                 "kind": "highway"
@@ -1243,7 +1063,7 @@
                 "kind": "highway"
             },
             {
-                "id": 186,
+                "id": 181,
                 "distance": 13907,
                 "kind": "road"
             }
@@ -1268,22 +1088,12 @@
                 "kind": "highway"
             },
             {
-                "id": 32,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 32,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 66,
+                "id": 64,
                 "distance": 137492,
                 "kind": "highway"
             },
             {
-                "id": 225,
+                "id": 220,
                 "distance": 19517,
                 "kind": "road"
             }
@@ -1308,7 +1118,7 @@
                 "kind": "highway"
             },
             {
-                "id": 193,
+                "id": 188,
                 "distance": 22084,
                 "kind": "road"
             }
@@ -1353,22 +1163,12 @@
                 "kind": "highway"
             },
             {
-                "id": 105,
+                "id": 103,
                 "distance": 36542,
                 "kind": "highway"
             },
             {
-                "id": 35,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 35,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 196,
+                "id": 191,
                 "distance": 10136,
                 "kind": "road"
             }
@@ -1453,27 +1253,17 @@
                 "kind": "highway"
             },
             {
-                "id": 69,
+                "id": 67,
                 "distance": 36962,
                 "kind": "highway"
             },
             {
-                "id": 124,
+                "id": 122,
                 "distance": 43969,
                 "kind": "highway"
             },
             {
-                "id": 39,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 39,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 190,
+                "id": 185,
                 "distance": 5734,
                 "kind": "road"
             }
@@ -1498,17 +1288,17 @@
                 "kind": "highway"
             },
             {
-                "id": 160,
+                "id": 155,
                 "distance": 57760,
                 "kind": "national"
             },
             {
-                "id": 161,
+                "id": 156,
                 "distance": 25726,
                 "kind": "national"
             },
             {
-                "id": 209,
+                "id": 204,
                 "distance": 3711,
                 "kind": "road"
             }
@@ -1553,22 +1343,12 @@
                 "kind": "highway"
             },
             {
-                "id": 42,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 42,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 134,
+                "id": 130,
                 "distance": 40405,
                 "kind": "national"
             },
             {
-                "id": 246,
+                "id": 241,
                 "distance": 15767,
                 "kind": "road"
             }
@@ -1585,16 +1365,6 @@
             {
                 "id": 42,
                 "distance": 97559,
-                "kind": "highway"
-            },
-            {
-                "id": 43,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 43,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -1618,47 +1388,37 @@
                 "kind": "highway"
             },
             {
-                "id": 44,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 44,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 96,
+                "id": 94,
                 "distance": 58286,
                 "kind": "highway"
             },
             {
-                "id": 101,
+                "id": 99,
                 "distance": 60242,
                 "kind": "national"
             },
             {
-                "id": 125,
+                "id": 123,
                 "distance": 40887,
                 "kind": "highway"
             },
             {
-                "id": 133,
+                "id": 129,
                 "distance": 97453,
                 "kind": "national"
             },
             {
-                "id": 174,
+                "id": 169,
                 "distance": 11922,
                 "kind": "road"
             },
             {
-                "id": 230,
+                "id": 225,
                 "distance": 15956,
                 "kind": "road"
             },
             {
-                "id": 243,
+                "id": 238,
                 "distance": 17324,
                 "kind": "road"
             }
@@ -1698,37 +1458,27 @@
                 "kind": "highway"
             },
             {
-                "id": 46,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 46,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 47,
                 "distance": 66912,
                 "kind": "highway"
             },
             {
-                "id": 69,
+                "id": 67,
                 "distance": 49398,
                 "kind": "highway"
             },
             {
-                "id": 70,
+                "id": 68,
                 "distance": 44906,
                 "kind": "highway"
             },
             {
-                "id": 117,
+                "id": 115,
                 "distance": 37452,
                 "kind": "highway"
             },
             {
-                "id": 185,
+                "id": 180,
                 "distance": 4922,
                 "kind": "road"
             }
@@ -1748,27 +1498,17 @@
                 "kind": "highway"
             },
             {
-                "id": 47,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 47,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 48,
                 "distance": 45621,
                 "kind": "highway"
             },
             {
-                "id": 124,
+                "id": 122,
                 "distance": 47068,
                 "kind": "highway"
             },
             {
-                "id": 183,
+                "id": 178,
                 "distance": 16699,
                 "kind": "road"
             }
@@ -1808,37 +1548,27 @@
                 "kind": "highway"
             },
             {
-                "id": 49,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 49,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 119,
+                "id": 117,
                 "distance": 33091,
                 "kind": "highway"
             },
             {
-                "id": 155,
+                "id": 150,
                 "distance": 54041,
                 "kind": "national"
             },
             {
-                "id": 163,
+                "id": 158,
                 "distance": 61535,
                 "kind": "national"
             },
             {
-                "id": 166,
+                "id": 161,
                 "distance": 29869,
                 "kind": "national"
             },
             {
-                "id": 172,
+                "id": 167,
                 "distance": 2425,
                 "kind": "road"
             }
@@ -1878,27 +1608,17 @@
                 "kind": "highway"
             },
             {
-                "id": 51,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 51,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 52,
                 "distance": 50657,
                 "kind": "highway"
             },
             {
-                "id": 56,
+                "id": 54,
                 "distance": 96238,
                 "kind": "national"
             },
             {
-                "id": 71,
+                "id": 69,
                 "distance": 67034,
                 "kind": "highway"
             },
@@ -1908,12 +1628,12 @@
                 "kind": "highway"
             },
             {
-                "id": 54,
+                "id": 140,
                 "distance": 72178,
                 "kind": "national"
             },
             {
-                "id": 197,
+                "id": 192,
                 "distance": 10135,
                 "kind": "road"
             }
@@ -1938,7 +1658,7 @@
                 "kind": "highway"
             },
             {
-                "id": 178,
+                "id": 173,
                 "distance": 24226,
                 "kind": "road"
             }
@@ -1958,27 +1678,17 @@
                 "kind": "highway"
             },
             {
-                "id": 123,
+                "id": 121,
                 "distance": 51521,
                 "kind": "national"
             },
             {
-                "id": 140,
+                "id": 136,
                 "distance": 58541,
                 "kind": "national"
             },
             {
-                "id": 53,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 53,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 199,
+                "id": 194,
                 "distance": 2032,
                 "kind": "road"
             }
@@ -1987,73 +1697,13 @@
     {
         "id": 54,
         "coords": [
-            623904,
-            6926493
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 54,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 54,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 51,
-                "distance": 72178,
-                "kind": "national"
-            },
-            {
-                "id": 131,
-                "distance": 81874,
-                "kind": "national"
-            },
-            {
-                "id": 252,
-                "distance": 9583,
-                "kind": "road"
-            }
-        ]
-    },
-    {
-        "id": 55,
-        "coords": [
-            644531,
-            6973115
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 55,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 55,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 191,
-                "distance": 7190,
-                "kind": "road"
-            }
-        ]
-    },
-    {
-        "id": 56,
-        "coords": [
             615393,
             7004769
         ],
         "city": null,
         "links": [
             {
-                "id": 57,
+                "id": 55,
                 "distance": 24331,
                 "kind": "highway"
             },
@@ -2061,11 +1711,16 @@
                 "id": 51,
                 "distance": 96238,
                 "kind": "national"
+            },
+            {
+                "id": 186,
+                "distance": 43401,
+                "kind": "road"
             }
         ]
     },
     {
-        "id": 57,
+        "id": 55,
         "coords": [
             607046,
             7027623
@@ -2073,19 +1728,19 @@
         "city": null,
         "links": [
             {
-                "id": 56,
+                "id": 54,
                 "distance": 24331,
                 "kind": "highway"
             },
             {
-                "id": 58,
+                "id": 56,
                 "distance": 43437,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 58,
+        "id": 56,
         "coords": [
             604452,
             7070982
@@ -2093,19 +1748,19 @@
         "city": null,
         "links": [
             {
-                "id": 57,
+                "id": 55,
                 "distance": 43437,
                 "kind": "highway"
             },
             {
-                "id": 59,
+                "id": 57,
                 "distance": 46061,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 59,
+        "id": 57,
         "coords": [
             642590,
             7096810
@@ -2113,18 +1768,8 @@
         "city": null,
         "links": [
             {
-                "id": 58,
+                "id": 56,
                 "distance": 46061,
-                "kind": "national"
-            },
-            {
-                "id": 59,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 59,
-                "distance": 0,
                 "kind": "national"
             },
             {
@@ -2138,14 +1783,14 @@
                 "kind": "highway"
             },
             {
-                "id": 223,
+                "id": 218,
                 "distance": 24782,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 60,
+        "id": 58,
         "coords": [
             628565,
             6684512
@@ -2153,34 +1798,24 @@
         "city": null,
         "links": [
             {
-                "id": 61,
+                "id": 59,
                 "distance": 21811,
                 "kind": "national"
             },
             {
-                "id": 105,
+                "id": 103,
                 "distance": 47670,
                 "kind": "highway"
             },
             {
-                "id": 60,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 60,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 106,
+                "id": 104,
                 "distance": 31670,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 61,
+        "id": 59,
         "coords": [
             614815,
             6667580
@@ -2188,19 +1823,19 @@
         "city": null,
         "links": [
             {
-                "id": 60,
+                "id": 58,
                 "distance": 21811,
                 "kind": "national"
             },
             {
-                "id": 62,
+                "id": 60,
                 "distance": 99712,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 62,
+        "id": 60,
         "coords": [
             576806,
             6575396
@@ -2208,39 +1843,29 @@
         "city": null,
         "links": [
             {
-                "id": 61,
+                "id": 59,
                 "distance": 99712,
                 "kind": "national"
             },
             {
-                "id": 62,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 62,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 63,
+                "id": 61,
                 "distance": 79995,
                 "kind": "national"
             },
             {
-                "id": 159,
+                "id": 154,
                 "distance": 29651,
                 "kind": "national"
             },
             {
-                "id": 107,
+                "id": 105,
                 "distance": 89015,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 63,
+        "id": 61,
         "coords": [
             583556,
             6495686
@@ -2248,19 +1873,19 @@
         "city": null,
         "links": [
             {
-                "id": 62,
+                "id": 60,
                 "distance": 79995,
                 "kind": "national"
             },
             {
-                "id": 64,
+                "id": 62,
                 "distance": 46972,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 64,
+        "id": 62,
         "coords": [
             578465,
             6448991
@@ -2268,39 +1893,29 @@
         "city": null,
         "links": [
             {
-                "id": 63,
+                "id": 61,
                 "distance": 46972,
                 "kind": "national"
             },
             {
-                "id": 64,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 64,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 65,
+                "id": 63,
                 "distance": 95218,
                 "kind": "highway"
             },
             {
-                "id": 125,
+                "id": 123,
                 "distance": 112284,
                 "kind": "highway"
             },
             {
-                "id": 126,
+                "id": 124,
                 "distance": 97258,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 65,
+        "id": 63,
         "coords": [
             580701,
             6353799
@@ -2308,24 +1923,24 @@
         "city": null,
         "links": [
             {
-                "id": 64,
+                "id": 62,
                 "distance": 95218,
                 "kind": "highway"
             },
             {
-                "id": 66,
+                "id": 64,
                 "distance": 76808,
                 "kind": "highway"
             },
             {
-                "id": 249,
+                "id": 244,
                 "distance": 31076,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 66,
+        "id": 64,
         "coords": [
             576875,
             6277087
@@ -2333,18 +1948,8 @@
         "city": null,
         "links": [
             {
-                "id": 65,
+                "id": 63,
                 "distance": 76808,
-                "kind": "highway"
-            },
-            {
-                "id": 66,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 66,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -2353,29 +1958,29 @@
                 "kind": "highway"
             },
             {
-                "id": 97,
+                "id": 95,
                 "distance": 82147,
                 "kind": "highway"
             },
             {
-                "id": 104,
+                "id": 102,
                 "distance": 55030,
                 "kind": "highway"
             },
             {
-                "id": 144,
+                "id": 139,
                 "distance": 118764,
                 "kind": "national"
             },
             {
-                "id": 170,
+                "id": 165,
                 "distance": 3976,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 67,
+        "id": 65,
         "coords": [
             788723,
             6845594
@@ -2388,14 +1993,14 @@
                 "kind": "highway"
             },
             {
-                "id": 68,
+                "id": 66,
                 "distance": 32652,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 68,
+        "id": 66,
         "coords": [
             784805,
             6813178
@@ -2403,7 +2008,7 @@
         "city": null,
         "links": [
             {
-                "id": 67,
+                "id": 65,
                 "distance": 32652,
                 "kind": "highway"
             },
@@ -2415,7 +2020,7 @@
         ]
     },
     {
-        "id": 69,
+        "id": 67,
         "coords": [
             510679,
             6730332
@@ -2428,16 +2033,6 @@
                 "kind": "highway"
             },
             {
-                "id": 69,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 69,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 46,
                 "distance": 49398,
                 "kind": "highway"
@@ -2445,7 +2040,7 @@
         ]
     },
     {
-        "id": 70,
+        "id": 68,
         "coords": [
             488121,
             6819612
@@ -2458,24 +2053,14 @@
                 "kind": "highway"
             },
             {
-                "id": 70,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 70,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 71,
+                "id": 69,
                 "distance": 63632,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 71,
+        "id": 69,
         "coords": [
             511938,
             6878619
@@ -2483,18 +2068,8 @@
         "city": null,
         "links": [
             {
-                "id": 70,
+                "id": 68,
                 "distance": 63632,
-                "kind": "highway"
-            },
-            {
-                "id": 71,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 71,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -2505,7 +2080,7 @@
         ]
     },
     {
-        "id": 72,
+        "id": 70,
         "coords": [
             909233,
             6935788
@@ -2516,21 +2091,11 @@
                 "id": 9,
                 "distance": 42063,
                 "kind": "national"
-            },
-            {
-                "id": 72,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 72,
-                "distance": 0,
-                "kind": "national"
             }
         ]
     },
     {
-        "id": 73,
+        "id": 71,
         "coords": [
             863307,
             6732006
@@ -2543,29 +2108,19 @@
                 "kind": "highway"
             },
             {
-                "id": 73,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 73,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
                 "id": 17,
                 "distance": 27870,
                 "kind": "highway"
             },
             {
-                "id": 74,
+                "id": 72,
                 "distance": 60040,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 74,
+        "id": 72,
         "coords": [
             897238,
             6781538
@@ -2573,29 +2128,19 @@
         "city": null,
         "links": [
             {
-                "id": 73,
+                "id": 71,
                 "distance": 60040,
                 "kind": "highway"
             },
             {
-                "id": 74,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 74,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 75,
+                "id": 73,
                 "distance": 56045,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 75,
+        "id": 73,
         "coords": [
             921304,
             6832153
@@ -2603,18 +2148,8 @@
         "city": null,
         "links": [
             {
-                "id": 74,
+                "id": 72,
                 "distance": 56045,
-                "kind": "highway"
-            },
-            {
-                "id": 75,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 75,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -2623,19 +2158,19 @@
                 "kind": "national"
             },
             {
-                "id": 145,
+                "id": 142,
                 "distance": 24277,
                 "kind": "national"
             },
             {
-                "id": 201,
+                "id": 196,
                 "distance": 20800,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 76,
+        "id": 74,
         "coords": [
             830217,
             6961918
@@ -2643,17 +2178,7 @@
         "city": null,
         "links": [
             {
-                "id": 76,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 76,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 77,
+                "id": 75,
                 "distance": 37082,
                 "kind": "national"
             },
@@ -2665,7 +2190,7 @@
         ]
     },
     {
-        "id": 77,
+        "id": 75,
         "coords": [
             802548,
             6937229
@@ -2673,7 +2198,7 @@
         "city": null,
         "links": [
             {
-                "id": 76,
+                "id": 74,
                 "distance": 37082,
                 "kind": "national"
             },
@@ -2685,7 +2210,7 @@
         ]
     },
     {
-        "id": 78,
+        "id": 76,
         "coords": [
             1026351,
             6797586
@@ -2698,29 +2223,19 @@
                 "kind": "national"
             },
             {
-                "id": 79,
+                "id": 77,
                 "distance": 70223,
                 "kind": "national"
             },
             {
-                "id": 78,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 78,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 226,
+                "id": 221,
                 "distance": 12791,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 79,
+        "id": 77,
         "coords": [
             1042852,
             6729329
@@ -2728,19 +2243,19 @@
         "city": null,
         "links": [
             {
-                "id": 78,
+                "id": 76,
                 "distance": 70223,
                 "kind": "national"
             },
             {
-                "id": 80,
+                "id": 78,
                 "distance": 35806,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 80,
+        "id": 78,
         "coords": [
             1008692,
             6740060
@@ -2748,44 +2263,34 @@
         "city": null,
         "links": [
             {
-                "id": 79,
+                "id": 77,
                 "distance": 35806,
                 "kind": "national"
             },
             {
-                "id": 80,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 80,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 81,
+                "id": 79,
                 "distance": 115471,
                 "kind": "highway"
             },
             {
-                "id": 142,
+                "id": 138,
                 "distance": 108078,
                 "kind": "national"
             },
             {
-                "id": 149,
+                "id": 146,
                 "distance": 27734,
                 "kind": "national"
             },
             {
-                "id": 198,
+                "id": 193,
                 "distance": 17615,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 81,
+        "id": 79,
         "coords": [
             909646,
             6680702
@@ -2793,29 +2298,19 @@
         "city": null,
         "links": [
             {
-                "id": 80,
+                "id": 78,
                 "distance": 115471,
                 "kind": "highway"
             },
             {
-                "id": 81,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 81,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 82,
+                "id": 80,
                 "distance": 33357,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 82,
+        "id": 80,
         "coords": [
             878623,
             6668441
@@ -2823,18 +2318,8 @@
         "city": null,
         "links": [
             {
-                "id": 81,
+                "id": 79,
                 "distance": 33357,
-                "kind": "highway"
-            },
-            {
-                "id": 82,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 82,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -2843,14 +2328,14 @@
                 "kind": "highway"
             },
             {
-                "id": 182,
+                "id": 177,
                 "distance": 35747,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 83,
+        "id": 81,
         "coords": [
             997007,
             6539016
@@ -2858,24 +2343,14 @@
         "city": null,
         "links": [
             {
-                "id": 84,
+                "id": 82,
                 "distance": 56640,
-                "kind": "highway"
-            },
-            {
-                "id": 83,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 83,
-                "distance": 0,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 84,
+        "id": 82,
         "coords": [
             946874,
             6565374
@@ -2883,34 +2358,24 @@
         "city": null,
         "links": [
             {
-                "id": 83,
+                "id": 81,
                 "distance": 56640,
                 "kind": "highway"
             },
             {
-                "id": 84,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 84,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 85,
+                "id": 83,
                 "distance": 30474,
                 "kind": "highway"
             },
             {
-                "id": 88,
+                "id": 86,
                 "distance": 42286,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 85,
+        "id": 83,
         "coords": [
             916538,
             6562484
@@ -2918,18 +2383,8 @@
         "city": null,
         "links": [
             {
-                "id": 84,
+                "id": 82,
                 "distance": 30474,
-                "kind": "highway"
-            },
-            {
-                "id": 85,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 85,
-                "distance": 0,
                 "kind": "highway"
             },
             {
@@ -2940,7 +2395,7 @@
         ]
     },
     {
-        "id": 86,
+        "id": 84,
         "coords": [
             912055,
             6458305
@@ -2948,44 +2403,34 @@
         "city": null,
         "links": [
             {
-                "id": 87,
+                "id": 85,
                 "distance": 44206,
                 "kind": "highway"
             },
             {
-                "id": 90,
+                "id": 88,
                 "distance": 49981,
                 "kind": "highway"
             },
             {
-                "id": 86,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 86,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 92,
+                "id": 90,
                 "distance": 51621,
                 "kind": "highway"
             },
             {
-                "id": 152,
+                "id": 149,
                 "distance": 47166,
                 "kind": "national"
             },
             {
-                "id": 181,
+                "id": 176,
                 "distance": 3014,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 87,
+        "id": 85,
         "coords": [
             930478,
             6498489
@@ -2993,12 +2438,12 @@
         "city": null,
         "links": [
             {
-                "id": 86,
+                "id": 84,
                 "distance": 44206,
                 "kind": "highway"
             },
             {
-                "id": 88,
+                "id": 86,
                 "distance": 27749,
                 "kind": "highway"
             },
@@ -3008,29 +2453,19 @@
                 "kind": "highway"
             },
             {
-                "id": 87,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 87,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 91,
+                "id": 89,
                 "distance": 70064,
                 "kind": "highway"
             },
             {
-                "id": 245,
+                "id": 240,
                 "distance": 2729,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 88,
+        "id": 86,
         "coords": [
             930868,
             6526235
@@ -3038,19 +2473,19 @@
         "city": null,
         "links": [
             {
-                "id": 87,
+                "id": 85,
                 "distance": 27749,
                 "kind": "highway"
             },
             {
-                "id": 84,
+                "id": 82,
                 "distance": 42286,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 89,
+        "id": 87,
         "coords": [
             879687,
             6554742
@@ -3065,7 +2500,7 @@
         ]
     },
     {
-        "id": 90,
+        "id": 88,
         "coords": [
             883056,
             6499013
@@ -3078,14 +2513,14 @@
                 "kind": "highway"
             },
             {
-                "id": 86,
+                "id": 84,
                 "distance": 49981,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 91,
+        "id": 89,
         "coords": [
             988865,
             6459760
@@ -3093,24 +2528,14 @@
         "city": null,
         "links": [
             {
-                "id": 87,
+                "id": 85,
                 "distance": 70064,
-                "kind": "highway"
-            },
-            {
-                "id": 91,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 91,
-                "distance": 0,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 92,
+        "id": 90,
         "coords": [
             864174,
             6439015
@@ -3118,29 +2543,19 @@
         "city": null,
         "links": [
             {
-                "id": 86,
+                "id": 84,
                 "distance": 51621,
                 "kind": "highway"
             },
             {
-                "id": 92,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 92,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 234,
+                "id": 229,
                 "distance": 18158,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 93,
+        "id": 91,
         "coords": [
             921137,
             6295763
@@ -3153,24 +2568,14 @@
                 "kind": "highway"
             },
             {
-                "id": 93,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 93,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 94,
+                "id": 92,
                 "distance": 59927,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 94,
+        "id": 92,
         "coords": [
             932269,
             6354647
@@ -3178,19 +2583,19 @@
         "city": null,
         "links": [
             {
-                "id": 93,
+                "id": 91,
                 "distance": 59927,
                 "kind": "highway"
             },
             {
-                "id": 95,
+                "id": 93,
                 "distance": 23108,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 95,
+        "id": 93,
         "coords": [
             940949,
             6376063
@@ -3198,19 +2603,19 @@
         "city": null,
         "links": [
             {
-                "id": 94,
+                "id": 92,
                 "distance": 23108,
                 "kind": "highway"
             },
             {
-                "id": 152,
+                "id": 149,
                 "distance": 40929,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 96,
+        "id": 94,
         "coords": [
             460264,
             6382087
@@ -3223,14 +2628,14 @@
                 "kind": "highway"
             },
             {
-                "id": 97,
+                "id": 95,
                 "distance": 75293,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 97,
+        "id": 95,
         "coords": [
             520296,
             6336643
@@ -3238,19 +2643,19 @@
         "city": null,
         "links": [
             {
-                "id": 96,
+                "id": 94,
                 "distance": 75293,
                 "kind": "highway"
             },
             {
-                "id": 66,
+                "id": 64,
                 "distance": 82147,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 98,
+        "id": 96,
         "coords": [
             314628,
             6260557
@@ -3258,14 +2663,14 @@
         "city": null,
         "links": [
             {
-                "id": 99,
+                "id": 97,
                 "distance": 52124,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 99,
+        "id": 97,
         "coords": [
             364219,
             6276608
@@ -3273,34 +2678,24 @@
         "city": null,
         "links": [
             {
-                "id": 98,
+                "id": 96,
                 "distance": 52124,
                 "kind": "highway"
             },
             {
-                "id": 100,
+                "id": 98,
                 "distance": 22314,
                 "kind": "highway"
             },
             {
-                "id": 99,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 99,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 102,
+                "id": 100,
                 "distance": 91076,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 100,
+        "id": 98,
         "coords": [
             359226,
             6298356
@@ -3308,19 +2703,19 @@
         "city": null,
         "links": [
             {
-                "id": 99,
+                "id": 97,
                 "distance": 22314,
                 "kind": "highway"
             },
             {
-                "id": 101,
+                "id": 99,
                 "distance": 87527,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 101,
+        "id": 99,
         "coords": [
             396380,
             6377606
@@ -3333,24 +2728,14 @@
                 "kind": "national"
             },
             {
-                "id": 101,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 101,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 100,
+                "id": 98,
                 "distance": 87527,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 102,
+        "id": 100,
         "coords": [
             448833,
             6242911
@@ -3358,29 +2743,24 @@
         "city": null,
         "links": [
             {
-                "id": 99,
+                "id": 97,
                 "distance": 91076,
                 "kind": "highway"
             },
             {
-                "id": 102,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 102,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 103,
+                "id": 101,
                 "distance": 53261,
                 "kind": "highway"
+            },
+            {
+                "id": 211,
+                "distance": 23318,
+                "kind": "road"
             }
         ]
     },
     {
-        "id": 103,
+        "id": 101,
         "coords": [
             498809,
             6224497
@@ -3388,19 +2768,19 @@
         "city": null,
         "links": [
             {
-                "id": 102,
+                "id": 100,
                 "distance": 53261,
                 "kind": "highway"
             },
             {
-                "id": 104,
+                "id": 102,
                 "distance": 42626,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 104,
+        "id": 102,
         "coords": [
             539709,
             6236504
@@ -3408,19 +2788,19 @@
         "city": null,
         "links": [
             {
-                "id": 103,
+                "id": 101,
                 "distance": 42626,
                 "kind": "highway"
             },
             {
-                "id": 66,
+                "id": 64,
                 "distance": 55030,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 105,
+        "id": 103,
         "coords": [
             618446,
             6731096
@@ -3433,14 +2813,14 @@
                 "kind": "highway"
             },
             {
-                "id": 60,
+                "id": 58,
                 "distance": 47670,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 106,
+        "id": 104,
         "coords": [
             649442,
             6660697
@@ -3448,24 +2828,24 @@
         "city": null,
         "links": [
             {
-                "id": 60,
+                "id": 58,
                 "distance": 31670,
                 "kind": "highway"
             },
             {
-                "id": 107,
+                "id": 105,
                 "distance": 75621,
                 "kind": "highway"
             },
             {
-                "id": 229,
+                "id": 224,
                 "distance": 6595,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 107,
+        "id": 105,
         "coords": [
             665099,
             6586714
@@ -3473,39 +2853,29 @@
         "city": null,
         "links": [
             {
-                "id": 106,
+                "id": 104,
                 "distance": 75621,
                 "kind": "highway"
             },
             {
-                "id": 108,
+                "id": 106,
                 "distance": 71396,
                 "kind": "highway"
             },
             {
-                "id": 109,
+                "id": 107,
                 "distance": 32960,
                 "kind": "highway"
             },
             {
-                "id": 107,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 107,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 62,
+                "id": 60,
                 "distance": 89015,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 108,
+        "id": 106,
         "coords": [
             711182,
             6532183
@@ -3513,34 +2883,24 @@
         "city": null,
         "links": [
             {
-                "id": 107,
+                "id": 105,
                 "distance": 71396,
                 "kind": "highway"
             },
             {
-                "id": 108,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 108,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 111,
+                "id": 109,
                 "distance": 62045,
                 "kind": "national"
             },
             {
-                "id": 188,
+                "id": 183,
                 "distance": 12678,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 109,
+        "id": 107,
         "coords": [
             697538,
             6580880
@@ -3548,19 +2908,19 @@
         "city": null,
         "links": [
             {
-                "id": 107,
+                "id": 105,
                 "distance": 32960,
                 "kind": "highway"
             },
             {
-                "id": 150,
+                "id": 147,
                 "distance": 84844,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 110,
+        "id": 108,
         "coords": [
             786490,
             6525016
@@ -3573,14 +2933,14 @@
                 "kind": "highway"
             },
             {
-                "id": 127,
+                "id": 125,
                 "distance": 30976,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 111,
+        "id": 109,
         "coords": [
             719170,
             6470654
@@ -3588,29 +2948,19 @@
         "city": null,
         "links": [
             {
-                "id": 108,
+                "id": 106,
                 "distance": 62045,
                 "kind": "national"
             },
             {
-                "id": 111,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 111,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 112,
+                "id": 110,
                 "distance": 49777,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 112,
+        "id": 110,
         "coords": [
             718607,
             6420880
@@ -3618,19 +2968,19 @@
         "city": null,
         "links": [
             {
-                "id": 111,
+                "id": 109,
                 "distance": 49777,
                 "kind": "national"
             },
             {
-                "id": 113,
+                "id": 111,
                 "distance": 54996,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 113,
+        "id": 111,
         "coords": [
             711050,
             6366406
@@ -3638,19 +2988,19 @@
         "city": null,
         "links": [
             {
-                "id": 112,
+                "id": 110,
                 "distance": 54996,
                 "kind": "national"
             },
             {
-                "id": 114,
+                "id": 112,
                 "distance": 33410,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 114,
+        "id": 112,
         "coords": [
             701971,
             6334254
@@ -3658,29 +3008,19 @@
         "city": null,
         "links": [
             {
-                "id": 113,
+                "id": 111,
                 "distance": 33410,
                 "kind": "national"
             },
             {
-                "id": 114,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 114,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 115,
+                "id": 113,
                 "distance": 31411,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 115,
+        "id": 113,
         "coords": [
             722650,
             6310610
@@ -3688,19 +3028,19 @@
         "city": null,
         "links": [
             {
-                "id": 114,
+                "id": 112,
                 "distance": 31411,
                 "kind": "highway"
             },
             {
-                "id": 116,
+                "id": 114,
                 "distance": 29718,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 116,
+        "id": 114,
         "coords": [
             736228,
             6284175
@@ -3708,19 +3048,19 @@
         "city": null,
         "links": [
             {
-                "id": 115,
+                "id": 113,
                 "distance": 29718,
                 "kind": "national"
             },
             {
-                "id": 128,
+                "id": 126,
                 "distance": 25142,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 117,
+        "id": 115,
         "coords": [
             451540,
             6774653
@@ -3733,14 +3073,14 @@
                 "kind": "highway"
             },
             {
-                "id": 118,
+                "id": 116,
                 "distance": 53256,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 118,
+        "id": 116,
         "coords": [
             399044,
             6783621
@@ -3748,29 +3088,19 @@
         "city": null,
         "links": [
             {
-                "id": 117,
+                "id": 115,
                 "distance": 53256,
                 "kind": "highway"
             },
             {
-                "id": 118,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 118,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 121,
+                "id": 119,
                 "distance": 43629,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 119,
+        "id": 117,
         "coords": [
             368364,
             6661362
@@ -3783,14 +3113,14 @@
                 "kind": "highway"
             },
             {
-                "id": 120,
+                "id": 118,
                 "distance": 52806,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 120,
+        "id": 118,
         "coords": [
             387559,
             6612168
@@ -3798,14 +3128,14 @@
         "city": null,
         "links": [
             {
-                "id": 119,
+                "id": 117,
                 "distance": 52806,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 121,
+        "id": 119,
         "coords": [
             355848,
             6789747
@@ -3813,44 +3143,34 @@
         "city": null,
         "links": [
             {
-                "id": 122,
+                "id": 120,
                 "distance": 56014,
                 "kind": "national"
             },
             {
-                "id": 135,
+                "id": 131,
                 "distance": 41460,
                 "kind": "national"
             },
             {
-                "id": 121,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 121,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 155,
+                "id": 150,
                 "distance": 45687,
                 "kind": "national"
             },
             {
-                "id": 118,
+                "id": 116,
                 "distance": 43629,
                 "kind": "national"
             },
             {
-                "id": 176,
+                "id": 171,
                 "distance": 5621,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 122,
+        "id": 120,
         "coords": [
             375464,
             6842214
@@ -3858,34 +3178,24 @@
         "city": null,
         "links": [
             {
-                "id": 121,
+                "id": 119,
                 "distance": 56014,
                 "kind": "national"
             },
             {
-                "id": 123,
+                "id": 121,
                 "distance": 50007,
                 "kind": "national"
             },
             {
-                "id": 122,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 122,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 165,
+                "id": 160,
                 "distance": 42443,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 123,
+        "id": 121,
         "coords": [
             407240,
             6880828
@@ -3893,18 +3203,8 @@
         "city": null,
         "links": [
             {
-                "id": 122,
+                "id": 120,
                 "distance": 50007,
-                "kind": "national"
-            },
-            {
-                "id": 123,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 123,
-                "distance": 0,
                 "kind": "national"
             },
             {
@@ -3913,14 +3213,14 @@
                 "kind": "national"
             },
             {
-                "id": 140,
+                "id": 136,
                 "distance": 37222,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 124,
+        "id": 122,
         "coords": [
             479235,
             6690133
@@ -3940,7 +3240,7 @@
         ]
     },
     {
-        "id": 125,
+        "id": 123,
         "coords": [
             466765,
             6437550
@@ -3953,14 +3253,14 @@
                 "kind": "highway"
             },
             {
-                "id": 64,
+                "id": 62,
                 "distance": 112284,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 126,
+        "id": 124,
         "coords": [
             659456,
             6502839
@@ -3968,19 +3268,19 @@
         "city": null,
         "links": [
             {
-                "id": 64,
+                "id": 62,
                 "distance": 97258,
                 "kind": "highway"
             },
             {
-                "id": 127,
+                "id": 125,
                 "distance": 99972,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 127,
+        "id": 125,
         "coords": [
             755829,
             6529419
@@ -3988,29 +3288,19 @@
         "city": null,
         "links": [
             {
-                "id": 126,
+                "id": 124,
                 "distance": 99972,
                 "kind": "highway"
             },
             {
-                "id": 127,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 127,
-                "distance": 0,
-                "kind": "highway"
-            },
-            {
-                "id": 110,
+                "id": 108,
                 "distance": 30976,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 128,
+        "id": 126,
         "coords": [
             761263,
             6281863
@@ -4018,19 +3308,19 @@
         "city": null,
         "links": [
             {
-                "id": 116,
+                "id": 114,
                 "distance": 25142,
                 "kind": "national"
             },
             {
-                "id": 173,
+                "id": 168,
                 "distance": 10698,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 129,
+        "id": 127,
         "coords": [
             391633,
             6548882
@@ -4038,14 +3328,14 @@
         "city": null,
         "links": [
             {
-                "id": 130,
+                "id": 128,
                 "distance": 44547,
                 "kind": "highway"
             }
         ]
     },
     {
-        "id": 130,
+        "id": 128,
         "coords": [
             425868,
             6520379
@@ -4053,79 +3343,19 @@
         "city": null,
         "links": [
             {
-                "id": 129,
+                "id": 127,
                 "distance": 44547,
                 "kind": "highway"
             },
             {
-                "id": 133,
+                "id": 129,
                 "distance": 52764,
                 "kind": "national"
-            },
-            {
-                "id": 130,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 130,
-                "distance": 0,
-                "kind": "national"
             }
         ]
     },
     {
-        "id": 131,
-        "coords": [
-            705644,
-            6921806
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 131,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 131,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 54,
-                "distance": 81874,
-                "kind": "national"
-            },
-            {
-                "id": 6,
-                "distance": 66159,
-                "kind": "national"
-            }
-        ]
-    },
-    {
-        "id": 132,
-        "coords": [
-            765831,
-            6986944
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 132,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 132,
-                "distance": 0,
-                "kind": "national"
-            }
-        ]
-    },
-    {
-        "id": 133,
+        "id": 129,
         "coords": [
             478038,
             6512493
@@ -4133,34 +3363,24 @@
         "city": null,
         "links": [
             {
-                "id": 133,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 133,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
                 "id": 44,
                 "distance": 97453,
                 "kind": "national"
             },
             {
-                "id": 158,
+                "id": 153,
                 "distance": 30404,
                 "kind": "national"
             },
             {
-                "id": 130,
+                "id": 128,
                 "distance": 52764,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 134,
+        "id": 130,
         "coords": [
             383623,
             6572380
@@ -4173,24 +3393,14 @@
                 "kind": "national"
             },
             {
-                "id": 134,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 134,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 220,
+                "id": 215,
                 "distance": 3813,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 135,
+        "id": 131,
         "coords": [
             318575,
             6807903
@@ -4198,19 +3408,19 @@
         "city": null,
         "links": [
             {
-                "id": 121,
+                "id": 119,
                 "distance": 41460,
                 "kind": "national"
             },
             {
-                "id": 136,
+                "id": 132,
                 "distance": 112310,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 136,
+        "id": 132,
         "coords": [
             214464,
             6850027
@@ -4218,19 +3428,19 @@
         "city": null,
         "links": [
             {
-                "id": 135,
+                "id": 131,
                 "distance": 112310,
                 "kind": "national"
             },
             {
-                "id": 139,
+                "id": 135,
                 "distance": 64196,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 137,
+        "id": 133,
         "coords": [
             299548,
             6825376
@@ -4238,19 +3448,19 @@
         "city": null,
         "links": [
             {
-                "id": 138,
+                "id": 134,
                 "distance": 25026,
                 "kind": "national"
             },
             {
-                "id": 165,
+                "id": 160,
                 "distance": 35942,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 138,
+        "id": 134,
         "coords": [
             277466,
             6837153
@@ -4258,14 +3468,14 @@
         "city": null,
         "links": [
             {
-                "id": 137,
+                "id": 133,
                 "distance": 25026,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 139,
+        "id": 135,
         "coords": [
             151347,
             6838302
@@ -4273,19 +3483,19 @@
         "city": null,
         "links": [
             {
-                "id": 136,
+                "id": 132,
                 "distance": 64196,
                 "kind": "national"
             },
             {
-                "id": 164,
+                "id": 159,
                 "distance": 95529,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 140,
+        "id": 136,
         "coords": [
             397030,
             6916622
@@ -4298,29 +3508,19 @@
                 "kind": "national"
             },
             {
-                "id": 141,
+                "id": 137,
                 "distance": 49779,
                 "kind": "national"
             },
             {
-                "id": 123,
+                "id": 121,
                 "distance": 37222,
-                "kind": "national"
-            },
-            {
-                "id": 140,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 140,
-                "distance": 0,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 141,
+        "id": 137,
         "coords": [
             369437,
             6958054
@@ -4328,14 +3528,14 @@
         "city": null,
         "links": [
             {
-                "id": 140,
+                "id": 136,
                 "distance": 49779,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 142,
+        "id": 138,
         "coords": [
             900704,
             6744482
@@ -4348,34 +3548,14 @@
                 "kind": "national"
             },
             {
-                "id": 80,
+                "id": 78,
                 "distance": 108078,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 143,
-        "coords": [
-            938159,
-            6730153
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 143,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 143,
-                "distance": 0,
-                "kind": "national"
-            }
-        ]
-    },
-    {
-        "id": 144,
+        "id": 139,
         "coords": [
             603241,
             6161287
@@ -4383,24 +3563,59 @@
         "city": null,
         "links": [
             {
-                "id": 66,
+                "id": 64,
                 "distance": 118764,
-                "kind": "national"
-            },
-            {
-                "id": 144,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 144,
-                "distance": 0,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 145,
+        "id": 140,
+        "coords": [
+            623904,
+            6926493
+        ],
+        "city": null,
+        "links": [
+            {
+                "id": 51,
+                "distance": 72178,
+                "kind": "national"
+            },
+            {
+                "id": 141,
+                "distance": 81874,
+                "kind": "national"
+            },
+            {
+                "id": 247,
+                "distance": 9583,
+                "kind": "road"
+            }
+        ]
+    },
+    {
+        "id": 141,
+        "coords": [
+            705644,
+            6921806
+        ],
+        "city": null,
+        "links": [
+            {
+                "id": 140,
+                "distance": 81874,
+                "kind": "national"
+            },
+            {
+                "id": 6,
+                "distance": 66159,
+                "kind": "national"
+            }
+        ]
+    },
+    {
+        "id": 142,
         "coords": [
             939210,
             6815759
@@ -4408,19 +3623,19 @@
         "city": null,
         "links": [
             {
-                "id": 75,
+                "id": 73,
                 "distance": 24277,
                 "kind": "national"
             },
             {
-                "id": 146,
+                "id": 143,
                 "distance": 51705,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 146,
+        "id": 143,
         "coords": [
             960237,
             6768523
@@ -4428,24 +3643,24 @@
         "city": null,
         "links": [
             {
-                "id": 145,
+                "id": 142,
                 "distance": 51705,
                 "kind": "national"
             },
             {
-                "id": 147,
+                "id": 144,
                 "distance": 78624,
                 "kind": "national"
             },
             {
-                "id": 149,
+                "id": 146,
                 "distance": 31683,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 147,
+        "id": 144,
         "coords": [
             927037,
             6697253
@@ -4453,24 +3668,24 @@
         "city": null,
         "links": [
             {
-                "id": 146,
+                "id": 143,
                 "distance": 78624,
                 "kind": "national"
             },
             {
-                "id": 148,
+                "id": 145,
                 "distance": 73061,
                 "kind": "national"
             },
             {
-                "id": 194,
+                "id": 189,
                 "distance": 9828,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 148,
+        "id": 145,
         "coords": [
             958378,
             6631256
@@ -4478,14 +3693,14 @@
         "city": null,
         "links": [
             {
-                "id": 147,
+                "id": 144,
                 "distance": 73061,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 149,
+        "id": 146,
         "coords": [
             991140,
             6761533
@@ -4493,19 +3708,19 @@
         "city": null,
         "links": [
             {
-                "id": 146,
+                "id": 143,
                 "distance": 31683,
                 "kind": "national"
             },
             {
-                "id": 80,
+                "id": 78,
                 "distance": 27734,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 150,
+        "id": 147,
         "coords": [
             780787,
             6597256
@@ -4513,12 +3728,12 @@
         "city": null,
         "links": [
             {
-                "id": 151,
+                "id": 148,
                 "distance": 45700,
                 "kind": "national"
             },
             {
-                "id": 109,
+                "id": 107,
                 "distance": 84844,
                 "kind": "national"
             },
@@ -4526,21 +3741,11 @@
                 "id": 21,
                 "distance": 62643,
                 "kind": "national"
-            },
-            {
-                "id": 150,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 150,
-                "distance": 0,
-                "kind": "national"
             }
         ]
     },
     {
-        "id": 151,
+        "id": 148,
         "coords": [
             813959,
             6628689
@@ -4548,7 +3753,7 @@
         "city": null,
         "links": [
             {
-                "id": 150,
+                "id": 147,
                 "distance": 45700,
                 "kind": "national"
             },
@@ -4560,7 +3765,7 @@
         ]
     },
     {
-        "id": 152,
+        "id": 149,
         "coords": [
             933538,
             6416315
@@ -4568,54 +3773,19 @@
         "city": null,
         "links": [
             {
-                "id": 86,
+                "id": 84,
                 "distance": 47166,
                 "kind": "national"
             },
             {
-                "id": 95,
+                "id": 93,
                 "distance": 40929,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 153,
-        "coords": [
-            424899,
-            6247964
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 154,
-                "distance": 54756,
-                "kind": "national"
-            },
-            {
-                "id": 216,
-                "distance": 3023,
-                "kind": "road"
-            }
-        ]
-    },
-    {
-        "id": 154,
-        "coords": [
-            411328,
-            6194916
-        ],
-        "city": null,
-        "links": [
-            {
-                "id": 153,
-                "distance": 54756,
-                "kind": "national"
-            }
-        ]
-    },
-    {
-        "id": 155,
+        "id": 150,
         "coords": [
             347387,
             6744850
@@ -4628,14 +3798,14 @@
                 "kind": "national"
             },
             {
-                "id": 121,
+                "id": 119,
                 "distance": 45687,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 156,
+        "id": 151,
         "coords": [
             557187,
             6529745
@@ -4643,19 +3813,19 @@
         "city": null,
         "links": [
             {
-                "id": 157,
+                "id": 152,
                 "distance": 26757,
                 "kind": "national"
             },
             {
-                "id": 189,
+                "id": 184,
                 "distance": 7030,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 157,
+        "id": 152,
         "coords": [
             530912,
             6534802
@@ -4663,19 +3833,19 @@
         "city": null,
         "links": [
             {
-                "id": 156,
+                "id": 151,
                 "distance": 26757,
                 "kind": "national"
             },
             {
-                "id": 158,
+                "id": 153,
                 "distance": 27946,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 158,
+        "id": 153,
         "coords": [
             503576,
             6528992
@@ -4683,19 +3853,19 @@
         "city": null,
         "links": [
             {
-                "id": 157,
+                "id": 152,
                 "distance": 27946,
                 "kind": "national"
             },
             {
-                "id": 133,
+                "id": 129,
                 "distance": 30404,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 159,
+        "id": 154,
         "coords": [
             551261,
             6560341
@@ -4703,19 +3873,19 @@
         "city": null,
         "links": [
             {
-                "id": 62,
+                "id": 60,
                 "distance": 29651,
                 "kind": "national"
             },
             {
-                "id": 160,
+                "id": 155,
                 "distance": 21911,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 160,
+        "id": 155,
         "coords": [
             535908,
             6575974
@@ -4723,7 +3893,7 @@
         "city": null,
         "links": [
             {
-                "id": 159,
+                "id": 154,
                 "distance": 21911,
                 "kind": "national"
             },
@@ -4735,7 +3905,7 @@
         ]
     },
     {
-        "id": 161,
+        "id": 156,
         "coords": [
             467949,
             6622098
@@ -4748,14 +3918,14 @@
                 "kind": "national"
             },
             {
-                "id": 162,
+                "id": 157,
                 "distance": 69120,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 162,
+        "id": 157,
         "coords": [
             409028,
             6658234
@@ -4763,29 +3933,19 @@
         "city": null,
         "links": [
             {
-                "id": 161,
+                "id": 156,
                 "distance": 69120,
                 "kind": "national"
             },
             {
-                "id": 162,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 162,
-                "distance": 0,
-                "kind": "national"
-            },
-            {
-                "id": 166,
+                "id": 161,
                 "distance": 35122,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 163,
+        "id": 158,
         "coords": [
             303205,
             6725787
@@ -4798,19 +3958,19 @@
                 "kind": "national"
             },
             {
-                "id": 164,
+                "id": 159,
                 "distance": 97032,
                 "kind": "national"
             },
             {
-                "id": 227,
+                "id": 222,
                 "distance": 26163,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 164,
+        "id": 159,
         "coords": [
             215688,
             6767690
@@ -4818,24 +3978,24 @@
         "city": null,
         "links": [
             {
-                "id": 163,
+                "id": 158,
                 "distance": 97032,
                 "kind": "national"
             },
             {
-                "id": 139,
+                "id": 135,
                 "distance": 95529,
                 "kind": "national"
             },
             {
-                "id": 247,
+                "id": 242,
                 "distance": 12365,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 165,
+        "id": 160,
         "coords": [
             333243,
             6837884
@@ -4843,19 +4003,19 @@
         "city": null,
         "links": [
             {
-                "id": 122,
+                "id": 120,
                 "distance": 42443,
                 "kind": "national"
             },
             {
-                "id": 137,
+                "id": 133,
                 "distance": 35942,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 166,
+        "id": 161,
         "coords": [
             382105,
             6680789
@@ -4868,14 +4028,14 @@
                 "kind": "national"
             },
             {
-                "id": 162,
+                "id": 157,
                 "distance": 35122,
                 "kind": "national"
             }
         ]
     },
     {
-        "id": 167,
+        "id": 162,
         "coords": [
             651903,
             6862418
@@ -4893,7 +4053,7 @@
         ]
     },
     {
-        "id": 168,
+        "id": 163,
         "coords": [
             892924,
             6247073
@@ -4911,7 +4071,7 @@
         ]
     },
     {
-        "id": 169,
+        "id": 164,
         "coords": [
             843121,
             6519368
@@ -4929,7 +4089,7 @@
         ]
     },
     {
-        "id": 170,
+        "id": 165,
         "coords": [
             573469,
             6279138
@@ -4940,14 +4100,14 @@
         },
         "links": [
             {
-                "id": 66,
+                "id": 64,
                 "distance": 3976,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 171,
+        "id": 166,
         "coords": [
             1042505,
             6298216
@@ -4965,7 +4125,7 @@
         ]
     },
     {
-        "id": 172,
+        "id": 167,
         "coords": [
             355838,
             6689518
@@ -4983,7 +4143,7 @@
         ]
     },
     {
-        "id": 173,
+        "id": 168,
         "coords": [
             771344,
             6278281
@@ -4994,14 +4154,14 @@
         },
         "links": [
             {
-                "id": 128,
+                "id": 126,
                 "distance": 10698,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 174,
+        "id": 169,
         "coords": [
             418208,
             6421269
@@ -5019,7 +4179,7 @@
         ]
     },
     {
-        "id": 175,
+        "id": 170,
         "coords": [
             704724,
             7059593
@@ -5037,7 +4197,7 @@
         ]
     },
     {
-        "id": 176,
+        "id": 171,
         "coords": [
             351472,
             6786219
@@ -5048,14 +4208,14 @@
         },
         "links": [
             {
-                "id": 121,
+                "id": 119,
                 "distance": 5621,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 177,
+        "id": 172,
         "coords": [
             775244,
             6906084
@@ -5073,7 +4233,7 @@
         ]
     },
     {
-        "id": 178,
+        "id": 173,
         "coords": [
             492305,
             6937175
@@ -5091,7 +4251,7 @@
         ]
     },
     {
-        "id": 179,
+        "id": 174,
         "coords": [
             809460,
             6482511
@@ -5109,7 +4269,7 @@
         ]
     },
     {
-        "id": 180,
+        "id": 175,
         "coords": [
             938863,
             6228596
@@ -5127,7 +4287,7 @@
         ]
     },
     {
-        "id": 181,
+        "id": 176,
         "coords": [
             913392,
             6455604
@@ -5138,14 +4298,14 @@
         },
         "links": [
             {
-                "id": 86,
+                "id": 84,
                 "distance": 3014,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 182,
+        "id": 177,
         "coords": [
             852324,
             6692653
@@ -5156,14 +4316,14 @@
         },
         "links": [
             {
-                "id": 82,
+                "id": 80,
                 "distance": 35747,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 183,
+        "id": 178,
         "coords": [
             432668,
             6713381
@@ -5181,7 +4341,7 @@
         ]
     },
     {
-        "id": 184,
+        "id": 179,
         "coords": [
             846360,
             6520311
@@ -5199,7 +4359,7 @@
         ]
     },
     {
-        "id": 185,
+        "id": 180,
         "coords": [
             491220,
             6770325
@@ -5217,7 +4377,7 @@
         ]
     },
     {
-        "id": 186,
+        "id": 181,
         "coords": [
             808589,
             6304738
@@ -5235,7 +4395,7 @@
         ]
     },
     {
-        "id": 187,
+        "id": 182,
         "coords": [
             896735,
             6273501
@@ -5253,7 +4413,7 @@
         ]
     },
     {
-        "id": 188,
+        "id": 183,
         "coords": [
             706474,
             6520412
@@ -5264,14 +4424,14 @@
         },
         "links": [
             {
-                "id": 108,
+                "id": 106,
                 "distance": 12678,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 189,
+        "id": 184,
         "coords": [
             564204,
             6529321
@@ -5282,14 +4442,14 @@
         },
         "links": [
             {
-                "id": 156,
+                "id": 151,
                 "distance": 7030,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 190,
+        "id": 185,
         "coords": [
             525238,
             6700670
@@ -5307,7 +4467,7 @@
         ]
     },
     {
-        "id": 191,
+        "id": 186,
         "coords": [
             649668,
             6978145
@@ -5318,14 +4478,14 @@
         },
         "links": [
             {
-                "id": 55,
-                "distance": 7190,
+                "id": 54,
+                "distance": 43401,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 192,
+        "id": 187,
         "coords": [
             931054,
             6897245
@@ -5343,7 +4503,7 @@
         ]
     },
     {
-        "id": 193,
+        "id": 188,
         "coords": [
             690426,
             6175971
@@ -5361,7 +4521,7 @@
         ]
     },
     {
-        "id": 194,
+        "id": 189,
         "coords": [
             929368,
             6687705
@@ -5372,14 +4532,14 @@
         },
         "links": [
             {
-                "id": 147,
+                "id": 144,
                 "distance": 9828,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 195,
+        "id": 190,
         "coords": [
             644945,
             6859510
@@ -5397,7 +4557,7 @@
         ]
     },
     {
-        "id": 196,
+        "id": 191,
         "coords": [
             617836,
             6757939
@@ -5415,7 +4575,7 @@
         ]
     },
     {
-        "id": 197,
+        "id": 192,
         "coords": [
             560937,
             6927672
@@ -5433,7 +4593,7 @@
         ]
     },
     {
-        "id": 198,
+        "id": 193,
         "coords": [
             1024539,
             6747752
@@ -5444,14 +4604,14 @@
         },
         "links": [
             {
-                "id": 80,
+                "id": 78,
                 "distance": 17615,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 199,
+        "id": 194,
         "coords": [
             455812,
             6903353
@@ -5469,7 +4629,7 @@
         ]
     },
     {
-        "id": 200,
+        "id": 195,
         "coords": [
             652988,
             6870560
@@ -5487,7 +4647,7 @@
         ]
     },
     {
-        "id": 201,
+        "id": 196,
         "coords": [
             935512,
             6847344
@@ -5498,14 +4658,14 @@
         },
         "links": [
             {
-                "id": 75,
+                "id": 73,
                 "distance": 20800,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 202,
+        "id": 197,
         "coords": [
             645069,
             6872487
@@ -5523,7 +4683,7 @@
         ]
     },
     {
-        "id": 203,
+        "id": 198,
         "coords": [
             658429,
             6863112
@@ -5541,7 +4701,7 @@
         ]
     },
     {
-        "id": 204,
+        "id": 199,
         "coords": [
             711796,
             7067037
@@ -5559,7 +4719,7 @@
         ]
     },
     {
-        "id": 205,
+        "id": 200,
         "coords": [
             710612,
             7068895
@@ -5577,7 +4737,7 @@
         ]
     },
     {
-        "id": 206,
+        "id": 201,
         "coords": [
             660812,
             6853822
@@ -5595,7 +4755,7 @@
         ]
     },
     {
-        "id": 207,
+        "id": 202,
         "coords": [
             845823,
             6318454
@@ -5613,7 +4773,7 @@
         ]
     },
     {
-        "id": 208,
+        "id": 203,
         "coords": [
             641350,
             6866963
@@ -5631,7 +4791,7 @@
         ]
     },
     {
-        "id": 209,
+        "id": 204,
         "coords": [
             495845,
             6612698
@@ -5649,7 +4809,7 @@
         ]
     },
     {
-        "id": 210,
+        "id": 205,
         "coords": [
             645176,
             6866625
@@ -5667,7 +4827,7 @@
         ]
     },
     {
-        "id": 211,
+        "id": 206,
         "coords": [
             636341,
             6855896
@@ -5685,7 +4845,7 @@
         ]
     },
     {
-        "id": 212,
+        "id": 207,
         "coords": [
             655914,
             6853857
@@ -5703,7 +4863,7 @@
         ]
     },
     {
-        "id": 213,
+        "id": 208,
         "coords": [
             645033,
             6868784
@@ -5721,7 +4881,7 @@
         ]
     },
     {
-        "id": 214,
+        "id": 209,
         "coords": [
             647634,
             6868148
@@ -5739,7 +4899,7 @@
         ]
     },
     {
-        "id": 215,
+        "id": 210,
         "coords": [
             664600,
             6872334
@@ -5757,7 +4917,7 @@
         ]
     },
     {
-        "id": 216,
+        "id": 211,
         "coords": [
             426738,
             6250363
@@ -5768,14 +4928,14 @@
         },
         "links": [
             {
-                "id": 153,
-                "distance": 3023,
+                "id": 100,
+                "distance": 23318,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 217,
+        "id": 212,
         "coords": [
             641332,
             6865106
@@ -5793,7 +4953,7 @@
         ]
     },
     {
-        "id": 218,
+        "id": 213,
         "coords": [
             654805,
             6868699
@@ -5811,7 +4971,7 @@
         ]
     },
     {
-        "id": 219,
+        "id": 214,
         "coords": [
             664509,
             6857512
@@ -5829,7 +4989,7 @@
         ]
     },
     {
-        "id": 220,
+        "id": 215,
         "coords": [
             379939,
             6571398
@@ -5840,14 +5000,14 @@
         },
         "links": [
             {
-                "id": 134,
+                "id": 130,
                 "distance": 3813,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 221,
+        "id": 216,
         "coords": [
             663273,
             6855663
@@ -5865,7 +5025,7 @@
         ]
     },
     {
-        "id": 222,
+        "id": 217,
         "coords": [
             1032445,
             6284694
@@ -5883,7 +5043,7 @@
         ]
     },
     {
-        "id": 223,
+        "id": 218,
         "coords": [
             617843,
             7095497
@@ -5894,14 +5054,14 @@
         },
         "links": [
             {
-                "id": 59,
+                "id": 57,
                 "distance": 24782,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 224,
+        "id": 219,
         "coords": [
             1024565,
             6280582
@@ -5919,7 +5079,7 @@
         ]
     },
     {
-        "id": 225,
+        "id": 220,
         "coords": [
             720280,
             6250127
@@ -5937,7 +5097,7 @@
         ]
     },
     {
-        "id": 226,
+        "id": 221,
         "coords": [
             1024986,
             6784868
@@ -5948,14 +5108,14 @@
         },
         "links": [
             {
-                "id": 78,
+                "id": 76,
                 "distance": 12791,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 227,
+        "id": 222,
         "coords": [
             307226,
             6699935
@@ -5966,14 +5126,14 @@
         },
         "links": [
             {
-                "id": 163,
+                "id": 158,
                 "distance": 26163,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 228,
+        "id": 223,
         "coords": [
             659704,
             6870509
@@ -5991,7 +5151,7 @@
         ]
     },
     {
-        "id": 229,
+        "id": 224,
         "coords": [
             654478,
             6664956
@@ -6002,14 +5162,14 @@
         },
         "links": [
             {
-                "id": 106,
+                "id": 104,
                 "distance": 6595,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 230,
+        "id": 225,
         "coords": [
             412945,
             6421509
@@ -6027,7 +5187,7 @@
         ]
     },
     {
-        "id": 231,
+        "id": 226,
         "coords": [
             646152,
             6857653
@@ -6045,7 +5205,7 @@
         ]
     },
     {
-        "id": 232,
+        "id": 227,
         "coords": [
             647459,
             6866904
@@ -6063,7 +5223,7 @@
         ]
     },
     {
-        "id": 233,
+        "id": 228,
         "coords": [
             710030,
             7065172
@@ -6081,7 +5241,7 @@
         ]
     },
     {
-        "id": 234,
+        "id": 229,
         "coords": [
             849882,
             6427814
@@ -6092,14 +5252,14 @@
         },
         "links": [
             {
-                "id": 92,
+                "id": 90,
                 "distance": 18158,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 235,
+        "id": 230,
         "coords": [
             668201,
             6861193
@@ -6117,7 +5277,7 @@
         ]
     },
     {
-        "id": 236,
+        "id": 231,
         "coords": [
             934861,
             6226590
@@ -6135,7 +5295,7 @@
         ]
     },
     {
-        "id": 237,
+        "id": 232,
         "coords": [
             648533,
             6850215
@@ -6153,7 +5313,7 @@
         ]
     },
     {
-        "id": 238,
+        "id": 233,
         "coords": [
             646221,
             6865058
@@ -6171,7 +5331,7 @@
         ]
     },
     {
-        "id": 239,
+        "id": 234,
         "coords": [
             780334,
             6800514
@@ -6189,7 +5349,7 @@
         ]
     },
     {
-        "id": 240,
+        "id": 235,
         "coords": [
             846581,
             6511052
@@ -6207,7 +5367,7 @@
         ]
     },
     {
-        "id": 241,
+        "id": 236,
         "coords": [
             648681,
             6866893
@@ -6225,7 +5385,7 @@
         ]
     },
     {
-        "id": 242,
+        "id": 237,
         "coords": [
             654877,
             6877962
@@ -6243,7 +5403,7 @@
         ]
     },
     {
-        "id": 243,
+        "id": 238,
         "coords": [
             414091,
             6417754
@@ -6261,7 +5421,7 @@
         ]
     },
     {
-        "id": 244,
+        "id": 239,
         "coords": [
             654718,
             6857580
@@ -6279,7 +5439,7 @@
         ]
     },
     {
-        "id": 245,
+        "id": 240,
         "coords": [
             928753,
             6500604
@@ -6290,14 +5450,14 @@
         },
         "links": [
             {
-                "id": 87,
+                "id": 85,
                 "distance": 2729,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 246,
+        "id": 241,
         "coords": [
             433334,
             6585498
@@ -6315,7 +5475,7 @@
         ]
     },
     {
-        "id": 247,
+        "id": 242,
         "coords": [
             223453,
             6758067
@@ -6326,14 +5486,14 @@
         },
         "links": [
             {
-                "id": 164,
+                "id": 159,
                 "distance": 12365,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 248,
+        "id": 243,
         "coords": [
             631751,
             6881893
@@ -6351,7 +5511,7 @@
         ]
     },
     {
-        "id": 249,
+        "id": 244,
         "coords": [
             567708,
             6325570
@@ -6362,14 +5522,14 @@
         },
         "links": [
             {
-                "id": 65,
+                "id": 63,
                 "distance": 31076,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 250,
+        "id": 245,
         "coords": [
             720392,
             6972393
@@ -6387,7 +5547,7 @@
         ]
     },
     {
-        "id": 251,
+        "id": 246,
         "coords": [
             653480,
             6855733
@@ -6405,7 +5565,7 @@
         ]
     },
     {
-        "id": 252,
+        "id": 247,
         "coords": [
             633486,
             6926370
@@ -6416,14 +5576,14 @@
         },
         "links": [
             {
-                "id": 54,
+                "id": 140,
                 "distance": 9583,
                 "kind": "road"
             }
         ]
     },
     {
-        "id": 253,
+        "id": 248,
         "coords": [
             953785,
             6229168

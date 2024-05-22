@@ -59,7 +59,7 @@ async function renderClients(data) {
             $('#modal-delete').modal('show');
         }).append($(svgDeleteButton));
 
-        row.append($('<td style="text-align: end">').append(editButton).append(deleteButton));
+        row.append($('<td style="text-align: end;white-space: pre;">').append(editButton).append(deleteButton));
 
         table.append(row);
     });
