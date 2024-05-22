@@ -69,5 +69,18 @@
         ],
         "title": "Véhicules",
         "icon": "car"
+    },
+    {
+        "src": "orders.html",
+        "dest": "orders.html",
+        "inline_scripts": [
+            "/app/common.js",
+            "/app/orders.js"
+        ],
+        "scripts": [
+            "/dist/libs/list.js/dist/list.min.js"
+        ],
+        "title": "Commandes",
+        "icon": "clipboard-list"
     }
 ]

@@ -18,7 +18,11 @@
                 <th><button class="table-sort" data-sort="sort-salaire">Salaire</button></th>
                 <th><button class="table-sort" data-sort="sort-licensetype">Type de permis</button></th>
                 <th><button class="table-sort" data-sort="sort-birthdate">Date de naissance</button></th>
-                <th></th>
+                <th><div style="
+                  display: block;
+                  width: 50px;
+              "></div>
+              </th>
               </tr>
             </thead>
             <tbody class="table-tbody" id="employeestable">
@@ -107,7 +111,11 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-create-position">
+                <select class="form-select" id="modal-create-position">
+                  <option value="Manager">Manager</option>
+                  <option value="Conducteur">Conducteur</option>
+                  <option value="Cadre">Cadre</option>
+                </select>
               </div>
             </div>
             <div class="col-lg-6">
@@ -248,7 +256,11 @@
             <div class="col-lg-6">
               <div class="mb-3">
                 <label class="form-label">Poste</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="30000" id="modal-edit-position">
+                <select class="form-select" id="modal-edit-position">
+                  <option value="Manager">Manager</option>
+                  <option value="Conducteur">Conducteur</option>
+                  <option value="Cadre">Cadre</option>
+                </select>
               </div>
             </div>
             <div class="col-lg-6">

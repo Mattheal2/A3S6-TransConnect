@@ -8,6 +8,12 @@ import json
 import random
 
 df = pd.read_csv('E-Road_2011.csv', sep="\t", decimal=",")
+
+# remove N0134 because it is separated from the rest of the network, and causes Pau to be an orphan node
+df = df[df['route'] != 'N0134']
+df.reset_index(drop=True, inplace=True)
+
+
 # each row is a line: 
 # xD & yD (for starting point) and xF & yF (for ending point) are the GPS coordinates
 
@@ -83,7 +89,10 @@ for i in df_new.index:
     
     start = (int(df_new['xD'][i]), int(df_new['yD'][i]))
     end = (int(df_new['xF'][i]), int(df_new['yF'][i]))
-
+    if start == end:
+        # raise ValueError('Start and end are the same')
+        continue
+    
     nodes.append(start)
     nodes.append(end)
     link_kind = {
@@ -147,6 +156,8 @@ for i in cities.index:
     # check if in range:
     if topX > lat > botX and topY > lon > botY:
         nearest= find_nearest_node((lat, lon), nodes)
+        if tuple(nearest) == (lat, lon):
+            raise ValueError('Node already exists')
         new_lines.append([nearest[0], nearest[1], lat, lon])
         # nodes.append((lat, lon))
         plt.plot([nearest[0], lat], [nearest[1], lon], 'b')
@@ -229,4 +240,27 @@ for node in export_nodes:
         plt.text(int(x), int(y), str(node['id']), color=random.choice(['b', 'r', 'g', 'y', 'k']))
 
 #
+# %%
+
+# check for orphan nodes
+# start from 0n then do a BFS to get all reachable nodes
+# then just check if all nodes are reachable
+reachable = set([0])
+to_check = [0]
+while len(to_check) > 0:
+    node = to_check.pop(0)
+    for link in export_nodes[node]['links']:
+        if link['id'] not in reachable:
+            reachable.add(link['id'])
+            to_check.append(link['id'])
+
+# check if all nodes are reachable
+if len(reachable) != len(export_nodes):
+    print('Orphan nodes')
+    for i in range(len(export_nodes)):
+        if i not in reachable:
+            print(i)
+    
+    raise ValueError('Orphan nodes')
+
 # %%

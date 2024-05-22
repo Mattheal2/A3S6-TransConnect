@@ -166,19 +166,4 @@ public class EmployeesController : ControllerBase
 
         return ApiResponse<MultiNodeTree<Employee>.JsonNode[]>.Success(employees.ToJson());
     }
-
-    [HttpGet(Name = "GetSchedule")]
-    public async Task<ApiResponse<Employee.ScheduleEntry[]>> GetSchedule([FromQuery] int user_id, [FromQuery] long start, [FromQuery] long end)
-    {
-        Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-        if (!auth.is_employee()) return auth.get_unauthorized_error<Employee.ScheduleEntry[]>();
-
-        Person? person = await Person.get_person_by_id(Config.cfg, user_id);
-        if (person == null || person is not Employee) return ApiResponse<Employee.ScheduleEntry[]>.Failure(404, "employee.not_found", "Employee not found");
-
-        Employee employee = (Employee)person;
-        List<Employee.ScheduleEntry> schedule = await employee.get_schedule(Config.cfg, start, end);
-
-        return ApiResponse<Employee.ScheduleEntry[]>.Success(schedule.ToArray());
-    }
 }

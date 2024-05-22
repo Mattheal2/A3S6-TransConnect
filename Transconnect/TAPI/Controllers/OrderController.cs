@@ -52,51 +52,53 @@ namespace TAPI.Controllers
         }
 
         [HttpGet(Name = "ListOrders")]
-        public async Task<ApiResponse<Order[]>> ListOrder([FromQuery] string filter = "", [FromQuery] int limit = 20, [FromQuery] int offset = 0, [FromQuery] string order_field = "departure_time", string order_dir = "DESC")
+        public async Task<ApiResponse<Order[]>> ListOrder()
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
 
-            List<Order> orders = await Order.list_orders(Config.cfg, filter, limit, offset, order_field, order_dir);
-            string error = "";
-            orders.ForEach(order => error += order.validate());
-            if (error != "") return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
+            List<Order> orders = await Order.list_orders(Config.cfg);
+            // string error = "";
+            // orders.ForEach(order => error += order.validate());
+            // if (error != "") return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
 
             return ApiResponse<Order[]>.Success(orders.ToArray());
         }
 
-        public struct OrderUpdateRequest
-        {
-            public int order_id { get; set; }
-            public long? departure_time { get; set; }
-            public string? departure_city { get; set; }
-            public string? arrival_city { get; set; }
-        }
 
-        [HttpPost(Name = "UpdateOrder")]
-        public async Task<ApiResponse<Order>> UpdateOrder([FromBody] OrderUpdateRequest body)
-        {
-            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
+        // ! we removed the ability to update an order
+        // public struct OrderUpdateRequest
+        // {
+        //     public int order_id { get; set; }
+        //     public long? departure_time { get; set; }
+        //     public string? departure_city { get; set; }
+        //     public string? arrival_city { get; set; }
+        // }
+
+        // [HttpPost(Name = "UpdateOrder")]
+        // public async Task<ApiResponse<Order>> UpdateOrder([FromBody] OrderUpdateRequest body)
+        // {
+        //     Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+        //     if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
             
-            Order? order = await Order.get_order_by_order_id(Config.cfg, body.order_id);
-            if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
+        //     Order? order = await Order.get_order_by_order_id(Config.cfg, body.order_id);
+        //     if (order == null) return ApiResponse<Order>.Failure(404, "order.not_found", "Order not found");
 
-            if (body.departure_time != null) 
-                await order.set_departure_time(Config.cfg, body.departure_time.Value);
-            if (body.departure_city != null) 
-                await order.set_departure_city(Config.cfg, body.departure_city);
-            if (body.arrival_city != null)
-                await order.set_arrival_city(Config.cfg, body.arrival_city);
+        //     if (body.departure_time != null) 
+        //         await order.set_departure_time(Config.cfg, body.departure_time.Value);
+        //     if (body.departure_city != null) 
+        //         await order.set_departure_city(Config.cfg, body.departure_city);
+        //     if (body.arrival_city != null)
+        //         await order.set_arrival_city(Config.cfg, body.arrival_city);
 
-            string? error = order.validate();
-            if (error != null) return ApiResponse<Order>.Failure(400, "order.invalid_order", error);
+        //     string? error = order.validate();
+        //     if (error != null) return ApiResponse<Order>.Failure(400, "order.invalid_order", error);
 
-            return ApiResponse<Order>.Success(order);
-        }
+        //     return ApiResponse<Order>.Success(order);
+        // }
 
         [HttpPost(Name = "DeleteOrder")]
-        public async Task<ApiResponse<Order>> DeleteOrder([FromBody] int order_id)
+        public async Task<ApiResponse<Order>> DeleteOrder([FromQuery] int order_id)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
@@ -122,6 +124,18 @@ namespace TAPI.Controllers
             return ApiResponse<Order[]>.Success(orders.ToArray());
         }
 
+        [HttpGet(Name = "ListActiveOrdersByDriverId")]
+        public async Task<ApiResponse<Order[]>> ListActiveOrdersByDriverId([FromQuery] int client_id)
+        {
+            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
 
+            List<Order> orders = await Order.list_active_orders_by_driver_id(Config.cfg, client_id);
+            string? error = null;
+            orders.ForEach(order => error += order.validate());
+            if (error != null) return ApiResponse<Order[]>.Failure(400, "order.invalid_order", error);
+
+            return ApiResponse<Order[]>.Success(orders.ToArray());
+        }
     }
 }

@@ -45,14 +45,6 @@ function applyVehicleFilter() {
 
 $("#modal-create-type").change(applyVehicleFilter);
 
-const formatPrice = (price) => `${Math.floor(price/100)}.${price%100} €`;
-function parsePrice(price) {
-    const parts = price.split('.');
-    const integer = parseInt(parts[0]) || 0;
-    const decimal = parseInt(parts[1]) || 0;
-    return integer * 100 + decimal;
-}
-
 async function renderVehicles(data) {
     var table = $('#vehiclestable');
 
@@ -101,7 +93,7 @@ async function renderVehicles(data) {
             $('#modal-delete').modal('show');
         }).append($(svgDeleteButton));
 
-        row.append($('<td>').append(editButton).append(deleteButton));
+        row.append($('<td style="text-align: end">').append(editButton).append(deleteButton));
 
         table.append(row);
     });

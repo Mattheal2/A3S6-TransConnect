@@ -91,3 +91,41 @@ function parseTime(localeDateString) {
     const date = new Date(parts[2], parts[1]-1, parts[0]);
     return date.getTime() / 1000;
 }
+
+function convertTimeFull(time) {
+    var date = new Date(time * 1000);
+    // DD/MM/YYYY HH:MM:SS
+    return date.toLocaleString('fr-FR');
+}
+
+function parseTimeFull(localeString) {
+    const parts = localeString.split(' ');
+    const date = parseTime(parts[0]);
+    const time = parts[1].split(':');
+    return date + parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
+}
+
+function parseTimeISO(universalString) {
+    // DD/MM/YYYY HH:MM
+    const date = new Date(universalString);
+    return date.getTime() / 1000;
+}
+
+function convertTimeISO(time) {
+    var date = new Date(time * 1000);
+    
+    return date.toISOString().slice(0, 16);
+}
+
+
+function formatPrice(price) {
+    const integer = Math.floor(price / 100);
+    const decimal = price % 100;
+    return `${integer}.${decimal.toString().padStart(2, '0')} €`;
+}
+function parsePrice(price) {
+    const parts = price.split('.');
+    const integer = parseInt(parts[0]) || 0;
+    const decimal = parseInt(parts[1]) || 0;
+    return integer * 100 + decimal;
+}

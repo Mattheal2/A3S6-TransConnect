@@ -423,6 +423,24 @@ namespace TransLib
         }
 
         /// <summary>
+        /// Returns all the active orders of a driver.
+        /// </summary>
+        /// <param name="cfg">The CFG.</param>
+        /// <param name="driver_id">The driver identifier.</param>
+        public static async Task<List<Order>> list_active_orders_by_driver_id(AppConfig cfg, int driver_id)
+        {
+            int now = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+            MySqlCommand cmd = new MySqlCommand(@"
+                SELECT * FROM orders
+                WHERE driver_id = @driver_id AND arrival_time > @now;
+            ");
+            cmd.Parameters.AddWithValue("@driver_id", driver_id);
+
+            DbDataReader reader = await cfg.query(cmd);
+            return await from_reader_multiple(cfg, reader);
+        }
+
+        /// <summary>
         /// Generic function to update a field.
         /// </summary>
         /// <typeparam name="T"></typeparam>

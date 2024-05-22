@@ -19,8 +19,8 @@ namespace TransDebug
             ItineraryService service = ItineraryService.Load("../Routing_maps/nodes.json");
             RouteNode[] nodes = service.GetNodes();
 
-            string dep = "Marseille";
-            string arr = "Paris";
+            string dep = "Nanterre";
+            string arr = "Pau";
 
             RouteNode? start = null;
             RouteNode? end = null;

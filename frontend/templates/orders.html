@@ -8,14 +8,19 @@
           <table class="table">
             <thead>
               <tr>
-                <th><button class="table-sort" data-sort="sort-lastname">Nom</button></th>
-                <th><button class="table-sort" data-sort="sort-firstname">Prénom</button></th>
-                <th><button class="table-sort" data-sort="sort-poste">Poste</button></th>
-                <th><button class="table-sort" data-sort="sort-ville">Ville</button></th>
-                <th><button class="table-sort" data-sort="sort-email">Email</button></th>
-                <th><button class="table-sort" data-sort="sort-tel">Téléphone</button></th>
-                <th><button class="table-sort" data-sort="sort-totalspent">Total dépensé</button></th>
-                <th><button class="table-sort" data-sort="sort-birthdate">Date de naissance</button></th>
+                <th><button class="table-sort" data-sort="sort-id">Numéro</button></th>
+                <th><button class="table-sort" data-sort="sort-client">Client</button></th>
+                <th><button class="table-sort" data-sort="sort-departure-time">Début</button></th>
+                <th><button class="table-sort" data-sort="sort-arrival-time">Fin</button></th>
+                <th><button class="table-sort" data-sort="sort-departure-city">Départ</button></th>
+                <th><button class="table-sort" data-sort="sort-arrival-city">Arrivée</button></th>
+                <th><button class="table-sort" data-sort="sort-vehicle">Véhicule</button></th>
+                <th><button class="table-sort" data-sort="sort-driver">Conducteur</button></th>
+                <th><button class="table-sort" data-sort="sort-price">Prix</button></th>
+                <th><button class="table-sort" data-sort="sort-kmprice">Prix au km</button></th>
+                <th><button class="table-sort" data-sort="sort-distance">Distance</button></th>
+                <th><button class="table-sort" data-sort="sort-toll">Péage</button></th>
+                <th><button class="table-sort" data-sort="sort-duration">Durée</button></th>
                 <th><div style="
                   display: block;
                   width: 50px;
@@ -23,7 +28,7 @@
               </th>
               </tr>
             </thead>
-            <tbody class="table-tbody" id="clientstable">
+            <tbody class="table-tbody" id="orderstable">
 
             </tbody>
           </table>
@@ -38,21 +43,27 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h5 class="modal-title">Nouveau Client</h5>
+          <h5 class="modal-title if-create">Nouvelle commande</h5>
+          <h5 class="modal-title if-edit">Modifier une commande</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
+          <div class="row if-create">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Nom</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Nom de famille" id="modal-create-lastname">
+                <label class="form-label">Client</label>
+                <input list="liste-clients" class="form-control" id="modal-create-client"></input>
               </div>
             </div>
+
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Prénom</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Prénom" id="modal-create-firstname">
+                <label class="form-label">Type de véhicule</label>
+                <select class="form-select" id="modal-create-vehicletype">
+                  <option value="car">Voiture</option>
+                  <option value="truck">Camion</option>
+                  <option value="van">Fourgon</option>
+                </select>
               </div>
             </div>
           </div>
@@ -60,14 +71,14 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Téléphone</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="06..." id="modal-create-phone">
+                <label class="form-label">Ville de départ</label>
+                <input list="liste-villes" class="form-control" id="modal-create-departurecity"></input>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Email" id="modal-create-email">
+                <label class="form-label">Ville d'arrivée</label>
+                <input list="liste-villes" class="form-control" id="modal-create-arrivalcity"></input>
               </div>
             </div>
           </div>
@@ -75,26 +86,26 @@
           <div class="row">
             <div class="col-lg-8">
               <div class="mb-3">
-                <label class="form-label">Adresse</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Numéro & rue" id="modal-create-address">
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="mb-3">
-                <label class="form-label">Ville</label>
-                <input list="liste-villes" class="form-control" id="modal-create-city"></input>
+                <label class="form-label">Date de départ</label>
+                <input type="datetime-local" class="form-control" id="modal-create-departuretime"></input>
               </div>
             </div>
           </div>
         </div>
-        <div class="modal-body">
+        <div class="modal-body if-create">
           <div class="row">
-            <div class="col-lg-6">
+            <!-- Truck -->
+            <div class="col-lg-6 if-truck not-if-any-vehicle">
               <div class="mb-3">
-                <label class="form-label">Date de naissance</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-create-birthdate">
+                <label class="form-label">Types de Camion</label>
+                <select class="form-select" id="modal-create-trucktype">
+                  <option value="benne">Benne</option>
+                  <option value="citerne">Citerne</option>
+                  <option value="fourgon">Fourgon</option>
+                  <option value="plateau">Plateau</option>
+                  <option value="remorque">Remorque</option>
+                  <option value="frigorifique">Frigorifique</option>
+                </select>
               </div>
             </div>
           </div>
@@ -111,99 +122,15 @@
               <path d="M12 5l0 14" />
               <path d="M5 12l14 0" />
             </svg>
-            Créer
+            <span class="if-create">Créer</span>
+            <span class="if-edit">Modifier</span>
             </a>
         </div>
       </form>
     </div>
   </div>
 </div>
-<div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h5 class="modal-title">Modifier un client</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Nom</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Nom de famille" id="modal-edit-lastname">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Prénom</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Prénom" id="modal-edit-firstname">
-              </div>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Téléphone</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="06..." id="modal-edit-phone">
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Email @tmail.com" id="modal-edit-email">
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="mb-3">
-                <label class="form-label">Adresse</label>
-                <input type="text" class="form-control" name="example-text-input" placeholder="Numéro & rue" id="modal-edit-address">
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="mb-3">
-                <label class="form-label">Ville</label>
-                <input list="liste-villes" class="form-control" id="modal-edit-city"></input>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="mb-3">
-                <label class="form-label">Date de naissance</label>
-                <input type="text" name="input-mask" class="form-control" data-mask="00/00/0000"
-                  data-mask-visible="true" placeholder="00/00/0000" autocomplete="off" id="modal-edit-birthdate">
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-            Annuler
-          </a>
-          <button class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M12 5l0 14" />
-              <path d="M5 12l14 0" />
-            </svg>
-            Mettre à jour
-            </a>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <div class="modal modal-blur fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -221,8 +148,8 @@
           <path d="M12 17h.01" />
         </svg>
         <h3>Etes vous sûr?</h3>
-        <div class="text-muted">Vous êtes sur le point de supprimer <strong id="modal-delete-name"></strong>. Cette
-          action est irréversible. (Hitman #993 sera envoyé sur site pour s'en charger)</div>
+        <div class="text-muted">Vous êtes sur le point de supprimer la commande de <strong id="modal-delete-name"></strong>. Cette
+          action est irréversible.</div>
       </div>
       <div class="modal-footer">
         <div class="w-100">
@@ -239,6 +166,7 @@
     </div>
   </div>
 </div>
+
 
 <datalist id="liste-villes">
   <option value='Paris'></option>
@@ -342,4 +270,7 @@
   <option value='Beauvais'></option>
   <option value='Hyères'></option>
 </datalist>
+
+<datalist id="liste-clients"></datalist>
+
 {% include 'parts/footer.html' %}
