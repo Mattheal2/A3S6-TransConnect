@@ -25,7 +25,7 @@ function convertTime(time) {
 
 function parseTime(localeDateString) {
     const parts = localeDateString.split('/');
-    const date = new Date(parts[2], parts[0] - 1, parts[1]);
+    const date = new Date(parts[2], parts[1]-1, parts[0]);
     return date.getTime() / 1000;
 }
 
@@ -188,7 +188,7 @@ $("#modal-create").submit(function(e) {
         'address': $('#modal-create-address').val(),
         'email': $('#modal-create-email').val(),
         'phone': $('#modal-create-phone').val(),
-        'hire_time': parseTime($('#modal-create-hiredate').val()),
+        // 'hire_time': parseTime($('#modal-create-hiredate').val()),
         'salary': $('#modal-create-salary').val(),
         'license_type': $('#modal-create-licensetype').val(),
         'birth_time': parseTime($('#modal-create-birthdate').val()),
