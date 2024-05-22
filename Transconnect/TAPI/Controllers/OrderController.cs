@@ -28,7 +28,7 @@ namespace TAPI.Controllers
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
             if (!auth.is_employee()) return auth.get_unauthorized_error<Order>();
 
-            Order new_order = new Order(body.client_id, body.departure_time, body.departure_city, body.arrival_city);
+            Order new_order = new Order(Config.cfg, body.client_id, body.departure_time, body.departure_city, body.arrival_city);
             await new_order.find_driver(Config.cfg);
             await new_order.find_vehicle(Config.cfg, body.vehicle_type, body.truck_type);
 

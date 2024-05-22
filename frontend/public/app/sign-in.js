@@ -35,7 +35,7 @@ function postJson(url, data, success, error) {
     $.ajax({
         url: url,
         method: "POST",
-        data: JSON.stringify(data),
+        data: encodeJSON(data),
         contentType: "application/json",
         cache: false,
         success: function (response) {

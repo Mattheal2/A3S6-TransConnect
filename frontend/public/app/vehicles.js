@@ -198,8 +198,8 @@ $("#modal-create").submit(function(e) {
     $.ajax({
         url: STATE.op === 'edit' ? '/api/Vehicle/UpdateVehicle' : '/api/Vehicle/AddVehicle',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        data: encodeJSON(data),
         success: function (resp) {
             if (resp.error || resp.errors) {
                 alert(resp.error.message || resp.errors["$"][0]);

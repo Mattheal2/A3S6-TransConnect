@@ -49,14 +49,14 @@ namespace TransLib
         /// <param name="departure_time"></param>
         /// <param name="departure_city"></param>
         /// <param name="arrival_city"></param>
-        public Order(int client_id, long departure_time, string departure_city, string arrival_city)
+        public Order(AppConfig cfg, int client_id, long departure_time, string departure_city, string arrival_city)
         {
             this.client_id = client_id;
             this.departure_time = departure_time;
             this.departure_city = departure_city;
             this.arrival_city = arrival_city;
 
-            this.route = build_itinerary();
+            this.route = build_itinerary(cfg);
             this.arrival_time = calculate_arrival_time();
             this.total_price = calculate_price();
 
@@ -75,7 +75,7 @@ namespace TransLib
         /// <param name="arrival_city"></param>
         /// <param name="price_per_km"></param>
         /// <param name="status"></param>
-        public Order(int order_id, int client_id, string vehicle_license_plate, int? driver_id, long departure_time, long? arrival_time, string departure_city, string arrival_city, int price_per_km, int total_price, string status)
+        public Order(AppConfig cfg, int order_id, int client_id, string vehicle_license_plate, int? driver_id, long departure_time, long? arrival_time, string departure_city, string arrival_city, int price_per_km, int total_price, string status)
         {
             this.order_id = order_id;
             this.client_id = client_id;
@@ -89,8 +89,8 @@ namespace TransLib
             this.price_per_km = price_per_km;
             this.total_price = total_price;
 
-            try { this.route = build_itinerary(); }
-            catch (Exception) { this.route = null; }
+            try { this.route = build_itinerary(cfg); }
+            catch (Exception e) { Console.WriteLine(e.Message); this.route = null; }
         }
 
         /// <summary>
@@ -253,10 +253,9 @@ namespace TransLib
         /// or
         /// Unknown error ¯\\_(ツ)_/¯
         /// </exception>
-        public Itinerary.Itinerary build_itinerary()
+        public Itinerary.Itinerary build_itinerary(AppConfig cfg)
         {
-            ItineraryService service = ItineraryService.Load("./Routing_maps/nodes.json");
-            RouteNode[] nodes = service.GetNodes();
+            RouteNode[] nodes = cfg.itinerary.GetNodes();
 
             RouteNode? start = null;
             RouteNode? end = null;
@@ -270,7 +269,7 @@ namespace TransLib
             }
             if (start != null && end != null)
             {
-                return service.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
+                return cfg.itinerary.GetRoute(start, end, ItineraryService.EuclideanDistance, ItineraryService.DistanceCost);
             }
             if (start == null) throw new Exception($"departure_city '{departure_city}' not found");
             if (end == null) throw new Exception($"arrival_city '{arrival_city}' not found");
@@ -305,9 +304,10 @@ namespace TransLib
         /// <param name="reader">The reader.</param>
         /// <param name="prefix">The prefix.</param>
         /// <returns></returns>
-        protected static Order cast_from_open_reader(DbDataReader reader, string prefix = "")
+        protected static Order cast_from_open_reader(AppConfig cfg, DbDataReader reader, string prefix = "")
         {
             return new Order(
+                cfg,
                 reader.GetInt32("order_id"),
                 reader.GetInt32("client_id"),
                 reader.GetString("vehicle_id"),
@@ -328,13 +328,13 @@ namespace TransLib
         /// <param name="reader">The reader.</param>
         /// <param name="prefix">The prefix.</param>
         /// <returns></returns>
-        public async static Task<Order?> from_reader(DbDataReader reader, string prefix = "")
+        public async static Task<Order?> from_reader(AppConfig cfg, DbDataReader reader, string prefix = "")
         {
             using (reader)
             {
                 bool more = await reader.ReadAsync();
                 if (!more) return null;
-                return cast_from_open_reader(reader, prefix);
+                return cast_from_open_reader(cfg, reader, prefix);
             }
         }
 
@@ -344,14 +344,14 @@ namespace TransLib
         /// <param name="reader">The reader.</param>
         /// <param name="prefix">The prefix.</param>
         /// <returns></returns>
-        public async static Task<List<Order>> from_reader_multiple(DbDataReader reader, string prefix = "")
+        public async static Task<List<Order>> from_reader_multiple(AppConfig cfg, DbDataReader reader, string prefix = "")
         {
             List<Order> orders = new List<Order>();
             using (reader)
             {
                 while (await reader.ReadAsync())
                 {
-                    orders.Append(cast_from_open_reader(reader));
+                    orders.Append(cast_from_open_reader(cfg, reader));
                 }
             }
             return orders;
@@ -372,7 +372,7 @@ namespace TransLib
             cmd.Parameters.AddWithValue("@order_id", order_id);
 
             DbDataReader reader = await cfg.query(cmd);
-            return await from_reader(reader);
+            return await from_reader(cfg, reader);
         }
 
         /// <summary>
@@ -401,7 +401,7 @@ namespace TransLib
             cmd.Parameters.AddWithValue("@order_dir", order_dir);
 
             DbDataReader reader = await cfg.query(cmd);
-            return await from_reader_multiple(reader);
+            return await from_reader_multiple(cfg, reader);
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace TransLib
             cmd.Parameters.AddWithValue("@client_id", client_id);
 
             DbDataReader reader = await cfg.query(cmd);
-            return await from_reader_multiple(reader);
+            return await from_reader_multiple(cfg,reader);
         }
 
         /// <summary>

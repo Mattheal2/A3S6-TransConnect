@@ -31,7 +31,7 @@ $(document).ready(function() {
 
         AUTH.employee = response.data;
 
-        localStorage.setItem('employee_data', JSON.stringify({
+        localStorage.setItem('employee_data', encodeJSON({
             data: AUTH.employee,
             timestamp: new Date().getTime()
         }));
@@ -72,3 +72,10 @@ $(document).ready(function() {
         }
     }
 });
+
+function encodeJSON(data) {
+    const ser = JSON.stringify(data);
+    return ser.replace(/[\u007F-\uFFFF]/g, function(chr) {
+        return "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).substr(-4)
+    });
+}

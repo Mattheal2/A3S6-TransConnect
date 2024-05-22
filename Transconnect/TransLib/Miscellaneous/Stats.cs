@@ -77,7 +77,7 @@ namespace TransLib.Miscellaneous
             cmd.Parameters.AddWithValue("@arrival_time", end);
 
             DbDataReader reader = await cfg.query(cmd);
-            return await Order.from_reader_multiple(reader);
+            return await Order.from_reader_multiple(cfg,reader);
 
         }
 

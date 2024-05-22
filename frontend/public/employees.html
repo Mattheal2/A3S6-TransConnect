@@ -698,7 +698,7 @@ $(document).ready(function() {
 
         AUTH.employee = response.data;
 
-        localStorage.setItem('employee_data', JSON.stringify({
+        localStorage.setItem('employee_data', encodeJSON({
             data: AUTH.employee,
             timestamp: new Date().getTime()
         }));
@@ -739,6 +739,13 @@ $(document).ready(function() {
         }
     }
 });
+
+function encodeJSON(data) {
+    const ser = JSON.stringify(data);
+    return ser.replace(/[\u007F-\uFFFF]/g, function(chr) {
+        return "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).substr(-4)
+    });
+}
 </script>
 
 <script>
@@ -892,8 +899,8 @@ $("#modal-edit").submit(function(e) {
     $.ajax({
         url: '/api/Employees/UpdateEmployee',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        data: encodeJSON(data),
         success: function (resp) {
             if (resp.error || resp.errors) {
                 alert(resp.error.message || resp.errors["$"][0]);
@@ -944,8 +951,8 @@ $("#modal-create").submit(function(e) {
     $.ajax({
         url: '/api/Employees/CreateEmployee',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        data: encodeJSON(data),
         success: function (resp) {
             if (resp.error || resp.errors) {
                 alert(resp.error.message || resp.errors["$"][0]);

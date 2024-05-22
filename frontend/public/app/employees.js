@@ -148,8 +148,8 @@ $("#modal-edit").submit(function(e) {
     $.ajax({
         url: '/api/Employees/UpdateEmployee',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        data: encodeJSON(data),
         success: function (resp) {
             if (resp.error || resp.errors) {
                 alert(resp.error.message || resp.errors["$"][0]);
@@ -200,8 +200,8 @@ $("#modal-create").submit(function(e) {
     $.ajax({
         url: '/api/Employees/CreateEmployee',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        data: encodeJSON(data),
         success: function (resp) {
             if (resp.error || resp.errors) {
                 alert(resp.error.message || resp.errors["$"][0]);

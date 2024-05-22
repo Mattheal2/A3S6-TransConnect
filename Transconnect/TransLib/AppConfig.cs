@@ -2,12 +2,17 @@ using System.Text.Json;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 using System.Data;
+using System.Text.Json.Serialization;
+using TransLib.Itinerary;
 namespace TransLib;
 
 public class AppConfig {
 
     public required string bing_maps_key { get; set; }
     public required string mysql_connection_string { get; set; }
+
+    [JsonIgnore]
+    public ItineraryService? itinerary { get; private set; }
 
     /// <summary>
     /// Reads the app configuration.
@@ -21,6 +26,9 @@ public class AppConfig {
             string text = reader.ReadToEnd();
             AppConfig? config = JsonSerializer.Deserialize<AppConfig>(text);
             if (config == null) throw new Exception("Failed to read config file");
+
+            string config_path = Path.GetDirectoryName(path) + "/nodes.json";
+            config.itinerary = ItineraryService.Load(config_path);
             return config;
         }
     }
@@ -51,4 +59,7 @@ public class AppConfig {
         await command.ExecuteNonQueryAsync();
         return connection;
     }
+
+    
+    
 }
