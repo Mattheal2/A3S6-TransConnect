@@ -30,7 +30,6 @@ async function renderClients(data) {
         var row = $('<tr>');
         row.append($('<td>').text(client.last_name).addClass('sort-lastname'));
         row.append($('<td>').text(client.first_name).addClass('sort-firstname'));
-        row.append($('<td>').text(client.position).addClass('sort-poste'));
         row.append($('<td>').text(client.city).addClass('sort-ville'));
         row.append($('<td>').text(client.email).addClass('sort-email'));
         row.append($('<td>').text(client.phone).addClass('sort-tel'));
