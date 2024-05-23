@@ -760,10 +760,14 @@ function applyVehicleFilter() {
 $("#modal-create-vehicletype").change(applyVehicleFilter);
 
 async function renderOrders(data) {
+    const pageFilters = document.location.search.substring(1).split('&').map(e => e.split('=')).reduce((acc, e) => { acc[e[0]] = e[1]; return acc; }, {});
+
     var table = $('#orderstable');
 
     table.empty();
     await data.forEach(function (order) {
+        if (pageFilters.client_id && order.client_id !== parseInt(pageFilters.client_id)) return;
+        if (pageFilters.driver_id && order.driver_id !== parseInt(pageFilters.driver_id)) return;
         if (order.route === null) order.route = { distance: 0, cost: 0, time: 0 };
         const client = STATE._clients.find(c => c.user_id === order.client_id) || { first_name: 'Client', last_name: 'Inconnu' };
         const employee = STATE._employees.find(e => e.user_id === order.driver_id) || { first_name: 'Conducteur', last_name: 'Inconnu' };
