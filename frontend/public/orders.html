@@ -486,7 +486,7 @@
     /* Common TransConnect JS */
 
 const AUTH = function() {
-    const user_id = document.cookie.split('; ').find(row => row.startsWith('user_id=')).split('=')[1];
+    let user_id = document.cookie.split('; ').find(row => row.startsWith('user_id='))?.split('=')[1];
 
     const stored = JSON.parse(localStorage.getItem('employee_data'));
     let employee = null;
