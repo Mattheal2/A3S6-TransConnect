@@ -263,4 +263,7 @@ if len(reachable) != len(export_nodes):
     
     raise ValueError('Orphan nodes')
 
+for node in export_nodes:
+    if node['city']:
+        print(f"<option value='{node['city']['name']}'></option>")
 # %%
