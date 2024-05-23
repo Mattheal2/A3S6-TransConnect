@@ -124,5 +124,19 @@ namespace TransLib.Miscellaneous
                 return reader.GetInt32("average_command_price");
             }
         }
+
+        public async static Task<int> total_deliveries_count(AppConfig cfg)
+        {
+            MySqlCommand cmd = new MySqlCommand(@"
+                SELECT COUNT(orders.order_id)
+                FROM orders;
+            ");
+            DbDataReader reader = await cfg.query(cmd);
+            using (reader)
+            {
+                await reader.ReadAsync();
+                return reader.GetInt32("deliveries_count");
+            }
+        }
     }
 }
