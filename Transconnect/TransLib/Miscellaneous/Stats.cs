@@ -17,10 +17,10 @@ namespace TransLib.Miscellaneous
         /// </summary>
         public struct DeliveriesByDriverResponse
         {
-            public int driver_id;
-            public string first_name;
-            public string last_name;
-            public int count;
+            public int driver_id { get; set; }
+            public string first_name { get; set; }
+            public string last_name { get; set; }
+            public int count { get; set; }
         }
 
         /// <summary>
@@ -128,14 +128,14 @@ namespace TransLib.Miscellaneous
         public async static Task<int> total_deliveries_count(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
-                SELECT COUNT(orders.order_id)
+                SELECT COUNT(orders.order_id) AS total
                 FROM orders;
             ");
             DbDataReader reader = await cfg.query(cmd);
             using (reader)
             {
                 await reader.ReadAsync();
-                return reader.GetInt32("deliveries_count");
+                return reader.GetInt32("total");
             }
         }
     }

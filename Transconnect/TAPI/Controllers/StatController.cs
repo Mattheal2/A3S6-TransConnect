@@ -20,12 +20,12 @@ namespace TAPI.Controllers
         /// <param name="driver_id"></param>
         /// <returns></returns>
         [HttpGet(Name = "GetDeliveriesByDriver")]
-        public async Task<ApiResponse<Order[]>> GetDeliveriesByDriver([FromQuery] int driver_id)
+        public async Task<ApiResponse<Stats.DeliveriesByDriverResponse[]>> GetDeliveriesByDriver([FromQuery] int driver_id)
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<Order[]>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<Stats.DeliveriesByDriverResponse[]>();
 
-            return null;
+            return ApiResponse<Stats.DeliveriesByDriverResponse[]>.Success((await Stats.deliveries_by_driver(Config.cfg)).ToArray());
         }
 
         /// <summary>
