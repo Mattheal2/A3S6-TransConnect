@@ -65,16 +65,16 @@ CREATE TABLE orders (
 );
 
 
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', 'Puteaux', '232878792', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Driver', '30000', '1716102592', 'B', 3, FALSE);
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', 'Paris', '230286792', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Driver', '30000', '1716100592', 'B', 3, FALSE);
-INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', 'Pibrac', '227608392', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Driver', '30000', '1716107512', 'B', 3, FALSE);
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Pierre', 'Dupont', '0692129501', 'pierre.dupont@tmail.com', '7 Avenue des Catalpas', 'Puteaux', '232878792', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Manager', '30000', '1716102592', 'B', 3, FALSE);
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Marc', 'Marque', '0629190801', 'marc.marque@tmail.com', '8 Avenue des Catalpas', 'Paris', '230286792', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Conducteur', '30000', '1716100592', 'B', 3, FALSE);
+INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash, position, salary, hire_time, license_type, supervisor_id, show_on_org_chart) VALUES ('EMPLOYEE', 'Jean', 'Martin', '0692129501', 'jean.martin@tmail.com', '9 Avenue des Catalpas', 'Pibrac', '227608392', 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==', 'Conducteur', '30000', '1716107512', 'B', 3, FALSE);
 
 INSERT INTO person (user_type, first_name, last_name, phone, email, address, city, birth_time, password_hash) VALUES ('CLIENT', 'Paul', 'Pan', '0100231311', 'paul@pan.fr', '1 rue de pole', 'Thouary', 232878794, 'ASpyssxGlsfZVDfTtd+dsIqAyfcTEQL7HJQdtwPMT0aPOJJZiHEmNRBaLSTw12eQaw==');
 
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('EN-789-NL', 'Nissan', 'X-trail', 14000.0, 'CAR', 5);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('DZ-171-GT', 'Audi', 'TT', 7000.0, 'CAR', 4);
 INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, seats) VALUES ('FT-519-KG', 'Mercedes', 'Classe B', 40000.0, 'CAR', 5);
-INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'TRANSPORT');
+INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, volume, truck_type) VALUES ('ME-302-ZB', 'Mercedes', 'Actros', 150000.0, 'TRUCK', 500, 'remorque');
 
 INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status) VALUES(1, 2, 'EN-789-NL', 1742373192, 1742376792, 'Colombes', 'Paris', 80, 800, 'InProgress');
 INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_time, departure_city, arrival_city, price_per_km, total_price, order_status) VALUES(2, 3, 'FT-519-KG', 1742373192, 1742376792, 'Nanterre', 'Noisy-le-Grand', 80, 800, 'InProgress');
@@ -110,3 +110,6 @@ END;
 //
 
 DELIMITER ;
+
+SELECT COUNT(orders.order_id) AS total
+FROM orders;

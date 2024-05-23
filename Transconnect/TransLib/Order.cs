@@ -501,38 +501,5 @@ namespace TransLib
             this.arrival_time = calculate_arrival_time();
             await update_field(cfg, "arrival_time", arrival_time);
         }
-
-        /// <summary>
-        /// checks some things and updates the status if necessary
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public void update_status()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Estimates the distance between two cities without creating an order
-        /// </summary>
-        /// <param name="address1"></param>
-        /// <param name="address2"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async static Task<float> calculate_distance(string address1, string address2)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Estimates the price of an order between 2 cities.
-        /// </summary>
-        /// <param name="departure_city">The departure city.</param>
-        /// <param name="arrival_city">The arrival city.</param>
-        /// <returns></returns>
-        public async static Task<int> estimate_price(string departure_city, string arrival_city)
-        {
-            return (int)(await calculate_distance(departure_city, arrival_city) * DEFAULT_PRICE_PER_KM);
-        }
-
     }
 }
