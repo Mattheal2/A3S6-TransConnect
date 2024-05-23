@@ -36,7 +36,7 @@ namespace TransLib.Miscellaneous
                 FROM person
                 LEFT JOIN orders ON person.user_id = orders.driver_id
                 WHERE person.user_type = 'EMPLOYEE'
-	                AND LOWER(person.position) = 'driver'
+	                AND LOWER(person.position) = 'conducteur'
                 GROUP BY person.user_id, person.first_name, person.last_name;
             ");
             DbDataReader reader = await cfg.query(cmd);
