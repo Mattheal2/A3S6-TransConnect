@@ -29,7 +29,7 @@ namespace TransLib.Vehicles
         public async override Task create(AppConfig cfg)
         {
             MySqlCommand cmd = new MySqlCommand(@"
-                INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, usage) 
+                INSERT INTO vehicle (license_plate, brand, model, price, vehicle_type, van_usage) 
                 VALUES(@license_plate, @brand, @model, @price, @vehicle_type, @usage);
             ");
             cmd.Parameters.AddWithValue("@license_plate", license_plate);
@@ -50,7 +50,7 @@ namespace TransLib.Vehicles
                     reader.GetString("brand"),
                     reader.GetString("model"),
                     reader.GetInt32("price"),
-                    reader.GetString("usage")
+                    reader.GetString("van_usage")
                     );
             }
             else throw new Exception("invalid vehicle_type");
@@ -63,7 +63,7 @@ namespace TransLib.Vehicles
         /// <param name="usage">The usage.</param>
         public async Task set_usage(AppConfig cfg, string usage)
         {
-            await update_field(cfg, "usage", usage);
+            await update_field(cfg, "van_usage", usage);
             this.usage = usage;
         }
     }

@@ -149,7 +149,7 @@ public class EmployeesController : ControllerBase
         if (!auth.is_employee()) return auth.get_unauthorized_error<bool>();
 
         Person? person = await Person.get_person_by_id(Config.cfg, user_id);
-        if (person == null || person is not Client) return ApiResponse<bool>.Failure(404, "employee.not_found", "Employee not found");
+        if (person == null || person is not Employee) return ApiResponse<bool>.Failure(404, "employee.not_found", "Employee not found");
 
         Employee employee = (Employee)person;
         await employee.delete(Config.cfg);
