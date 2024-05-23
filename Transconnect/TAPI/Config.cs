@@ -14,6 +14,7 @@ namespace TAPI
         public static void SetFromArgs(string[] args)
         {
             string path = args.Length > 0 ? args[0] : "data/credentials.json";
+            Console.WriteLine($"Loading config from {path}");
             _cfg = AppConfig.read_config(path);
         }
     }
