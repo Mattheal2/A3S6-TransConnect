@@ -26,7 +26,7 @@ FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish
 
 # Copy the published files to the base image and set the entry point
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 EXPOSE 80
 WORKDIR /app
