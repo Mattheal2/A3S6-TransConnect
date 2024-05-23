@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.8 as build-stage
+FROM python:3.12 as build-stage
 
 # Set working directory
 WORKDIR /app
