@@ -1,0 +1,33 @@
+version: 3
+services:
+    mariadb:
+        image: mariadb:10.4
+        container_name: esilv24-transconnect-mariadb
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: transcodb
+        networks:
+            - esilv24-transconnect
+        volumes:
+            - ./sqldata:/var/lib/mysql
+    
+    frontend:
+        build: frontend
+        container_name: esilv24-transconnect-frontend
+        restart: always
+        networks:
+            - esilv24-transconnect
+    
+    backend:
+        build: Transconnect
+        container_name: esilv24-transconnect-backend
+        restart: always
+        networks:
+            - esilv24-transconnect
+        depends_on:
+            - mariadb
+        volumes:
+            - ./data:/app/data
+    
+        
