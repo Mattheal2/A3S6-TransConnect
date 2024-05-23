@@ -361,7 +361,9 @@ function parsePrice(price) {
 </script>
 
 <script>
-    
+    if (!AUTH.isAuthenticated) {
+    window.location.href = "/sign-in";
+}
 </script>
 
 </body>
