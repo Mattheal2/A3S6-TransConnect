@@ -29,5 +29,8 @@ services:
             - mariadb
         volumes:
             - ./data:/app/data
-    
+
+networks:
+    esilv24-transconnect:
+        driver: bridge
         
