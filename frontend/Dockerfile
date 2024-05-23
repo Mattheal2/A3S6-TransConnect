@@ -6,7 +6,7 @@ WORKDIR /app
 RUN pip install jinja2 minify_html
 COPY . .
 
-RUN python render_v2.py --js
+RUN python render_v2.py
 
 # Use NGINX as the web server
 FROM nginx:alpine as production-stage
