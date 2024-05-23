@@ -30,20 +30,22 @@ namespace TAPI.Controllers
             return null;
         }
 
-        public async Task<ApiResponse<int>> GetAverageTotalSpent()
+        public struct StatsResponse
         {
-            Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<int>();
-
-            return ApiResponse<int>.Success(await Stats.average_total_spent(Config.cfg));
+            public int average_total_spent { get; set; }
+            public int average_command_price { get; set; }
         }
 
-        public async Task<ApiResponse<int>> GetAverageCommandPrice()
+        public async Task<ApiResponse<StatsResponse>> GetStats()
         {
             Authorization auth = await Authorization.obtain(Config.cfg, Request.HttpContext);
-            if (!auth.is_employee()) return auth.get_unauthorized_error<int>();
+            if (!auth.is_employee()) return auth.get_unauthorized_error<StatsResponse>();
 
-            return ApiResponse<int>.Success(await Stats.average_command_price(Config.cfg));
+            return ApiResponse<StatsResponse>.Success(new StatsResponse
+            {
+                average_total_spent = await Stats.average_total_spent(Config.cfg),
+                average_command_price = await Stats.average_command_price(Config.cfg)
+            });
         }
     }
 }
