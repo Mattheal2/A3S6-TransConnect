@@ -2,7 +2,7 @@
   "profiles": {
     "http": {
       "commandName": "Project",
-      "workingDirectory": "C:\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL",
+      "workingDirectory": "C:\\OneDrive\\OneDrive - De Vinci\\Documents\\Programmes\\C#\\TransConnect_MattheoB_RemiL",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {

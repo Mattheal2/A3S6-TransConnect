@@ -82,3 +82,31 @@ INSERT INTO orders (client_id, driver_id, vehicle_id, departure_time, arrival_ti
 
 
 INSERT INTO auth_tokens VALUES('xxx', 1);
+
+DELIMITER //
+
+CREATE TRIGGER after_order_insert
+AFTER INSERT ON orders
+FOR EACH ROW
+BEGIN
+    UPDATE person
+    SET total_spent = total_spent + NEW.total_price
+    WHERE user_id = NEW.client_id;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER after_order_delete
+AFTER DELETE ON orders
+FOR EACH ROW
+BEGIN
+    UPDATE person
+    SET total_spent = total_spent - OLD.total_price
+    WHERE user_id = OLD.client_id;
+END;
+//
+
+DELIMITER ;
