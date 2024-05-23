@@ -295,3 +295,7 @@ $("#modal-create").submit(function(e) {
     });
 
 });
+
+if (!AUTH.isAuthenticated) {
+    window.location.href = "/sign-in";
+}

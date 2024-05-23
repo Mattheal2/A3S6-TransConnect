@@ -61,3 +61,7 @@ function renderOrganigram(data) {
     
     new Treant( config );
 }
+
+if (!AUTH.isAuthenticated) {
+    window.location.href = "/sign-in";
+}

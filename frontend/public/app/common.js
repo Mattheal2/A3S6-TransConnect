@@ -1,7 +1,10 @@
 /* Common TransConnect JS */
 
 const AUTH = function() {
-    let user_id = document.cookie.split('; ').find(row => row.startsWith('user_id='))?.split('=')[1];
+    let user_id = document.cookie.split('; ').find(row => row.startsWith('user_id='));
+    if (user_id !== undefined) {
+        user_id = user_id.split('=')[1];
+    }
 
     const stored = JSON.parse(localStorage.getItem('employee_data'));
     let employee = null;
